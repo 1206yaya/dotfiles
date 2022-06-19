@@ -1,0 +1,8 @@
+cargo-edit
+cargo-expand
+cargo-generate
+cargo-watch
+cargo-workspaces
+https
+trunk
+tauri-cli
