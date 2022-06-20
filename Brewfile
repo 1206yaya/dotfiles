@@ -1,27 +1,37 @@
-tap "adoptopenjdk/openjdk"
+# tap "adoptopenjdk/openjdk"
 tap "cjbassi/ytop"
-tap "convco/formulae"
-tap "ethereum/ethereum"
-tap "extrawurst/tap"
+# tap "convco/formulae"
+# tap "ethereum/ethereum"
+# tap "extrawurst/tap"
 tap "github/gh"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
 tap "koekeishiya/formulae"
-tap "wix/brew"
+tap "spring-io/tap"
+tap "hashicorp/tap"
+
+# tap "wix/brew"
 cask_args appdir: "/Applications"
 
 brew "asdf"
-brew "applesimutils"
-brew "bandwhich"
+## wix
+# brew "applesimutils"
+## Network Wathing
+# brew "bandwhich"
 brew "bat"
 brew "cmake"
-brew "convco"
+# brew "convco"
 brew "coreutils"
 brew "curl"
-brew "dust"
-brew "ethereum"
+
+## For Rust
+# brew "dust"
+# brew "ethereum" 
+
+## Make if colorul for Terminal 
 brew "exa"
+## enhance find-command
 brew "fd"
 brew "fzf"
 brew "gh"
@@ -31,23 +41,37 @@ brew "git-delta"
 brew "grep"
 brew "htop"
 brew "hyperfine"
-brew "ios-deploy"
+## 何に使うかわからん
+# brew "ios-deploy"
 brew "jq"
-brew "lf"
+## For Go
+# brew "lf"
+
+## A simple command line interface for the Mac App Store. Designed for scripting and automation.
 brew "mas"
+## ターミナルで動作するディスク使用量調査ツール
 brew "ncdu"
 brew "nushell"
 brew "nvim"
+## enhance npm/yarn
 brew "pnpm"
+## プロセス表示・検索ツール
 brew "procs"
 brew "ripgrep"
 brew "ruby"
-brew "rust-analyzer"
+brew "spring-io/tap/spring-boot"
+# brew "rust-analyzer"
+
+## search & displace cli 
 brew "sd"
+## Terminal 便利検索
 brew "sk"
+## For yabai
 brew "skhd"
 brew "starship"
 brew "stow"
+
+## man コミュニティー駆動
 brew "tealdeer"
 brew "tmux"
 brew "tokei"
@@ -59,44 +83,59 @@ brew "zoxide"
 brew "zsh"
 brew "zsh-autosuggestions"
 
-# https://github.com/Automattic/node-canvas
+## https://github.com/Automattic/node-canvas
 brew "pkg-config"
-brew "cairo"
-brew "pango"
+
+## 複数の出力デバイスをサポートする2Dグラフィックライブラリ
+# brew "cairo"
+# brew "pango"
+
 brew "libpng"
 brew "jpeg"
 brew "giflib"
 brew "librsvg"
 
 cask "1password"
-cask "adoptopenjdk/openjdk/adoptopenjdk8"
+# cask "adoptopenjdk/openjdk/adoptopenjdk11"
 cask "android-file-transfer"
 cask "android-studio"
 cask "blender"
-cask "brave-browser"
+cask "vivaldi"
+# cask "brave-browser"
 cask "discord"
 cask "docker"
+cask "dbeaver-community"
 cask "figma"
 cask "font-hack-nerd-font"
 cask "google-chrome"
 cask "google-cloud-sdk"
 cask "google-japanese-ime"
 cask "gpg-suite"
+## APIを確認する用のクライアント
 cask "insomnia"
-cask "ledger-live"
-cask "minecraft"
+## Easily manage your crypto
+# cask "ledger-live"
 cask "notion"
-cask "obs"
-cask "obs-ndi"
+cask "dropbox"
+
+## for video recording and live streaming
+# cask "obs"
+# cask "obs-ndi"
 cask "recut"
 cask "signal"
 cask "slack"
-cask "steam"
-cask "utm"
+## mac　で ubuntu / windows / raspbian
+# cask "utm"
 cask "visual-studio-code"
-cask "zoom"
+# cask "zoom"
+cask install sourcetree
 
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 mas "Final Cut Pro", id: 424389933
 mas "Vimari", id: 1480933944
 mas "Xcode", id: 497799835
+mas "NAS Navigator2", id: 450664466
+mas "Kindle", id: 405399194
+mas "LINE", id: 539883307
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Skitch", id: 425955336

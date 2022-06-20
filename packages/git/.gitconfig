@@ -1,7 +1,7 @@
 [user]
-	name       = JunichiSugiura
-	email      = jun.sugiura.jp@gmail.com
-	signingkey = 36E13C2D34E47F45
+	name       = 1206yaya
+	email      = 1206yaya@gmail.com
+	signingkey = 784F7F9F8B3D4BE7
 [alias]
 	s   = status -sb
 	d   = diff
@@ -45,3 +45,9 @@
     diffFilter = delta --color-only
 ; [url "git@github.com:"]
 ;   insteadOf = https://github.com/
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

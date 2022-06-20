@@ -1,0 +1,33 @@
+{
+    "title": "Template",
+    "rules": [
+        {
+            "description": "Template",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "",
+                        "modifiers": {
+                            "mandatory": []
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "",
+                            "modifiers": []
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com.google.Chrome"
+                            ]
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
+    ]
+}

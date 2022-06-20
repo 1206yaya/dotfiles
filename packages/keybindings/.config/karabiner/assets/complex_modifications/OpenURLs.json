@@ -1,0 +1,31 @@
+{
+  "title": "Open URLs",
+  "rules": [
+    {
+      "description": "筋トレ",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "1",
+            "modifiers": {
+              "mandatory": [
+                "right_shift"
+              ],
+              "optional": []
+            }
+          },
+          "parameters": {
+            "basic.to_if_held_down_threshold_milliseconds": 1000
+          },
+          "to_if_held_down": [
+            {
+              "shell_command": "open -na 'Google Chrome.app' --args --new-window 'https://www.youtube.com/watch?v=vHVBavbJ0iI&list=PLhoo4UMVgpjJczj8BLGbfXdKd5OiDC7yJ&ab_channel=%E3%82%A2%E3%82%AF%E3%83%88%E3%83%AC%E3%83%96%E3%83%AD%E3%82%B0%2FACTRE_VLOG'",
+              "repeat": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "title": "Chrome go to back/next = control+command+b/f",
+  "rules": [
+    {
+      "description": "Chrome go to back/next = control+command+b/f",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com.google.Chrome"
+              ]
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com.google.Chrome"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

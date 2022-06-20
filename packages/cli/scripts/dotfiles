@@ -2,8 +2,8 @@
  
 set -e 
 
-GITHUB_PATH=~/projects/github.com
-GIT_CLONE_PATH="$GITHUB_PATH/JunichiSugiura"
+GITHUB_PATH=~/projects/github
+GIT_CLONE_PATH="$GITHUB_PATH/1206yaya"
 STOW_PACKAGES_PATH="$GIT_CLONE_PATH"/dotfiles/packages
 
 ###########################################################
@@ -83,9 +83,9 @@ fi
 ensure_dir "$GIT_CLONE_PATH"
 
 if ! is_dir "$GIT_CLONE_PATH"/dotfiles; then
-    log 'Clone dotfiles'
+    log "Clone dotfiles to $GIT_CLONE_PATH/dotfiles"
     cd "$GIT_CLONE_PATH"
-    git clone https://github.com/JunichiSugiura/dotfiles.git
+    git clone https://github.com/1206yaya/dotfiles.git
 fi
 
 if [ ! "$skip_apps" ]; then
@@ -100,7 +100,7 @@ log 'Link dotfiles'
 ensure_dir ~/.config/alacritty
 ensure_dir ~/.config/starship
 ensure_dir ~/.config/yarn/global
-
+ensure_dir ~/.config/karabiner/assets/complex_modifications
 # shellcheck disable=SC2046
 stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
 
@@ -150,15 +150,18 @@ for plugin in $(awk '{print $1}' ~/.tool-versions); do
         asdf plugin add "$plugin"
     fi
 done
-
+# .tool-versionsに変更があるかどうかß
 is_runtime_versions_changed () {
     plugin="$1"
+    # ex. grep yarn ~/.tool-versions | awk '{$1=""; print $0}'
     specified=$(grep "$plugin" ~/.tool-versions | awk '{$1=""; print $0}')
-    installed=$(asdf list "$plugin" 2>&1)
-
+    # installed=$(asdf list "$plugin" 2>&1)
+    nstalled=$(asdf list "$plugin")
+    # pluginに変更があるかどうか
     is_changed=
     for version in $specified; do
         match=$(echo "$installed" | grep "$version")
+        # $match に文字列があれば　is_changed=1
         [ -z "$match" ] && is_changed=1
     done
 
@@ -167,9 +170,9 @@ is_runtime_versions_changed () {
 
 for plugin in $(asdf plugin list); do
     if is_runtime_versions_changed "$plugin"; then
-        if [ "$plugin" = nodejs ]; then log "Import release team keyring for Node.JS"
-            bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
-        fi
+        # if [ "$plugin" = nodejs ]; then log "Import release team keyring for Node.JS"
+        #     bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
+        # fi
 
         log "Install runtime: $plugin"
         asdf install "$plugin"

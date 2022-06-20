@@ -1,0 +1,145 @@
+{
+  "title": "Vimac",
+  "rules": [
+    {
+      "description": "right_command+f Show Hint",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "right_command"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 300,
+            "basic.to_if_held_down_threshold_milliseconds": 500
+          },
+          "to_if_alone": [
+            {
+              "key_code": "f",
+              "modifiers": [
+                "left_command",
+                "left_option",
+                "left_shift"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "right_command"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "right_command+j Scroll",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "right_command"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 300,
+            "basic.to_if_held_down_threshold_milliseconds": 500
+          },
+          "to_if_alone": [
+            {
+              "key_code": "j",
+              "modifiers": [
+                "left_command",
+                "left_option",
+                "left_shift"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "right_command"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "right_option+f Show Hint",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "right_option"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 300,
+            "basic.to_if_held_down_threshold_milliseconds": 500
+          },
+          "to_if_alone": [
+            {
+              "key_code": "f",
+              "modifiers": [
+                "left_command",
+                "left_option",
+                "left_shift"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "right_option"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "right_option+j Scroll",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "right_option"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 300,
+            "basic.to_if_held_down_threshold_milliseconds": 500
+          },
+          "to_if_alone": [
+            {
+              "key_code": "j",
+              "modifiers": [
+                "left_command",
+                "left_option",
+                "left_shift"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "right_option"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
