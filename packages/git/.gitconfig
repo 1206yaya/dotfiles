@@ -24,8 +24,8 @@
 	defaultBranch = main
 [commit]
 	gpgsign = true
-;[gpg]
-;	program = /usr/local/MacGPG2/bin/gpg
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg
 [pull]
 	rebase = false
 [filter "lfs"]
