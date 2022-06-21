@@ -1,5 +1,5 @@
 export PATH=$PATH:$HOME/scripts
-export GIT_CLONE_PATH="$HOME"/projects/github.com/JunichiSugiura
+export GIT_CLONE_PATH="$HOME"/projects/github/1206yaya
 
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
