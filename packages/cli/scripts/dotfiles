@@ -123,7 +123,7 @@ fi
 plugged_path=~/.local/share/nvim/autoload/plugged
 if ! is_dir "$plugged_path"; then
     log 'Install Neovim Plugins'
-    nvim +PlugInstall +qall
+    /opt/homebrew/bin/nvim +PlugInstall +qall
 fi
 
 ###########################################################
