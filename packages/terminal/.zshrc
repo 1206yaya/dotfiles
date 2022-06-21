@@ -1,5 +1,5 @@
 export PATH=$PATH:$HOME/scripts
-export GIT_CLONE_PATH="$HOME"/projects/github.com/JunichiSugiura
+export GIT_CLONE_PATH="$HOME"/projects/github/1206yaya
 
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
@@ -47,7 +47,6 @@ if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
     export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH
 fi
 
-echo 'zak1'
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
