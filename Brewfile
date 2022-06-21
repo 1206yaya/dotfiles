@@ -128,10 +128,10 @@ cask "slack"
 # cask "utm"
 cask "visual-studio-code"
 # cask "zoom"
-cask install sourcetree
+cask "sourcetree"
 
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
-mas "Final Cut Pro", id: 424389933
+#mas "Final Cut Pro", id: 424389933
 mas "Vimari", id: 1480933944
 mas "Xcode", id: 497799835
 mas "NAS Navigator2", id: 450664466
