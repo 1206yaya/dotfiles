@@ -93,7 +93,7 @@ fi
 
 if [ ! "$skip_apps" ]; then
     log 'Install Apps and CLIs'
-    brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
+    /usr/local/bin/brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
 fi
 
 ###########################################################
