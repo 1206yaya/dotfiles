@@ -46,6 +46,8 @@ defaults write -g com.apple.trackpad.scaling -float 2.5
 defaults write -g com.apple.mouse.scaling -float 2.5
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton
 
+defaults write -g com.apple.swipescrolldirection -bool true 
+
 ###########################################################
 # Language
 ###########################################################

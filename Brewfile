@@ -109,7 +109,7 @@ cask "figma"
 cask "font-hack-nerd-font"
 cask "google-chrome"
 cask "google-cloud-sdk"
-cask "google-japanese-ime"
+# cask "google-japanese-ime"
 cask "gpg-suite"
 ## APIを確認する用のクライアント
 cask "insomnia"
@@ -129,10 +129,11 @@ cask "slack"
 cask "visual-studio-code"
 # cask "zoom"
 cask "sourcetree"
-
+cask "karabiner-elements"
+cask "alacritty"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
-mas "Vimari", id: 1480933944
+# mas "Vimari", id: 1480933944
 mas "Xcode", id: 497799835
 mas "NAS Navigator2", id: 450664466
 mas "Kindle", id: 405399194

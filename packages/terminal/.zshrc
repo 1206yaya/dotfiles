@@ -48,8 +48,8 @@ if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
 fi
 
 echo 'zak1'
-eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
 
 export GPG_TTY=$(tty)
 

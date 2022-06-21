@@ -1,6 +1,7 @@
 #!/bin/sh 
 GITHUB_EMAIL=1206yaya@gmail.com
 set -e 
+# set -x	
 
 # sudo -v
 # # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
@@ -59,7 +60,6 @@ ensure_dir() {
 ###########################################################
 if [ -n "$unlink_packages" ]; then
     log 'Unlinking dotfiles...'
-    source ~/.zshrc
     stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
     exit
 fi
@@ -93,8 +93,7 @@ if ! is_dir "$GIT_CLONE_PATH"/dotfiles; then
 fi
 
 if [ ! "$skip_apps" ]; then
-    log 'Install Apps and CLIs'
-    source ~/.zshrc
+    log 'Install Apps and CLIs'ß
     brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
 fi
 
@@ -109,7 +108,6 @@ ensure_dir ~/.config/starship
 ensure_dir ~/.config/yarn/global
 ensure_dir ~/.config/karabiner/assets/complex_modifications
 # shellcheck disable=SC2046
-source ~/.zshrc
 stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
 
 # configure macOS settings
@@ -129,7 +127,6 @@ fi
 plugged_path=~/.local/share/nvim/autoload/plugged
 if ! is_dir "$plugged_path"; then
     log 'Install Neovim Plugins'
-    source ~/.zshrc
     nvim +PlugInstall +qall
 fi
 
@@ -157,7 +154,6 @@ fi
 ###########################################################
 for plugin in $(awk '{print $1}' ~/.tool-versions); do
     if ! is_dir ~/.asdf/plugins/"$plugin"; then
-        source ~/.zshrc
         asdf plugin add "$plugin"
     fi
 done
@@ -190,11 +186,13 @@ for plugin in $(asdf plugin list); do
     fi
 done
 
-system_node_path=/usr/local/bin/node
-if ! is_file "$system_node_path"; then
-    log "Create symlink to $system_node_path so that XCode can reference"
-    ln -s ~/.asdf/shims/node "$system_node_path"
-fi
+# いらない？
+# system_node_path=/usr/local/bin/node
+# if ! is_file "$system_node_path"; then
+#     log "Create symlink to $system_node_path so that XCode can reference"
+#     # ERROR!! ln: /usr/local/bin/node: Permission denied
+#     ln -s ~/.asdf/shims/node "$system_node_path"
+# fi
 
 sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
 sudo xcodebuild -runFirstLaunch
@@ -203,7 +201,6 @@ sudo xcodebuild -runFirstLaunch
 ###########################################################
 if ! is_dir ~/.config/yarn/global/node_modules; then
     log 'Setup Yarn global'
-    source ~/.zshrc
     yarn global add
 fi
 
