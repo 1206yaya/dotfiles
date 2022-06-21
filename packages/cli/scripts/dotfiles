@@ -59,7 +59,7 @@ ensure_dir() {
 ###########################################################
 if [ -n "$unlink_packages" ]; then
     log 'Unlinking dotfiles...'
-    stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
+    /opt/homebrew/bin/stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
     exit
 fi
 
@@ -105,7 +105,7 @@ ensure_dir ~/.config/starship
 ensure_dir ~/.config/yarn/global
 ensure_dir ~/.config/karabiner/assets/complex_modifications
 # shellcheck disable=SC2046
-stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
+/opt/homebrew/bin/stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
 
 # configure macOS settings
 ensure_dir ~/screenshots
