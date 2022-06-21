@@ -35,13 +35,13 @@ alias ps="procs"
 alias top="ytop"
 alias vi="nvim"
 alias du="dust"
-# alias de="defaults"
-# alias refresh="source ~/.zshrc"
-# alias edit="code ~/.zshrc"
+alias de="defaults"
+alias refresh="source ~/.zshrc"
+alias edit="code ~/.zshrc"
 
-# function mkcd() {
-#     mkdir -p "$@" && cd "$_";
-# }
+function mkcd() {
+    mkdir -p "$@" && cd "$_";
+}
 
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
     export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH
