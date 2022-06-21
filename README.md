@@ -11,7 +11,7 @@ dotfiles managed with
 2. Run install
 
 ```sh
-curl -o - https://raw.githubusercontent.com/JunichiSugiura/dotfiles/master/packages/cli/scripts/dotfiles | sh
+curl -o - https://raw.githubusercontent.com/1206yaya/dotfiles/master/packages/cli/scripts/dotfiles | sh
 ```
 
 3. Start Yabai and skhd
