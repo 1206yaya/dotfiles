@@ -1,5 +1,5 @@
 #!/bin/sh 
-
+GITHUB_EMAIL=1206yaya@gmail.com
 set -e 
 
 # sudo -v
@@ -59,7 +59,8 @@ ensure_dir() {
 ###########################################################
 if [ -n "$unlink_packages" ]; then
     log 'Unlinking dotfiles...'
-    /opt/homebrew/bin/stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
+    source ~/.zshrc
+    stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
     exit
 fi
 
@@ -93,19 +94,23 @@ fi
 
 if [ ! "$skip_apps" ]; then
     log 'Install Apps and CLIs'
-    /usr/local/bin/brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
+    source ~/.zshrc
+    brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
 fi
 
 ###########################################################
 # Stow link
 ###########################################################
 log 'Link dotfiles'
+
+
 ensure_dir ~/.config/alacritty
 ensure_dir ~/.config/starship
 ensure_dir ~/.config/yarn/global
 ensure_dir ~/.config/karabiner/assets/complex_modifications
 # shellcheck disable=SC2046
-/opt/homebrew/bin/stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
+source ~/.zshrc
+stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
 
 # configure macOS settings
 ensure_dir ~/screenshots
@@ -114,6 +119,7 @@ ensure_dir ~/screenshots
 ###########################################################
 # Neovim
 ###########################################################
+
 plug_path=~/.local/share/nvim/site/autoload/plug.vim
 if ! is_file "$plug_path"; then
     log 'Setup vim-plug"'
@@ -123,7 +129,8 @@ fi
 plugged_path=~/.local/share/nvim/autoload/plugged
 if ! is_dir "$plugged_path"; then
     log 'Install Neovim Plugins'
-    /opt/homebrew/bin/nvim +PlugInstall +qall
+    source ~/.zshrc
+    nvim +PlugInstall +qall
 fi
 
 ###########################################################
@@ -140,7 +147,7 @@ fi
 
 if ! is_file ~/.ssh/id_rsa.pub; then
     log 'Setup gpg signing for git'
-    ssh-keygen -t rsa -b 4096 -C "jun.sugiura.jp@gmail.com"
+    ssh-keygen -t rsa -b 4096 -C $GITHUB_EMAIL
     log 'Copy and pates the SSH key below to GitHub'
     cat ~/.ssh/id_rsa.pub
 fi
@@ -150,6 +157,7 @@ fi
 ###########################################################
 for plugin in $(awk '{print $1}' ~/.tool-versions); do
     if ! is_dir ~/.asdf/plugins/"$plugin"; then
+        source ~/.zshrc
         asdf plugin add "$plugin"
     fi
 done
@@ -195,6 +203,7 @@ sudo xcodebuild -runFirstLaunch
 ###########################################################
 if ! is_dir ~/.config/yarn/global/node_modules; then
     log 'Setup Yarn global'
+    source ~/.zshrc
     yarn global add
 fi
 
