@@ -36,6 +36,7 @@ alias top="ytop"
 alias vi="nvim"
 alias du="dust"
 alias de="defaults"
+alias gam="git add . ; git commit -m "$@""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 
@@ -230,3 +231,4 @@ ex=:\
 *.pdf=:\
 *.nix=:\
 "
+

@@ -1,8 +1,8 @@
 {
-  "title": "o Launcher",
+  "title": "o Launcher+",
   "rules": [
     {
-      "description": "o Launcher",
+      "description": "o Launcher+",
       "manipulators": [
         {
           "conditions": [

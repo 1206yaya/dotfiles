@@ -102,7 +102,6 @@ fi
 ###########################################################
 log 'Link dotfiles'
 
-
 ensure_dir ~/.config/alacritty
 ensure_dir ~/.config/starship
 ensure_dir ~/.config/yarn/global
