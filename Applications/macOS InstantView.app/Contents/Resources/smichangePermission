@@ -1,0 +1,19 @@
+#!/bin/sh
+
+chmod +x ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Sparkle
+
+#chmod +x /Applications/macOS\ InstantView.app/Contents/MacOS/macOS\ InstantView
+
+chmod +x ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/Autoupdate.app/Contents/MacOS/Autoupdate
+
+chmod +x ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/Autoupdate.app/Contents/MacOS/fileop
+
+ln -snf ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr_CA.lproj
+
+ln -snf ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/pt_BR.lproj ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/pt.lproj
+
+ln -snf ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/Current
+
+ln -snf ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Resources
+
+ln -snf ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Versions/A/Sparkle ~/Library/Application\ Support/InstantView/macOS\ InstantView.app/Contents/Frameworks/Sparkle.framework/Sparkle

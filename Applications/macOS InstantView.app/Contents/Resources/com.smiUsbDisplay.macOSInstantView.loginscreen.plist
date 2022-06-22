@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.smiUsbDisplay.macOSInstantView.loginscreen</string>
+	<key>LimitLoadToSessionType</key>
+	<string>LoginWindow</string>
+	<key>Program</key>
+	<string>/Applications/macOS InstantView.app/Contents/MacOS/macOS InstantView</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Applications/macOS InstantView.app/Contents/MacOS/macOS InstantView</string>
+		<string>LoginWindow</string>
+	</array>
+	<key>ProcessType</key>
+	<string>Interactive</string>
+	<key>ThrottleInterval</key>
+	<integer>5</integer>
+	<key>Disabled</key>
+	<false/>
+	<key>Umask</key>
+	<integer>0</integer>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+</dict>
+</plist>

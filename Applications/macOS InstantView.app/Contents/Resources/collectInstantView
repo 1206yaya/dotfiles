@@ -1,0 +1,18 @@
+#!/bin/sh
+
+
+LOGPATH=/USERS/$USER/Library/Logs
+BASEDIR=$LOGPATH/SMIInfoLog
+mkdir $BASEDIR
+mkdir $BASEDIR/InstantView
+mkdir $BASEDIR/Docking
+mkdir $BASEDIR/Firmware
+
+cp  ~/Library/Logs/macOS\ InstantView.log $BASEDIR/InstantView/
+cp ~/Library/Logs/macOS\ InstantView_old.log $BASEDIR/InstantView/
+
+cp ~/Library/Caches/com.SMI.InstantView/.logs/* $BASEDIR/InstantView/
+cp /Library/Logs/DiagnosticReports/macOS\ InstantView*.crash $BASEDIR/InstantView/
+cp ~/Library/Logs/DiagnosticReports/macOS\ InstantView*.crash $BASEDIR/InstantView/
+
+mv ~/Library/Logs/smiBugTimeInfo.txt $BASEDIR

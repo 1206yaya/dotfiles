@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "Deleting global preferences"
+sudo rm -f /Library/Preferences/com.apple.windowserver.plist
+sudo rm -f /Library/Preferences/com.apple.windowserver.plist.*
+
+echo ""
+echo "Deleting user preferences"
+for i in ~root /Users/*
+do
+echo $i
+sudo rm -f $i/Library/Preferences/ByHost/com.apple.windowserver.*.plist
+sudo rm -f $i/Library/Preferences/ByHost/com.apple.windowserver.*.plist.*
+done
+
+echo "Done! Please restart the system"
+
+

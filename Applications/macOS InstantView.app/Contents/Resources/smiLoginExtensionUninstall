@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo rm -rf /Library/LaunchAgents/com.smiUsbDisplay.macOSInstantView.loginscreen.plist
+
+sudo rm -rf /Applications/macOS\ InstantView.app

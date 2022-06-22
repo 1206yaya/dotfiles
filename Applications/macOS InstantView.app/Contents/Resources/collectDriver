@@ -1,0 +1,32 @@
+#!/bin/sh
+
+DESKTOP=/Users/$USER/Desktop
+LOGPATH=/USERS/$USER/Library/Logs
+BASEDIR=$LOGPATH/SMIInfoLog
+sudo cp /Library/PrivilegedHelperTools/SMIUSBDisplay/SMIUSBDisplay.log $BASEDIR/Docking/
+sudo cp /Library/PrivilegedHelperTools/SMIUSBDisplay/SMIUSBDisplayHelper.log $BASEDIR/Docking/
+sudo cp /Library/PrivilegedHelperTools/SMIUSBDisplay/SMIUSBDisplay_old.log $BASEDIR/Docking/
+sudo cp /Library/PrivilegedHelperTools/SMIUSBDisplay/SMIUSBDisplayHelper_old.log $BASEDIR/Docking/
+sudo cp -rf /Applications/SiliconMotion/.logs/* $BASEDIR/Docking/
+
+#system info
+sudo cp /Library/Logs/DiagnosticReports/SMIUSBDisplay*.crash $BASEDIR/Docking/
+sudo cp ~/Library/Logs/DiagnosticReports/SMIUSBDisplay*.crash $BASEDIR/Docking/
+
+sudo cp  /private/var/log/system.log  $BASEDIR
+system_profiler -xml -detailLevel full > $BASEDIR/System\ Profile.spx
+
+# firmware log
+cp ~/Library/Caches/com.SMI.InstantView/FirmwareLog/*.txt $BASEDIR/Firmware/
+#rm -rf ~/Library/Caches/com.SMI.InstantView/FirmwareLog
+
+cd $LOGPATH
+sudo zip -q -r SMIInfoLog.zip SMIInfoLog
+sudo rm -rf SMIInfoLog
+
+package="SMIInfoLog_"
+current=`date "+%Y-%m-%d-%H%M%S"`
+formate=".zip"
+packageName=$package$current$formate
+mv SMIInfoLog.zip $DESKTOP/$packageName
+
