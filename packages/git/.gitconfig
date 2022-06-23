@@ -13,6 +13,7 @@
 	c   = commit
 	cm  = commit -m
 	pso = push origin
+	p   = push
 	pl  = pull
 	plo = pull origin
 	f   = fetch

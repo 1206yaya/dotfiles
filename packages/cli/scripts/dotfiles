@@ -105,9 +105,13 @@ log 'Link dotfiles'
 ensure_dir ~/.config/alacritty
 ensure_dir ~/.config/starship
 ensure_dir ~/.config/yarn/global
-ensure_dir ~/.config/karabiner
+
 # shellcheck disable=SC2046
-stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls $STOW_PACKAGES_PATH)
+stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls  $STOW_PACKAGES_PATH)
+
+#### Warning
+# Do not make a symlink to karabiner.json directly.
+# https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
 
 # configure macOS settings
 ensure_dir ~/screenshots

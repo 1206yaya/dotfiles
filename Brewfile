@@ -61,7 +61,7 @@ brew "ripgrep"
 brew "ruby"
 brew "spring-io/tap/spring-boot"
 # brew "rust-analyzer"
-
+brew "terraform"
 ## search & displace cli 
 brew "sd"
 ## Terminal 便利検索
@@ -94,7 +94,7 @@ brew "libpng"
 brew "jpeg"
 brew "giflib"
 brew "librsvg"
-
+brew "tree"
 cask "1password"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
 cask "android-file-transfer"
@@ -131,6 +131,8 @@ cask "visual-studio-code"
 cask "sourcetree"
 cask "karabiner-elements"
 cask "alacritty"
+cask "obsidian"
+cask "todoist"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944

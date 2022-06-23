@@ -36,12 +36,16 @@ alias top="ytop"
 alias vi="nvim"
 alias du="dust"
 alias de="defaults"
+alias g="git"
 alias gam="git add . ; git commit -m "$@""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 
 function mkcd() {
     mkdir -p "$@" && cd "$_";
+}
+function touchp() {
+    mkdir -p "$(dirname "$@")" && touch  "$@"
 }
 
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
@@ -231,4 +235,3 @@ ex=:\
 *.pdf=:\
 *.nix=:\
 "
-

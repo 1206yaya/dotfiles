@@ -272,7 +272,7 @@
           },
           "to": [
             {
-              "shell_command": "open -F -n -b 'com.microsoft.VSCode' --args /Users/aya/.config/karabiner"
+              "shell_command": "open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"
             }
           ],
           "type": "basic"
@@ -314,7 +314,7 @@
               }
             },
             {
-              "shell_command": "open -F -n -b 'com.microsoft.VSCode' --args /Users/aya/.config/karabiner"
+              "shell_command": "open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"
             }
           ],
           "type": "basic"
