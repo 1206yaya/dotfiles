@@ -34,7 +34,7 @@ haven't figure out ways to automate
   - [Vulkan SDK](https://vulkan.lunarg.com/)
   - [Postlab](https://hedge.video/postlab)
 - add [Vimari](https://apps.apple.com/us/app/vimari/id1480933944?mt=12) Safari extension
-
+ 
 ## Installed Apps
 
 Check [Brewfile](./Brewfile) for the latest bundle.
@@ -42,3 +42,14 @@ Check [Brewfile](./Brewfile) for the latest bundle.
 ## Tutorial
 
 If you like to learn how to create dotfiles, check out my [tutorial ](https://github.com/JunichiSugiura/tutorials/tree/master/dotfiles).
+
+## うまくいかない時
+
+* パッケージにうまくリンクがはれない
+
+一度、リンクを全て削除してからリンクを貼りなおす
+
+```
+rm ~/.config/karabiner
+stow -vd ~//Users/zak/projects/github/1206yaya/dotfiles/packages -t ~ keybindiings
+```
