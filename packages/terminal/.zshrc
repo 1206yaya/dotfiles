@@ -7,7 +7,6 @@ if [ -f "/opt/homebrew/bin/brew"  ]; then
 
     . $(brew --prefix asdf)/libexec/asdf.sh
 fi
-
 alias code="open -a 'Visual Studio Code'"
 alias syncsh=". syncsh"
 alias cdrepo=". cdrepo"
@@ -67,6 +66,15 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH=$PATH:$(yarn global bin)
 export FZF_DEFAULT_COMMAND="rg --files --hidden -l -g '!.git/*' -g '!node_modules/*'"
 export FZF_DEFAULT_OPTS="-m --height 100% --border --preview 'cat {}'"
+
+############ >>>DOCKER
+alias d='docker'
+alias dl='docker container ls -la'
+alias di='docker images'
+alias dm='docker-machine'
+# docker-compose shortcut - overrides /usr/bin/dc - desktop calculator
+alias dc='docker-compose'
+
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'

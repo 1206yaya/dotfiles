@@ -62,6 +62,7 @@ brew "ruby"
 brew "spring-io/tap/spring-boot"
 # brew "rust-analyzer"
 brew "terraform"
+brew "awscli"
 ## search & displace cli 
 brew "sd"
 ## Terminal 便利検索
@@ -95,6 +96,7 @@ brew "jpeg"
 brew "giflib"
 brew "librsvg"
 brew "tree"
+
 cask "1password"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
 cask "android-file-transfer"
