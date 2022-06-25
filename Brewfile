@@ -97,6 +97,7 @@ brew "giflib"
 brew "librsvg"
 brew "tree"
 
+brew "git-secrets"
 cask "1password"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
 cask "android-file-transfer"
@@ -136,6 +137,7 @@ cask "alacritty"
 cask "obsidian"
 cask "todoist"
 cask "microsoft-office"
+cask "intellij-idea-ce"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944

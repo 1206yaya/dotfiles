@@ -1,6 +1,6 @@
 export PATH=$PATH:$HOME/scripts
 export GIT_CLONE_PATH="$HOME"/projects/github/1206yaya
-
+export JAVA_HOME="$(asdf where java)"
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"

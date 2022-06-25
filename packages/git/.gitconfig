@@ -19,7 +19,7 @@
 	f   = fetch
 	fup = fetch upstream
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore_global
 	editor = nvim
 [init]
 	defaultBranch = main
