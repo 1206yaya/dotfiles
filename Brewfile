@@ -135,6 +135,7 @@ cask "karabiner-elements"
 cask "alacritty"
 cask "obsidian"
 cask "todoist"
+cask "microsoft-office"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944

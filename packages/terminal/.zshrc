@@ -27,7 +27,8 @@ if [ -n "$(which exa)" ]; then
     alias ls="exa"
 fi
 
-alias cat="bat"
+alias cat='bat --style=plain --paging=never'
+alias less='bat --style=plain'
 alias ll="ls -lah --git"
 alias lt="ll -TL 3 --ignore-glob=.git"
 alias ps="procs"
@@ -75,6 +76,29 @@ alias dm='docker-machine'
 # docker-compose shortcut - overrides /usr/bin/dc - desktop calculator
 alias dc='docker-compose'
 
+############ >>> Springboot
+function springinit {
+cat <<'EOF'
+spring init \
+--artifactId=sample-project \
+--groupId=app \
+--bootVersion=2.6.4-SNAPSHOT \
+--javaVersion=11 \
+--language=java \
+--type=gradle-project \
+--packageName=app \
+--name=Application \
+--dependencies=lombok,web,data-jpa,postgresql \
+sample-project
+
+more info 
+$ spring init --list
+
+Notes. if you use dynamodb
+    gradle.build dependencies 
+        implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.17.100'
+EOF
+}
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
