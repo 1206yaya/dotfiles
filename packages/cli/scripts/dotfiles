@@ -38,19 +38,19 @@ log() {
     echo 📌 "$message"
 }
 
-is_file() {
+file_exists() {
     path="$1"
     [ -f "$path" ]
 }
 
-is_dir() {
+dir_exists() {
     path="$1"
     [ -d "$path" ]
 }
 
-ensure_dir() {
+ensure_dir_exists() {
     path="$1"
-    if ! is_dir "$path"; then
+    if ! dir_exists "$path"; then
         mkdir -p "$path"
     fi
 }
@@ -69,12 +69,12 @@ fi
 ###########################################################
 arch_name="$(uname -m)"
 if [ "${arch_name}" = "x86_64" ]; then
-    if ! is_file /usr/local/bin/brew; then
+    if ! file_exists /usr/local/bin/brew; then
         log 'Setup Homebrew'
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 elif [ "${arch_name}" = "arm64" ]; then
-    if ! is_file /opt/homebrew/bin/brew; then
+    if ! file_exists /opt/homebrew/bin/brew; then
         log 'Setup Homebrew'
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -84,9 +84,9 @@ elif [ "${arch_name}" = "arm64" ]; then
     fi
 fi
 
-ensure_dir "$GIT_CLONE_PATH"
+ensure_dir_exists "$GIT_CLONE_PATH"
 
-if ! is_dir "$GIT_CLONE_PATH"/dotfiles; then
+if ! dir_exists "$GIT_CLONE_PATH"/dotfiles; then
     log "Clone dotfiles to $GIT_CLONE_PATH/dotfiles"
     cd "$GIT_CLONE_PATH"
     git clone https://github.com/1206yaya/dotfiles.git
@@ -102,9 +102,9 @@ fi
 ###########################################################
 log 'Link dotfiles'
 
-ensure_dir ~/.config/alacritty
-ensure_dir ~/.config/starship
-ensure_dir ~/.config/yarn/global
+ensure_dir_exists ~/.config/alacritty
+ensure_dir_exists ~/.config/starship
+ensure_dir_exists ~/.config/yarn/global
 
 # shellcheck disable=SC2046
 stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls  $STOW_PACKAGES_PATH)
@@ -114,7 +114,7 @@ stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls  $STOW_PACKAGES_PATH)
 # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
 
 # configure macOS settings
-ensure_dir ~/screenshots
+ensure_dir_exists ~/screenshots
 ~/scripts/macos-defaults
 
 ###########################################################
@@ -122,13 +122,13 @@ ensure_dir ~/screenshots
 ###########################################################
 
 plug_path=~/.local/share/nvim/site/autoload/plug.vim
-if ! is_file "$plug_path"; then
+if ! file_exists "$plug_path"; then
     log 'Setup vim-plug"'
     sh -c "curl -fLo $plug_path --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 fi
 
 plugged_path=~/.local/share/nvim/autoload/plugged
-if ! is_dir "$plugged_path"; then
+if ! dir_exists "$plugged_path"; then
     log 'Install Neovim Plugins'
     nvim +PlugInstall +qall
 fi
@@ -136,7 +136,7 @@ fi
 ###########################################################
 # Git
 ###########################################################
-if ! is_dir ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
+if ! dir_exists ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
     log 'Install gpg signing with git'
     gpg --default-new-key-algo rsa4096 --gen-key
     key_id=$(gpg --list-secret-keys --keyid-format LONG | ggrep -oP "rsa4096\/[0-9a-fA-F]{16}" | cut -d"/"  -f2)
@@ -145,7 +145,7 @@ if ! is_dir ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; 
     git config --global user.signingkey "$key_id"
 fi
 
-if ! is_file ~/.ssh/id_rsa.pub; then
+if ! file_exists ~/.ssh/id_rsa.pub; then
     log 'Setup gpg signing for git'
     ssh-keygen -t rsa -b 4096 -C $GITHUB_EMAIL
     log 'Copy and pates the SSH key below to GitHub'
@@ -156,7 +156,7 @@ fi
 # asdf
 ###########################################################
 for plugin in $(awk '{print $1}' ~/.tool-versions); do
-    if ! is_dir ~/.asdf/plugins/"$plugin"; then
+    if ! dir_exists ~/.asdf/plugins/"$plugin"; then
         asdf plugin add "$plugin"
     fi
 done
@@ -191,7 +191,7 @@ done
 
 # いらない？
 # system_node_path=/usr/local/bin/node
-# if ! is_file "$system_node_path"; then
+# if ! file_exists "$system_node_path"; then
 #     log "Create symlink to $system_node_path so that XCode can reference"
 #     # ERROR!! ln: /usr/local/bin/node: Permission denied
 #     ln -s ~/.asdf/shims/node "$system_node_path"
@@ -202,14 +202,14 @@ sudo xcodebuild -runFirstLaunch
 ###########################################################
 # Yarn global
 ###########################################################
-if ! is_dir ~/.config/yarn/global/node_modules; then
+if ! dir_exists ~/.config/yarn/global/node_modules; then
     log 'Setup Yarn global'
     yarn global add
 fi
 
-if ! is_file ~/prysm/prysm.sh; then
+if ! file_exists ~/prysm/prysm.sh; then
     log 'Setup Ethereum 2.0 client'
-    if ! is_dir ~/prysm; then
+    if ! dir_exists ~/prysm; then
         mkdir ~/prysm
     fi
 
@@ -224,15 +224,15 @@ fi
 # Alacritty
 ###########################################################
 ALACRITTY_ORG_PATH="$GIT_CLONE_PATH/alacritty"
-ensure_dir "$ALACRITTY_ORG_PATH"
-if ! is_dir "$ALACRITTY_ORG_PATH/alacritty"; then
+ensure_dir_exists "$ALACRITTY_ORG_PATH"
+if ! dir_exists "$ALACRITTY_ORG_PATH/alacritty"; then
     (
         cd "$ALACRITTY_ORG_PATH"
         gh repo clone alacritty/alacritty
     )
 fi
 
-if ! is_dir /Applications/Alacritty.app; then
+if ! dir_exists /Applications/Alacritty.app; then
     log "Build alacritty"
     (
         cd "$ALACRITTY_ORG_PATH/alacritty"
