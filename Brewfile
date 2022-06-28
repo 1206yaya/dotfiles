@@ -84,6 +84,7 @@ brew "zola"
 brew "zoxide"
 brew "zsh"
 brew "zsh-autosuggestions"
+brew "yqrashawn/goku/goku"
 
 ## https://github.com/Automattic/node-canvas
 brew "pkg-config"
@@ -123,7 +124,8 @@ cask "insomnia"
 # cask "ledger-live"
 cask "notion"
 cask "dropbox"
-
+cask "alfred"
+cask "postman"
 ## for video recording and live streaming
 # cask "obs"
 # cask "obs-ndi"

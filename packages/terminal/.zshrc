@@ -1,6 +1,6 @@
 export PATH=$PATH:$HOME/scripts
 export GIT_CLONE_PATH="$HOME"/projects/github/1206yaya
-
+export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
 #
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
@@ -82,7 +82,8 @@ function dc() {
 }
 
 function dcr() {
- 　# 引数が一つもなければ
+    # TODO
+    # if status=exited size 0 then echo "status=exitedのコンテナは存在しません"
   if [[ $# -eq 0 ]]; then
     command docker rm $(docker ps -a -f status=exited -q) ;
   else
