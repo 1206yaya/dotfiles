@@ -35,8 +35,22 @@
     ;; ignored.
 
 ;; [karabiner-layers.md　神設定拝借](https://gist.github.com/gsinclair/f4ab34da53034374eb6164698a0a8ace)
-
+ :applications {
+   :Chrome   ["com.google.Chrome", "com.google.Chrome.beta"]
+   :Contexts ["com.contextsformac.Contexts"]
+   :Finder   ["com.apple.finder"]
+   :IntelliJ ["com.jetbrains.intellij"]
+   :Keynote  ["com.apple.iWork.Keynote"]
+   :Notion   ["notion.id"]
+   :Slack    ["com.tinyspeck.slackmacgap"]
+ }
+ :templates {
+  ;; :open "open -a '%s.app'"
+  :launch "osascript -e 'tell application \"%s\" to activate'"
+  :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
+}
  :simlayers {
+             :open-mode {:key :o}
              :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
              :d-mode {:key :d}    ; arithmetic    + - * / = % < > #
              :s-mode {:key :s}    ; punctuation   ? ! : ; ' " ` ~
@@ -55,6 +69,17 @@
              }
 
  :main [
+        {:des "Open mode"
+          :rules [:open-mode
+            [:t [:launch "iTerm"]]
+            [:c [:launch "Google Chrome"]]
+            [:a [:launch "Alacritty"]]
+            [:b [:launch "Obsidian"]]
+            [:v [:launch "VSCode"]]
+            ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
+            [:k [:code-project "~/projects/github/1206yaya/dotfiles"]]
+
+          ]}
         ;; {:des "Mouse Keys" :rules [[{:pkey :button4} :a]]}
 
         {:des "Ctrl Tab to Command Tab Swap" :rules [[:!C##tab :!Ttab]]}
