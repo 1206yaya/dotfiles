@@ -2103,6 +2103,17 @@
         "basic.to_if_held_down_threshold_milliseconds" : 500
       },
       "rules" : [ {
+        "description" : "Mouse Keys",
+        "manipulators" : [ {
+          "from" : {
+            "pointing_button" : "button4"
+          },
+          "to" : [ {
+            "key_code" : "a"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
         "description" : "Ctrl Tab to Command Tab Swap",
         "manipulators" : [ {
           "from" : {
@@ -6402,24 +6413,24 @@
     "selected" : true,
     "simple_modifications" : [ {
       "from" : {
-        "key_code" : "left_control"
-      },
-      "to" : [ {
-        "key_code" : "left_command"
-      } ]
-    }, {
-      "from" : {
-        "key_code" : "left_command"
-      },
-      "to" : [ {
-        "key_code" : "left_control"
-      } ]
-    }, {
-      "from" : {
         "key_code" : "caps_lock"
       },
       "to" : [ {
         "key_code" : "left_control"
+      } ]
+    }, {
+      "from" : {
+        "key_code" : "left_command"
+      },
+      "to" : [ {
+        "key_code" : "left_control"
+      } ]
+    }, {
+      "from" : {
+        "key_code" : "left_control"
+      },
+      "to" : [ {
+        "key_code" : "left_command"
       } ]
     } ],
     "virtual_hid_keyboard" : {

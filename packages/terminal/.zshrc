@@ -33,7 +33,7 @@ alias cat='bat --style=plain --paging=never'
 alias less='bat --style=plain'
 alias ll="ls -lah --git"
 alias lt="ll -TL 3 --ignore-glob=.git"
-alias ps="procs"
+# alias ps="procs"
 alias top="ytop"
 alias vi="nvim"
 alias du="dust"
@@ -50,6 +50,12 @@ function mkcd() {
 function touchp() {
     mkdir -p "$(dirname "$@")" && touch  "$@"
 }
+
+function kill_webdriver() {
+  kill $(ps aux | grep 'selenium' | awk '{print $2}')
+  kill $(ps aux | grep 'Google Chrome.app' | awk '{print $2}')
+}
+
 
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
     export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH

@@ -56,11 +56,8 @@
 
  :main [
 
-        ;; {:des "Ctrl Tab to Command Tab Swap"
-        ;;  :rules [
-        ;;          [[:Ttab] [:Ctab]]
-        ;;         ]
-        ;;  }
+        {:des "Ctrl Tab to Command Tab Swap" :rules [[:!C##tab :!Ttab]]}
+        {:des "Command Tab to Ctrl Tab Swap" :rules [[:!T##tab :!Ctab]]}
 
         {:des "Swap Win and Alt on Sculpt keyboard"
          :rules [:sculpt-keyboard
@@ -241,4 +238,7 @@
           ]}
 
  ]
+ ,
+ ; the default value is 250
+ :simlayer-threshold 500
 }

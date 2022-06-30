@@ -2,6 +2,22 @@
   "title": "Sample Rules",
   "rules": [
     {
+      "description": "Mouse Keys",
+      "manipulators": [
+        {
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "key_code": "a"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
       "description": "Ctrl Tab to Command Tab Swap",
       "manipulators": [
         {

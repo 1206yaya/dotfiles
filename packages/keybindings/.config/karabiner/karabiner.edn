@@ -34,7 +34,7 @@
     ;; if simplified modifier is used in <to>, optional(#) definition will be
     ;; ignored.
 
-;; [karabiner-layers.md](https://gist.github.com/gsinclair/f4ab34da53034374eb6164698a0a8ace)
+;; [karabiner-layers.md　神設定拝借](https://gist.github.com/gsinclair/f4ab34da53034374eb6164698a0a8ace)
 
  :simlayers {
              :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
@@ -55,6 +55,7 @@
              }
 
  :main [
+        ;; {:des "Mouse Keys" :rules [[{:pkey :button4} :a]]}
 
         {:des "Ctrl Tab to Command Tab Swap" :rules [[:!C##tab :!Ttab]]}
         {:des "Command Tab to Ctrl Tab Swap" :rules [[:!T##tab :!Ctab]]}
