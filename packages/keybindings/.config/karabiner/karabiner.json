@@ -2103,6 +2103,35 @@
         "basic.to_if_held_down_threshold_milliseconds" : 500
       },
       "rules" : [ {
+        "description" : "Change input source to English by left_command; Russian by right_command.",
+        "manipulators" : [ {
+          "to_if_alone" : [ {
+            "select_input_source" : {
+              "input_source_id" : "^com.apple.keylayout.ABC$"
+            }
+          } ],
+          "from" : {
+            "key_code" : "left_command"
+          },
+          "to" : [ {
+            "key_code" : "left_command"
+          } ],
+          "type" : "basic"
+        }, {
+          "to_if_alone" : [ {
+            "select_input_source" : {
+              "input_source_id" : "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"
+            }
+          } ],
+          "from" : {
+            "key_code" : "left_control"
+          },
+          "to" : [ {
+            "key_code" : "left_control"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
         "description" : "Open mode",
         "manipulators" : [ {
           "from" : {

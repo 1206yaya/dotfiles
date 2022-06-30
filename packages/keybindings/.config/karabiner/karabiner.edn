@@ -67,8 +67,19 @@
              :c-mode {:key :c}    ; Slashes and lines  ^ | \ _ @
              :x-mode {:key :x}    ; Some multi-character shortcuts like <= (not implemented)
              }
+  :input-sources  {
+                    :en {:input_source_id "^com.apple.keylayout.ABC$"}
+                    :jp {:input_source_id "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"}
+  }
 
  :main [
+        {:des "Change input source to English by left_command; Russian by right_command."
+          :rules [
+            [:left_command    :left_command    nil {:alone {:input :en}}]
+            [:left_control    :left_control    nil {:alone {:input :jp}}]
+          ]
+
+        }
         {:des "Open mode"
           :rules [:open-mode
             [:t [:launch "iTerm"]]
