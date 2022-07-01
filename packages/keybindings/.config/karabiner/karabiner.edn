@@ -35,6 +35,10 @@
     ;; ignored.
 
 ;; [karabiner-layers.md　神設定拝借](https://gist.github.com/gsinclair/f4ab34da53034374eb6164698a0a8ace)
+
+;; TODO Chromeで指定のURLを開く
+;;  https://github.com/raya/dotfiles/blob/885f68694ee79790ffb81bb6421dcf5c0493fd27/karabiner/karabiner.edn
+;; [AppleScript to make Google Chrome open/reload a URL](https://gist.github.com/mayoff/1138816)
  :applications {
    :Chrome   ["com.google.Chrome", "com.google.Chrome.beta"]
    :Contexts ["com.contextsformac.Contexts"]
@@ -67,6 +71,7 @@
              :c-mode {:key :c}    ; Slashes and lines  ^ | \ _ @
              :x-mode {:key :x}    ; Some multi-character shortcuts like <= (not implemented)
              }
+  ;; dotfileTools/PrintKeylayout.swift を使ってinput sourceを調べることができます
   :input-sources  {
                     :en {:input_source_id "^com.apple.keylayout.ABC$"}
                     :jp {:input_source_id "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"}

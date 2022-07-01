@@ -55,6 +55,12 @@ function kill_webdriver() {
   kill $(ps aux | grep 'selenium' | awk '{print $2}')
   kill $(ps aux | grep 'Google Chrome.app' | awk '{print $2}')
 }
+function killport() {
+  port=$(lsof -n -i4TCP:$1 | grep LISTEN | awk '{ print $2 }')  
+  kill -9 $port 
+}
+
+
 
 
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
