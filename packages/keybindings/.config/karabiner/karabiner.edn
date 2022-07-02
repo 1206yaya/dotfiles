@@ -59,8 +59,14 @@
    :Slack    ["com.tinyspeck.slackmacgap"]
  }
  :templates {
-  ;; :open "open -a '%s.app'"
   :launch "osascript -e 'tell application \"%s\" to activate'"
+  :paste "osascript -e '
+    set the clipboard to \"%s\"
+    tell application \"System Events\"
+        keystroke \"v\" using command down
+    end tell
+  '"
+  :open "open -a '%s.app'"
   :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
   :open_url "open -u %s"
 }
@@ -98,7 +104,7 @@
                 [:a [:open_url "https://www.amazon.co.jp"]]
                 [:q [:open_url "https://qiita.com"]]
                 [:n [:open_url "https://notion.so"]]
-                [:g [:open_url "https://github.com/search?q=filename%3A+extension%3Aedn"]]
+                [:g [:open_url "https://github.com/search?q=filename%3A+extension%3A"]]
         ]}
         {:des "Change input source to English by left_command; Russian by right_command."
           :rules [
@@ -109,12 +115,12 @@
         }
         {:des "Open mode"
           :rules [:open-mode
-            [:t [:launch "iTerm"]]
-            [:c [:launch "Google Chrome"]]
-            [:a [:launch "Alacritty"]]
-            [:b [:launch "Obsidian"]]
-            [:f [:launch "Finder"]]
-            [:v [:launch "VSCode"]]
+            [:t [:open "iTerm"]]
+            [:c [:open "Google Chrome"]]
+            [:a [:open "Alacritty"]]
+            [:b [:open "Obsidian"]]
+            [:f [:open "Finder"]]
+            [:v [:open "VSCode"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             [:k [:code-project "~/projects/github/1206yaya/dotfiles"]]
 
