@@ -1,4 +1,14 @@
 {
+    ;; rule [:period ["media-mode" 1] nil {:afterup ["media-mode" 0] :alone :period}]
+    ;;       |_____| |_______________| |_| |_________________________________________|
+    ;;        <from>    <to>      <conditions>         <other options>
+    
+    ;; :japanese_kana {:label "かなキー" :display true}
+    ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/src/karabiner_configurator/keys_info.clj
+
+    ;; chrome-mode
+    ;; https://github.com/LcitsChan/dotfiles/blob/01c8ef75147cb67302824772004a51486eccbffb/goku/karabiner.edn
+
     ;; this is a little bit weird, but it's convenient
     ;; the rule [:!Ca :!T1]
     ;; means from command a to control 1
@@ -52,8 +62,10 @@
   ;; :open "open -a '%s.app'"
   :launch "osascript -e 'tell application \"%s\" to activate'"
   :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
+  :open_url "open -u %s"
 }
  :simlayers {
+             :chrome-mode      {:key :d                                :condi :Chrome}
              :open-mode {:key :o}
              :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
              :d-mode {:key :d}    ; arithmetic    + - * / = % < > #
@@ -78,6 +90,16 @@
   }
 
  :main [
+        {:des "chrome"
+        :rules [:chrome-mode
+                [:m [:open_url "https://mail.google.com/"]]
+                [:c [:open_url "https://calendar.google.com/"]]
+                [:y [:open_url "https://youtube.com"]]
+                [:a [:open_url "https://www.amazon.co.jp"]]
+                [:q [:open_url "https://qiita.com"]]
+                [:n [:open_url "https://notion.so"]]
+                [:g [:open_url "https://github.com/search?q=filename%3A+extension%3Aedn"]]
+        ]}
         {:des "Change input source to English by left_command; Russian by right_command."
           :rules [
             [:left_command    :left_command    nil {:alone {:input :en}}]
@@ -91,6 +113,7 @@
             [:c [:launch "Google Chrome"]]
             [:a [:launch "Alacritty"]]
             [:b [:launch "Obsidian"]]
+            [:f [:launch "Finder"]]
             [:v [:launch "VSCode"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             [:k [:code-project "~/projects/github/1206yaya/dotfiles"]]
