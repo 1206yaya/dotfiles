@@ -124,6 +124,8 @@
             [:a [:open "Alacritty"]]
             [:b [:open "Obsidian"]]
             [:f [:open "Finder"]]
+            [:m [:open "Morgen"]]
+            [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"]]
             [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             [:k [:code-project "~/projects/github/1206yaya/dotfiles"]]

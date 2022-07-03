@@ -9,6 +9,7 @@ if [ -f "/opt/homebrew/bin/brew"  ]; then
     . $(brew --prefix asdf)/libexec/asdf.sh
 fi
 export JAVA_HOME="$(asdf where java)"
+alias q="exit"
 alias code="open -a 'Visual Studio Code'"
 alias syncsh=". syncsh"
 alias cdrepo=". cdrepo"

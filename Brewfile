@@ -32,6 +32,7 @@ brew "curl"
 
 ## Make if colorul for Terminal 
 brew "exa"
+cask "iterm2"
 ## enhance find-command
 brew "fd"
 brew "fzf"
