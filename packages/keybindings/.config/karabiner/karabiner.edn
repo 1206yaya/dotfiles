@@ -57,6 +57,7 @@
    :Keynote  ["com.apple.iWork.Keynote"]
    :Notion   ["notion.id"]
    :Slack    ["com.tinyspeck.slackmacgap"]
+   :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
  }
  :templates {
   :launch "osascript -e 'tell application \"%s\" to activate'"
@@ -98,8 +99,10 @@
  :main [
         {:des "chrome"
         :rules [:chrome-mode
-                [:m [:open_url "https://mail.google.com/"]]
+                [:e [:open_url "https://mail.google.com/"]]
+                [:m [:open_url "https://www.google.com/maps/"]]
                 [:c [:open_url "https://calendar.google.com/"]]
+                [:w [:open_url "https://console.aws.amazon.com/console/home#"]]
                 [:y [:open_url "https://youtube.com"]]
                 [:a [:open_url "https://www.amazon.co.jp"]]
                 [:q [:open_url "https://qiita.com"]]
@@ -115,12 +118,13 @@
         }
         {:des "Open mode"
           :rules [:open-mode
-            [:t [:open "iTerm"]]
+            [:i [:open "iTerm"]]
+            [:t [:open "Todoist"]]
             [:c [:open "Google Chrome"]]
             [:a [:open "Alacritty"]]
             [:b [:open "Obsidian"]]
             [:f [:open "Finder"]]
-            [:v [:open "VSCode"]]
+            [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             [:k [:code-project "~/projects/github/1206yaya/dotfiles"]]
 

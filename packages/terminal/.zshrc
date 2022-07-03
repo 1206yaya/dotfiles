@@ -44,6 +44,17 @@ alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias st='open -a /Applications/SourceTree.app '
 
+function lsp() {
+    ls -la ~/projects/github/1206yaya/;
+}
+function cdp() {
+    cd ~/projects/github/1206yaya/"$@";
+}
+function codep() {
+    code ~/projects/github/1206yaya/"$@";
+}
+
+
 function mkcd() {
     mkdir -p "$@" && cd "$_";
 }

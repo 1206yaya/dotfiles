@@ -2106,7 +2106,7 @@
         "description" : "chrome",
         "manipulators" : [ {
           "from" : {
-            "key_code" : "m"
+            "key_code" : "e"
           },
           "to" : [ {
             "shell_command" : "open -u https://mail.google.com/"
@@ -2129,6 +2129,55 @@
             }
           }, {
             "shell_command" : "open -u https://mail.google.com/"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "d"
+            }, {
+              "key_code" : "e"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "chrome-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          },
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ]
+        }, {
+          "from" : {
+            "key_code" : "m"
+          },
+          "to" : [ {
+            "shell_command" : "open -u https://www.google.com/maps/"
+          } ],
+          "conditions" : [ {
+            "name" : "chrome-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "chrome-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -u https://www.google.com/maps/"
           } ],
           "from" : {
             "simultaneous" : [ {
@@ -2184,6 +2233,55 @@
               "key_code" : "d"
             }, {
               "key_code" : "c"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "chrome-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          },
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ]
+        }, {
+          "from" : {
+            "key_code" : "w"
+          },
+          "to" : [ {
+            "shell_command" : "open -u https://console.aws.amazon.com/console/home#"
+          } ],
+          "conditions" : [ {
+            "name" : "chrome-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "chrome-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -u https://console.aws.amazon.com/console/home#"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "d"
+            }, {
+              "key_code" : "w"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -2481,7 +2579,7 @@
         "description" : "Open mode",
         "manipulators" : [ {
           "from" : {
-            "key_code" : "t"
+            "key_code" : "i"
           },
           "to" : [ {
             "shell_command" : "open -a 'iTerm.app'"
@@ -2504,6 +2602,51 @@
             }
           }, {
             "shell_command" : "open -a 'iTerm.app'"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "o"
+            }, {
+              "key_code" : "i"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "t"
+          },
+          "to" : [ {
+            "shell_command" : "open -a 'Todoist.app'"
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a 'Todoist.app'"
           } ],
           "from" : {
             "simultaneous" : [ {
@@ -2709,7 +2852,7 @@
             "key_code" : "v"
           },
           "to" : [ {
-            "shell_command" : "open -a 'VSCode.app'"
+            "shell_command" : "open -n -b 'com.microsoft.VSCode'"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -2728,7 +2871,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a 'VSCode.app'"
+            "shell_command" : "open -n -b 'com.microsoft.VSCode'"
           } ],
           "from" : {
             "simultaneous" : [ {
