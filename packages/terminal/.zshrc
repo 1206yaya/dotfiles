@@ -41,9 +41,14 @@ alias du="dust"
 alias de="defaults"
 alias g="git"
 alias gam="git add . ; git commit -m "$@""
+alias wip="git add . ; git commit -m "wip""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias st='open -a /Applications/SourceTree.app '
+
+grep() {
+  command grep --color -E "$@"
+}
 
 function lsp() {
     ls -la ~/projects/github/1206yaya/;
@@ -53,6 +58,17 @@ function cdp() {
 }
 function codep() {
     code ~/projects/github/1206yaya/"$@";
+}
+
+function cdtmp() {
+  NOW=$(date "+%Y-%m-%d%H%M")
+  echo "$NOW"
+  TMP_DIR="~/Downloads/tmp/${NOW}"
+  log "$TMP_DIR"
+  if [ ! -d "$TMP_DIR" ]; then
+    mkdir -p "$TMP_DIR"
+  fi
+  cd ${TMP_DIR}
 }
 
 
@@ -72,8 +88,34 @@ function killport() {
   kill -9 $port 
 }
 
+# ======================================  Git
+# >>> ⭐️ ⭐️ workflow of repository create on github ⭐️ ⭐️
+# gam 'first commit'
+# ggen
+
+function ggen() {
+    # 引数がセットされていればそれをレポジトリ名に、そうでなければカレントディレクトリ名
+    REPO_NAME=
+    if [[ $# -eq 0 ]]; then
+        CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
+        REPO_NAME=$CURERNT_DIR
+    else
+        REPO_NAME=$@
+    fi
+    
+    git branch -M main
+    gh repo create --private $REPO_NAME
+    git remote add origin https://github.com/1206yaya/${REPO_NAME}.git
+    git push -u origin main
+}
 
 
+function gi() { curl -sL https://www.gitignore.io/api/$@ ;}
+
+
+# ====================================== yarn 
+alias ys='yarn start $@'
+alias yis='yarn install && yarn start $@'
 
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
     export PATH=/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH
@@ -122,26 +164,7 @@ alias dv='docker volume $@'
 alias di='docker images $@'
 alias d-c='docker-compose'
 
-############ >>> Git
-# >>> workflow of repository create on github 
-# gam 'first commit'
-# ggen
 
-function ggen() {
-    # 引数がセットされていればそれをレポジトリ名に、そうでなければカレントディレクトリ名
-    REPO_NAME=
-    if [[ $# -eq 0 ]]; then
-        CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
-        REPO_NAME=$CURERNT_DIR
-    else
-        REPO_NAME=$@
-    fi
-    
-    git branch -M main
-    gh repo create --private $REPO_NAME
-    git remote add origin https://github.com/1206yaya/${REPO_NAME}.git
-    git push -u origin main
-}
 
 ############ >>> Springboot
 function springinit {

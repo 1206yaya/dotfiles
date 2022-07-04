@@ -125,6 +125,9 @@
             [:b [:open "Obsidian"]]
             [:f [:open "Finder"]]
             [:m [:open "Morgen"]]
+            [:d [:open "Dictionary"]]
+            [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja"]]
+            
             [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"]]
             [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
