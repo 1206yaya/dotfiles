@@ -60,11 +60,10 @@ function codep() {
     code ~/projects/github/1206yaya/"$@";
 }
 
-function cdtmp() {
+function tmpdir() {
   NOW=$(date "+%Y-%m-%d%H%M")
   echo "$NOW"
   TMP_DIR="~/Downloads/tmp/${NOW}"
-  log "$TMP_DIR"
   if [ ! -d "$TMP_DIR" ]; then
     mkdir -p "$TMP_DIR"
   fi
@@ -156,6 +155,9 @@ function dcr() {
     command docker rm $@ ;
   fi
 }
+function dir() {
+  docker rmi $(docker images -a -q)
+}
 # リンク切れのVolumeを削除
 alias dvr='docker volume ls -qf dangling=true | xargs -r docker volume rm'
 alias dl='docker container ls -a'
@@ -167,12 +169,13 @@ alias d-c='docker-compose'
 
 
 ############ >>> Springboot
+# 2.6.4-SNAPSHOT
 function springinit {
 cat <<'EOF'
 spring init \
 --artifactId=sample-project \
 --groupId=app \
---bootVersion=2.6.4-SNAPSHOT \
+--bootVersion=2.7.1 \
 --javaVersion=11 \
 --language=java \
 --type=gradle-project \

@@ -74,6 +74,7 @@
  :simlayers {
              :chrome-mode      {:key :d                                :condi :Chrome}
              :open-mode {:key :o}
+             :z-mode {:key :z}    ; emoji 
              :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
              :d-mode {:key :d}    ; arithmetic    + - * / = % < > #
              :s-mode {:key :s}    ; punctuation   ? ! : ; ' " ` ~
@@ -118,6 +119,10 @@
         }
         {:des "Open mode"
           :rules [:open-mode
+            [:w [:open "WebStorm"]]
+            [:l [:open "IntelliJ IDEA CE"]]
+            [:e [:open "DBeaver"]]
+            [:n [:open "Postman"]]
             [:i [:open "iTerm"]]
             [:t [:open "Todoist"]]
             [:c [:open "Google Chrome"]]
@@ -127,7 +132,6 @@
             [:m [:open "Morgen"]]
             [:d [:open "Dictionary"]]
             [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja"]]
-            
             [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"]]
             [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
@@ -135,7 +139,15 @@
 
           ]}
         ;; {:des "Mouse Keys" :rules [[{:pkey :button4} :a]]}
+        {:des "z-mode for emoji"
+         :rules [:z-mode
+                 [:h [:paste "🤔 "]]
+                 [:l [:paste "💡 "]]
+                 [:o [:paste "😲 "]]
+                 
 
+                ]
+         }
         {:des "Ctrl Tab to Command Tab Swap" :rules [[:!C##tab :!Ttab]]}
         {:des "Command Tab to Ctrl Tab Swap" :rules [[:!T##tab :!Ctab]]}
 
