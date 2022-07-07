@@ -1,7 +1,17 @@
 export PATH=$PATH:$HOME/scripts
 export GIT_CLONE_PATH="$HOME"/projects/github/1206yaya
 export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
-#
+export HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt no_beep
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt auto_cd
+setopt hist_ignore_dups
+# setopt share_history
+setopt inc_append_history
+
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -45,6 +55,17 @@ alias wip="git add . ; git commit -m "wip""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias st='open -a /Applications/SourceTree.app '
+
+function gib {
+  git checkout $@
+}
+
+function ginb {
+  git checkout -b $@
+}
+
+
+
 
 grep() {
   command grep --color -E "$@"

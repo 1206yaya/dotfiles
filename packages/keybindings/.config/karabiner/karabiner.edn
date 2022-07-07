@@ -70,6 +70,35 @@
   :open "open -a '%s.app'"
   :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
   :open_url "open -u %s"
+  ;; https://github.com/osandell/cfg/blob/07e29fd3dbba187b79fff4f8c23c9e831209de97/.config/karabiner.edn
+  ;; https://gist.github.com/Glutexo/78c170e2e314f0eacc1a
+  :yyyymmddhhss "osascript -e '
+                    on zero_pad(value, string_length)
+                      set string_zeroes to \"\"
+                      set digits_to_pad to string_length - (length of (value as string))
+                      if digits_to_pad > 0 then
+                        repeat digits_to_pad times
+                          set string_zeroes to string_zeroes & \"0\" as string
+                        end repeat
+                      end if
+                      set padded_value to string_zeroes & value as string
+                      return padded_value
+                    end zero_pad
+                    set now to (current date)
+                    set result to (year of now as integer) as string
+                    set result to result & \"-\"
+                    set result to result & zero_pad(month of now as integer, 2)	
+                    set result to result & \"-\"
+                    set result to result & zero_pad(day of now as integer, 2)
+                    set result to result & \" \"
+                    set result to result & zero_pad(hours of now as integer, 2)
+                    set result to result & \":\"
+                    set result to result & zero_pad(minutes of now as integer, 2)
+                    set result to result & \"%s\"
+                    tell application \"System Events\"
+                          keystroke result
+                    end tell
+                  '"
 }
  :simlayers {
              :chrome-mode      {:key :d                                :condi :Chrome}
@@ -144,6 +173,8 @@
                  [:h [:paste "🤔 "]]
                  [:l [:paste "💡 "]]
                  [:o [:paste "😲 "]]
+                 [:t [:paste "🍅 "]]
+
                  
 
                 ]
@@ -208,6 +239,9 @@
                  [:##m :semicolon]
                  [:##comma :!Ssemicolon]
                  [:##period :!Sgrave_accent_and_tilde]
+
+
+                 [:##p [:yyyymmddhhss "-> 🍅"]]
                 ]
          }
 
