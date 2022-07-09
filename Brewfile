@@ -46,6 +46,7 @@ brew "hyperfine"
 ## 何に使うかわからん
 # brew "ios-deploy"
 brew "jq"
+brew "ghq"
 ## For Go
 # brew "lf"
 
@@ -103,11 +104,12 @@ brew "postgresql"
 brew "openssl"
 
 brew "git-secrets"
+# brew uninstall --cask blender
 cask "1password"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
 cask "android-file-transfer"
 cask "android-studio"
-cask "blender"
+# cask "blender"
 cask "vivaldi"
 # cask "brave-browser"
 cask "discord"

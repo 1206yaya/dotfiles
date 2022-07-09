@@ -72,6 +72,7 @@
   :open_url "open -u %s"
   ;; https://github.com/osandell/cfg/blob/07e29fd3dbba187b79fff4f8c23c9e831209de97/.config/karabiner.edn
   ;; https://gist.github.com/Glutexo/78c170e2e314f0eacc1a
+
   :yyyymmddhhss "osascript -e '
                     on zero_pad(value, string_length)
                       set string_zeroes to \"\"
@@ -95,10 +96,12 @@
                     set result to result & \":\"
                     set result to result & zero_pad(minutes of now as integer, 2)
                     set result to result & \"%s\"
+                    set the clipboard to result
                     tell application \"System Events\"
-                          keystroke result
+                        keystroke \"v\" using command down
                     end tell
                   '"
+
 }
  :simlayers {
              :chrome-mode      {:key :d                                :condi :Chrome}
