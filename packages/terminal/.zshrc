@@ -49,13 +49,21 @@ alias top="ytop"
 alias vi="nvim"
 alias du="dust"
 alias de="defaults"
-alias g="git"
+
 alias gam="git add . ; git commit -m "$@""
 alias wip="git add . ; git commit -m "wip""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias st='open -a /Applications/SourceTree.app '
-
+alias gh='ghq'
+alias g='cd $(ghq root)/$(ghq list | peco)'
+function hub() {
+  if [[ $@ == "" ]]; then
+    command hub browse $(ghq list | peco | cut -d "/" -f 2,3)
+  else
+    command hub "$@"
+  fi
+}
 function gib {
   git checkout $@
 }
@@ -63,9 +71,6 @@ function gib {
 function ginb {
   git checkout -b $@
 }
-
-
-
 
 grep() {
   command grep --color -E "$@"

@@ -25,7 +25,7 @@ brew "wget"
 # brew "convco"
 brew "coreutils"
 brew "curl"
-
+brew "go"
 ## For Rust
 # brew "dust"
 # brew "ethereum" 
@@ -47,6 +47,8 @@ brew "hyperfine"
 # brew "ios-deploy"
 brew "jq"
 brew "ghq"
+brew "peco"
+brew "hub"
 ## For Go
 # brew "lf"
 
