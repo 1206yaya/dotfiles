@@ -149,6 +149,7 @@ cask "todoist"
 cask "microsoft-office"
 cask "intellij-idea-ce"
 cask "webstorm"
+cask "pycharm"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944

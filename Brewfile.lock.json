@@ -17,13 +17,13 @@
         "revision": "209f59cda890de69b74c224982591642c21323d3"
       },
       "homebrew/cask": {
-        "revision": "0ec7c70cf357a131954cdf5d9cde1b078e6e7915"
+        "revision": "9a5bb968b6d74fb475e3cac77d13e5a3d705bd43"
       },
       "homebrew/cask-fonts": {
-        "revision": "057549c676d52464fe639681eb000c72cdff8f27"
+        "revision": "02d8190834fc0cf9e1a3d681815e8f30c01af086"
       },
       "homebrew/services": {
-        "revision": "f8d68ed8a6a23799fcaf8669ef8821e4ae076f1b"
+        "revision": "b19f20254f737c20cae1a780362cf42c82e3487d"
       },
       "koekeishiya/formulae": {
         "revision": "14828329ddf9c2cd577c672036371ec706f88579"
@@ -2844,7 +2844,7 @@
         }
       },
       "dbeaver-community": {
-        "version": "22.1.1",
+        "version": "22.1.2",
         "options": {
           "full_name": "dbeaver-community",
           "args": {
@@ -2968,6 +2968,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "pycharm": {
+        "version": "2022.1.3,221.5921.27",
+        "options": {
+          "full_name": "pycharm",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     },
     "mas": {
@@ -3010,7 +3019,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.5.4",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "b33086d807f24b4597138069f9fa117eb191d7a2",
+        "Homebrew/homebrew-core": "f4a3ae4c95b4d4d6f56ad09137820f21ef677877",
         "CLT": "13.4.0.0.1.1651278267",
         "Xcode": "13.4.1",
         "macOS": "12.4"
