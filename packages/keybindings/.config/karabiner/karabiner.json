@@ -2568,10 +2568,10 @@
             }
           } ],
           "from" : {
-            "key_code" : "left_control"
+            "key_code" : "left_alt"
           },
           "to" : [ {
-            "key_code" : "left_control"
+            "key_code" : "left_alt"
           } ],
           "type" : "basic"
         } ]
@@ -3122,7 +3122,7 @@
             "key_code" : "r"
           },
           "to" : [ {
-            "shell_command" : "open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja"
+            "shell_command" : "open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -3141,7 +3141,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja"
+            "shell_command" : "open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"
           } ],
           "from" : {
             "simultaneous" : [ {
@@ -3257,7 +3257,7 @@
             "key_code" : "k"
           },
           "to" : [ {
-            "shell_command" : "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' ~/projects/github/1206yaya/dotfiles -g "
+            "shell_command" : "open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -3276,7 +3276,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' ~/projects/github/1206yaya/dotfiles -g "
+            "shell_command" : "open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "
           } ],
           "from" : {
             "simultaneous" : [ {
@@ -3466,6 +3466,51 @@
               "key_code" : "z"
             }, {
               "key_code" : "t"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "z-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "u"
+          },
+          "to" : [ {
+            "shell_command" : "osascript -e '\n    set the clipboard to \"hi! \"\n    tell application \"System Events\"\n        keystroke \"v\" using command down\n    end tell\n  '"
+          } ],
+          "conditions" : [ {
+            "name" : "z-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "z-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "osascript -e '\n    set the clipboard to \"hi! \"\n    tell application \"System Events\"\n        keystroke \"v\" using command down\n    end tell\n  '"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "z"
+            }, {
+              "key_code" : "u"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -4957,54 +5002,6 @@
               "key_code" : "s"
             }, {
               "key_code" : "p"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : true,
-              "key_down_order" : "strict",
-              "key_up_order" : "strict_inverse",
-              "key_up_when" : "any",
-              "to_after_key_up" : [ {
-                "set_variable" : {
-                  "name" : "s-mode",
-                  "value" : 0
-                }
-              } ]
-            }
-          }
-        }, {
-          "from" : {
-            "key_code" : "h",
-            "modifiers" : {
-              "optional" : [ "any" ]
-            }
-          },
-          "to" : [ {
-            "shell_command" : "osascript -e '\n                    set the clipboard to (do shell script \"echo 🍅[$(date +0:)]\")\n                    tell application \"System Events\"\n                        keystroke \"v\" using command down\n                    end tell\n                  '"
-          } ],
-          "conditions" : [ {
-            "name" : "s-mode",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "type" : "basic",
-          "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 500
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "s-mode",
-              "value" : 1
-            }
-          }, {
-            "shell_command" : "osascript -e '\n                    set the clipboard to (do shell script \"echo 🍅[$(date +0:)]\")\n                    tell application \"System Events\"\n                        keystroke \"v\" using command down\n                    end tell\n                  '"
-          } ],
-          "from" : {
-            "simultaneous" : [ {
-              "key_code" : "s"
-            }, {
-              "key_code" : "h"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,

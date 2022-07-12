@@ -55,7 +55,6 @@ alias wip="git add . ; git commit -m "wip""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias st='open -a /Applications/SourceTree.app '
-alias gh='ghq'
 alias g='cd $(ghq root)/$(ghq list | peco)'
 function hub() {
   if [[ $@ == "" ]]; then
@@ -218,6 +217,46 @@ Notes. if you use dynamodb
         implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.17.100'
 EOF
 }
+
+cs() {
+    # pathDir=/mnt/c/Users/1206y/github/cheat.sheet/
+    pathDir="/Users/zak/ghq/github.com/1206yaya/cheet-sheet"
+    if [[ $@ == "aws-dynamodb" || $@ == "dynamo" || $@ == "dynamodb" ]]; then
+        cat $pathDir/dynamodb.sh
+    elif  [[ $@ == "py" || $@ == "python" ]]; then
+        cat $pathDir/python.sh
+    elif  [[ $1 == "docker" || $1 == "dc" ]]; then
+        if [[ $2 == "fix" ]]; then
+            cat $pathDir/docker.fix.sh
+        else
+            cat $pathDir/docker.sh
+        fi 
+    elif  [[ $1 == "sls" || $1 == "serverless" ]]; then
+        if [[ $2 == "fix" ]]; then
+            cat $pathDir/sls.fix.sh
+        else
+            cat $pathDir/sls.sh
+        fi 
+    elif  [[ $@ == "copilot" || $@ == "copi" ]]; then
+        cat $pathDir/copilot.sh
+    elif  [[ $@ == "bash" || $@ == "sh" ]]; then
+        cat $pathDir/bash.sh
+    elif  [[ $@ == "git" ]]; then
+        cat $pathDir/git.sh
+    elif  [[ $@ == "react" ]]; then
+        cat $pathDir/react.sh
+    elif  [[ $@ == "ts" || $@ == "typescript" ]]; then
+        cat $pathDir/typescript.sh
+    elif  [[ $@ == "open" || $@ == "edit" ]]; then
+        code $pathDir/
+
+    else
+        cat <<- EOF
+Nothing $@ 
+EOF
+    fi
+}
+
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'

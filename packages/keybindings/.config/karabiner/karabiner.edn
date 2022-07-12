@@ -68,7 +68,8 @@
     end tell
   '"
   :open "open -a '%s.app'"
-  :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
+  :code-project "open -a 'Visual Studio Code' %s -g %s"
+  ;; :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
   :open_url "open -u %s"
   ;; https://github.com/osandell/cfg/blob/07e29fd3dbba187b79fff4f8c23c9e831209de97/.config/karabiner.edn
   ;; https://gist.github.com/Glutexo/78c170e2e314f0eacc1a
@@ -145,7 +146,7 @@
         {:des "Change input source to English by left_command; Russian by right_command."
           :rules [
             [:left_command    :left_command    nil {:alone {:input :en}}]
-            [:left_control    :left_control    nil {:alone {:input :jp}}]
+            [:left_alt    :left_alt    nil {:alone {:input :jp}}]
           ]
 
         }
@@ -163,11 +164,13 @@
             [:f [:open "Finder"]]
             [:m [:open "Morgen"]]
             [:d [:open "Dictionary"]]
-            [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja"]]
+            [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
             [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"]]
             [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
-            [:k [:code-project "~/projects/github/1206yaya/dotfiles"]]
+            ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
+            [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
+
 
           ]}
         ;; {:des "Mouse Keys" :rules [[{:pkey :button4} :a]]}
@@ -177,6 +180,7 @@
                  [:l [:paste "💡 "]]
                  [:o [:paste "😲 "]]
                  [:t [:paste "🍅 "]]
+                 [:u [:paste "hi! "]]
 
                  
 
