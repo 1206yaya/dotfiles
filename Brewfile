@@ -106,11 +106,21 @@ brew "postgresql"
 brew "openssl"
 
 brew "git-secrets"
+# Successfully `flutter doctor` 
+# Have to Open Android Studio App and Install Components
+# Then, More Action > SDK Manager > Android SDK > SDK Tools 
+# Check > [ ] Android SDK Build-Tools xx  [ ] Android SDK Command-line Tools(latest)
+# Run Command `flutter doctor --android-licenses` On Terminal
+cask "flutter"
+cask "android-file-transfer"
+cask "android-studio"
+brew "cocoapods"
 # brew uninstall --cask blender
 cask "1password"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
-cask "android-file-transfer"
-cask "android-studio"
+
+
+
 # cask "blender"
 cask "vivaldi"
 # cask "brave-browser"
@@ -149,7 +159,7 @@ cask "todoist"
 cask "microsoft-office"
 cask "intellij-idea-ce"
 cask "webstorm"
-cask "pycharm"
+cask "pycharm-ce"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944

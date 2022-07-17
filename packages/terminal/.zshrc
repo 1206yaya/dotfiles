@@ -54,8 +54,14 @@ alias gam="git add . ; git commit -m "$@""
 alias wip="git add . ; git commit -m "wip""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-alias st='open -a /Applications/SourceTree.app '
 alias g='cd $(ghq root)/$(ghq list | peco)'
+function st() {
+  if [[ $@ == "" ]]; then
+    command open -a /Applications/SourceTree.app .
+  else
+    command open -a /Applications/SourceTree.app "$@"
+  fi
+}
 function hub() {
   if [[ $@ == "" ]]; then
     command hub browse $(ghq list | peco | cut -d "/" -f 2,3)
@@ -63,11 +69,11 @@ function hub() {
     command hub "$@"
   fi
 }
-function gib {
+function gb {
   git checkout $@
 }
 
-function ginb {
+function gnb {
   git checkout -b $@
 }
 
