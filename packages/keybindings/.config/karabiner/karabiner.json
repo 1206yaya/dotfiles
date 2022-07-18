@@ -2568,10 +2568,10 @@
             }
           } ],
           "from" : {
-            "key_code" : "left_alt"
+            "key_code" : "left_control"
           },
           "to" : [ {
-            "key_code" : "left_alt"
+            "key_code" : "left_control"
           } ],
           "type" : "basic"
         } ]
@@ -3167,7 +3167,7 @@
             "key_code" : "p"
           },
           "to" : [ {
-            "shell_command" : "open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"
+            "shell_command" : "open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -3186,7 +3186,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"
+            "shell_command" : "open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"
           } ],
           "from" : {
             "simultaneous" : [ {
@@ -3292,6 +3292,686 @@
               "to_after_key_up" : [ {
                 "set_variable" : {
                   "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        } ]
+      }, {
+        "description" : "v-mode for number pad",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "f"
+          },
+          "to" : [ {
+            "shell_command" : "open -F -n -b 'com.microsoft.VSCode' --args $(pbpaste)"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -F -n -b 'com.microsoft.VSCode' --args $(pbpaste)"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "f"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "i"
+          },
+          "to" : [ {
+            "key_code" : "8"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "8"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "i"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "o"
+          },
+          "to" : [ {
+            "key_code" : "9"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "9"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "o"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "j"
+          },
+          "to" : [ {
+            "key_code" : "4"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "4"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "j"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "k"
+          },
+          "to" : [ {
+            "key_code" : "5"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "5"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "k"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "l"
+          },
+          "to" : [ {
+            "key_code" : "6"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "6"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "l"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "m"
+          },
+          "to" : [ {
+            "key_code" : "1"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "1"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "m"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "comma"
+          },
+          "to" : [ {
+            "key_code" : "2"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "2"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "comma"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "period"
+          },
+          "to" : [ {
+            "key_code" : "3"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "3"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "period"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "p"
+          },
+          "to" : [ {
+            "key_code" : "equal_sign",
+            "modifiers" : [ "left_shift" ]
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "equal_sign",
+            "modifiers" : [ "left_shift" ]
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "p"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "semicolon"
+          },
+          "to" : [ {
+            "key_code" : "hyphen"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "hyphen"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "semicolon"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "slash"
+          },
+          "to" : [ {
+            "key_code" : "return_or_enter"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "return_or_enter"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "slash"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "y"
+          },
+          "to" : [ {
+            "key_code" : "delete_or_backspace"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "delete_or_backspace"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "y"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "h"
+          },
+          "to" : [ {
+            "key_code" : "period"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "period"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "h"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "n"
+          },
+          "to" : [ {
+            "key_code" : "0"
+          } ],
+          "conditions" : [ {
+            "name" : "v-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "v-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "0"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "v"
+            }, {
+              "key_code" : "n"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "v-mode",
                   "value" : 0
                 }
               } ]
@@ -6835,7 +7515,7 @@
           }
         } ]
       }, {
-        "description" : "v-mode for number pad",
+        "description" : "b-mode for number pad",
         "manipulators" : [ {
           "from" : {
             "key_code" : "u"
@@ -6844,7 +7524,7 @@
             "key_code" : "7"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -6856,7 +7536,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -6864,7 +7544,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "u"
             } ],
@@ -6875,7 +7555,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -6889,7 +7569,7 @@
             "key_code" : "8"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -6901,7 +7581,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -6909,7 +7589,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "i"
             } ],
@@ -6920,7 +7600,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -6934,7 +7614,7 @@
             "key_code" : "9"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -6946,7 +7626,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -6954,7 +7634,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "o"
             } ],
@@ -6965,7 +7645,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -6979,7 +7659,7 @@
             "key_code" : "4"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -6991,7 +7671,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -6999,7 +7679,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "j"
             } ],
@@ -7010,7 +7690,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7024,7 +7704,7 @@
             "key_code" : "5"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7036,7 +7716,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7044,7 +7724,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "k"
             } ],
@@ -7055,7 +7735,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7069,7 +7749,7 @@
             "key_code" : "6"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7081,7 +7761,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7089,7 +7769,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "l"
             } ],
@@ -7100,7 +7780,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7114,7 +7794,7 @@
             "key_code" : "1"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7126,7 +7806,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7134,7 +7814,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "m"
             } ],
@@ -7145,7 +7825,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7159,7 +7839,7 @@
             "key_code" : "2"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7171,7 +7851,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7179,7 +7859,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "comma"
             } ],
@@ -7190,7 +7870,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7204,7 +7884,7 @@
             "key_code" : "3"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7216,7 +7896,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7224,7 +7904,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "period"
             } ],
@@ -7235,7 +7915,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7250,7 +7930,7 @@
             "modifiers" : [ "left_shift" ]
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7262,7 +7942,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7271,7 +7951,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "p"
             } ],
@@ -7282,7 +7962,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7296,7 +7976,7 @@
             "key_code" : "hyphen"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7308,7 +7988,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7316,7 +7996,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "semicolon"
             } ],
@@ -7327,7 +8007,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7341,7 +8021,7 @@
             "key_code" : "return_or_enter"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7353,7 +8033,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7361,7 +8041,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "slash"
             } ],
@@ -7372,7 +8052,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7386,7 +8066,7 @@
             "key_code" : "delete_or_backspace"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7398,7 +8078,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7406,7 +8086,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "y"
             } ],
@@ -7417,7 +8097,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7431,7 +8111,7 @@
             "key_code" : "period"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7443,7 +8123,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7451,7 +8131,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "h"
             } ],
@@ -7462,7 +8142,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]
@@ -7476,7 +8156,7 @@
             "key_code" : "0"
           } ],
           "conditions" : [ {
-            "name" : "v-mode",
+            "name" : "b-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -7488,7 +8168,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "v-mode",
+              "name" : "b-mode",
               "value" : 1
             }
           }, {
@@ -7496,7 +8176,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "v"
+              "key_code" : "b"
             }, {
               "key_code" : "n"
             } ],
@@ -7507,7 +8187,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "v-mode",
+                  "name" : "b-mode",
                   "value" : 0
                 }
               } ]

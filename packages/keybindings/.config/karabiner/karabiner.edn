@@ -120,7 +120,8 @@
              ;
              :g-mode {:key :g}    ; Mouse scroll, desktop left-right, zoom in-out, screenshot (not implemented)
              ;
-             :v-mode {:key :v}    ; Number pad with + - BS ENTER as well
+             :v-mode {:key :v} 
+             :b-mode {:key :b}    ; Number pad with + - BS ENTER as well
              :c-mode {:key :c}    ; Slashes and lines  ^ | \ _ @
              :x-mode {:key :x}    ; Some multi-character shortcuts like <= (not implemented)
              }
@@ -146,7 +147,7 @@
         {:des "Change input source to English by left_command; Russian by right_command."
           :rules [
             [:left_command    :left_command    nil {:alone {:input :en}}]
-            [:left_alt    :left_alt    nil {:alone {:input :jp}}]
+            [:left_control    :left_control    nil {:alone {:input :jp}}]
           ]
 
         }
@@ -165,7 +166,7 @@
             [:m [:open "Morgen"]]
             [:d [:open "Dictionary"]]
             [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
-            [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"]]
+            [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes1.0/projects/osho/tasks.md'"]]
             [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
@@ -173,6 +174,25 @@
 
 
           ]}
+        {:des "v-mode for number pad"
+         :rules [:v-mode
+                 [:f ["open -F -n -b 'com.microsoft.VSCode' --args $(pbpaste)"]]
+                 [:i :8]
+                 [:o :9]
+                 [:j :4]
+                 [:k :5]
+                 [:l :6]
+                 [:m :1]
+                 [:comma :2]
+                 [:period :3]
+                 [:p :!Sequal_sign]
+                 [:semicolon :hyphen]
+                 [:slash :return_or_enter]
+                 [:y :delete_or_backspace]
+                 [:h :period]
+                 [:n :0]
+                ]
+        }          
         ;; {:des "Mouse Keys" :rules [[{:pkey :button4} :a]]}
         {:des "z-mode for emoji"
          :rules [:z-mode
@@ -314,8 +334,8 @@
                 ]
          }
 
-        {:des "v-mode for number pad"
-         :rules [:v-mode
+        {:des "b-mode for number pad"
+         :rules [:b-mode
                  [:u :7]
                  [:i :8]
                  [:o :9]

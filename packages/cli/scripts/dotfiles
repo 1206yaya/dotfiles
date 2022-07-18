@@ -246,3 +246,8 @@ if ! dir_exists /Applications/Alacritty.app; then
         cp -r target/release/osx/Alacritty.app /Applications/
     )
 fi
+
+if ! file_exists ~/crontab.log; then
+    touch ~/crontab.log
+    chmod 777 ~/crontab.log
+fi

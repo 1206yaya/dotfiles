@@ -26,6 +26,7 @@ brew "wget"
 brew "coreutils"
 brew "curl"
 brew "go"
+brew "sqlite"
 ## For Rust
 # brew "dust"
 # brew "ethereum" 
