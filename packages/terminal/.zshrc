@@ -29,7 +29,8 @@ alias prysm="~/prysm/prysm.sh"
 alias lldlib="open ~/Library/Application\ Support/Electron"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/"
 alias keycodes="cat /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h"
-
+# @Flutter Alias
+alias fl='flutter'
 
 # Override
 if [ -n "$(which z)" ]; then
@@ -93,8 +94,8 @@ function codep() {
 
 function tmpdir() {
   NOW=$(date "+%Y-%m-%d%H%M")
-  echo "$NOW"
-  TMP_DIR="~/Downloads/tmp/${NOW}"
+  TMP_DIR=~/Downloads/tmp/${NOW}
+  echo ${TMP_DIR}
   if [ ! -d "$TMP_DIR" ]; then
     mkdir -p "$TMP_DIR"
   fi

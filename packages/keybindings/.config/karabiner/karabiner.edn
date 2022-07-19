@@ -112,6 +112,7 @@
              :d-mode {:key :d}    ; arithmetic    + - * / = % < > #
              :s-mode {:key :s}    ; punctuation   ? ! : ; ' " ` ~
              :a-mode {:key :a}    ; navigation hjkl + tab + enter + page down/up
+             :backslash-mode {:key :grave_accent_and_tilde} ;; `
              ;
              :q-mode {:key :q}    ; General shortcuts (browser etc.) - not settled
              :w-mode {:key :w}    ; Selection left and right (letter, word, line)
@@ -128,7 +129,7 @@
   ;; dotfileTools/PrintKeylayout.swift を使ってinput sourceを調べることができます
   :input-sources  {
                     :en {:input_source_id "^com.apple.keylayout.ABC$"}
-                    :jp {:input_source_id "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"}
+                    ;; :jp {:input_source_id "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"}
   }
 
  :main [
@@ -142,12 +143,14 @@
                 [:a [:open_url "https://www.amazon.co.jp"]]
                 [:q [:open_url "https://qiita.com"]]
                 [:n [:open_url "https://notion.so"]]
+                [:f [:open_url "https://feedly.com/i/powerSearch/in"]]
+
                 [:g [:open_url "https://github.com/search?q=filename%3A+extension%3A"]]
         ]}
         {:des "Change input source to English by left_command; Russian by right_command."
           :rules [
             [:left_command    :left_command    nil {:alone {:input :en}}]
-            [:left_control    :left_control    nil {:alone {:input :jp}}]
+            ;; [:left_control    :left_control    nil {:alone {:input :jp}}]
           ]
 
         }
@@ -254,7 +257,7 @@
                   [:##period :!S5]                  ; d -> .        %
                 ]
          }
-
+        
         {:des "s-mode for punctuation"   ;;    ' " `    , . &    ; : ~
          :rules [:s-mode
                  [:##u :quote]
@@ -284,8 +287,44 @@
                   [:##i :tab]
                   [:comma :page_down]
                   [:period :page_up]
+                  [:##t :home]
+                  [:##b :end]
+
+                  [:##d :delete_or_backspace]
+                  [:##f :delete_forward]
+                  [:##e :return_or_enter]
                 ]
          }
+        {:des "backslash-mode clickable"
+         :rules [:backslash-mode
+                  [:##1 {:pkey :button1}]
+                  [:##f1 :end]
+                  [:##f2 :home]
+                  [:##2 :!Copen_bracket]
+                  [:##3 :!Cclose_bracket]
+                  [:##q :delete_or_backspace] ;; page back
+                  [:##w :delete_forward] ;; page back
+                ]
+         } 
+        {:des "s-mode for punctuation"   ;;    ' " `    , . &    ; : ~
+         :rules [:s-mode
+                 [:##u :quote]
+                 [:##i :!Squote]
+                 [:##o :grave_accent_and_tilde]
+                 [:##j :comma]
+                 [:##k :period]
+                 [:##l :!S7]
+                 [:##m :semicolon]
+                 [:##comma :!Ssemicolon]
+                 [:##period :!Sgrave_accent_and_tilde]
+
+
+                 [:##p [:yyyymmddhhss "-> 🍅"]]
+                ]
+         }
+
+
+         
 
         {:des "r-mode for deleting characters with ui, words with jk and lines with hl"
          :rules [:r-mode
