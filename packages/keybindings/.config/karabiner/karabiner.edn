@@ -297,13 +297,13 @@
          }
         {:des "backslash-mode clickable"
          :rules [:backslash-mode
-                  [:##1 {:pkey :button1}]
-                  [:##f1 :end]
-                  [:##f2 :home]
-                  [:##2 :!Copen_bracket]
-                  [:##3 :!Cclose_bracket]
-                  [:##q :delete_or_backspace] ;; page back
-                  [:##w :delete_forward] ;; page back
+                  ;; [:##1 {:pkey :button1}]
+                  ;; [:##f1 :end]
+                  ;; [:##f2 :home]
+                  ;; [:##2 :!CSopen_bracket]
+                  ;; [:##3 :!CSclose_bracket]
+                  ;; [:##q :delete_or_backspace] ;; page back
+                  ;; [:##w :delete_forward] ;; page back
                 ]
          } 
         {:des "s-mode for punctuation"   ;;    ' " `    , . &    ; : ~
@@ -363,12 +363,18 @@
 
         {:des "q-mode for general shortcuts like browser tab navigation"
          :rules [:q-mode
-                  [:##j :!CSopen_bracket]  ; q -> j    tab to the left:  Cmd-{
-                  [:##k :!CSclose_bracket] ; q -> k    tab to the right: Cmd-}
-                  [:##l :!TCf           ]  ; q -> l    toggle full screen: ^⌘F
-                  [:##u :!Cclose_bracket]  ; q -> u    browser back:     Cmd-[
-                  [:##i :!Cclose_bracket]  ; q -> i    browser forward:  Cmd-]
+                  [:##w {:pkey :button1}] ;; click
+                  [:##e :!Copen_bracket]  ; q -> u    browser back:     Cmd-[
+                  [:##r :!Cclose_bracket]  ; q -> i    browser forward:  Cmd-]
+                  [:##3 :!CSopen_bracket]  ; q -> j    tab to the left:  Cmd-{
+                  [:##4 :!CSclose_bracket] ; q -> k    tab to the right: Cmd-}
+
+                  [:##f3 :end]
+                  [:##f4 :home]
+                  [:##d :delete_or_backspace] ;; page back
+                  [:##f :delete_forward] ;; page back
                   [:##o :f2             ]  ; q -> o    F2 (useful in Excel)
+                  [:##l :!TCf           ]  ; q -> l    toggle full screen: ^⌘F
                   [:##p :f4             ]  ; q -> p    F4 (useful in Excel)
                 ]
          }
