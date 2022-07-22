@@ -59,7 +59,7 @@ alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias g='cd $(ghq root)/$(ghq list | peco)'
 function cd() {
-  if [[ $@ == "notes" || $@ == "note"]]; then
+  if [[ $@ == "notes" || $@ == "note" ]]; then
     command cd  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes
   else
     command cd $@
