@@ -368,6 +368,7 @@
                   [:##r :!Cclose_bracket]  ; q -> i    browser forward:  Cmd-]
                   [:##3 :!CSopen_bracket]  ; q -> j    tab to the left:  Cmd-{
                   [:##4 :!CSclose_bracket] ; q -> k    tab to the right: Cmd-}
+                  [:##2 :f1] ; q -> k    tab to the right: Cmd-}
 
                   [:##f3 :end]
                   [:##f4 :home]

@@ -17,13 +17,13 @@
         "revision": "209f59cda890de69b74c224982591642c21323d3"
       },
       "homebrew/cask": {
-        "revision": "e3102f01469ac18acdb70e995f204abc0dcd251d"
+        "revision": "a8372383d6f07034ba99c3c953618562a99bb6ae"
       },
       "homebrew/cask-fonts": {
-        "revision": "4db51074a44c9960502371ec4665d64d55965ac6"
+        "revision": "85239d934569154a2e4c754125b9727d17804d01"
       },
       "homebrew/services": {
-        "revision": "0b653a3102b15789885b5d4fdb38b0930a8fd342"
+        "revision": "b167b4279698e0bbf1a00a81bd9c209cbf9bab69"
       },
       "koekeishiya/formulae": {
         "revision": "14828329ddf9c2cd577c672036371ec706f88579"
@@ -38,7 +38,10 @@
         "revision": "136d13ca75d624862a22e3de20dadce9479eec8b"
       },
       "hashicorp/tap": {
-        "revision": "36ff099f773baf665466d9e8fc64140d0b17b194"
+        "revision": "d80f977d55afc9be3ab908aa2748ac17da0a3c6e"
+      },
+      "leoafarias/fvm": {
+        "revision": "a1a46f45fb693b1cc527e4395f13deb7d5383d0c"
       }
     },
     "brew": {
@@ -2712,6 +2715,10 @@
             }
           }
         }
+      },
+      "fvm": {
+        "version": "2.4.1",
+        "bottle": false
       }
     },
     "cask": {
@@ -2806,7 +2813,7 @@
         }
       },
       "google-chrome": {
-        "version": "103.0.5060.114",
+        "version": "103.0.5060.134",
         "options": {
           "full_name": "google-chrome",
           "args": {
@@ -2932,7 +2939,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.69.1",
+        "version": "1.69.2",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -3049,7 +3056,7 @@
         }
       },
       "intellij-idea-ce": {
-        "version": "2022.1.3,221.5921.22",
+        "version": "2022.1.4,221.6008.13",
         "options": {
           "full_name": "intellij-idea-ce",
           "args": {
@@ -3177,9 +3184,9 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.5.4",
+        "HOMEBREW_VERSION": "3.5.5",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "141aed5d76a7f039398bcdb4c39a0f25265ebcf2",
+        "Homebrew/homebrew-core": "ec968264357fc0e4a9c610b449a41ee0959aef74",
         "CLT": "13.4.0.0.1.1651278267",
         "Xcode": "13.4.1",
         "macOS": "12.4"

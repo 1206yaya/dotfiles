@@ -19,8 +19,10 @@ if [ -f "/opt/homebrew/bin/brew"  ]; then
     . $(brew --prefix asdf)/libexec/asdf.sh
 fi
 export JAVA_HOME="$(asdf where java)"
+export PATH="$PATH:$HOME/fvm/default/bin"
 alias q="exit"
 alias code="open -a 'Visual Studio Code'"
+alias tm="Open -a Terminal"
 alias syncsh=". syncsh"
 alias cdrepo=". cdrepo"
 alias lscmd="ls ~/scripts"
@@ -56,6 +58,13 @@ alias wip="git add . ; git commit -m "wip""
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias g='cd $(ghq root)/$(ghq list | peco)'
+function cd() {
+  if [[ $@ == "notes" || $@ == "note"]]; then
+    command cd  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes
+  else
+    command cd $@
+  fi
+}
 function st() {
   if [[ $@ == "" ]]; then
     command open -a /Applications/SourceTree.app .

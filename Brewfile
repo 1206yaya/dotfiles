@@ -10,6 +10,7 @@ tap "homebrew/services"
 tap "koekeishiya/formulae"
 tap "spring-io/tap"
 tap "hashicorp/tap"
+tap "leoafarias/fvm"
 
 # tap "wix/brew"
 cask_args appdir: "/Applications"
@@ -112,7 +113,8 @@ brew "git-secrets"
 # Then, More Action > SDK Manager > Android SDK > SDK Tools 
 # Check > [ ] Android SDK Build-Tools xx  [ ] Android SDK Command-line Tools(latest)
 # Run Command `flutter doctor --android-licenses` On Terminal
-cask "flutter"
+# cask "flutter"
+brew "fvm"
 cask "android-file-transfer"
 cask "android-studio"
 brew "cocoapods"

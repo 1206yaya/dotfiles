@@ -8181,6 +8181,54 @@
           }
         }, {
           "from" : {
+            "key_code" : "2",
+            "modifiers" : {
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "f1"
+          } ],
+          "conditions" : [ {
+            "name" : "q-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "q-mode",
+              "value" : 1
+            }
+          }, {
+            "key_code" : "f1"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "q"
+            }, {
+              "key_code" : "2"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "q-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
             "key_code" : "f3",
             "modifiers" : {
               "optional" : [ "any" ]
