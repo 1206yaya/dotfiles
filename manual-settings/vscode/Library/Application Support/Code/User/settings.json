@@ -1,0 +1,81 @@
+
+{
+    "window.title": "${activeEditorLong}",
+    "workbench.iconTheme": "material-icon-theme",
+      // OPEN EDITORS を非表示
+    "explorer.openEditors.visible": 1,
+    // Setting Search 
+    "files.exclude": {
+        "/.git": true,
+        "/.DS_Store": true,
+        "/node_modules": true,
+        "/node_modules/": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+      },
+      "search.exclude": {
+        ".history": true,
+        "**/.next": true,
+        "/node_modules": true,
+        "site-packages": true,
+        "**/.fvm": true,
+      },
+      "files.watcherExclude": {
+        "/node_modules/": true
+      },
+
+    "explorer.confirmDelete": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDragAndDrop": false,
+    "files.autoSave": "afterDelay",
+    "extensions.ignoreRecommendations": true,
+    "workbench.startupEditor": "none",
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    "markdown-checkbox.checkmark": "x",
+    "markdown-checkbox.typeOfBulletPoint": "-",
+    "markdown-checkbox.dateFormat": "YYYY-MM-DD HH:mm:ss",
+    "markdown-checkbox.italicWhenChecked": false,
+    "markdown-checkbox.strikeThroughWhenChecked": false,
+    "workbench.colorTheme": "Dracula Soft",
+    "debug.disassemblyView.showSourceCode": false,
+
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false,
+        "editor.defaultFormatter": "Dart-Code.dart-code",
+        "editor.formatOnPaste": true,
+        
+    },
+    "editor.occurrencesHighlight": false,
+    "editor.selectionHighlight": false,
+    // Flutter
+    "dart.previewFlutterUiGuides": true,
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "editor.accessibilitySupport": "on",
+    // soundを消す
+    "audioCues.lineHasBreakpoint": "off",
+    "audioCues.lineHasError": "off",
+    "audioCues.lineHasFoldedArea": "off",
+    "audioCues.lineHasInlineSuggestion": "off",
+    "audioCues.onDebugBreak": "off",
+    "audioCues.noInlayHints": "off",
+    // ファイルをクリックで開いたら閉じずに開きっぱなしにする
+    "workbench.editor.enablePreview": false,
+    "editor.codeActionsOnSave": {
+      "quickfix.insertSemicolon": true,
+    },
+    "editor.showFoldingControls": "always",
+      // Controls when the folding controls on the gutter are shown.
+
+}
