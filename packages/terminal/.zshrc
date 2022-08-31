@@ -50,6 +50,7 @@ alias lt="ll -TL 3 --ignore-glob=.git"
 # alias ps="procs"
 alias top="ytop"
 alias vi="nvim"
+alias vim="nvim"
 alias du="dust"
 alias de="defaults"
 
@@ -123,10 +124,19 @@ function kill_webdriver() {
   kill $(ps aux | grep 'selenium' | awk '{print $2}')
   kill $(ps aux | grep 'Google Chrome.app' | awk '{print $2}')
 }
+# killPort <port>
 function killport() {
-  port=$(lsof -n -i4TCP:$1 | grep LISTEN | awk '{ print $2 }')  
-  kill -9 $port 
+    if [[ -n "$1" ]]
+    then
+        lsof -t -i tcp:"$1" | xargs kill
+    else
+        echo 'Error: please provide a port number.'
+    fi
 }
+# function killport() {
+#   port=$(lsof -n -i4TCP:$1 | grep LISTEN | awk '{ print $2 }')  
+#   kill -9 $port 
+# }
 
 # ======================================  Git
 # >>> ⭐️ ⭐️ workflow of repository create on github ⭐️ ⭐️
@@ -255,6 +265,10 @@ cs() {
         fi 
     elif  [[ $@ == "copilot" || $@ == "copi" ]]; then
         cat $pathDir/copilot.sh
+    elif  [[ $@ == "sam" ]]; then
+        cat $pathDir/sam.sh
+    elif  [[ $@ == "makefile" || $@ == "make" ]]; then
+        cat $pathDir/makefile.sh
     elif  [[ $@ == "bash" || $@ == "sh" ]]; then
         cat $pathDir/bash.sh
     elif  [[ $@ == "git" ]]; then
