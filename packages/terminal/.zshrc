@@ -88,6 +88,36 @@ function gnb {
   git checkout -b $@
 }
 
+function fvm() {
+  project_name=$2
+  version=$3
+  echo "create flutter \nProjectName:$project_name \nVersion $version"
+  if [[ $1 == "create" ]]; then
+    # mkdir $project_name
+    # cd $project_name
+    # fvm use $version --force
+    # fvm flutter create .
+    mkdir .vscode
+    touch .vscode/settings.json
+cat <<EOF >.vscode/settings.json
+{
+    // 使用するFlutter SDKのパスを指定。
+	"dart.flutterSdkPath": ".fvm/flutter_sdk",
+    // 検索対象からFVMのファイルを除外します。(任意)
+    "search.exclude": {
+        "**/.fvm": true
+    },
+    // ファイル監視対象からFVMのファイルを除外します。(任意)
+    "files.watcherExclude": {
+        "**/.fvm": true
+    },
+}
+EOF
+  else
+    command fvm "$@"
+  fi
+}
+
 grep() {
   command grep --color -E "$@"
 }

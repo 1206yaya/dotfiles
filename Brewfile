@@ -126,6 +126,7 @@ cask "android-studio"
 brew "cocoapods"
 # brew uninstall --cask blender
 cask "1password"
+cask "webtorrent"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
 
 
@@ -158,7 +159,7 @@ cask "signal"
 cask "slack"
 cask "google-japanese-ime"
 ## mac　で ubuntu / windows / raspbian
-# cask "utm"
+cask "utm"
 cask "visual-studio-code"
 # cask "zoom"
 cask "sourcetree"
