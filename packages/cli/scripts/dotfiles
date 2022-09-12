@@ -1,253 +1,258 @@
 #!/bin/sh 
-GITHUB_EMAIL=1206yaya@gmail.com
-set -e 
-# set -x	
+# GITHUB_EMAIL=1206yaya@gmail.com
+# set -e 
+# # set -x	
 
-## 全てのstowリンクを削除するコマンド
-##　stow -vD -d "$STOW_PACKAGES_PATH" -t ~ `ls $STOW_PACKAGES_PATH`
+# ## 全てのstowリンクを削除するコマンド
+# ##　stow -vD -d "$STOW_PACKAGES_PATH" -t ~ `ls $STOW_PACKAGES_PATH`
 
-# sudo -v
-# # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
-# while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-GITHUB_PATH=~/ghq/github.com
+# # sudo -v
+# # # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+# # while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+# GITHUB_PATH=~/ghq/github.com
 
-GIT_CLONE_PATH="$GITHUB_PATH/1206yaya"
-STOW_PACKAGES_PATH="$GIT_CLONE_PATH"/dotfiles/packages
+# GIT_CLONE_PATH="$GITHUB_PATH/1206yaya"
+# STOW_PACKAGES_PATH="$GIT_CLONE_PATH"/dotfiles/packages
 
-###########################################################
-# Options
-###########################################################
-unlink_packages=
-verbose=
-for i in "$@"; do
-    case "$i" in
-       -s|--skip-apps)
-            skip_apps=1
-            shift ;;
-        -v|--verbose)
-            verbose=1
-            shift ;;
-        -u=*|--unlink=*)
-            unlink_packages="${i#*=}"
-            shift ;;
-        *) ;;
-    esac
-done
+# ###########################################################
+# # Options
+# ###########################################################
+# unlink_packages=
+# verbose=
+# for i in "$@"; do
+#     case "$i" in
+#        -s|--skip-apps)
+#             skip_apps=1
+#             shift ;;
+#         -v|--verbose)
+#             verbose=1
+#             shift ;;
+#         -u=*|--unlink=*)
+#             unlink_packages="${i#*=}"
+#             shift ;;
+#         *) ;;
+#     esac
+# done
 
-###########################################################
-# Utils
-###########################################################
-log() {
-    message=$1
-    echo 📌 "$message"
-}
+# ###########################################################
+# # Utils
+# ###########################################################
+# log() {
+#     message=$1
+#     echo 📌 "$message"
+# }
 
-file_exists() {
-    path="$1"
-    [ -f "$path" ]
-}
+# file_exists() {
+#     path="$1"
+#     [ -f "$path" ]
+# }
 
-dir_exists() {
-    path="$1"
-    [ -d "$path" ]
-}
+# dir_exists() {
+#     path="$1"
+#     [ -d "$path" ]
+# }
 
-ensure_dir_exists() {
-    path="$1"
-    if ! dir_exists "$path"; then
-        mkdir -p "$path"
-    fi
-}
+# ensure_dir_exists() {
+#     path="$1"
+#     if ! dir_exists "$path"; then
+#         mkdir -p "$path"
+#     fi
+# }
 
-###########################################################
-# Stow unlink
-###########################################################
-if [ -n "$unlink_packages" ]; then
-    log 'Unlinking dotfiles...'
-    stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
-    exit
-fi
-
-###########################################################
-# Install Homebrew
-###########################################################
-arch_name="$(uname -m)"
-if [ "${arch_name}" = "x86_64" ]; then
-    if ! file_exists /usr/local/bin/brew; then
-        log 'Setup Homebrew'
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    fi
-elif [ "${arch_name}" = "arm64" ]; then
-    if ! file_exists /opt/homebrew/bin/brew; then
-        log 'Setup Homebrew'
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-
-        log 'Install Rosetta 2'
-        sudo softwareupdate --install-rosetta
-    fi
-fi
-
-ensure_dir_exists "$GIT_CLONE_PATH"
-
-if ! dir_exists "$GIT_CLONE_PATH"/dotfiles; then
-    log "Clone dotfiles to $GIT_CLONE_PATH/dotfiles"
-    cd "$GIT_CLONE_PATH"
-    git clone https://github.com/1206yaya/dotfiles.git
-fi
-
-if [ ! "$skip_apps" ]; then
-    log 'Install Apps and CLIs'ß
-    brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
-fi
-
-###########################################################
-# Stow link
-###########################################################
-log 'Link dotfiles'
-
-ensure_dir_exists ~/.config/alacritty
-ensure_dir_exists ~/.config/starship
-ensure_dir_exists ~/.config/yarn/global
-
-# shellcheck disable=SC2046
-stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls  $STOW_PACKAGES_PATH)
-
-#### Warning
-# Do not make a symlink to karabiner.json directly.
-# https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
-
-# configure macOS settings
-ensure_dir_exists ~/screenshots
-~/scripts/macos-defaults
-
-###########################################################
-# Neovim
-###########################################################
-
-plug_path=~/.local/share/nvim/site/autoload/plug.vim
-if ! file_exists "$plug_path"; then
-    log 'Setup vim-plug"'
-    sh -c "curl -fLo $plug_path --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-fi
-
-plugged_path=~/.local/share/nvim/autoload/plugged
-if ! dir_exists "$plugged_path"; then
-    log 'Install Neovim Plugins'
-    nvim +PlugInstall +qall
-fi
-
-###########################################################
-# Git
-###########################################################
-if ! dir_exists ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
-    log 'Install gpg signing with git'
-    gpg --default-new-key-algo rsa4096 --gen-key
-    key_id=$(gpg --list-secret-keys --keyid-format LONG | ggrep -oP "rsa4096\/[0-9a-fA-F]{16}" | cut -d"/"  -f2)
-    log 'Copy and pates the GPG key below to GitHub'
-    gpg --armor --export "$key_id"
-    git config --global user.signingkey "$key_id"
-fi
-
-if ! file_exists ~/.ssh/id_rsa.pub; then
-    log 'Setup gpg signing for git'
-    ssh-keygen -t rsa -b 4096 -C $GITHUB_EMAIL
-    log 'Copy and pates the SSH key below to GitHub'
-    cat ~/.ssh/id_rsa.pub
-fi
-
-###########################################################
-# asdf
-###########################################################
-for plugin in $(awk '{print $1}' ~/.tool-versions); do
-    if ! dir_exists ~/.asdf/plugins/"$plugin"; then
-        asdf plugin add "$plugin"
-    fi
-done
-# .tool-versionsに変更があるかどうかß
-is_runtime_versions_changed () {
-    plugin="$1"
-    # ex. grep yarn ~/.tool-versions | awk '{$1=""; print $0}'
-    specified=$(grep "$plugin" ~/.tool-versions | awk '{$1=""; print $0}')
-    # installed=$(asdf list "$plugin" 2>&1)
-    nstalled=$(asdf list "$plugin")
-    # pluginに変更があるかどうか
-    is_changed=
-    for version in $specified; do
-        match=$(echo "$installed" | grep "$version")
-        # $match に文字列があれば　is_changed=1
-        [ -z "$match" ] && is_changed=1
-    done
-
-    [ "$is_changed" ]
-}
-
-for plugin in $(asdf plugin list); do
-    if is_runtime_versions_changed "$plugin"; then
-        # if [ "$plugin" = nodejs ]; then log "Import release team keyring for Node.JS"
-        #     bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
-        # fi
-
-        log "Install runtime: $plugin"
-        asdf install "$plugin"
-    fi
-done
-
-# いらない？
-# system_node_path=/usr/local/bin/node
-# if ! file_exists "$system_node_path"; then
-#     log "Create symlink to $system_node_path so that XCode can reference"
-#     # ERROR!! ln: /usr/local/bin/node: Permission denied
-#     ln -s ~/.asdf/shims/node "$system_node_path"
+# ###########################################################
+# # Stow unlink
+# ###########################################################
+# if [ -n "$unlink_packages" ]; then
+#     log 'Unlinking dotfiles...'
+#     stow -vD -d "$STOW_PACKAGES_PATH" -t ~ "$unlink_packages"
+#     exit
 # fi
 
-sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-sudo xcodebuild -runFirstLaunch
-###########################################################
-# Yarn global
-###########################################################
-if ! dir_exists ~/.config/yarn/global/node_modules; then
-    log 'Setup Yarn global'
-    yarn global add
-fi
+# ###########################################################
+# # Install Homebrew
+# ###########################################################
+# arch_name="$(uname -m)"
+# if [ "${arch_name}" = "x86_64" ]; then
+#     if ! file_exists /usr/local/bin/brew; then
+#         log 'Setup Homebrew'
+#         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+#     fi
+# elif [ "${arch_name}" = "arm64" ]; then
+#     if ! file_exists /opt/homebrew/bin/brew; then
+#         log 'Setup Homebrew'
+#         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#         eval "$(/opt/homebrew/bin/brew shellenv)"
 
-if ! file_exists ~/prysm/prysm.sh; then
-    log 'Setup Ethereum 2.0 client'
-    if ! dir_exists ~/prysm; then
-        mkdir ~/prysm
-    fi
+#         log 'Install Rosetta 2'
+#         sudo softwareupdate --install-rosetta
+#     fi
+# fi
 
-    (
-        cd ~/prysm
-        curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh
-        chmod +x prysm.sh
-    )
-fi
+# ensure_dir_exists "$GIT_CLONE_PATH"
 
-###########################################################
-# Alacritty
-###########################################################
-ALACRITTY_ORG_PATH="$GIT_CLONE_PATH/alacritty"
-ensure_dir_exists "$ALACRITTY_ORG_PATH"
-if ! dir_exists "$ALACRITTY_ORG_PATH/alacritty"; then
-    (
-        cd "$ALACRITTY_ORG_PATH"
-        gh repo clone alacritty/alacritty
-    )
-fi
+# if ! dir_exists "$GIT_CLONE_PATH"/dotfiles; then
+#     log "Clone dotfiles to $GIT_CLONE_PATH/dotfiles"
+#     cd "$GIT_CLONE_PATH"
+#     git clone https://github.com/1206yaya/dotfiles.git
+# fi
 
-if ! dir_exists /Applications/Alacritty.app; then
-    log "Build alacritty"
-    (
-        cd "$ALACRITTY_ORG_PATH/alacritty"
+# if [ ! "$skip_apps" ]; then
+#     log 'Install Apps and CLIs'ß
+#     brew bundle --file "$GIT_CLONE_PATH"/dotfiles/Brewfile $([ -n "$verbose" ] && echo -v)
+# fi
 
-        rustup target add x86_64-apple-darwin aarch64-apple-darwin
-        make app-universal
-        cp -r target/release/osx/Alacritty.app /Applications/
-    )
-fi
+# ###########################################################
+# # Stow link
+# ###########################################################
+# log 'Link dotfiles'
 
-if ! file_exists ~/crontab.log; then
-    touch ~/crontab.log
-    chmod 777 ~/crontab.log
+# ensure_dir_exists ~/.config/alacritty
+# ensure_dir_exists ~/.config/starship
+# ensure_dir_exists ~/.config/yarn/global
+
+# # shellcheck disable=SC2046
+# stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls  $STOW_PACKAGES_PATH)
+
+# #### Warning
+# # Do not make a symlink to karabiner.json directly.
+# # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
+
+# # configure macOS settings
+# ensure_dir_exists ~/screenshots
+# ~/scripts/macos-defaults
+
+# ###########################################################
+# # Neovim
+# ###########################################################
+
+# plug_path=~/.local/share/nvim/site/autoload/plug.vim
+# if ! file_exists "$plug_path"; then
+#     log 'Setup vim-plug"'
+#     sh -c "curl -fLo $plug_path --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+# fi
+
+# plugged_path=~/.local/share/nvim/autoload/plugged
+# if ! dir_exists "$plugged_path"; then
+#     log 'Install Neovim Plugins'
+#     nvim +PlugInstall +qall
+# fi
+
+# ###########################################################
+# # Git
+# ###########################################################
+# if ! dir_exists ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
+#     log 'Install gpg signing with git'
+#     gpg --default-new-key-algo rsa4096 --gen-key
+#     key_id=$(gpg --list-secret-keys --keyid-format LONG | ggrep -oP "rsa4096\/[0-9a-fA-F]{16}" | cut -d"/"  -f2)
+#     log 'Copy and pates the GPG key below to GitHub'
+#     gpg --armor --export "$key_id"
+#     git config --global user.signingkey "$key_id"
+# fi
+
+# if ! file_exists ~/.ssh/id_rsa.pub; then
+#     log 'Setup gpg signing for git'
+#     ssh-keygen -t rsa -b 4096 -C $GITHUB_EMAIL
+#     log 'Copy and pates the SSH key below to GitHub'
+#     cat ~/.ssh/id_rsa.pub
+# fi
+
+# ###########################################################
+# # asdf
+# ###########################################################
+# for plugin in $(awk '{print $1}' ~/.tool-versions); do
+#     if ! dir_exists ~/.asdf/plugins/"$plugin"; then
+#         asdf plugin add "$plugin"
+#     fi
+# done
+# # .tool-versionsに変更があるかどうかß
+# is_runtime_versions_changed () {
+#     plugin="$1"
+#     # ex. grep yarn ~/.tool-versions | awk '{$1=""; print $0}'
+#     specified=$(grep "$plugin" ~/.tool-versions | awk '{$1=""; print $0}')
+#     # installed=$(asdf list "$plugin" 2>&1)
+#     nstalled=$(asdf list "$plugin")
+#     # pluginに変更があるかどうか
+#     is_changed=
+#     for version in $specified; do
+#         match=$(echo "$installed" | grep "$version")
+#         # $match に文字列があれば　is_changed=1
+#         [ -z "$match" ] && is_changed=1
+#     done
+
+#     [ "$is_changed" ]
+# }
+
+# for plugin in $(asdf plugin list); do
+#     if is_runtime_versions_changed "$plugin"; then
+#         # if [ "$plugin" = nodejs ]; then log "Import release team keyring for Node.JS"
+#         #     bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
+#         # fi
+
+#         log "Install runtime: $plugin"
+#         asdf install "$plugin"
+#     fi
+# done
+
+# # いらない？
+# # system_node_path=/usr/local/bin/node
+# # if ! file_exists "$system_node_path"; then
+# #     log "Create symlink to $system_node_path so that XCode can reference"
+# #     # ERROR!! ln: /usr/local/bin/node: Permission denied
+# #     ln -s ~/.asdf/shims/node "$system_node_path"
+# # fi
+
+# sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+# sudo xcodebuild -runFirstLaunch
+# ###########################################################
+# # Yarn global
+# ###########################################################
+# if ! dir_exists ~/.config/yarn/global/node_modules; then
+#     log 'Setup Yarn global'
+#     yarn global add
+# fi
+
+# if ! file_exists ~/prysm/prysm.sh; then
+#     log 'Setup Ethereum 2.0 client'
+#     if ! dir_exists ~/prysm; then
+#         mkdir ~/prysm
+#     fi
+
+#     (
+#         cd ~/prysm
+#         curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh
+#         chmod +x prysm.sh
+#     )
+# fi
+
+# ###########################################################
+# # Alacritty
+# ###########################################################
+# ALACRITTY_ORG_PATH="$GIT_CLONE_PATH/alacritty"
+# ensure_dir_exists "$ALACRITTY_ORG_PATH"
+# if ! dir_exists "$ALACRITTY_ORG_PATH/alacritty"; then
+#     (
+#         cd "$ALACRITTY_ORG_PATH"
+#         gh repo clone alacritty/alacritty
+#     )
+# fi
+
+# if ! dir_exists /Applications/Alacritty.app; then
+#     log "Build alacritty"
+#     (
+#         cd "$ALACRITTY_ORG_PATH/alacritty"
+
+#         rustup target add x86_64-apple-darwin aarch64-apple-darwin
+#         make app-universal
+#         cp -r target/release/osx/Alacritty.app /Applications/
+#     )
+# fi
+
+# if ! file_exists ~/crontab.log; then
+#     touch ~/crontab.log
+#     chmod 777 ~/crontab.log
+# fi
+
+if [[ ! -e /usr/bin/python && -e ~/.asdf/shims/python ]]; then
+    echo 'not exist'
+    sudo ln -s ~/.asdf/shims/python /usr/bin/python
 fi

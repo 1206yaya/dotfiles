@@ -166,6 +166,7 @@
             [:a [:open "Alacritty"]]
             [:b [:open "Obsidian"]]
             [:f [:open "Finder"]]
+            [:x [:open "Vivaldi"]]
             ;; [:m [:open "Morgen"]]
             [:d [:open "Dictionary"]]
             

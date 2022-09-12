@@ -1,4 +1,5 @@
 export PATH=$PATH:$HOME/scripts
+
 export GIT_CLONE_PATH="$HOME"/projects/github/1206yaya
 export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
 export HISTFILE=~/.zsh_history
@@ -20,6 +21,9 @@ if [ -f "/opt/homebrew/bin/brew"  ]; then
 fi
 export JAVA_HOME="$(asdf where java)"
 export PATH="$PATH:$HOME/fvm/default/bin"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+# for curl
+# setopt nonomatch
 alias q="exit"
 alias code="open -a 'Visual Studio Code'"
 alias tm="Open -a Terminal"
@@ -54,11 +58,14 @@ alias vim="nvim"
 alias du="dust"
 alias de="defaults"
 
-alias gam="git add . ; git commit -m "$@""
+alias gam="git add . ; git commit -m '$@'"
 alias wip="git add . ; git commit -m "wip""
+alias gconf='cat $(git rev-parse --show-toplevel)/.git/config'
+alias gtags="git tag -l"
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias g='cd $(ghq root)/$(ghq list | peco)'
+
 function cd() {
   if [[ $@ == "notes" || $@ == "note" ]]; then
     command cd  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes
@@ -87,18 +94,53 @@ function gb {
 function gnb {
   git checkout -b $@
 }
+function gtam() {
+    if [[ -z $1 ]]; then
+      echo "タグ名を第１引数に指定してください"
+      return 1;
+    fi
+    if [[ -z $2 ]]; then
+      echo "タグコメントを第２引数に指定してください"
+      return 1;
+    fi
+    git tag -a $1 -m $2
+    git push origin $1
+}
+function gdeltag() {
+    if [[ -z $1 ]]; then
+      echo "タグ名を第１引数に指定してください"
+      return 1;
+    fi
+    git tag -d $1;
+    git push --delete origin $1;
+}
 
-function fvm() {
-  project_name=$2
-  version=$3
+function fvmcreate() {
+  project_name=$1
+  version=$2
+  if [[ -z $project_name ]]; then
+    echo "プロジェクト名を第１引数に指定してください"
+    return 1;
+  fi
+  if [[ $project_name == *"-"* ]]; then
+    echo "プロジェクト名に - は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
+    return 1;
+  fi
+  if [[ -z $version ]]; then
+    echo "fvm で使用する flutter Version を第２引数に指定してください"
+    return 1;
+  fi
   echo "create flutter \nProjectName:$project_name \nVersion $version"
-  if [[ $1 == "create" ]]; then
-    # mkdir $project_name
-    # cd $project_name
-    # fvm use $version --force
-    # fvm flutter create .
-    mkdir .vscode
-    touch .vscode/settings.json
+  mkdir $project_name
+  cd $project_name
+  fvm global $version
+  fvm use $version --force
+  fvm flutter create \
+    --org com.u1206yaya.$project_name \
+    --project-name $project_name  .
+
+  mkdir .vscode
+  touch .vscode/settings.json
 cat <<EOF >.vscode/settings.json
 {
     // 使用するFlutter SDKのパスを指定。
@@ -113,9 +155,13 @@ cat <<EOF >.vscode/settings.json
     },
 }
 EOF
-  else
-    command fvm "$@"
-  fi
+  # コメントアウトを削除
+  sed '/^[[:blank:]]*\/\//d;s/#.*//' ./lib/main.dart > ./lib/main.dart.tmp
+  mv ./lib/main.dart.tmp ./lib/main.dart
+
+  gi > .gitignore
+  sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
+  sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
 }
 
 grep() {
@@ -183,10 +229,16 @@ function ggen() {
         REPO_NAME=$@
     fi
     
+    if [[ -e README.md ]]; then
+      touch README.md
+    fi
+
     git branch -M main
+    git add .
+    git commit -m 'first commit'
     gh repo create --private $REPO_NAME
     git remote add origin https://github.com/1206yaya/${REPO_NAME}.git
-    git push -u origin main
+    git push --set-upstream origin main
 }
 
 
@@ -303,6 +355,11 @@ cs() {
         cat $pathDir/bash.sh
     elif  [[ $@ == "git" ]]; then
         cat $pathDir/git.sh
+    elif  [[ $@ == "ghq" ]]; then
+        cat $pathDir/ghq.sh
+    elif  [[ $@ == "fvm" ]]; then
+        cat $pathDir/fvm.sh
+
     elif  [[ $@ == "react" ]]; then
         cat $pathDir/react.sh
     elif  [[ $@ == "ts" || $@ == "typescript" ]]; then

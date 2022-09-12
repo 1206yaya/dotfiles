@@ -112,8 +112,8 @@ brew "mysql"
 brew "jenkins-lts"
 brew "gradle"
 brew "openssl"
-
 brew "git-secrets"
+
 # Successfully `flutter doctor` 
 # Have to Open Android Studio App and Install Components
 # Then, More Action > SDK Manager > Android SDK > SDK Tools 
@@ -122,11 +122,14 @@ brew "git-secrets"
 # cask "flutter"
 brew "fvm"
 cask "android-file-transfer"
+brew "scrcpy"
 cask "android-studio"
+cask "android-platform-toos"
 brew "cocoapods"
 # brew uninstall --cask blender
 cask "1password"
 cask "webtorrent"
+cask "adobe-acrobat-reader"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
 
 
