@@ -57,8 +57,8 @@ alias vi="nvim"
 alias vim="nvim"
 alias du="dust"
 alias de="defaults"
-
-alias gam="git add . ; git commit -m '$@'"
+alias groot="cd ~/ghq/github.com/1206yaya"
+alias gam="git add . ; git commit -m "$@""
 alias wip="git add . ; git commit -m "wip""
 alias gconf='cat $(git rev-parse --show-toplevel)/.git/config'
 alias gtags="git tag -l"
@@ -113,6 +113,28 @@ function gdeltag() {
     fi
     git tag -d $1;
     git push --delete origin $1;
+}
+function poetryadddev() {
+  poetry add -D black pyproject-flake8 flake8-bugbear isort mypy
+}
+function createpy() {
+  project_name=$1
+
+  if [[ -z $project_name ]]; then
+    echo "プロジェクト名を第１引数に指定してください"
+    return 1;
+  fi
+
+  if [[ $project_name == *"-"* ]]; then
+    echo "プロジェクト名に - は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
+    return 1;
+  fi
+  git clone https://github.com/navdeep-G/samplemod.git
+  mv samplemod $project_name 
+  cd $project_name
+  rm -rf .git
+  mv sample $project_name
+  ll
 }
 
 function fvmcreate() {
@@ -320,11 +342,15 @@ sample-project
 more info 
 $ spring init --list
 
-Notes. if you use dynamodb
+Notes. 
+If you use Selenide 5.25.0 then --bootVersion=2.6.4-SNAPSHOT.
+
+if you use dynamodb
     gradle.build dependencies 
         implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.17.100'
 EOF
 }
+
 
 cs() {
     # pathDir=/mnt/c/Users/1206y/github/cheat.sheet/
@@ -333,6 +359,10 @@ cs() {
         cat $pathDir/dynamodb.sh
     elif  [[ $@ == "py" || $@ == "python" ]]; then
         cat $pathDir/python.sh
+    elif  [[ $@ == "poetry" ]]; then
+        cat $pathDir/poetry.sh
+    elif  [[ $@ == "pyenv" ]]; then
+        cat $pathDir/pyenv.sh
     elif  [[ $1 == "docker" || $1 == "dc" ]]; then
         if [[ $2 == "fix" ]]; then
             cat $pathDir/docker.fix.sh
@@ -359,7 +389,8 @@ cs() {
         cat $pathDir/ghq.sh
     elif  [[ $@ == "fvm" ]]; then
         cat $pathDir/fvm.sh
-
+    elif  [[ $@ == "sql" ]]; then
+        cat $pathDir/sql.sh
     elif  [[ $@ == "react" ]]; then
         cat $pathDir/react.sh
     elif  [[ $@ == "ts" || $@ == "typescript" ]]; then
@@ -543,6 +574,11 @@ ex=:\
 *.nix=:\
 "
 
+export EXA_COLORS="da=37:uu=37;1:un=37:gu=37;1:gn=37:sb=33:sn=33;1"
+export EXA_COLORS="ur=37:uw=37:ux=37;1:ue=37;1:$EXA_COLORS" # user file permissions
+export EXA_COLORS="gr=37:gw=37:gx=37;1:$EXA_COLORS" # group file permissions
+export EXA_COLORS="tr=37:tw=37:tx=37;1:$EXA_COLORS" # world file permissions
+export EXA_COLORS="*.rb=33:$EXA_COLORS" # world file permissions
 
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -553,4 +589,19 @@ man() {
     LESS_TERMCAP_ue=$'\E[0m' \
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
+}
+
+
+# なんかいまいち
+# https://qiita.com/masakuni-ito/items/deb000b5ca5eb6588463
+function fr() {
+  grep_cmd="grep --recursive --line-number --invert-match --regexp '^\s*$' * 2>/dev/null"
+
+  if type "rg" >/dev/null 2>&1; then
+      grep_cmd="rg --hidden --no-ignore --line-number --no-heading --invert-match '^\s*$' 2>/dev/null"
+  fi
+
+  read -r file line <<<"$(eval $grep_cmd | fzf --select-1 --exit-0 | awk -F: '{print $1, $2}')"
+  ( [[ -z "$file" ]] || [[ -z "$line" ]] ) && exit
+  $EDITOR $file +$line
 }

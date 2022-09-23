@@ -80,6 +80,7 @@ brew "sk"
 ## For yabai
 brew "skhd"
 brew "starship"
+brew "poetry"
 brew "stow"
 
 ## man コミュニティー駆動
@@ -113,6 +114,9 @@ brew "jenkins-lts"
 brew "gradle"
 brew "openssl"
 brew "git-secrets"
+brew "xpdf"
+brew "pyenv"
+
 
 # Successfully `flutter doctor` 
 # Have to Open Android Studio App and Install Components
@@ -124,7 +128,7 @@ brew "fvm"
 cask "android-file-transfer"
 brew "scrcpy"
 cask "android-studio"
-cask "android-platform-toos"
+cask "android-platform-tools"
 brew "cocoapods"
 # brew uninstall --cask blender
 cask "1password"

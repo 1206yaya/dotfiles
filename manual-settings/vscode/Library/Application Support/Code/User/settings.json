@@ -173,6 +173,7 @@
         "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/14.env_param.jenkins"
       }
     ],
+    "redhat.telemetry.enabled": true,
       // Controls when the folding controls on the gutter are shown.
 
 }
