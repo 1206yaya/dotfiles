@@ -65,6 +65,7 @@ alias gtags="git tag -l"
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias g='cd $(ghq root)/$(ghq list | peco)'
+alias pycharm="open -na "PyCharm CE.app" --args "$@""
 
 function cd() {
   if [[ $@ == "notes" || $@ == "note" ]]; then
@@ -116,6 +117,45 @@ function gdeltag() {
 }
 function poetryadddev() {
   poetry add -D black pyproject-flake8 flake8-bugbear isort mypy
+cat <<EOF >>pyproject.toml
+[tool.black]
+target-version = ['py39']
+line-length = 120
+
+[tool.isort]
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+known_local_folder=['config',]
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 18
+ignore = "E203,E266,W503,"
+
+[tool.mypy]
+python_version = "3.9"
+no_strict_optional = true
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests",]
+filterwarnings = ["ignore::DeprecationWarning",]
+
+EOF
+
+touch Makefile
+cat <<EOF >Makefile
+.PHONY: tests
+tests: ## run tests with poetry
+  poetry run isort .
+  poetry run black .
+# poetry run pflake8 .
+  poetry run mypy .
+  poetry run pytest
+EOF
+
 }
 function createpy() {
   project_name=$1

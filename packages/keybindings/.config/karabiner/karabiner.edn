@@ -158,6 +158,7 @@
           :rules [:open-mode
             [:w [:open "WebStorm"]]
             [:l [:open "IntelliJ IDEA CE"]]
+            [:p [:open "PyCharm CE"]]
             [:e [:open "DBeaver"]]
             [:n [:open "Postman"]]
             [:i [:open "iTerm"]]
@@ -172,7 +173,7 @@
             
             [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
             ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes/osho/tasks.md'"]]
-            [:p ["open -F -n -b 'com.microsoft.VSCode' --args ~/LinkNotes"]]
+            ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args ~/LinkNotes"]]
 
             [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]

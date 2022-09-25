@@ -115,7 +115,6 @@ brew "gradle"
 brew "openssl"
 brew "git-secrets"
 brew "xpdf"
-brew "pyenv"
 
 
 # Successfully `flutter doctor` 
