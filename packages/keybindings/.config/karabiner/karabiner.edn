@@ -170,8 +170,9 @@
             [:x [:open "Vivaldi"]]
             ;; [:m [:open "Morgen"]]
             [:d [:open "Dictionary"]]
-            
             [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
+            
+            [:j ["open -F -na 'Google Chrome' --args http://localhost:8888/tree?"]]
             ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes/osho/tasks.md'"]]
             ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args ~/LinkNotes"]]
 

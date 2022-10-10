@@ -65,11 +65,22 @@ alias gtags="git tag -l"
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias g='cd $(ghq root)/$(ghq list | peco)'
-alias pycharm="open -na "PyCharm CE.app" --args "$@""
+alias pycharm="open -na 'PyCharm CE.app' --args "$@""
+alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
+
+function open() {
+  if [[ $@ == "pdf" ]]; then
+    command open /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
+  else
+    command open $@
+  fi
+}
 
 function cd() {
   if [[ $@ == "notes" || $@ == "note" ]]; then
     command cd  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes
+  elif  [[ $@ == "pdf" ]]; then
+    command open  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
   else
     command cd $@
   fi
@@ -149,11 +160,11 @@ touch Makefile
 cat <<EOF >Makefile
 .PHONY: tests
 tests: ## run tests with poetry
-  poetry run isort .
-  poetry run black .
-# poetry run pflake8 .
-  poetry run mypy .
-  poetry run pytest
+    poetry run isort .
+    poetry run black .
+    # poetry run pflake8 .
+    poetry run mypy .
+    poetry run pytest
 EOF
 
 }
@@ -295,11 +306,17 @@ function ggen() {
       touch README.md
     fi
 
+    if [[ ! -d .git ]]; then
+      git init
+    fi
+
     git branch -M main
     git add .
     git commit -m 'first commit'
+    # git remote add origin https://github.com/1206yaya/${REPO_NAME}.git
+    git remote add origin git@github.com:1206yaya/${REPO_NAME}.git
     gh repo create --private $REPO_NAME
-    git remote add origin https://github.com/1206yaya/${REPO_NAME}.git
+
     git push --set-upstream origin main
 }
 
@@ -362,7 +379,11 @@ alias di='docker images $@'
 alias d-c='docker-compose'
 
 
+############ >>> java application
+function javainit {
+  gradle init --project-name demo --package demo --type java-application --dsl groovy --test-framework junit-jupiter
 
+}
 ############ >>> Springboot
 # 2.6.4-SNAPSHOT
 function springinit {
@@ -390,7 +411,9 @@ if you use dynamodb
         implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.17.100'
 EOF
 }
-
+jupyter() {
+  cd /Users/zak/ghq/github.com/1206yaya/py-jupyter-notebooks && make run
+}
 
 cs() {
     # pathDir=/mnt/c/Users/1206y/github/cheat.sheet/
@@ -401,6 +424,8 @@ cs() {
         cat $pathDir/python.sh
     elif  [[ $@ == "poetry" ]]; then
         cat $pathDir/poetry.sh
+    elif  [[ $@ == "dart" ]]; then
+        cat $pathDir/dart.sh
     elif  [[ $@ == "pyenv" ]]; then
         cat $pathDir/pyenv.sh
     elif  [[ $1 == "docker" || $1 == "dc" ]]; then
@@ -645,3 +670,4 @@ function fr() {
   ( [[ -z "$file" ]] || [[ -z "$line" ]] ) && exit
   $EDITOR $file +$line
 }
+

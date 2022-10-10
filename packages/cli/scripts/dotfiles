@@ -1,4 +1,4 @@
-!/bin/sh 
+#!/bin/sh 
 GITHUB_EMAIL=1206yaya@gmail.com
 set -e 
 # set -x	

@@ -1,7 +1,7 @@
 [user]
 	name       = 1206yaya
 	email      = 1206yaya@gmail.com
-	signingkey = 567AEC8EA9AD7DEE
+	signingkey = 2729DB3D44D24FDAA1586FD9DFF35CAD14A02D85
 [alias]
 	s   = status -sb
 	d   = diff
