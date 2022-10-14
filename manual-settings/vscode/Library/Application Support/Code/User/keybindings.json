@@ -17,6 +17,11 @@
   "when": "canNavigateBack"
 },
 {
+  "key": "f3",
+  "command": "workbench.action.navigateBack",
+  "when": "canNavigateBack"
+},
+{
   "key": "ctrl+-",
   "command": "-workbench.action.navigateBack",
   "when": "canNavigateBack"

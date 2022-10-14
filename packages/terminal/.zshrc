@@ -3,8 +3,8 @@ export PATH=$PATH:$HOME/scripts
 export GIT_CLONE_PATH="$HOME"/projects/github/1206yaya
 export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
 export HISTFILE=~/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
+export HISTSIZE=100000
+export SAVEHIST=100000
 setopt no_beep
 setopt auto_pushd
 setopt pushd_ignore_dups

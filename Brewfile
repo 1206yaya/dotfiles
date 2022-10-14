@@ -131,6 +131,7 @@ brew "scrcpy"
 cask "android-studio"
 cask "android-platform-tools"
 brew "cocoapods"
+cask "figma"
 # brew uninstall --cask blender
 cask "the-unarchiver"
 cask "webtorrent"
