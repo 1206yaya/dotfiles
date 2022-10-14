@@ -1,7 +1,7 @@
 [user]
 	name       = 1206yaya
 	email      = 1206yaya@gmail.com
-	signingkey = 2729DB3D44D24FDAA1586FD9DFF35CAD14A02D85
+	signingkey = 31535A11612613F038A1712C37F085A0F0B2CD58
 [alias]
 	s   = status -sb
 	d   = diff
@@ -52,3 +52,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
