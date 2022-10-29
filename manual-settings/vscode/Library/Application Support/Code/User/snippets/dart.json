@@ -16,8 +16,42 @@
 		"prefix": "main",
 		"body": [
 			"void main() {",
-			"\trunApp(const MyApp());",
+			" runApp(const MyApp());",
 			"}"
+		]
+	},
+
+	"Flutter MaterialApp": {
+		"prefix": "fma",
+		"body": [
+			"class App extends StatelessWidget {",
+			" const App({super.key});",
+			"",
+			" @override",
+			" Widget build(BuildContext context) {",
+			"  return MaterialApp(",
+			"    theme: ThemeData(",
+			"      brightness: Brightness.dark,",
+			"      primarySwatch: Colors.blueGrey,",
+			"      indicatorColor: Colors.blueGrey),",
+			"    darkTheme: ThemeData.dark(),",
+			"    themeMode: ThemeMode.dark,",
+			"    debugShowCheckedModeBanner: false,",
+			"    home: const HomePage());",
+			" }",
+			"}",
+			"",
+			"class HomePage extends HookConsumerWidget {",
+			" const HomePage({super.key});",
+			"",
+			" @override",
+			" Widget build(BuildContext context, WidgetRef ref) {",
+			"  return Scaffold(",
+			"    appBar: AppBar(title: const Text('Stream')), body: Container());",
+			" }",
+			"}",
+			
+			
 		]
 	}
 }

@@ -2641,7 +2641,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "w"
             } ],
@@ -2686,7 +2686,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "l"
             } ],
@@ -2731,7 +2731,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "p"
             } ],
@@ -2776,7 +2776,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "e"
             } ],
@@ -2821,7 +2821,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "n"
             } ],
@@ -2866,7 +2866,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "i"
             } ],
@@ -2911,7 +2911,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "t"
             } ],
@@ -2956,7 +2956,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "c"
             } ],
@@ -3001,7 +3001,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "a"
             } ],
@@ -3046,7 +3046,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "b"
             } ],
@@ -3091,7 +3091,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "f"
             } ],
@@ -3136,7 +3136,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "x"
             } ],
@@ -3181,7 +3181,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "d"
             } ],
@@ -3226,7 +3226,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "r"
             } ],
@@ -3271,7 +3271,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "j"
             } ],
@@ -3316,7 +3316,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "v"
             } ],
@@ -3361,7 +3361,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "o"
+              "key_code" : "0"
             }, {
               "key_code" : "k"
             } ],

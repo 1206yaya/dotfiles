@@ -206,5 +206,33 @@
 {
   "key": "shift+cmd+i",
   "command": "workbench.action.splitEditorRight"
+},
+{
+  "key": "ctrl+alt+cmd+n",
+  "command": "-welcome.showNewFileEntries"
+},
+{
+  "key": "cmd+n",
+  "command": "-workbench.action.files.newUntitledFile"
+},
+{
+  "key": "cmd+n",
+  "command": "explorer.newFile"
+},
+{
+  "key": "ctrl+alt+cmd+n",
+  "command": "workbench.action.newWindow"
+},
+{
+  "key": "shift+cmd+n",
+  "command": "-workbench.action.newWindow"
+},
+{
+  "key": "shift+cmd+n",
+  "command": "explorer.newFolder"
+},
+{
+  "key": "alt+cmd+n",
+  "command": "workbench.action.files.newUntitledFile"
 }
 ]

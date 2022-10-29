@@ -34,6 +34,7 @@ alias pr="gh pr view --web"
 alias prysm="~/prysm/prysm.sh"
 alias lldlib="open ~/Library/Application\ Support/Electron"
 alias sim="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/"
+alias iosopen="open ./ios/Runner.xcworkspace"
 alias keycodes="cat /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h"
 # @Flutter Alias
 alias fl='flutter'
@@ -209,7 +210,7 @@ function fvmcreate() {
   fvm global $version
   fvm use $version --force
   fvm flutter create \
-    --org com.u1206yaya.$project_name \
+    --org com.u1206yaya \
     --project-name $project_name  .
 
   mkdir .vscode
@@ -232,7 +233,7 @@ EOF
   sed '/^[[:blank:]]*\/\//d;s/#.*//' ./lib/main.dart > ./lib/main.dart.tmp
   mv ./lib/main.dart.tmp ./lib/main.dart
 
-  gi > .gitignore
+  gi flutter > .gitignore
   sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
   sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
 }

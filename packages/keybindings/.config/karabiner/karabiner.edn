@@ -106,7 +106,7 @@
 }
  :simlayers {
              :chrome-mode      {:key :d                                :condi :Chrome}
-             :open-mode {:key :o}
+             :open-mode {:key :0}
              :z-mode {:key :z}    ; emoji 
              :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
              :d-mode {:key :d}    ; arithmetic    + - * / = % < > #

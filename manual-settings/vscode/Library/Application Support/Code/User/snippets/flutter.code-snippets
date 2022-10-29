@@ -23,5 +23,6 @@
 			"\trunApp(const MyApp());",
 			"}"
 		]
-	}
+	},
+
 }
