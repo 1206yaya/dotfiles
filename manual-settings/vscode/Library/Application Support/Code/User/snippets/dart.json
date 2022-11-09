@@ -12,6 +12,14 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+	"import riverpod_annotation": {
+		"prefix": "importAn",
+		"body": [
+			"import 'package:riverpod_annotation/riverpod_annotation.dart';",
+			"part '$TM_FILENAME_BASE.g.dart';",
+			"@riverpod"
+		]
+	},
 	"main": {
 		"prefix": "main",
 		"body": [
@@ -21,9 +29,63 @@
 		]
 	},
 
+	"Flutter MaterialApp Hook": {
+		"prefix": "fmaHook",
+		"body": [
+			"import 'package:firebase_core/firebase_core.dart';",
+			"import 'package:flutter/material.dart';",
+			"import 'package:hooks_riverpod/hooks_riverpod.dart';",
+			"import 'firebase_options.dart';",
+			"void main() async {",
+			"  WidgetsFlutterBinding.ensureInitialized();",
+			"  await Firebase.initializeApp(",
+			"    options: DefaultFirebaseOptions.currentPlatform,",
+			"  );",
+			"",
+			"  runApp(",
+			"    const ProviderScope(",
+			"      child: App(),",
+			"    ),",
+			"  );",
+			"}",
+			"class App extends StatelessWidget {",
+			"  const App({super.key});",
+			"",
+			"  @override",
+			"  Widget build(BuildContext context) {",
+			"    return MaterialApp(",
+			"        theme: ThemeData(",
+			"            brightness: Brightness.dark,",
+			"            primarySwatch: Colors.blueGrey,",
+			"            indicatorColor: Colors.blueGrey),",
+			"        darkTheme: ThemeData.dark(),",
+			"        themeMode: ThemeMode.dark,",
+			"        debugShowCheckedModeBanner: false,",
+			"        home: const MainView());",
+			"  }",
+			"}",
+			"",
+			"class MainView extends ConsumerStatefulWidget {",
+			"  const MainView({super.key});",
+			"",
+			"  @override",
+			"  ConsumerState<ConsumerStatefulWidget> createState() => _MainViewState();",
+			"}",
+			"",
+			"class _MainViewState extends ConsumerState<MainView> {",
+			"  @override",
+			"  Widget build(BuildContext context) {",
+			"    return Scaffold(",
+			"        appBar: AppBar(title: const Text('Main View')), body: Container());",
+			"  }",
+			"}",
+		]
+	},
 	"Flutter MaterialApp": {
 		"prefix": "fma",
 		"body": [
+			"import 'package:flutter/material.dart';",
+			"",
 			"class App extends StatelessWidget {",
 			" const App({super.key});",
 			"",
@@ -41,17 +103,25 @@
 			" }",
 			"}",
 			"",
-			"class HomePage extends HookConsumerWidget {",
+			"class HomePage extends StatefulWidget {",
 			" const HomePage({super.key});",
 			"",
 			" @override",
-			" Widget build(BuildContext context, WidgetRef ref) {",
+			" State<HomePage> createState() => _HomePageState();",
+			"}",
+			"",
+			"class _HomePageState extends State<HomePage> {",
+			" @override",
+			" Widget build(BuildContext context) {",
 			"  return Scaffold(",
-			"    appBar: AppBar(title: const Text('Stream')), body: Container());",
+			"   appBar: AppBar(",
+			"    title: const Text('HomePage'),",
+			"   ),",
+			"   body: Container(),",
+			"  );",
 			" }",
 			"}",
-			
-			
+			"",
 		]
 	}
 }

@@ -1,8 +1,8 @@
-#!/bin/sh 
+#!/bin/zsh 
 GITHUB_EMAIL=1206yaya@gmail.com
 set -e 
 # set -x	
-
+source ~/.zshrc
 ## 全てのstowリンクを削除するコマンド
 ##　stow -vD -d "$STOW_PACKAGES_PATH" -t ~ `ls $STOW_PACKAGES_PATH`
 

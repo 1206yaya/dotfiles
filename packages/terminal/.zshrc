@@ -236,6 +236,10 @@ EOF
   gi flutter > .gitignore
   sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
   sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
+  
+  grep -v '^\s*#' pubspec.yaml |grep -v '^\s*$' > pubspec.yaml_tmp; cat pubspec.yaml_tmp > pubspec.yaml ; rm -rf pubspec.yaml_tmp;
+  code .
+
 }
 
 grep() {
@@ -435,6 +439,15 @@ cs() {
         else
             cat $pathDir/docker.sh
         fi 
+    elif  [[ $1 == "flutter" ]]; then
+        if [[ $2 == "pub" ]]; then
+            cat $pathDir/flutter-pub.sh
+        else
+            cat $pathDir/flutter.sh
+        fi 
+    elif  [[ $1 == "pub" ]]; then
+        cat $pathDir/flutter-pub.sh
+
     elif  [[ $1 == "sls" || $1 == "serverless" ]]; then
         if [[ $2 == "fix" ]]; then
             cat $pathDir/sls.fix.sh
