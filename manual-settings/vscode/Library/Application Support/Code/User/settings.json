@@ -1,181 +1,204 @@
-
 {
-    "window.title": "${activeEditorLong}",
-    "workbench.iconTheme": "material-icon-theme",
-      // OPEN EDITORS を非表示
-    "explorer.openEditors.visible": 1,
-    // Setting Search 
-    "files.exclude": {
-        "/.git": true,
-        "/.DS_Store": true,
-        "/node_modules": true,
-        "/node_modules/": true,
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
-      },
-      "search.exclude": {
-        ".history": true,
-        "**/.next": true,
-        "/node_modules": true,
-        "site-packages": true,
-        "**/.fvm": true,
-      },
-      "files.watcherExclude": {
-        "/node_modules/": true
-      },
-
-    "explorer.confirmDelete": false,
-    "security.workspace.trust.untrustedFiles": "open",
-    "explorer.confirmDragAndDrop": false,
-    "files.autoSave": "afterDelay",
-    "extensions.ignoreRecommendations": true,
-    "workbench.startupEditor": "none",
-    "diffEditor.ignoreTrimWhitespace": false,
-
-    "markdown-checkbox.checkmark": "x",
-    "markdown-checkbox.typeOfBulletPoint": "-",
-    "markdown-checkbox.dateFormat": "YYYY-MM-DD HH:mm:ss",
-    "markdown-checkbox.italicWhenChecked": false,
-    "markdown-checkbox.strikeThroughWhenChecked": false,
-    "workbench.colorTheme": "Dracula Soft",
-    "debug.disassemblyView.showSourceCode": false,
-
-    "[dart]": {
-        "editor.formatOnSave": true,
-        "editor.formatOnType": true,
-        "editor.rulers": [
-            80
-        ],
-        "editor.selectionHighlight": false,
-        "editor.suggest.snippetsPreventQuickSuggestions": false,
-        "editor.suggestSelection": "first",
-        "editor.tabCompletion": "onlySnippets",
-        "editor.wordBasedSuggestions": false,
-        "editor.defaultFormatter": "Dart-Code.dart-code",
-        "editor.formatOnPaste": true,
-        
-    },
-    "editor.occurrencesHighlight": false,
-    "editor.selectionHighlight": false,
-    // Flutter
-    "dart.previewFlutterUiGuides": true,
-    "dart.previewFlutterUiGuidesCustomTracking": true,
-    "editor.accessibilitySupport": "on",
-    // soundを消す
-    "audioCues.lineHasBreakpoint": "off",
-    "audioCues.lineHasError": "off",
-    "audioCues.lineHasFoldedArea": "off",
-    "audioCues.lineHasInlineSuggestion": "off",
-    "audioCues.onDebugBreak": "off",
-    "audioCues.noInlayHints": "off",
-    // ファイルをクリックで開いたら閉じずに開きっぱなしにする
-    "workbench.editor.enablePreview": false,
+  "window.title": "${activeEditorLong}",
+  "workbench.iconTheme": "material-icon-theme",
+  // OPEN EDITORS を非表示
+  "explorer.openEditors.visible": 1,
+  // Setting Search 
+  "files.exclude": {
+    "/.git": true,
+    "/.DS_Store": true,
+    "/node_modules": true,
+    "/node_modules/": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "search.exclude": {
+    ".history": true,
+    "**/.next": true,
+    "/node_modules": true,
+    "site-packages": true,
+    "**/.fvm": true,
+  },
+  "files.watcherExclude": {
+    "/node_modules/": true
+  },
+  "explorer.confirmDelete": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSave": "afterDelay",
+  "extensions.ignoreRecommendations": true,
+  "workbench.startupEditor": "none",
+  "markdown-checkbox.checkmark": "x",
+  "markdown-checkbox.typeOfBulletPoint": "-",
+  "markdown-checkbox.dateFormat": "YYYY-MM-DD HH:mm:ss",
+  "markdown-checkbox.italicWhenChecked": false,
+  "markdown-checkbox.strikeThroughWhenChecked": false,
+  "debug.disassemblyView.showSourceCode": false,
+  "[dart]": {
+    // andrea
     "editor.codeActionsOnSave": {
-      "quickfix.insertSemicolon": true,
+      "source.fixAll": true
     },
-    "editor.showFoldingControls": "always",
-    "leetcode.workspaceFolder": "/Users/zak/ghq/github.com/1206yaya/leetcode",
-    "jenkins-jack.jenkins.connections": [
-      {
-        "name": "localhost:8080",
-        "uri": "http://127.0.0.1:8080",
-        "username": "1206yaya",
-        "crumbIssuer": true,
-        "active": true
-      }
+    "editor.rulers": [
+      80
     ],
-    "jenkins-jack.pipeline.tree.items": [
-      {
-        "hostId": "localhost:8080",
-        "jobName": "1.plain-node",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/1.plain-node.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "2.plain-pipeline",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/2.plain-pipeline.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "3.conditional",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/3.conditional.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "4.groovy",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/4.groovy.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "6.write_file",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/6.write_file.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "7. parameters",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/7. parameters.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "8.try-catch-finally",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/8.try-catch-finally.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "9.run-other-jobs",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.run-other-jobs.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "9.1.job1",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.1.job1.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "JenkinsUtils",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/src/com/JenkinsUtils.groovy"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "10.shared-library",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/10.shared-library.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "9.2.sleep",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.2.sleep.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "9.3.job-status",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.3.job-status.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "12.retry",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/12.retry.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "13.parallel",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/13.parallel.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "DailyJob",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/osho/DailyJob.jenkins"
-      },
-      {
-        "hostId": "localhost:8080",
-        "jobName": "14.env_param",
-        "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/14.env_param.jenkins"
-      }
-    ],
-    "redhat.telemetry.enabled": true,
-    "dart.flutterSdkPath": "/opt/homebrew/bin/dart",
-    "dart.checkForSdkUpdates": false,
-      // Controls when the folding controls on the gutter are shown.
-
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false,
+    // version1
+    // "editor.formatOnSave": true,
+    // "editor.formatOnType": true,
+    // "editor.rulers": [
+    //     80
+    // ],
+    // "editor.selectionHighlight": false,
+    // "editor.suggest.snippetsPreventQuickSuggestions": false,
+    // "editor.suggestSelection": "first",
+    // "editor.tabCompletion": "onlySnippets",
+    // "editor.wordBasedSuggestions": false,
+    // "editor.defaultFormatter": "Dart-Code.dart-code",
+    // "editor.formatOnPaste": true,
+  },
+  // 👇 Andrea Setting
+  "dart.warnWhenEditingFilesOutsideWorkspace": false,
+  "dart.renameFilesWithClasses": "prompt",
+  // "window.zoomLevel": 1,
+  "workbench.colorTheme": "Dracula",
+  // "workbench.colorTheme": "Dracula Soft",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.stickyScroll.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.dart": "${capture}.g.dart, ${capture}.freezed.dart"
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  // 👆 Andrea
+  "editor.occurrencesHighlight": false,
+  "editor.selectionHighlight": false,
+  // Flutter
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  "editor.accessibilitySupport": "off",
+  // soundを消す
+  "audioCues.lineHasBreakpoint": "off",
+  "audioCues.lineHasError": "off",
+  "audioCues.lineHasFoldedArea": "off",
+  "audioCues.lineHasInlineSuggestion": "off",
+  "audioCues.onDebugBreak": "off",
+  "audioCues.noInlayHints": "off",
+  // ファイルをクリックで開いたら閉じずに開きっぱなしにする
+  "workbench.editor.enablePreview": false,
+  "editor.codeActionsOnSave": {
+  
+    "quickfix.insertSemicolon": true,
+  },
+  "editor.showFoldingControls": "always",
+  "leetcode.workspaceFolder": "/Users/zak/ghq/github.com/1206yaya/leetcode",
+  "jenkins-jack.jenkins.connections": [
+    {
+      "name": "localhost:8080",
+      "uri": "http://127.0.0.1:8080",
+      "username": "1206yaya",
+      "crumbIssuer": true,
+      "active": true
+    }
+  ],
+  "jenkins-jack.pipeline.tree.items": [
+    {
+      "hostId": "localhost:8080",
+      "jobName": "1.plain-node",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/1.plain-node.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "2.plain-pipeline",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/2.plain-pipeline.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "3.conditional",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/3.conditional.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "4.groovy",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/4.groovy.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "6.write_file",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/6.write_file.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "7. parameters",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/7. parameters.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "8.try-catch-finally",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/8.try-catch-finally.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.run-other-jobs",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.run-other-jobs.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.1.job1",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.1.job1.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "JenkinsUtils",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/src/com/JenkinsUtils.groovy"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "10.shared-library",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/10.shared-library.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.2.sleep",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.2.sleep.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.3.job-status",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.3.job-status.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "12.retry",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/12.retry.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "13.parallel",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/13.parallel.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "DailyJob",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/osho/DailyJob.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "14.env_param",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/14.env_param.jenkins"
+    }
+  ],
+  "redhat.telemetry.enabled": true,
+  "dart.flutterSdkPath": "/opt/homebrew/bin/dart",
+  "dart.checkForSdkUpdates": false,
+  "bracket-pair-colorizer-2.depreciation-notice": false,
+  // Controls when the folding controls on the gutter are shown.
 }

@@ -22,6 +22,8 @@ fi
 export JAVA_HOME="$(asdf where java)"
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$HOME/.anyenv/bin:$PATH"
+
 # for curl
 # setopt nonomatch
 alias q="exit"
@@ -431,6 +433,8 @@ cs() {
         cat $pathDir/poetry.sh
     elif  [[ $@ == "dart" ]]; then
         cat $pathDir/dart.sh
+    elif  [[ $@ == "firebase" || $@ == "flutterfire" ]]; then
+        cat $pathDir/firebase.md
     elif  [[ $@ == "pyenv" ]]; then
         cat $pathDir/pyenv.sh
     elif  [[ $1 == "docker" || $1 == "dc" ]]; then

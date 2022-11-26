@@ -12,8 +12,21 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+	"import freezed annotation": {
+		"prefix": "freezed",
+		"body": [
+			"import 'package:freezed_annotation/freezed_annotation.dart';",
+			"part '$TM_FILENAME_BASE.freezed.dart';",
+			"part '$TM_FILENAME_BASE.g.dart';",
+			"@freezed",
+			"class ${1} with _$${1} {",
+			"factory ${1}({}) = _${1};",
+			"factory ${1}.fromJson(Map<String, dynamic> json) => _${1}.fromJson(json);",
+			"}"
+		]
+	},
 	"import riverpod_annotation": {
-		"prefix": "importAn",
+		"prefix": "riverpod",
 		"body": [
 			"import 'package:riverpod_annotation/riverpod_annotation.dart';",
 			"part '$TM_FILENAME_BASE.g.dart';",
@@ -28,7 +41,6 @@
 			"}"
 		]
 	},
-
 	"Flutter MaterialApp Hook": {
 		"prefix": "fmaHook",
 		"body": [

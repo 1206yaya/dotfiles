@@ -51,7 +51,9 @@ brew "hyperfine"
 ## 何に使うかわからん
 # brew "ios-deploy"
 brew "jq"
+brew "cloc"
 brew "ghq"
+brew "anyenv"
 brew "peco"
 brew "hub"
 ## For Go
