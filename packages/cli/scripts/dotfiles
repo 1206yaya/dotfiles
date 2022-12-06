@@ -111,6 +111,8 @@ ensure_dir_exists ~/.config/yarn/global
 
 # shellcheck disable=SC2046
 stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls  $STOW_PACKAGES_PATH)
+# 手動で追加でしたいとき
+# swow -vd "$STOW_PACKAGES_PATH" -t ~ terminal
 
 #### Warning
 # Do not make a symlink to karabiner.json directly.

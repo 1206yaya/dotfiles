@@ -13,6 +13,8 @@ setopt hist_ignore_dups
 # setopt share_history
 setopt inc_append_history
 
+
+
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -22,7 +24,8 @@ fi
 export JAVA_HOME="$(asdf where java)"
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
-export PATH="$HOME/.anyenv/bin:$PATH"
+# export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
 
 # for curl
 # setopt nonomatch
@@ -61,16 +64,13 @@ alias vim="nvim"
 alias du="dust"
 alias de="defaults"
 alias groot="cd ~/ghq/github.com/1206yaya"
-alias gam="git add . ; git commit -m "$@""
-alias wip="git add . ; git commit -m "wip""
-alias gconf='cat $(git rev-parse --show-toplevel)/.git/config'
-alias gtags="git tag -l"
+
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
-
+alias fire="firebase "$@""
 function open() {
   if [[ $@ == "pdf" ]]; then
     command open /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
@@ -102,33 +102,7 @@ function hub() {
     command hub "$@"
   fi
 }
-function gb {
-  git checkout $@
-}
 
-function gnb {
-  git checkout -b $@
-}
-function gtam() {
-    if [[ -z $1 ]]; then
-      echo "タグ名を第１引数に指定してください"
-      return 1;
-    fi
-    if [[ -z $2 ]]; then
-      echo "タグコメントを第２引数に指定してください"
-      return 1;
-    fi
-    git tag -a $1 -m $2
-    git push origin $1
-}
-function gdeltag() {
-    if [[ -z $1 ]]; then
-      echo "タグ名を第１引数に指定してください"
-      return 1;
-    fi
-    git tag -d $1;
-    git push --delete origin $1;
-}
 function poetryadddev() {
   poetry add -D black pyproject-flake8 flake8-bugbear isort mypy
 cat <<EOF >>pyproject.toml
@@ -248,15 +222,6 @@ grep() {
   command grep --color -E "$@"
 }
 
-function lsp() {
-    ls -la ~/projects/github/1206yaya/;
-}
-function cdp() {
-    cd ~/projects/github/1206yaya/"$@";
-}
-function codep() {
-    code ~/projects/github/1206yaya/"$@";
-}
 
 function tmpdir() {
   NOW=$(date "+%Y-%m-%d%H%M")
@@ -293,42 +258,6 @@ function killport() {
 #   port=$(lsof -n -i4TCP:$1 | grep LISTEN | awk '{ print $2 }')  
 #   kill -9 $port 
 # }
-
-# ======================================  Git
-# >>> ⭐️ ⭐️ workflow of repository create on github ⭐️ ⭐️
-# gam 'first commit'
-# ggen
-
-function ggen() {
-    # 引数がセットされていればそれをレポジトリ名に、そうでなければカレントディレクトリ名
-    REPO_NAME=
-    if [[ $# -eq 0 ]]; then
-        CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
-        REPO_NAME=$CURERNT_DIR
-    else
-        REPO_NAME=$@
-    fi
-    
-    if [[ -e README.md ]]; then
-      touch README.md
-    fi
-
-    if [[ ! -d .git ]]; then
-      git init
-    fi
-
-    git branch -M main
-    git add .
-    git commit -m 'first commit'
-    # git remote add origin https://github.com/1206yaya/${REPO_NAME}.git
-    git remote add origin git@github.com:1206yaya/${REPO_NAME}.git
-    gh repo create --private $REPO_NAME
-
-    git push --set-upstream origin main
-}
-
-
-function gi() { curl -sL https://www.gitignore.io/api/$@ ;}
 
 
 # ====================================== yarn 
@@ -422,77 +351,24 @@ jupyter() {
   cd /Users/zak/ghq/github.com/1206yaya/py-jupyter-notebooks && make run
 }
 
-cs() {
-    # pathDir=/mnt/c/Users/1206y/github/cheat.sheet/
-    pathDir="/Users/zak/ghq/github.com/1206yaya/cheet-sheet"
-    if [[ $@ == "aws-dynamodb" || $@ == "dynamo" || $@ == "dynamodb" ]]; then
-        cat $pathDir/dynamodb.sh
-    elif  [[ $@ == "py" || $@ == "python" ]]; then
-        cat $pathDir/python.sh
-    elif  [[ $@ == "poetry" ]]; then
-        cat $pathDir/poetry.sh
-    elif  [[ $@ == "dart" ]]; then
-        cat $pathDir/dart.sh
-    elif  [[ $@ == "firebase" || $@ == "flutterfire" ]]; then
-        cat $pathDir/firebase.md
-    elif  [[ $@ == "pyenv" ]]; then
-        cat $pathDir/pyenv.sh
-    elif  [[ $1 == "docker" || $1 == "dc" ]]; then
-        if [[ $2 == "fix" ]]; then
-            cat $pathDir/docker.fix.sh
-        else
-            cat $pathDir/docker.sh
-        fi 
-    elif  [[ $1 == "flutter" ]]; then
-        if [[ $2 == "pub" ]]; then
-            cat $pathDir/flutter-pub.sh
-        else
-            cat $pathDir/flutter.sh
-        fi 
-    elif  [[ $1 == "pub" ]]; then
-        cat $pathDir/flutter-pub.sh
-
-    elif  [[ $1 == "sls" || $1 == "serverless" ]]; then
-        if [[ $2 == "fix" ]]; then
-            cat $pathDir/sls.fix.sh
-        else
-            cat $pathDir/sls.sh
-        fi 
-    elif  [[ $@ == "copilot" || $@ == "copi" ]]; then
-        cat $pathDir/copilot.sh
-    elif  [[ $@ == "sam" ]]; then
-        cat $pathDir/sam.sh
-    elif  [[ $@ == "makefile" || $@ == "make" ]]; then
-        cat $pathDir/makefile.sh
-    elif  [[ $@ == "bash" || $@ == "sh" ]]; then
-        cat $pathDir/bash.sh
-    elif  [[ $@ == "git" ]]; then
-        cat $pathDir/git.sh
-    elif  [[ $@ == "ghq" ]]; then
-        cat $pathDir/ghq.sh
-    elif  [[ $@ == "fvm" ]]; then
-        cat $pathDir/fvm.sh
-    elif  [[ $@ == "sql" ]]; then
-        cat $pathDir/sql.sh
-    elif  [[ $@ == "react" ]]; then
-        cat $pathDir/react.sh
-    elif  [[ $@ == "ts" || $@ == "typescript" ]]; then
-        cat $pathDir/typescript.sh
-    elif  [[ $@ == "open" || $@ == "edit" ]]; then
-        code $pathDir/
-
-    else
-        cat <<- EOF
-Nothing $@ 
-EOF
-    fi
-}
 
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 # source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 bindkey '^e' autosuggest-accept
+
+# .zshの読み込み
+ZSH_DIR="${HOME}/.zsh"
+
+# .zshがディレクトリで、読み取り、実行、が可能なとき
+if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
+    # zshディレクトリより下にある、.zshファイルの分、繰り返す
+    for file in ${ZSH_DIR}/**/*.zsh; do
+        # 読み取り可能ならば実行する
+        [ -r $file ] && source $file
+    done
+fi
 
 export LF_ICONS="\
 tw=:\

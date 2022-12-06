@@ -43,6 +43,10 @@ Check [Brewfile](./Brewfile) for the latest bundle.
 
 If you like to learn how to create dotfiles, check out my [tutorial ](https://github.com/JunichiSugiura/tutorials/tree/master/dotfiles).
 
+## packages紹介
+### terminal
+ターミナル関連
+
 ## うまくいかない時
 
 * パッケージにうまくリンクがはれない
@@ -52,4 +56,23 @@ If you like to learn how to create dotfiles, check out my [tutorial ](https://gi
 ```
 rm ~/.config/karabiner
 stow -vd ~//Users/zak/projects/github/1206yaya/dotfiles/packages -t ~ keybindiings
+```
+
+## stowが作っているファイルがどうなっているかわからなくなったとき
+```
+ll ~ | grep packages
+```
+
+```
+ .cargo -> ghq/github.com/1206yaya/dotfiles/packages/runtime/.cargo
+ .default-cargo-crates -> ghq/github.com/1206yaya/dotfiles/packages/runtime/.default-cargo-crates
+ .default-gems -> ghq/github.com/1206yaya/dotfiles/packages/runtime/.default-gems
+ .default-golang-pkgs -> ghq/github.com/1206yaya/dotfiles/packages/runtime/.default-golang-pkgs
+ .gitconfig -> ghq/github.com/1206yaya/dotfiles/packages/git/.gitconfig
+ .gitignore_global -> ghq/github.com/1206yaya/dotfiles/packages/git/.gitignore_global
+ .profile -> ghq/github.com/1206yaya/dotfiles/packages/terminal/.profile
+ .tmux.conf -> ghq/github.com/1206yaya/dotfiles/packages/terminal/.tmux.conf
+ .tool-versions -> ghq/github.com/1206yaya/dotfiles/packages/runtime/.tool-versions
+ .zshrc -> ghq/github.com/1206yaya/dotfiles/packages/terminal/.zshrc
+ scripts -> ghq/github.com/1206yaya/dotfiles/packages/cli/scripts
 ```
