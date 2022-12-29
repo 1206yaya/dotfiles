@@ -108,6 +108,8 @@ brew "pkg-config"
 # brew "cairo"
 # brew "pango"
 brew "pgloader"
+brew "hdf5"
+
 brew "libpng"
 brew "jpeg"
 brew "giflib"
@@ -185,6 +187,7 @@ cask "intellij-idea-ce"
 cask "webstorm"
 cask "pycharm-ce"
 cask "sublime-text"
+cask "anaconda"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944

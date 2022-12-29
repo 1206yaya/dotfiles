@@ -3,7 +3,7 @@
   "workbench.iconTheme": "material-icon-theme",
   // OPEN EDITORS を非表示
   "explorer.openEditors.visible": 1,
-  // Setting Search 
+  // Setting Search
   "files.exclude": {
     "/.git": true,
     "/.DS_Store": true,
@@ -95,7 +95,6 @@
   // ファイルをクリックで開いたら閉じずに開きっぱなしにする
   "workbench.editor.enablePreview": false,
   "editor.codeActionsOnSave": {
-  
     "quickfix.insertSemicolon": true,
   },
   "editor.showFoldingControls": "always",

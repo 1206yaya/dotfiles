@@ -8,6 +8,8 @@ cs() {
         cat $pathDir/dynamodb.sh
     elif  [[ $@ == "py" || $@ == "python" ]]; then
         cat $pathDir/python.md
+    elif  [[ $@ == "gc" || $@ == "gcloud" ]]; then
+        cat $pathDir/gcloud.md
     elif  [[ $@ == "poetry" ]]; then
         cat $pathDir/poetry.sh
     elif  [[ $@ == "pandas" ]]; then

@@ -43,7 +43,9 @@ alias iosopen="open ./ios/Runner.xcworkspace"
 alias keycodes="cat /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h"
 # @Flutter Alias
 alias fl='flutter'
-
+alias gl='gcloud'
+alias pt='poetry run pytest'
+alias pr='poetry run'
 # Override
 if [ -n "$(which z)" ]; then
     alias cd="z"
