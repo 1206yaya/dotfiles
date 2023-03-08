@@ -1,4 +1,5 @@
 #!/bin/bash
+alias gm='git commit -m "$@"'
 alias gam="git add . ; git commit -m "$@""
 alias wip="git add . ; git commit -m "wip""
 alias gconf='cat $(git rev-parse --show-toplevel)/.git/config'

@@ -32,7 +32,7 @@
   "workbench.startupEditor": "none",
   "markdown-checkbox.checkmark": "x",
   "markdown-checkbox.typeOfBulletPoint": "-",
-  "markdown-checkbox.dateFormat": "YYYY-MM-DD HH:mm:ss",
+  "markdown-checkbox.dateFormat": "MM-DD HH:mm",
   "markdown-checkbox.italicWhenChecked": false,
   "markdown-checkbox.strikeThroughWhenChecked": false,
   "debug.disassemblyView.showSourceCode": false,
@@ -199,5 +199,8 @@
   "dart.flutterSdkPath": "/opt/homebrew/bin/dart",
   "dart.checkForSdkUpdates": false,
   "bracket-pair-colorizer-2.depreciation-notice": false,
+  "[python]": {
+    "editor.formatOnType": true
+  },
   // Controls when the folding controls on the gutter are shown.
 }

@@ -145,13 +145,14 @@
          :rules [:open-mode
                  [:w [:open "WebStorm"]]
                  [:l [:open "IntelliJ IDEA CE"]]
+                 [:s [:open "Android Studio"]]
                  [:p [:open "PyCharm CE"]]
                  [:e [:open "DBeaver"]]
                  [:n [:open "Postman"]]
                  [:i [:open "iTerm"]]
                 ;;  [:t [:open "Todoist"]]
                  [:c [:open "Google Chrome"]]
-                 [:a [:open "Alacritty"]]
+                ;;  [:a [:open "Alacritty"]]
                  [:b [:open "Obsidian"]]
                  [:f [:open "Finder"]]
                  [:x [:open "Vivaldi"]]
@@ -160,14 +161,18 @@
             ;; [:m [:open "Morgen"]]
                  [:d [:open "Dictionary"]]
                  [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
+                 [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
 
                  [:j ["open -F -na 'Google Chrome' --args http://localhost:8888/tree?"]]
-            ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes/osho/tasks.md'"]]
+
+                ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes/osho/tasks.md'"]]
+
             ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args ~/LinkNotes"]]
 
                  [:v ["open -n -b 'com.microsoft.VSCode'"]]
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
+                 [:a ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/ghq/github.com/1206yaya/mytasks'"]]
                  [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]]}
 
         {:des "v-mode for number pad"

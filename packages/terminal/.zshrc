@@ -73,6 +73,7 @@ alias g='cd $(ghq root)/$(ghq list | peco)'
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias fire="firebase "$@""
+alias rege="flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
 function open() {
   if [[ $@ == "pdf" ]]; then
     command open /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
@@ -170,6 +171,14 @@ function createpy() {
 function fvmcreate() {
   project_name=$1
   version=$2
+  create_dir=true
+
+  if [[ $project_name == "." || $project_name == "./" ]]; then
+    echo "カレントディレクトリに生成します"
+    CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
+    project_name=$CURERNT_DIR
+    create_dir=false
+  fi
   if [[ -z $project_name ]]; then
     echo "プロジェクト名を第１引数に指定してください"
     return 1;
@@ -183,8 +192,10 @@ function fvmcreate() {
     return 1;
   fi
   echo "create flutter \nProjectName:$project_name \nVersion $version"
-  mkdir $project_name
-  cd $project_name
+  if [[ create_dir ]]; then
+    mkdir $project_name
+    cd $project_name
+  fi
   fvm global $version
   fvm use $version --force
   fvm flutter create \
@@ -295,6 +306,7 @@ function dc() {
     command docker container $@ ;
   fi
 }
+
 
 function dcr() {
     # TODO

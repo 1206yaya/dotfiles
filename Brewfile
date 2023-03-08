@@ -122,7 +122,20 @@ brew "gradle"
 brew "openssl"
 brew "git-secrets"
 brew "xpdf"
-
+brew "autoconf"
+brew "automake"
+brew "libtool"
+brew "pkg-config"
+brew "gcc"
+brew "gperf"
+brew "texinfo"
+brew "yasm"
+brew "nasm"
+brew "bison"
+brew "autogen"
+brew "gettext"
+brew "meson"
+brew "ninja"
 
 # Successfully `flutter doctor` 
 # Have to Open Android Studio App and Install Components
@@ -131,10 +144,13 @@ brew "xpdf"
 # Run Command `flutter doctor --android-licenses` On Terminal
 # cask "flutter"
 brew "fvm"
+
+# Android Studio SetUp
 cask "android-file-transfer"
 brew "scrcpy"
 cask "android-studio"
 cask "android-platform-tools"
+
 brew "cocoapods"
 cask "figma"
 # brew uninstall --cask blender
@@ -172,6 +188,9 @@ cask "postman"
 cask "recut"
 cask "signal"
 cask "slack"
+# https://youtu.be/d8plJSJYqVw?t=808
+# https://matthewpalmer.net/rocket/
+cask "rocket"
 cask "google-japanese-ime"
 ## mac　で ubuntu / windows / raspbian
 cask "utm"
@@ -188,6 +207,7 @@ cask "webstorm"
 cask "pycharm-ce"
 cask "sublime-text"
 cask "anaconda"
+cask "timemachineeditor"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944
