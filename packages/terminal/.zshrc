@@ -192,10 +192,7 @@ function fvmcreate() {
     return 1;
   fi
   echo "create flutter \nProjectName:$project_name \nVersion $version"
-  if [[ create_dir ]]; then
-    mkdir $project_name
-    cd $project_name
-  fi
+
   fvm global $version
   fvm use $version --force
   fvm flutter create \
@@ -227,6 +224,12 @@ EOF
   sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
   
   grep -v '^\s*#' pubspec.yaml |grep -v '^\s*$' > pubspec.yaml_tmp; cat pubspec.yaml_tmp > pubspec.yaml ; rm -rf pubspec.yaml_tmp;
+  
+  if [[ !create_dir ]]; then
+    mv $project_name/* ./
+    mv $project_name/.* ./
+  fi
+
   code .
 
 }
