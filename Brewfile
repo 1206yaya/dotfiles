@@ -56,6 +56,8 @@ brew "ghq"
 brew "anyenv"
 brew "peco"
 brew "hub"
+brew "graphviz"
+brew "plantuml"
 ## For Go
 # brew "lf"
 
@@ -179,6 +181,7 @@ cask "insomnia"
 ## Easily manage your crypto
 # cask "ledger-live"
 cask "notion"
+cask 'drawio'
 cask "dropbox"
 cask "alfred"
 cask "postman"

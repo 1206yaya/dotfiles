@@ -46,6 +46,9 @@ alias fl='flutter'
 alias gl='gcloud'
 alias pt='poetry run pytest'
 alias pr='poetry run'
+alias flrgen='flutter pub run build_runner watch'
+alias flrdel='flutter pub run build_runner build --delete-conflicting-outputs'
+
 # Override
 if [ -n "$(which z)" ]; then
     alias cd="z"
