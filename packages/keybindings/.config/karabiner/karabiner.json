@@ -2798,7 +2798,7 @@
             "key_code" : "e"
           },
           "to" : [ {
-            "shell_command" : "open -a 'DBeaver.app'"
+            "shell_command" : "open -a 'Brave Browser.app'"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -2817,7 +2817,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a 'DBeaver.app'"
+            "shell_command" : "open -a 'Brave Browser.app'"
           } ],
           "from" : {
             "simultaneous" : [ {
