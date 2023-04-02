@@ -155,6 +155,7 @@ cask "android-platform-tools"
 
 brew "cocoapods"
 cask "figma"
+cask "raycast"
 # brew uninstall --cask blender
 cask "the-unarchiver"
 cask "webtorrent"

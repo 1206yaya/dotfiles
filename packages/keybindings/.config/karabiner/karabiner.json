@@ -2795,10 +2795,10 @@
           }
         }, {
           "from" : {
-            "key_code" : "e"
+            "key_code" : "a"
           },
           "to" : [ {
-            "shell_command" : "open -a 'Brave Browser.app'"
+            "shell_command" : "open -a 'Arc.app'"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -2817,13 +2817,13 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a 'Brave Browser.app'"
+            "shell_command" : "open -a 'Arc.app'"
           } ],
           "from" : {
             "simultaneous" : [ {
               "key_code" : "0"
             }, {
-              "key_code" : "e"
+              "key_code" : "a"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -2843,7 +2843,7 @@
             "key_code" : "n"
           },
           "to" : [ {
-            "shell_command" : "open -a 'Postman.app'"
+            "shell_command" : "open -a 'Notion.app'"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -2862,7 +2862,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a 'Postman.app'"
+            "shell_command" : "open -a 'Notion.app'"
           } ],
           "from" : {
             "simultaneous" : [ {
