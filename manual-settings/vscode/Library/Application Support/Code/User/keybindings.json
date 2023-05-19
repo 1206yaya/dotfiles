@@ -235,5 +235,15 @@
   {
     "key": "alt+cmd+n",
     "command": "workbench.action.files.newUntitledFile"
+  },
+  {
+    "key": "shift+alt+cmd+a",
+    "command": "copyRelativeFilePath",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+k shift+alt+cmd+c",
+    "command": "-copyRelativeFilePath",
+    "when": "editorFocus"
   }
 ]

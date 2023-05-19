@@ -202,5 +202,15 @@
   "[python]": {
     "editor.formatOnType": true
   },
+  "google-translate.firstLanguage": "ja",
+  "google-translate.secondLanguage": "zh-cn",
+  "files.autoGuessEncoding": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  "genieai.enableConversationHistory": true,
   // Controls when the folding controls on the gutter are shown.
 }

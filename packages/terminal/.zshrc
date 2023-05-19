@@ -14,7 +14,6 @@ setopt hist_ignore_dups
 setopt inc_append_history
 
 
-
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -69,6 +68,7 @@ alias vim="nvim"
 alias du="dust"
 alias de="defaults"
 alias groot="cd ~/ghq/github.com/1206yaya"
+
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
@@ -259,10 +259,18 @@ function mkcd() {
 function touchp() {
     mkdir -p "$(dirname "$@")" && touch  "$@"
 }
-
-function kill_webdriver() {
-  kill $(ps aux | grep 'selenium' | awk '{print $2}')
-  kill $(ps aux | grep 'Google Chrome.app' | awk '{print $2}')
+#* ChromeのWindowタイトルに特定の文字列が含まれているもののみを終了するということはできない
+# AppleScript ではプロセス ID に関連する情報を取得する機能がないから
+# 閉じるときは全部閉じるしかない
+function killbrowser() {
+  # kill $(ps aux | grep 'selenium' | awk '{print $2}')
+  # kill $(ps aux | grep 'Google Chrome.app' | awk '{print $2}')
+}
+function tv() {
+  ~/ghq/github.com/1206yaya/tradingview/tv-crawler/runner-scripts/LoginCrawler.sh
+}
+function chat() {
+  code ~/ghq/github.com/1206yaya/prompt-engineering
 }
 # killPort <port>
 function killport() {
@@ -358,6 +366,7 @@ sample-project
 
 more info 
 $ spring init --list
+https://start.spring.io/
 
 Notes. 
 If you use Selenide 5.25.0 then --bootVersion=2.6.4-SNAPSHOT.
@@ -389,6 +398,33 @@ if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
         [ -r $file ] && source $file
     done
 fi
+
+#* postgresql
+
+alias pqstart="brew services start postgresql"
+alias pg="psql postgres"
+alias pqconn="psql -h localhost -U postgres"
+function pqhelp() {
+mdcat <<'EOF'
+
+- pqstart: brew services start postgresql
+- pqconn: psql -h localhost -U postgres
+
+```
+CREATE DATABASE mydatabase;
+\conninfo
+```
+
+```
+psql -U zak mydatabase
+CREATE TABLE your_table_name (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100)
+);
+```
+EOF
+}
+
 
 export LF_ICONS="\
 tw=:\

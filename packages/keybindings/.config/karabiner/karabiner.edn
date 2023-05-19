@@ -48,6 +48,7 @@
 ;; TODO Chromeで指定のURLを開く
 ;;  https://github.com/raya/dotfiles/blob/885f68694ee79790ffb81bb6421dcf5c0493fd27/karabiner/karabiner.edn
 ;; [AppleScript to make Google Chrome open/reload a URL](https://gist.github.com/mayoff/1138816)
+;; BundleIDを調べる osascript -e 'id of app "Evernote"'
  :applications {:Chrome   ["com.google.Chrome", "com.google.Chrome.beta"]
                 :Contexts ["com.contextsformac.Contexts"]
                 :Finder   ["com.apple.finder"]
@@ -56,6 +57,7 @@
                 :Notion   ["notion.id"]
                 :Slack    ["com.tinyspeck.slackmacgap"]
                 :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]}
+ :Evernote ["com.evernote.Evernote"]
  :templates {:launch "osascript -e 'tell application \"%s\" to activate'"
              :paste "osascript -e '
     set the clipboard to \"%s\"
@@ -64,6 +66,7 @@
     end tell
   '"
              :open "open -a '%s.app'"
+             :opena "open -a \"%s\" %s"
              :code-project "open -a 'Visual Studio Code' %s -g %s"
   ;; :code-project "osascript -e 'tell application \"Visual Studio Code\" to activate' && open -a 'Visual Studio Code' %s -g %s"
              :open_url "open -u %s"
@@ -101,6 +104,7 @@
  :simlayers {:chrome-mode      {:key :d                                :condi :Chrome}
              :open-mode {:key :0}
              :z-mode {:key :z}    ; emoji 
+             :m-mode {:key :m}    ; emoji 
              :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
              :d-mode {:key :d}    ; arithmetic    + - * / = % < > #
              :s-mode {:key :s}    ; punctuation   ? ! : ; ' " ` ~
@@ -136,7 +140,7 @@
                  [:n [:open_url "https://notion.so"]]
                  [:f [:open_url "https://feedly.com/i/powerSearch/in"]]
 
-                 [:g [:open_url "https://github.com/search?q=filename%3A+extension%3A"]]]}
+                 [:g [:open_url "https://github.com/"]]]}
         {:des "Change input source to English by left_command; Russian by right_command."
          :rules [[:left_command    :left_command    nil {:alone {:input :en}}]
             ;; [:left_control    :left_control    nil {:alone {:input :jp}}]
@@ -149,7 +153,7 @@
                  [:p [:open "PyCharm CE"]]
                 ;;  [:e [:open "Brave Browser"]]
                  [:a [:open "Arc"]]
-                ;;  [:e [:open "DBeaver"]]
+                 [:e [:open "Evernote"]]
                 ;;  [:n [:open "Postman"]]
                  [:n [:open "Notion"]]
                  [:i [:open "iTerm"]]
@@ -157,13 +161,14 @@
                 ;;  [:a [:open "Alacritty"]]
                  [:b [:open "Obsidian"]]
                  [:f [:open "Finder"]]
-                 [:x [:open "Vivaldi"]]
-                ;;  [:t [:open "iThoughtsX"]]
+                ;;  [:x [:open "Vivaldi"]]
+                 [:x [:open "iThoughtsX"]]
                  [:t [:open "Todoist"]]
 
             ;; [:m [:open "Morgen"]]
                  [:d [:open "Dictionary"]]
                  [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
+                 [:1 ["open -F -na 'Google Chrome' --args https://www.notion.so/00-SelfOps-19c369a6388549e0af1ce36ed4aeeaff"]]
                  [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
 
                  [:j ["open -F -na 'Google Chrome' --args http://localhost:8888/tree?"]]
@@ -197,13 +202,25 @@
                  [:n :0]]}
 
 ;; {:des "Mouse Keys" :rules [[{:pkey :button4} :a]]}
-        {:des "z-mode for emoji"
+        ;; {:des "z-mode for emoji"
+        ;;  :rules [:z-mode
+        ;;          [:h [:paste "🤔 "]]
+        ;;          [:l [:paste "💡 "]]
+        ;;          [:o [:paste "😲 "]]
+        ;;          [:t [:paste "🍅 "]]
+        ;;          [:u [:paste "hi! "]]]}
+        {:des "open for WEB Site"
          :rules [:z-mode
-                 [:h [:paste "🤔 "]]
-                 [:l [:paste "💡 "]]
-                 [:o [:paste "😲 "]]
-                 [:t [:paste "🍅 "]]
-                 [:u [:paste "hi! "]]]}
+                 [:c [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleCalendar.app"]]
+                 [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Perplexity.app"]]
+                 [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app"]]
+                 [:t [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleTranslate.app"]]
+                 [:a [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]
+                 [:x [" open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"]]
+                 [:i [:opena "/Users/zak/Applications/Chrome Apps.localized/chat.gpt.openai.app"]]]}
+        {:des "xmind"
+         :rules [:m-mode
+                 [:1 [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]]}
 
         {:des "Ctrl Tab to Command Tab Swap" :rules [[:!C##tab :!Ttab]]}
         {:des "Command Tab to Ctrl Tab Swap" :rules [[:!T##tab :!Ctab]]}
@@ -246,19 +263,19 @@
                  [:##comma :slash]                 ; d -> ,        /
                  [:##period :!S5]                  ; d -> .        %
                  ]}
-        {:des "s-mode for punctuation"   ;;    ' " `    , . &    ; : ~
-         :rules [:s-mode
-                 [:##u :quote]
-                 [:##i :!Squote]
-                 [:##o :grave_accent_and_tilde]
-                 [:##j :comma]
-                 [:##k :period]
-                 [:##l :!S7]
-                 [:##m :semicolon]
-                 [:##comma :!Ssemicolon]
-                 [:##period :!Sgrave_accent_and_tilde]
+        ;; {:des "s-mode for punctuation"   ;;    ' " `    , . &    ; : ~
+        ;;  :rules [:s-mode
+        ;;          [:##u :quote]
+        ;;          [:##i :!Squote]
+        ;;          [:##o :grave_accent_and_tilde]
+        ;;          [:##j :comma]
+        ;;          [:##k :period]
+        ;;          [:##l :!S7]
+        ;;          [:##m :semicolon]
+        ;;          [:##comma :!Ssemicolon]
+        ;;          [:##period :!Sgrave_accent_and_tilde]
 
-                 [:##p [:yyyymmddhhss "-> 🍅"]]]}
+        ;;          [:##p [:yyyymmddhhss "-> 🍅"]]]}
 
         {:des "a-mode for hjkl movement and nm enter and ui tab and ,. PageDn/Up"
          :rules [:a-mode
