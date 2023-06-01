@@ -5,69 +5,77 @@ cs() {
     # pathDir=/mnt/c/Users/1206y/github/cheat.sheet/
     pathDir="/Users/zak/ghq/github.com/1206yaya/cheet-sheet"
     if [[ $@ == "aws-dynamodb" || $@ == "dynamo" || $@ == "dynamodb" ]]; then
-        cat $pathDir/dynamodb.sh
+        mdcat $pathDir/dynamodb.sh
     elif  [[ $@ == "py" || $@ == "python" ]]; then
-        cat $pathDir/python.md
+        mdcat $pathDir/python.md
+    elif  [[ $@ == "psql" || $@ == "pg" ]]; then
+        mdcat $pathDir/postgresql.md
+    elif  [[ $@ == "asdf" ]]; then
+        mdcat $pathDir/asdf.md
+    elif  [[ $@ == "jupyter" ]]; then
+        mdcat $pathDir/jupyter.md
     elif  [[ $@ == "gc" || $@ == "gcloud" ]]; then
-        cat $pathDir/gcloud.md
+        mdcat $pathDir/postgresql.md
+    elif  [[ $@ == "func" || $@ == "az" ]]; then
+        mdcat $pathDir/func.md
     elif  [[ $@ == "poetry" ]]; then
-        cat $pathDir/poetry.sh
+        mdcat $pathDir/poetry.md
     elif  [[ $@ == "pandas" ]]; then
-        cat $pathDir/pandas.md
+        mdcat $pathDir/pandas.md
     elif  [[ $@ == "npx" ]]; then
-        cat $pathDir/npx.md
+        mdcat $pathDir/npx.md
     elif  [[ $@ == "dart" ]]; then
-        cat $pathDir/dart.sh
+        mdcat $pathDir/dart.sh
     elif  [[ $@ == "firebase" || $@ == "flutterfire" ]]; then
-        cat $pathDir/firebase.md
+        mdcat $pathDir/firebase.md
     elif  [[ $@ == "pyenv" ]]; then
-        cat $pathDir/pyenv.sh
+        mdcat $pathDir/pyenv.sh
     elif  [[ $1 == "docker" || $1 == "dc" ]]; then
         if [[ $2 == "fix" ]]; then
-            cat $pathDir/docker.fix.sh
+            mdcat $pathDir/docker.fix.sh
         else
-            cat $pathDir/docker.sh
+            mdcat $pathDir/docker.sh
         fi 
     elif  [[ $1 == "flutter" ]]; then
         if [[ $2 == "pub" ]]; then
-            cat $pathDir/flutter-pub.sh
+            mdcat $pathDir/flutter-pub.sh
         else
-            cat $pathDir/flutter.sh
+            mdcat $pathDir/flutter.sh
         fi 
     elif  [[ $1 == "pub" ]]; then
-        cat $pathDir/flutter-pub.sh
+        mdcat $pathDir/flutter-pub.sh
 
     elif  [[ $1 == "sls" || $1 == "serverless" ]]; then
         if [[ $2 == "fix" ]]; then
-            cat $pathDir/sls.fix.sh
+            mdcat $pathDir/sls.fix.sh
         else
-            cat $pathDir/sls.sh
+            mdcat $pathDir/sls.sh
         fi 
     elif  [[ $@ == "copilot" || $@ == "copi" ]]; then
-        cat $pathDir/copilot.sh
+        mdcat $pathDir/copilot.sh
     elif  [[ $@ == "sam" ]]; then
-        cat $pathDir/sam.sh
+        mdcat $pathDir/sam.sh
     elif  [[ $@ == "makefile" || $@ == "make" ]]; then
-        cat $pathDir/makefile.sh
+        mdcat $pathDir/makefile.sh
     elif  [[ $@ == "bash" || $@ == "sh" ]]; then
-        cat $pathDir/bash.sh
+        mdcat $pathDir/bash.sh
     elif  [[ $@ == "git" ]]; then
-        cat $pathDir/git.sh
+        mdcat $pathDir/git.sh
     elif  [[ $@ == "ghq" ]]; then
-        cat $pathDir/ghq.sh
+        mdcat $pathDir/ghq.sh
     elif  [[ $@ == "fvm" ]]; then
-        cat $pathDir/fvm.sh
+        mdcat $pathDir/fvm.sh
     elif  [[ $@ == "sql" ]]; then
-        cat $pathDir/sql.sh
+        mdcat $pathDir/sql.sh
     elif  [[ $@ == "react" ]]; then
-        cat $pathDir/react.sh
+        mdcat $pathDir/react.sh
     elif  [[ $@ == "ts" || $@ == "typescript" ]]; then
-        cat $pathDir/typescript.sh
+        mdcat $pathDir/typescript.sh
     elif  [[ $@ == "open" || $@ == "edit" ]]; then
         code $pathDir/
 
     else
-        cat <<- EOF
+        mdcat <<- EOF
 Nothing $@ 
 EOF
     fi

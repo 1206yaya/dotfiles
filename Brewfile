@@ -12,7 +12,7 @@ tap "spring-io/tap"
 tap "hashicorp/tap"
 tap "leoafarias/fvm"
 tap "aws/tap"
-
+tap "azure/functions"
 # tap "wix/brew"
 cask_args appdir: "/Applications"
 
@@ -82,6 +82,9 @@ brew "awscli"
 brew "aws-sam-cli"
 brew "serverless"
 brew "redis"
+# Rosetta にて個別にインストールする
+# brew "azure-functions-core-tools@4"
+# brew "azure-cli"
 ## search & displace cli 
 brew "sd"
 ## Terminal 便利検索
@@ -156,6 +159,8 @@ cask "android-file-transfer"
 brew "scrcpy"
 cask "android-studio"
 cask "android-platform-tools"
+
+cask "background-music"
 
 brew "cocoapods"
 cask "figma"

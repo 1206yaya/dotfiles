@@ -376,7 +376,7 @@ if you use dynamodb
         implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.17.100'
 EOF
 }
-jupyter() {
+myjupyter() {
   cd /Users/zak/ghq/github.com/1206yaya/py-jupyter-notebooks && make run
 }
 
@@ -407,24 +407,14 @@ alias pqconn="psql -h localhost -U postgres"
 function pqhelp() {
 mdcat <<'EOF'
 
-- pqstart: brew services start postgresql
-- pqconn: psql -h localhost -U postgres
-
-```
-CREATE DATABASE mydatabase;
-\conninfo
-```
-
-```
-psql -U zak mydatabase
-CREATE TABLE your_table_name (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100)
-);
-```
 EOF
 }
 
+function showinfo() {
+  echo arch: $(uname -m)
+}
+
+showinfo
 
 export LF_ICONS="\
 tw=:\
@@ -620,4 +610,5 @@ function fr() {
   ( [[ -z "$file" ]] || [[ -z "$line" ]] ) && exit
   $EDITOR $file +$line
 }
+
 
