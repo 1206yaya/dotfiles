@@ -117,7 +117,7 @@ brew "pkg-config"
 brew "pgloader"
 brew "mdcat"
 brew "hdf5"
-
+brew "nmap"
 brew "libpng"
 brew "jpeg"
 brew "giflib"
@@ -145,6 +145,7 @@ brew "autogen"
 brew "gettext"
 brew "meson"
 brew "ninja"
+brew "mitmproxy"
 
 # Successfully `flutter doctor` 
 # Have to Open Android Studio App and Install Components
@@ -161,12 +162,14 @@ cask "android-studio"
 cask "android-platform-tools"
 
 cask "background-music"
+cask "telegram"
 
 brew "cocoapods"
 cask "figma"
 cask "raycast"
 cask "insomnia"
 cask "bitwarden"
+cask "protonvpn"
 # brew uninstall --cask blender
 cask "the-unarchiver"
 cask "webtorrent"
@@ -191,6 +194,7 @@ cask "timemachineeditor"
 cask "gpg-suite"
 ## APIを確認する用のクライアント
 cask "insomnia"
+cask "slack-cli"
 ## Easily manage your crypto
 # cask "ledger-live"
 cask "notion"

@@ -56,9 +56,9 @@ cs() {
     elif  [[ $@ == "sam" ]]; then
         mdcat $pathDir/sam.sh
     elif  [[ $@ == "makefile" || $@ == "make" ]]; then
-        mdcat $pathDir/makefile.sh
+        mdcat $pathDir/makefile.md
     elif  [[ $@ == "bash" || $@ == "sh" ]]; then
-        mdcat $pathDir/bash.sh
+        mdcat $pathDir/bash.md
     elif  [[ $@ == "git" ]]; then
         mdcat $pathDir/git.sh
     elif  [[ $@ == "ghq" ]]; then

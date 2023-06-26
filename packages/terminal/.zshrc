@@ -30,6 +30,7 @@ eval "$(anyenv init -)"
 # setopt nonomatch
 alias q="exit"
 alias code="open -a 'Visual Studio Code'"
+alias o="open ."
 alias tm="Open -a Terminal"
 alias syncsh=". syncsh"
 alias cdrepo=". cdrepo"
@@ -169,6 +170,14 @@ function createpy() {
   rm -rf .git
   mv sample $project_name
   ll
+}
+function podrefresh(){
+  cd ios
+  rm -rf  Podfile.lock 
+  rm -rf Pods
+  pod repo update
+  cd ..
+  fvm flutter pub upgrade
 }
 
 function fvmcreate() {
