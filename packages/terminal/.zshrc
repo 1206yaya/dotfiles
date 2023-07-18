@@ -423,7 +423,7 @@ function showinfo() {
   echo arch: $(uname -m)
 }
 
-showinfo
+# showinfo
 
 export LF_ICONS="\
 tw=:\

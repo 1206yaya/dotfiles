@@ -165,6 +165,7 @@ cask "background-music"
 cask "telegram"
 
 brew "cocoapods"
+brew "llvm"
 cask "figma"
 cask "raycast"
 cask "insomnia"

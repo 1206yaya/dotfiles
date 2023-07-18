@@ -2615,51 +2615,6 @@
         "description" : "Open mode",
         "manipulators" : [ {
           "from" : {
-            "key_code" : "w"
-          },
-          "to" : [ {
-            "shell_command" : "open -a 'WebStorm.app'"
-          } ],
-          "conditions" : [ {
-            "name" : "open-mode",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "type" : "basic",
-          "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 500
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "open-mode",
-              "value" : 1
-            }
-          }, {
-            "shell_command" : "open -a 'WebStorm.app'"
-          } ],
-          "from" : {
-            "simultaneous" : [ {
-              "key_code" : "0"
-            }, {
-              "key_code" : "w"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : true,
-              "key_down_order" : "strict",
-              "key_up_order" : "strict_inverse",
-              "key_up_when" : "any",
-              "to_after_key_up" : [ {
-                "set_variable" : {
-                  "name" : "open-mode",
-                  "value" : 0
-                }
-              } ]
-            }
-          }
-        }, {
-          "from" : {
             "key_code" : "l"
           },
           "to" : [ {
@@ -2708,7 +2663,7 @@
             "key_code" : "s"
           },
           "to" : [ {
-            "shell_command" : "open -a 'Android Studio.app'"
+            "shell_command" : "open -a 'Slack.app'"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -2727,58 +2682,13 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a 'Android Studio.app'"
+            "shell_command" : "open -a 'Slack.app'"
           } ],
           "from" : {
             "simultaneous" : [ {
               "key_code" : "0"
             }, {
               "key_code" : "s"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : true,
-              "key_down_order" : "strict",
-              "key_up_order" : "strict_inverse",
-              "key_up_when" : "any",
-              "to_after_key_up" : [ {
-                "set_variable" : {
-                  "name" : "open-mode",
-                  "value" : 0
-                }
-              } ]
-            }
-          }
-        }, {
-          "from" : {
-            "key_code" : "p"
-          },
-          "to" : [ {
-            "shell_command" : "open -a 'PyCharm CE.app'"
-          } ],
-          "conditions" : [ {
-            "name" : "open-mode",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "type" : "basic",
-          "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 500
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "open-mode",
-              "value" : 1
-            }
-          }, {
-            "shell_command" : "open -a 'PyCharm CE.app'"
-          } ],
-          "from" : {
-            "simultaneous" : [ {
-              "key_code" : "0"
-            }, {
-              "key_code" : "p"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -3158,7 +3068,7 @@
             "key_code" : "t"
           },
           "to" : [ {
-            "shell_command" : "open -a 'Todoist.app'"
+            "shell_command" : "open -a 'Trello.app'"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -3177,7 +3087,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a 'Todoist.app'"
+            "shell_command" : "open -a 'Trello.app'"
           } ],
           "from" : {
             "simultaneous" : [ {
@@ -3364,6 +3274,51 @@
               "key_code" : "0"
             }, {
               "key_code" : "g"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "p"
+          },
+          "to" : [ {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Planyway.app\" "
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Planyway.app\" "
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "0"
+            }, {
+              "key_code" : "p"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
