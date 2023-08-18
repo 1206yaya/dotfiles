@@ -232,9 +232,58 @@ EOF
   mv ./lib/main.dart.tmp ./lib/main.dart
 
   gi flutter > .gitignore
+  sed -i '' -e $'1s/^/\\*\\.g\\.dart\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\*\\.freezed\\.dart\\\n/' .gitignore
+
+
   sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
   sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
-  
+
+##! .gitignoreに次のファイルを追加するかの議論があるが、
+##! プライベートリポジトリなので、追加しない。
+# cat <<EOF >>.gitignore
+# # Firebase config files
+# lib/firebase_options.dart
+# ios/Runner/GoogleService-Info.plist
+# ios/firebase_app_id_file.json
+# macos/Runner/GoogleService-Info.plist
+# macos/firebase_app_id_file.json
+# android/app/google-services.json
+# EOF
+
+cat <<EOF >>README.md
+fvm flutter pub add \
+	flutter_riverpod \
+	riverpod_annotation \
+	flutter_hooks \
+	hooks_riverpod \
+	freezed \
+	intl \
+	go_router:^6.2.0 \
+	equatable \
+	flutter_launcher_icons
+
+fvm flutter pub add \
+	flutter_lints \
+	riverpod_lint \
+	custom_lint \
+	build_runner \
+	riverpod_generator \
+	--dev 
+
+
+fvm flutter pub add \
+	firebase_auth \
+	firebase_ui_auth \
+	firebase_core \
+	cloud_firestore \
+	firebase_ui_firestore
+
+
+flutterfire configure
+EOF
+
+
   grep -v '^\s*#' pubspec.yaml |grep -v '^\s*$' > pubspec.yaml_tmp; cat pubspec.yaml_tmp > pubspec.yaml ; rm -rf pubspec.yaml_tmp;
   
   if [[ !create_dir ]]; then
@@ -365,7 +414,7 @@ spring init \
 --artifactId=sample-project \
 --groupId=app \
 --bootVersion=2.7.1 \
---javaVersion=11 \
+--javaVersion=17 \
 --language=java \
 --type=gradle-project \
 --packageName=app \

@@ -212,5 +212,8 @@
     "scminput": false
   },
   "genieai.enableConversationHistory": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
   // Controls when the folding controls on the gutter are shown.
 }

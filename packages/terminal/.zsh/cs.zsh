@@ -24,6 +24,12 @@ cs() {
         mdcat $pathDir/pandas.md
     elif  [[ $@ == "pydoc" ]]; then
         mdcat $pathDir/pydoc.md
+    elif  [[ $@ == "vscode" || $@ == "code" ]]; then
+        mdcat $pathDir/vscode.md
+    elif  [[ $@ == "tree" ]]; then
+        mdcat $pathDir/tree.md
+    elif  [[ $@ == "svn" ]]; then
+        mdcat $pathDir/svn.md
     elif  [[ $@ == "npx" ]]; then
         mdcat $pathDir/npx.md
     elif  [[ $@ == "dart" ]]; then

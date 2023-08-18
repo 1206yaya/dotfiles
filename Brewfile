@@ -154,7 +154,7 @@ brew "mitmproxy"
 # Run Command `flutter doctor --android-licenses` On Terminal
 # cask "flutter"
 brew "fvm"
-
+brew "trash"
 # Android Studio SetUp
 cask "android-file-transfer"
 brew "scrcpy"
@@ -166,6 +166,8 @@ cask "telegram"
 
 brew "cocoapods"
 brew "llvm"
+brew "yt-dlp"
+brew "subversion"
 cask "figma"
 cask "raycast"
 cask "insomnia"
