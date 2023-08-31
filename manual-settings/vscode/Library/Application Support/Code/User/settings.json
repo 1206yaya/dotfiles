@@ -215,5 +215,8 @@
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "never",
+  "editor.minimap.enabled": false,
+  "totalTypeScript.hideAllTips": false,
+  "totalTypeScript.hideBasicTips": false,
   // Controls when the folding controls on the gutter are shown.
 }

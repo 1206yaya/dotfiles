@@ -77,7 +77,8 @@ alias g='cd $(ghq root)/$(ghq list | peco)'
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias fire="firebase "$@""
-alias rege="flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
+alias mk="make "$@""
+alias rege="fvm flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
 function open() {
   if [[ $@ == "pdf" ]]; then
     command open /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
@@ -171,13 +172,19 @@ function createpy() {
   mv sample $project_name
   ll
 }
-function podrefresh(){
-  cd ios
-  rm -rf  Podfile.lock 
-  rm -rf Pods
-  pod repo update
-  cd ..
-  fvm flutter pub upgrade
+
+
+function makefile() {
+  PROJECT_TYPES=("flutter" "functions" "python")
+  target_project_type=$1
+
+  # Step1. target_project_typeが ROJECT_TYPES に含まれていない場合  PROJECT_TYPES を表示して終了
+  if [[ ! " ${PROJECT_TYPES[@]} " =~ " ${target_project_type} " ]]; then
+    echo "第１引数には、${PROJECT_TYPES[@]} のいずれかを指定してください"
+    return 1
+  fi
+  MAKEFILE_PATH="$HOME/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
+  cp ${MAKEFILE_PATH}/Makefile_${target_project_type}.mk ./Makefile
 }
 
 function fvmcreate() {
@@ -234,6 +241,7 @@ EOF
   gi flutter > .gitignore
   sed -i '' -e $'1s/^/\\*\\.g\\.dart\\\n/' .gitignore
   sed -i '' -e $'1s/^/\\*\\.freezed\\.dart\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\functions\\/.env\\\n/' .gitignore
 
 
   sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
@@ -252,35 +260,7 @@ EOF
 # EOF
 
 cat <<EOF >>README.md
-fvm flutter pub add \
-	flutter_riverpod \
-	riverpod_annotation \
-	flutter_hooks \
-	hooks_riverpod \
-	freezed \
-	intl \
-	go_router:^6.2.0 \
-	equatable \
-	flutter_launcher_icons
-
-fvm flutter pub add \
-	flutter_lints \
-	riverpod_lint \
-	custom_lint \
-	build_runner \
-	riverpod_generator \
-	--dev 
-
-
-fvm flutter pub add \
-	firebase_auth \
-	firebase_ui_auth \
-	firebase_core \
-	cloud_firestore \
-	firebase_ui_firestore
-
-
-flutterfire configure
+# $project_name
 EOF
 
 
@@ -434,6 +414,7 @@ if you use dynamodb
         implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.17.100'
 EOF
 }
+
 myjupyter() {
   cd /Users/zak/ghq/github.com/1206yaya/py-jupyter-notebooks && make run
 }
