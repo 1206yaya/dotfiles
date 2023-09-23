@@ -19,7 +19,7 @@
     "**/.next": true,
     "/node_modules": true,
     "site-packages": true,
-    "**/.fvm": true,
+    "**/.fvm": true
   },
   "files.watcherExclude": {
     "/node_modules/": true
@@ -41,14 +41,12 @@
     "editor.codeActionsOnSave": {
       "source.fixAll": true
     },
-    "editor.rulers": [
-      80
-    ],
+    "editor.rulers": [80],
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": false
     // version1
     // "editor.formatOnSave": true,
     // "editor.formatOnType": true,
@@ -95,7 +93,7 @@
   // ファイルをクリックで開いたら閉じずに開きっぱなしにする
   "workbench.editor.enablePreview": false,
   "editor.codeActionsOnSave": {
-    "quickfix.insertSemicolon": true,
+    "quickfix.insertSemicolon": true
   },
   "editor.showFoldingControls": "always",
   "leetcode.workspaceFolder": "/Users/zak/ghq/github.com/1206yaya/leetcode",
@@ -218,5 +216,6 @@
   "editor.minimap.enabled": false,
   "totalTypeScript.hideAllTips": false,
   "totalTypeScript.hideBasicTips": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
   // Controls when the folding controls on the gutter are shown.
 }

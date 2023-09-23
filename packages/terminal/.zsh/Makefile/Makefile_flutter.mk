@@ -1,5 +1,5 @@
 
-include functions/Makefile
+# include functions/Makefile
 
 list: # Show this help.
 	@awk -F':|#' '/^[a-zA-Z0-9_-]+:.*#/ { if ($$1 != "list") print $$1 ": " $$3 }' Makefile
@@ -33,12 +33,8 @@ clean.ios: # rm Podfile.lock Pods
 	cd ios; rm -rf  Podfile.lock ;rm -rf Pods;pod repo update; cd ..; fvm flutter pub upgrade
 
 func.init: # cloud functions init
-	firebase init functions
-func.setup: # create .env
-	cd functions; touch .env; echo .env >> .gitignore; 
+	firebase init 
 
-func.deploy: # cloud functions deploy
-	cd functions; npm run build; firebase deploy;
 
 add.firebase:
 	fvm flutter pub add \

@@ -163,7 +163,7 @@ cask "android-platform-tools"
 
 cask "background-music"
 cask "telegram"
-
+cask "calibre"
 brew "cocoapods"
 brew "llvm"
 brew "yt-dlp"

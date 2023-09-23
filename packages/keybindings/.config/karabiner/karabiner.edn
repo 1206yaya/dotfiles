@@ -170,8 +170,9 @@
                  [:d [:open "Dictionary"]]
                  [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
                  [:1 ["open -F -na 'Google Chrome' --args https://www.notion.so/00-SelfOps-19c369a6388549e0af1ce36ed4aeeaff"]]
-                 [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
+                ;;  [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Planyway.app"]]
+                 [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/GithubProject.app"]]
 
                  [:j ["open -F -na 'Google Chrome' --args http://localhost:8888/tree?"]]
 

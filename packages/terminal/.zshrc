@@ -175,7 +175,7 @@ function createpy() {
 
 
 function makefile() {
-  PROJECT_TYPES=("flutter" "functions" "python")
+  PROJECT_TYPES=("flutter" "firebase" "functions" "python")
   target_project_type=$1
 
   # Step1. target_project_typeが ROJECT_TYPES に含まれていない場合  PROJECT_TYPES を表示して終了
@@ -184,7 +184,7 @@ function makefile() {
     return 1
   fi
   MAKEFILE_PATH="$HOME/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
-  cp ${MAKEFILE_PATH}/Makefile_${target_project_type}.mk ./Makefile
+  cat ${MAKEFILE_PATH}/Makefile_${target_project_type}.mk 
 }
 
 function fvmcreate() {
