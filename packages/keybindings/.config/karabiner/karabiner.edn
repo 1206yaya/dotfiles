@@ -56,7 +56,8 @@
                 :Keynote  ["com.apple.iWork.Keynote"]
                 :Notion   ["notion.id"]
                 :Slack    ["com.tinyspeck.slackmacgap"]
-                :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]}
+                :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
+                :vscode   ["com.microsoft.VSCode"]}
  :Evernote ["com.evernote.Evernote"]
  :templates {:launch "osascript -e 'tell application \"%s\" to activate'"
              :paste "osascript -e '
@@ -103,6 +104,7 @@
                   '"}
  :simlayers {:chrome-mode      {:key :d                                :condi :Chrome}
              :open-mode {:key :0}
+             :n-mode {:key :n}    ; emoji 
              :z-mode {:key :z}    ; emoji 
              :m-mode {:key :m}    ; emoji 
              :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
@@ -145,6 +147,11 @@
          :rules [[:left_command    :left_command    nil {:alone {:input :en}}]
             ;; [:left_control    :left_control    nil {:alone {:input :jp}}]
                  ]}
+        {:des "VSCode Key Binding"
+         :rules [:vscode 
+                ;;  [{:pkey :butotn4}] :!Copen_bracket] ; Ctrl + [
+                 [{:pkey :button4} :a] ; Ctrl + [
+        ]} ; Ctrl + [
         {:des "Open mode"
          :rules [:open-mode
                 ;;  [:w [:open "WebStorm"]]
@@ -172,6 +179,7 @@
                  [:1 ["open -F -na 'Google Chrome' --args https://www.notion.so/00-SelfOps-19c369a6388549e0af1ce36ed4aeeaff"]]
                 ;;  [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Planyway.app"]]
+                 [:m [:opena "/Users/zak/Applications/Chrome Apps.localized/Notepad.app"]]
                  [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/GithubProject.app"]]
 
                  [:j ["open -F -na 'Google Chrome' --args http://localhost:8888/tree?"]]
@@ -185,7 +193,15 @@
             ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
                  [:a ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/ghq/github.com/1206yaya/mytasks'"]]
                  [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]]}
-
+        {:des "Notion layer"
+        :rules [:n-mode
+                [:c ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]
+                [:t ["open -a 'Notion.app' 'https://www.notion.so/82559e3f040c4b4b97d941ffe7182825?pvs=4'"]]
+                [:y ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]
+                
+                
+                ]
+        }
         {:des "v-mode for number pad"
          :rules [:v-mode
                  [:f ["open -F -n -b 'com.microsoft.VSCode' --args $(pbpaste)"]]

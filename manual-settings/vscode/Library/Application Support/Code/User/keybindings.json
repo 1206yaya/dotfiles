@@ -10,7 +10,7 @@
   },
   {
     "key": "shift+cmd+-",
-    "command": "workbench.action.splitEditorDown"
+    "command": "workbench.action.splixptEditorDown"
   },
   {
     "key": "cmd+[",

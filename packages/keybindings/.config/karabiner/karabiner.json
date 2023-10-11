@@ -1,8 +1,10 @@
 {
   "global" : {
+    "ask_for_confirmation_before_quitting" : true,
     "check_for_updates_on_startup" : true,
     "show_in_menu_bar" : true,
-    "show_profile_name_in_menu_bar" : false
+    "show_profile_name_in_menu_bar" : false,
+    "unsafe_ui" : false
   },
   "profiles" : [ {
     "complex_modifications" : {
@@ -229,7 +231,8 @@
       },
       "ignore" : true,
       "manipulate_caps_lock_led" : true,
-      "simple_modifications" : [ ]
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
     } ],
     "fn_function_keys" : [ {
       "from" : {
@@ -2612,6 +2615,21 @@
           "type" : "basic"
         } ]
       }, {
+        "description" : "VSCode Key Binding",
+        "manipulators" : [ {
+          "from" : {
+            "pointing_button" : "button4"
+          },
+          "to" : [ {
+            "key_code" : "a"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.microsoft.VSCode" ]
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
         "description" : "Open mode",
         "manipulators" : [ {
           "from" : {
@@ -3290,6 +3308,51 @@
           }
         }, {
           "from" : {
+            "key_code" : "m"
+          },
+          "to" : [ {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Notepad.app\" "
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Notepad.app\" "
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "0"
+            }, {
+              "key_code" : "m"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
             "key_code" : "g"
           },
           "to" : [ {
@@ -3508,6 +3571,144 @@
               "to_after_key_up" : [ {
                 "set_variable" : {
                   "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        } ]
+      }, {
+        "description" : "Notion layer",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "c"
+          },
+          "to" : [ {
+            "shell_command" : "open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"
+          } ],
+          "conditions" : [ {
+            "name" : "n-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "n-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "n"
+            }, {
+              "key_code" : "c"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "n-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "t"
+          },
+          "to" : [ {
+            "shell_command" : "open -a 'Notion.app' 'https://www.notion.so/82559e3f040c4b4b97d941ffe7182825?pvs=4'"
+          } ],
+          "conditions" : [ {
+            "name" : "n-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "n-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a 'Notion.app' 'https://www.notion.so/82559e3f040c4b4b97d941ffe7182825?pvs=4'"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "n"
+            }, {
+              "key_code" : "t"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "n-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "y"
+          },
+          "to" : [ {
+            "shell_command" : "open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"
+          } ],
+          "conditions" : [ {
+            "name" : "n-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "n-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "n"
+            }, {
+              "key_code" : "y"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "n-mode",
                   "value" : 0
                 }
               } ]
@@ -9343,7 +9544,85 @@
         } ]
       } ]
     },
-    "devices" : [ ],
+    "devices" : [ {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : true,
+        "is_pointing_device" : false,
+        "product_id" : 641,
+        "vendor_id" : 1452
+      },
+      "ignore" : false,
+      "manipulate_caps_lock_led" : true,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    }, {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : false,
+        "is_pointing_device" : true,
+        "product_id" : 641,
+        "vendor_id" : 1452
+      },
+      "ignore" : true,
+      "manipulate_caps_lock_led" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    }, {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : true,
+        "is_pointing_device" : false,
+        "product_id" : 591,
+        "vendor_id" : 1452
+      },
+      "ignore" : false,
+      "manipulate_caps_lock_led" : true,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    }, {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : false,
+        "is_pointing_device" : true,
+        "product_id" : 32925,
+        "vendor_id" : 1149
+      },
+      "ignore" : true,
+      "manipulate_caps_lock_led" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    }, {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : true,
+        "is_pointing_device" : false,
+        "product_id" : 34304,
+        "vendor_id" : 1452
+      },
+      "ignore" : false,
+      "manipulate_caps_lock_led" : true,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    }, {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : false,
+        "is_pointing_device" : true,
+        "product_id" : 251,
+        "vendor_id" : 1390
+      },
+      "ignore" : true,
+      "manipulate_caps_lock_led" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    } ],
     "fn_function_keys" : [ {
       "from" : {
         "key_code" : "f1"

@@ -24,6 +24,11 @@ genf: # build_runner build --delete-conflicting-outputs
 genintl: # gen-l10n
 	fvm flutter gen-l10n
 
+genkey:
+	fvm flutter pub add firebase_core firebase_auth google_sign_in
+	echo "password: android"
+	keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+
 get: # pub get
 	fvm flutter pub get
 	
@@ -108,3 +113,7 @@ run.ios: # シミュレーターを起動する
 	@while ! xcrun simctl list devices | grep Booted; do sleep 5; done
 	@IOS_DEVICE_ID=$(shell fvm flutter devices | grep "iOS" | awk '{print $$7}') && \
 	fvm flutter run -d $$IOS_DEVICE_ID &
+
+
+start:
+	firebase emulators:start --only auth,firestore,functions --import=seed --inspect-functions

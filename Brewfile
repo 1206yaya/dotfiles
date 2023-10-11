@@ -175,6 +175,7 @@ cask "bitwarden"
 cask "protonvpn"
 # brew uninstall --cask blender
 cask "the-unarchiver"
+cask "gitkraken"
 cask "webtorrent"
 cask "adobe-acrobat-reader"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
@@ -235,7 +236,7 @@ cask "timemachineeditor"
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944
-mas "Xcode", id: 497799835
+# mas "Xcode", id: 497799835
 mas "NAS Navigator2", id: 450664466
 mas "Kindle", id: 405399194
 mas "LINE", id: 539883307
