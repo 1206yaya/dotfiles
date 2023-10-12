@@ -253,3 +253,9 @@ if ! file_exists ~/crontab.log; then
     chmod 777 ~/crontab.log
 fi
 
+
+###########################################################
+# VSCode extensions export
+###########################################################
+VSCODE_EXTENSIONS_FILE=~/ghq/github.com/1206yaya/dotfiles/manual-settings/vscode/vscode-extensions.txt
+code --list-extensions > "$VSCODE_EXTENSIONS_FILE"

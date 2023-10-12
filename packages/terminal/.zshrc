@@ -29,7 +29,7 @@ eval "$(anyenv init -)"
 # for curl
 # setopt nonomatch
 alias q="exit"
-alias code="open -a 'Visual Studio Code'"
+# alias code="open -a 'Visual Studio Code'"
 alias o="open ."
 alias tm="Open -a Terminal"
 alias syncsh=". syncsh"

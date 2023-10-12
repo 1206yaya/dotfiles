@@ -1,4 +1,5 @@
 // Place your key bindings in this file to override the defaults
+//
 [
   {
     "key": "shift+cmd+t",
@@ -10,21 +11,11 @@
   },
   {
     "key": "shift+cmd+-",
-    "command": "workbench.action.splixptEditorDown"
+    "command": "workbench.action.splitEditorDown"
   },
   {
     "key": "cmd+[",
     "command": "workbench.action.navigateBack",
-    "when": "canNavigateBack"
-  },
-  {
-    "key": "f3",
-    "command": "workbench.action.navigateBack",
-    "when": "canNavigateBack"
-  },
-  {
-    "key": "ctrl+-",
-    "command": "-workbench.action.navigateBack",
     "when": "canNavigateBack"
   },
   {
@@ -273,5 +264,10 @@
   {
     "key": "shift+cmd+o",
     "command": "workbench.view.extension.outline-map"
+  },
+  {
+    "key": "ctrl+-",
+    "command": "-workbench.action.navigateBack",
+    "when": "canNavigateBack"
   }
 ]

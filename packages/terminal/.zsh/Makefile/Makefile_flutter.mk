@@ -117,3 +117,9 @@ run.ios: # シミュレーターを起動する
 
 start:
 	firebase emulators:start --only auth,firestore,functions --import=seed --inspect-functions
+
+pull_official:
+	svn checkout https://github.com/letsar/flutter_staggered_grid_view/trunk/examples/assets assets/pub_flutter_staggered_grid_view_official_example/
+# svn checkout https://github.com/letsar/flutter_staggered_grid_view/trunk/examples/lib lib/pub_flutter_staggered_grid_view_official_example
+# パターン1 svn checkout https://github.com/flutter/packages/trunk/packages/go_router/example/lib lib/official_example
+# パターン2 svn checkout https://github.com/rrousselGit/flutter_hooks/trunk/packages/flutter_hooks/example/lib lib/official_example

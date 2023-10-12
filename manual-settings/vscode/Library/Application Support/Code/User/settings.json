@@ -216,6 +216,65 @@
   "editor.minimap.enabled": false,
   "totalTypeScript.hideAllTips": false,
   "totalTypeScript.hideBasicTips": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   // Controls when the folding controls on the gutter are shown.
+  // 👇 vim setting
+  // easymotionを有効にする。高速なテキスト移動が可能になります。
+  "vim.easymotion": true,
+
+  // インクリメンタルサーチを有効にする。検索時に部分一致でヒットする場所をリアルタイムで表示します。
+  "vim.incsearch": true,
+
+  // システムのクリップボードをVimと共有する。
+  "vim.useSystemClipboard": true,
+
+  // Ctrlキーを使ったVimのキーバインドを有効にする。
+  "vim.useCtrlKeys": true,
+
+  // 検索結果をハイライト表示する。
+  "vim.hlsearch": true,
+
+  // 挿入モードでのキーバインド。ここでは「j」を二回押すとNormalモードに戻る設定になっています。
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+
+  // Normalモードでの非再帰的なキーバインド。
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      // leaderキー（後述）と「d」を押すと「dd」（行削除）が実行される。
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
+    },
+    {
+      // Ctrl+nを押すと:nohl（検索ハイライトを消去）が実行される。
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      // 「K」を押すとlineBreakInsertコマンドが実行される。このコマンドはVSCode固有のもので、具体的な動作は拡張機能に依存します。
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    }
+  ],
+
+  // leaderキーをスペースに設定。このキーはカスタムショートカットのプレフィックスとして使われます。
+  "vim.leader": "<space>",
+
+  // 特定のキーのハンドリングを無効にする。ここではCtrl+aとCtrl+fが無効になっています。
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  },
+
+  // パフォーマンス向上のための設定。VSCodeVim拡張機能にCPUアフィニティ1を割り当てます。
+  "// To improve performance": {
+    "extensions.experimental.affinity": {
+      "vscodevim.vim": 1
+    }
+  }
 }

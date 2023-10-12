@@ -16,9 +16,9 @@
   // 	"description": "Log output to console"
   // }
   // test
-  "main": {
-    "scope": "flutter",
-    "prefix": "main",
-    "body": ["void main() {", "\trunApp(const MyApp());", "}"]
-  }
+  // "main": {
+  //   "scope": "flutter,dart",
+  //   "prefix": "main",
+  //   "body": ["void main() {", "\trunApp(const MyApp());", "}"]
+  // }
 }
