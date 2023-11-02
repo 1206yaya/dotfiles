@@ -3218,51 +3218,6 @@
           }
         }, {
           "from" : {
-            "key_code" : "1"
-          },
-          "to" : [ {
-            "shell_command" : "open -F -na 'Google Chrome' --args https://www.notion.so/00-SelfOps-19c369a6388549e0af1ce36ed4aeeaff"
-          } ],
-          "conditions" : [ {
-            "name" : "open-mode",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "type" : "basic",
-          "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 500
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "open-mode",
-              "value" : 1
-            }
-          }, {
-            "shell_command" : "open -F -na 'Google Chrome' --args https://www.notion.so/00-SelfOps-19c369a6388549e0af1ce36ed4aeeaff"
-          } ],
-          "from" : {
-            "simultaneous" : [ {
-              "key_code" : "0"
-            }, {
-              "key_code" : "1"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : true,
-              "key_down_order" : "strict",
-              "key_up_order" : "strict_inverse",
-              "key_up_when" : "any",
-              "to_after_key_up" : [ {
-                "set_variable" : {
-                  "name" : "open-mode",
-                  "value" : 0
-                }
-              } ]
-            }
-          }
-        }, {
-          "from" : {
             "key_code" : "p"
           },
           "to" : [ {
@@ -3562,6 +3517,51 @@
               "key_code" : "0"
             }, {
               "key_code" : "k"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "1"
+          },
+          "to" : [ {
+            "shell_command" : "open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "0"
+            }, {
+              "key_code" : "1"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -4405,7 +4405,7 @@
             "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/GoogleCalendar.app\" "
           } ],
           "conditions" : [ {
-            "name" : "1-mode",
+            "name" : "9-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -4417,7 +4417,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "1-mode",
+              "name" : "9-mode",
               "value" : 1
             }
           }, {
@@ -4425,7 +4425,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "1"
+              "key_code" : "9"
             }, {
               "key_code" : "c"
             } ],
@@ -4436,7 +4436,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "1-mode",
+                  "name" : "9-mode",
                   "value" : 0
                 }
               } ]
@@ -4450,7 +4450,7 @@
             "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Perplexity.app\" "
           } ],
           "conditions" : [ {
-            "name" : "1-mode",
+            "name" : "9-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -4462,7 +4462,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "1-mode",
+              "name" : "9-mode",
               "value" : 1
             }
           }, {
@@ -4470,7 +4470,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "1"
+              "key_code" : "9"
             }, {
               "key_code" : "p"
             } ],
@@ -4481,7 +4481,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "1-mode",
+                  "name" : "9-mode",
                   "value" : 0
                 }
               } ]
@@ -4495,7 +4495,7 @@
             "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app\" "
           } ],
           "conditions" : [ {
-            "name" : "1-mode",
+            "name" : "9-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -4507,7 +4507,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "1-mode",
+              "name" : "9-mode",
               "value" : 1
             }
           }, {
@@ -4515,7 +4515,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "1"
+              "key_code" : "9"
             }, {
               "key_code" : "g"
             } ],
@@ -4526,7 +4526,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "1-mode",
+                  "name" : "9-mode",
                   "value" : 0
                 }
               } ]
@@ -4540,7 +4540,7 @@
             "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/GoogleTranslate.app\" "
           } ],
           "conditions" : [ {
-            "name" : "1-mode",
+            "name" : "9-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -4552,7 +4552,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "1-mode",
+              "name" : "9-mode",
               "value" : 1
             }
           }, {
@@ -4560,7 +4560,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "1"
+              "key_code" : "9"
             }, {
               "key_code" : "t"
             } ],
@@ -4571,7 +4571,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "1-mode",
+                  "name" : "9-mode",
                   "value" : 0
                 }
               } ]
@@ -4585,7 +4585,7 @@
             "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app\" "
           } ],
           "conditions" : [ {
-            "name" : "1-mode",
+            "name" : "9-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -4597,7 +4597,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "1-mode",
+              "name" : "9-mode",
               "value" : 1
             }
           }, {
@@ -4605,7 +4605,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "1"
+              "key_code" : "9"
             }, {
               "key_code" : "a"
             } ],
@@ -4616,7 +4616,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "1-mode",
+                  "name" : "9-mode",
                   "value" : 0
                 }
               } ]
@@ -4630,7 +4630,7 @@
             "shell_command" : " open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"
           } ],
           "conditions" : [ {
-            "name" : "1-mode",
+            "name" : "9-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -4642,7 +4642,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "1-mode",
+              "name" : "9-mode",
               "value" : 1
             }
           }, {
@@ -4650,7 +4650,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "1"
+              "key_code" : "9"
             }, {
               "key_code" : "x"
             } ],
@@ -4661,7 +4661,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "1-mode",
+                  "name" : "9-mode",
                   "value" : 0
                 }
               } ]
@@ -4675,7 +4675,7 @@
             "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/chat.gpt.openai.app\" "
           } ],
           "conditions" : [ {
-            "name" : "1-mode",
+            "name" : "9-mode",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -4687,7 +4687,7 @@
           },
           "to" : [ {
             "set_variable" : {
-              "name" : "1-mode",
+              "name" : "9-mode",
               "value" : 1
             }
           }, {
@@ -4695,7 +4695,7 @@
           } ],
           "from" : {
             "simultaneous" : [ {
-              "key_code" : "1"
+              "key_code" : "9"
             }, {
               "key_code" : "i"
             } ],
@@ -4706,7 +4706,7 @@
               "key_up_when" : "any",
               "to_after_key_up" : [ {
                 "set_variable" : {
-                  "name" : "1-mode",
+                  "name" : "9-mode",
                   "value" : 0
                 }
               } ]

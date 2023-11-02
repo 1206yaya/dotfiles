@@ -62,6 +62,7 @@ peakchen90.open-html-in-browser
 pedrorgirardi.vscode-cljfmt
 PKief.markdown-checkbox
 PKief.material-icon-theme
+rangav.vscode-thunder-client
 redhat.vscode-xml
 ritwickdey.LiveServer
 robert-brunhage.flutter-riverpod-snippets
@@ -72,5 +73,6 @@ tabeyti.jenkins-jack
 toba.vsfire
 tomoki1207.pdf
 usernamehw.errorlens
+vscodevim.vim
 yzhang.markdown-all-in-one
 ZainChen.json

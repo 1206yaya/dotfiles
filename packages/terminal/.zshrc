@@ -69,7 +69,7 @@ alias vim="nvim"
 alias du="dust"
 alias de="defaults"
 alias groot="cd ~/ghq/github.com/1206yaya"
-
+alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
@@ -359,6 +359,17 @@ function dc() {
   fi
 }
 
+function ghget() {
+  if [ "$#" -ne 2 ]; then
+      echo "Usage: $0 <url> <directory_name>"
+      exit 1
+  fi
+
+  URL=$1
+  DIR_NAME=$2
+
+  svn checkout $URL $DIR_NAME
+}
 
 function dcr() {
     # TODO
@@ -452,6 +463,7 @@ EOF
 function showinfo() {
   echo arch: $(uname -m)
 }
+
 
 # showinfo
 

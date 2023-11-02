@@ -104,6 +104,7 @@
                   '"}
  :simlayers {:chrome-mode      {:key :d                                :condi :Chrome}
              :open-mode {:key :0}
+             :9-mode {:key :9}
              :n-mode {:key :n}    ; emoji 
              :1-mode {:key :1}    ; emoji 
              :z-mode {:key :z}    ; emoji 
@@ -177,7 +178,6 @@
             ;; [:m [:open "Morgen"]]
                  [:d [:open "Dictionary"]]
                  [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
-                 [:1 ["open -F -na 'Google Chrome' --args https://www.notion.so/00-SelfOps-19c369a6388549e0af1ce36ed4aeeaff"]]
                 ;;  [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Planyway.app"]]
                  [:m [:opena "/Users/zak/Applications/Chrome Apps.localized/Notepad.app"]]
@@ -193,7 +193,8 @@
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
                  [:a ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/ghq/github.com/1206yaya/mytasks'"]]
-                 [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]]}
+                 [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
+                 [:1 ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "]]]}
         {:des "Notion layer"
         :rules [:n-mode
                 [:c ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]
@@ -230,7 +231,7 @@
         ;;          [:t [:paste "🍅 "]]
         ;;          [:u [:paste "hi! "]]]}
         {:des "open for WEB Site"
-         :rules [:1-mode
+         :rules [:9-mode
                  [:c [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleCalendar.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Perplexity.app"]]
                  [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app"]]

@@ -219,6 +219,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   // Controls when the folding controls on the gutter are shown.
   // 👇 vim setting
+  "vim.statusBarColorControl": false,
+
   // easymotionを有効にする。高速なテキスト移動が可能になります。
   "vim.easymotion": true,
 

@@ -1,5 +1,6 @@
 # tap "adoptopenjdk/openjdk"
 tap "cjbassi/ytop"
+tap "CQLabs/dcm"
 # tap "convco/formulae"
 # tap "ethereum/ethereum"
 # tap "extrawurst/tap"
@@ -30,6 +31,7 @@ brew "curl"
 brew "go"
 brew "sqlite"
 brew "iproute2mac"
+# brew "dcm"
 ## For Rust
 # brew "dust"
 # brew "ethereum" 
@@ -37,6 +39,7 @@ brew "iproute2mac"
 ## Make if colorul for Terminal 
 brew "exa"
 cask "iterm2"
+cask "spotify"
 ## enhance find-command
 brew "fd"
 brew "fzf"
