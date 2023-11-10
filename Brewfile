@@ -39,7 +39,9 @@ brew "iproute2mac"
 ## Make if colorul for Terminal 
 brew "exa"
 cask "iterm2"
+
 cask "spotify"
+cask "clipy"
 ## enhance find-command
 brew "fd"
 brew "fzf"

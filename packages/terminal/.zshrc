@@ -337,6 +337,13 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 export GPG_TTY=$(tty)
+# この関数は、コマンド履歴の一覧を表示し、pecoで選択したコマンドを実行するものです。
+function peco-history-pbcopy() {
+  history -n 1 | tail -r  | awk '!a[$0]++' | peco --layout=bottom-up | tr -d "\r\n" | pbcopy 
+}
+# Control + hh で実行
+zle -N peco-history-pbcopy
+bindkey '^H^H' peco-history-pbcopy
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator

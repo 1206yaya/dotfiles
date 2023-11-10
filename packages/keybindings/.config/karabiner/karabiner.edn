@@ -104,7 +104,7 @@
                   '"}
  :simlayers {:chrome-mode      {:key :d                                :condi :Chrome}
              :open-mode {:key :0}
-             :9-mode {:key :9}
+             :2-mode {:key :2}
              :n-mode {:key :n}    ; emoji 
              :1-mode {:key :1}    ; emoji 
              :z-mode {:key :z}    ; emoji 
@@ -231,7 +231,7 @@
         ;;          [:t [:paste "🍅 "]]
         ;;          [:u [:paste "hi! "]]]}
         {:des "open for WEB Site"
-         :rules [:9-mode
+         :rules [:2-mode
                  [:c [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleCalendar.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Perplexity.app"]]
                  [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app"]]
