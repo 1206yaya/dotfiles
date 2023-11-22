@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        // VSCodeのF5キー（デバッグ開始）を使用してPythonスクリプトを実行すると、VSCodeは現在のファイルのディレクトリをワーキングディレクトリとして使用します。このため、src/ibouzserver/crawler/core/delete_user.pyを直接実行すると、Pythonはibouzserverモジュールを見つけられず、ModuleNotFoundErrorが発生します。
+        // これを解決するためには、VSCodeのデバッグ設定を変更して、Pythonにモジュールを探すための正しいパスを指示する必要があります。
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/src",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            }
+        }
+    ]
+}

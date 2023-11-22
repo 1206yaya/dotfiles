@@ -175,7 +175,7 @@ function createpy() {
 
 
 function makefile() {
-  PROJECT_TYPES=("flutter" "firebase" "functions" "python")
+  PROJECT_TYPES=("flutter" "firebase" "functions" "poetry")
   target_project_type=$1
 
   # Step1. target_project_typeが ROJECT_TYPES に含まれていない場合  PROJECT_TYPES を表示して終了
@@ -185,6 +185,18 @@ function makefile() {
   fi
   MAKEFILE_PATH="$HOME/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
   cat ${MAKEFILE_PATH}/Makefile_${target_project_type}.mk 
+}
+### クリップボードの内容を特定のフォルダにタイムスタンプ付きでファイルとして保存する
+function cbf() {
+  
+  FOLDER_PATH=~/Downloads
+
+  # 現在のタイムスタンプを取得します。
+  TIMESTAMP=$(date "+%Y%m%d%H%M%S")
+
+  # クリップボードの内容をファイルに保存します。
+  pbpaste > "$FOLDER_PATH/$TIMESTAMP.txt"
+
 }
 
 function fvmcreate() {
@@ -205,6 +217,10 @@ function fvmcreate() {
   if [[ $project_name == *"-"* ]]; then
     echo "プロジェクト名に - は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
     return 1;
+  fi
+  if [[ -z $version ]]; then
+    echo "fvm で使用する flutter Version を第２引数に指定してください"
+    return 1
   fi
   if [[ -z $version ]]; then
     echo "fvm で使用する flutter Version を第２引数に指定してください"
@@ -266,6 +282,7 @@ EOF
 
   grep -v '^\s*#' pubspec.yaml |grep -v '^\s*$' > pubspec.yaml_tmp; cat pubspec.yaml_tmp > pubspec.yaml ; rm -rf pubspec.yaml_tmp;
   
+  echo ">>> create_dir: $create_dir"
   if [[ !create_dir ]]; then
     mv $project_name/* ./
     mv $project_name/.* ./
@@ -274,6 +291,83 @@ EOF
   code .
 
 }
+function chatutil() {
+  mkdir -p chatutils
+  tree -fFi -I '*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  sed -i.bak '$d' chatutils/files.txt
+  sed -i.bak '$d' chatutils/files.txt
+  while IFS= read -r filepath
+  do
+      # Check if the file exists before trying to display its contents
+      if [ ! -f "$filepath" ]; then
+        continue ;
+      fi
+      # Print the file path
+      echo "*$filepath*"
+      echo ""
+      echo "\`\`\`"
+  grep -v '^import ' "$filepath"| grep -vE '^from .+ import .+'
+  #    cat "$filepath"
+      echo ""
+
+      echo "\`\`\`"
+      echo ""
+  done < "chatutils/files.txt"
+}
+function poetrycreate() {
+  # .git ディレクトリが存在するか確認
+  if [[ -d ".git" ]]; then
+    echo -n "このコマンドはgit cloneをつかいます。.git ディレクトリが存在します。削除しますか？ [y/N]: "
+    read response
+    if [[ $response =~ ^[Yy]([Ee][Ss])?$ ]]; then
+      echo ".git ディレクトリを削除します。"
+      rm -rf .git
+    else
+      echo ".git ディレクトリは削除されません。"
+    fi
+  fi
+  project_name=$1
+  create_dir=true
+
+  if [[ $project_name == "." || $project_name == "./" ]]; then
+    echo "カレントディレクトリに生成します"
+    CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
+    project_name=$CURERNT_DIR
+    create_dir=false
+  fi
+  if [[ -z $project_name ]]; then
+    echo "プロジェクト名を第１引数に指定してください"
+    return 1;
+  fi
+  if [[ $project_name == *"-"* ]]; then
+    echo "プロジェクト名に - は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
+    return 1;
+  fi
+
+
+  echo "Creating poetry project: $project_name"
+
+  URL='https://github.com/1206yaya/poetry_starter'
+
+  if [[ $create_dir == true ]]; then
+    git clone $URL $project_name
+    cd $project_name
+  else
+    git clone $URL .
+  fi
+
+  # プロジェクト名の変更など、ここで追加の設定を行う
+  if [[ !create_dir ]]; then
+    mv $project_name/* ./
+    mv $project_name/.* ./
+  fi
+  
+  git init
+  echo "mk init;"
+  echo "mk install"
+  code .
+}
+
 
 grep() {
   command grep --color -E "$@"
@@ -670,3 +764,4 @@ function fr() {
 }
 
 
+export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"

@@ -65,6 +65,9 @@ brew "peco"
 brew "hub"
 brew "graphviz"
 brew "plantuml"
+brew "mbedtls"
+brew "libsodium"
+brew "libtomcrypt"
 ## For Go
 # brew "lf"
 
@@ -98,6 +101,7 @@ brew "sk"
 brew "skhd"
 brew "starship"
 brew "poetry"
+brew "python-certifi"
 brew "stow"
 
 ## man コミュニティー駆動
