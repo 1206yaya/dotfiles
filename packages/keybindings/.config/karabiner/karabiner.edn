@@ -162,13 +162,15 @@
                 ;;  [:s [:open "Android Studio"]]
                 ;;  [:p [:open "PyCharm CE"]]
                 ;;  [:e [:open "Brave Browser"]]
-                 [:a [:open "Arc"]]
+                ;;  [:a [:open "Arc"]]
+                 [:a [:open "Alacritty"]]Alacritty
+                 
                  [:e [:open "Evernote"]]
                 ;;  [:n [:open "Postman"]]
                  [:n [:open "Notion"]]
                  [:i [:open "iTerm"]]
                  [:c [:open "Google Chrome"]]
-                ;;  [:a [:open "Alacritty"]]
+                 [:a [:open "Alacritty"]]
                  [:b [:open "Obsidian"]]
                  [:f [:open "Finder"]]
                 ;;  [:x [:open "Vivaldi"]]
@@ -176,7 +178,7 @@
                  [:t [:open "Trello"]]
 
             ;; [:m [:open "Morgen"]]
-                 [:d [:open "Dictionary"]]
+                ;;  [:d [:open "Dictionary"]]
                  [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
                 ;;  [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Planyway.app"]]
@@ -411,7 +413,10 @@
                  [:##j :!Sbackslash]
                  [:##k :!S2]
                  [:##m :backslash]
-                 [:##comma :!Shyphen]]}
+                 [:##comma :!Shyphen]
+                 [:d ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-LCZMl4La4-ying-dan-yu; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]
+                 [:i ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-lAyeCrKJ2-ityong-yu; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]
+                ]}
 
         #_{:des "x-mode for some programming pairs like <= (not yet implemented)"
            :rules [:x-mode]}

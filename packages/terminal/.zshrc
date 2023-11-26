@@ -73,7 +73,7 @@ alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-alias g='cd $(ghq root)/$(ghq list | peco); code .'
+alias g='cd $(ghq root)/$(ghq list | peco); code .; exit;'
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias fire="firebase "$@""

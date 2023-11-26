@@ -279,5 +279,6 @@
       "vscodevim.vim": 1
     }
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "hediet.vscode-drawio.resizeImages": null
 }

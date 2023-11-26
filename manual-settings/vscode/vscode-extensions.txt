@@ -28,6 +28,7 @@ GitHub.copilot-chat
 GrapeCity.gc-excelviewer
 hancel.google-translate
 hancel.markdown-image
+hediet.vscode-drawio
 hzgood.dart-data-class-generator
 innwin.i18n-arb-editor
 jeroen-meijer.pubspec-assist

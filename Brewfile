@@ -170,6 +170,7 @@ brew "scrcpy"
 cask "android-studio"
 cask "android-platform-tools"
 
+cask "alacritty"
 cask "background-music"
 cask "telegram"
 cask "calibre"
