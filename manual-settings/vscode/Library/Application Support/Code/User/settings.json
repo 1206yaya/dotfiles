@@ -200,8 +200,8 @@
   "[python]": {
     "editor.formatOnType": true
   },
-  "google-translate.firstLanguage": "ja",
-  "google-translate.secondLanguage": "zh-cn",
+  "google-translate.firstLanguage": "zh-cn",
+  "google-translate.secondLanguage": "ja",
   "files.autoGuessEncoding": true,
   "github.copilot.enable": {
     "*": true,
@@ -278,5 +278,6 @@
     "extensions.experimental.affinity": {
       "vscodevim.vim": 1
     }
-  }
+  },
+  "editor.tabSize": 2
 }

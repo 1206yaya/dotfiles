@@ -50,9 +50,9 @@ alias flrgen='flutter pub run build_runner watch'
 alias flrdel='flutter pub run build_runner build --delete-conflicting-outputs'
 
 # Override
-if [ -n "$(which z)" ]; then
-    alias cd="z"
-fi
+# if [ -n "$(which z)" ]; then
+#     alias cd="z"
+# fi
 
 if [ -n "$(which exa)" ]; then
     alias ls="exa"
@@ -153,26 +153,6 @@ tests: ## run tests with poetry
 EOF
 
 }
-function createpy() {
-  project_name=$1
-
-  if [[ -z $project_name ]]; then
-    echo "プロジェクト名を第１引数に指定してください"
-    return 1;
-  fi
-
-  if [[ $project_name == *"-"* ]]; then
-    echo "プロジェクト名に - は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
-    return 1;
-  fi
-  git clone https://github.com/navdeep-G/samplemod.git
-  mv samplemod $project_name 
-  cd $project_name
-  rm -rf .git
-  mv sample $project_name
-  ll
-}
-
 
 function makefile() {
   PROJECT_TYPES=("flutter" "firebase" "functions" "poetry")
@@ -196,7 +176,6 @@ function cbf() {
 
   # クリップボードの内容をファイルに保存します。
   pbpaste > "$FOLDER_PATH/$TIMESTAMP.txt"
-
 }
 
 function fvmcreate() {
@@ -314,23 +293,55 @@ function chatutil() {
       echo ""
   done < "chatutils/files.txt"
 }
+function updatepy() {
+  # link file
+  version_file=~/ghq/github.com/1206yaya/dotfiles/packages/runtime/.tool-versions
+
+  latest_versions=$(asdf latest python)
+  if [ -z "$1" ]; then
+    new_version=$latest_versions
+  else
+    new_version=$1
+  fi
+
+  # ~/.tool-versionsファイルを更新
+  sed -i '' "s/python [0-9]*\.[0-9]*\.[0-9]*/python $new_version/" $version_file
+
+
+  asdf install python $new_version
+}
+
 function poetrycreate() {
-  # .git ディレクトリが存在するか確認
-  if [[ -d ".git" ]]; then
-    echo -n "このコマンドはgit cloneをつかいます。.git ディレクトリが存在します。削除しますか？ [y/N]: "
+
+  project_name=$1
+  version=$2
+  default_version="3.12"
+  create_dir=true
+
+  if [[ -z $version ]]; then
+    echo -n "poetry で使用する Python の Version は $default_version を使用しますか？ [y/N]: "
     read response
     if [[ $response =~ ^[Yy]([Ee][Ss])?$ ]]; then
-      echo ".git ディレクトリを削除します。"
-      rm -rf .git
+      echo "poetry で使用する Python の Version は $default_version を使用します"
     else
-      echo ".git ディレクトリは削除されません。"
+      echo "versionを第二引数に指定してください"
+      return 1;
     fi
   fi
-  project_name=$1
-  create_dir=true
 
   if [[ $project_name == "." || $project_name == "./" ]]; then
     echo "カレントディレクトリに生成します"
+    # .git ディレクトリが存在するか確認
+    if [[ -d ".git" ]]; then
+      echo -n "このコマンドはgit cloneをつかいます。現在のディレクトリには `.git` ディレクトリが存在します。削除しますか？ [y/N]: "
+      read response
+      if [[ $response =~ ^[Yy]([Ee][Ss])?$ ]]; then
+        echo "`.git` ディレクトリを削除します。"
+        rm -rf .git
+      else
+        echo "`.git` ディレクトリは削除されません。"
+      fi
+    fi
     CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
     project_name=$CURERNT_DIR
     create_dir=false
@@ -339,10 +350,11 @@ function poetrycreate() {
     echo "プロジェクト名を第１引数に指定してください"
     return 1;
   fi
-  if [[ $project_name == *"-"* ]]; then
-    echo "プロジェクト名に - は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
+  if [[ $project_name == *"_"* ]]; then
+    echo "プロジェクト名に _ は使えません。半角小文字とアンダースコア（-）だけが使用可能です。"
     return 1;
   fi
+
 
 
   echo "Creating poetry project: $project_name"
@@ -350,21 +362,91 @@ function poetrycreate() {
   URL='https://github.com/1206yaya/poetry_starter'
 
   if [[ $create_dir == true ]]; then
+    # ディレクトリを作成してそこにクローンする
     git clone $URL $project_name
     cd $project_name
   else
+    # カレントディレクトリにクローンする
     git clone $URL .
   fi
+  rm -rf .git
 
-  # プロジェクト名の変更など、ここで追加の設定を行う
-  if [[ !create_dir ]]; then
-    mv $project_name/* ./
-    mv $project_name/.* ./
+  sed -i '' "s/^name = \".*\"/name = \"$project_name\"/" pyproject.toml
+  make install
+
+  git init
+  
+  code .
+}
+
+
+function nodecreate() {
+  project_name=$1
+  version=$2
+  default_version="20.10.0"
+  create_dir=true
+
+  if [[ $project_name == "." || $project_name == "./" ]]; then
+    echo "カレントディレクトリに生成します"
+    # .git ディレクトリが存在するか確認
+    if [[ -d ".git" ]]; then
+      echo -n "このコマンドはgit cloneをつかいます。現在のディレクトリには `.git` ディレクトリが存在します。削除しますか？ [y/N]: "
+      read response
+      if [[ $response =~ ^[Yy]([Ee][Ss])?$ ]]; then
+        echo "`.git` ディレクトリを削除します。"
+        rm -rf .git
+      else
+        echo "`.git` ディレクトリは削除されません。"
+        return 1;
+      fi
+    fi
+    CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
+    project_name=$CURERNT_DIR
+    create_dir=false
   fi
+
+  if [[ -z $project_name ]]; then
+    echo "プロジェクト名を第１引数に指定してください"
+    return 1;
+  fi
+
+  if [[ -z $version ]]; then
+    echo -n "nodejs で使用する Version は $default_version を使用しますか？ [y/N]: "
+    read response
+    if [[ $response =~ ^[Yy]([Ee][Ss])?$ ]]; then
+      echo "nodejs で使用する Version は $default_version を使用します"
+    else
+      echo "versionを第二引数に指定してください"
+      return 1;
+    fi
+  fi
+  echo "create nodejs by asdf \nProjectName:$project_name \nVersion $version"
+
+  URL='https://github.com/1206yaya/nodejs_starter'
+
+  if [[ $create_dir == true ]]; then
+    # ディレクトリを作成してそこにクローンする
+    git clone $URL $project_name
+    cd $project_name
+  else
+    # カレントディレクトリにクローンする
+    git clone $URL .
+  fi
+  
   
   git init
   echo "mk init;"
   echo "mk install"
+
+  # mkdir $project_name
+  # cd $project_name
+  # touch .tool-versions
+  # echo "nodejs $version" >> .tool-versions
+  # asdf install
+  # npm init -y
+
+  mkdir .vscode
+  touch .vscode/settings.json
   code .
 }
 
