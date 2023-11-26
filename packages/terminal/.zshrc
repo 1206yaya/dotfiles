@@ -50,9 +50,9 @@ alias flrgen='flutter pub run build_runner watch'
 alias flrdel='flutter pub run build_runner build --delete-conflicting-outputs'
 
 # Override
-# if [ -n "$(which z)" ]; then
-#     alias cd="z"
-# fi
+if [ -n "$(which z)" ]; then
+    alias cd="z"
+fi
 
 if [ -n "$(which exa)" ]; then
     alias ls="exa"
@@ -73,7 +73,7 @@ alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-alias g='cd $(ghq root)/$(ghq list | peco)'
+alias g='cd $(ghq root)/$(ghq list | peco); code .'
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias fire="firebase "$@""
@@ -463,7 +463,7 @@ function tmpdir() {
   if [ ! -d "$TMP_DIR" ]; then
     mkdir -p "$TMP_DIR"
   fi
-  cd ${TMP_DIR}
+  builtin cd ${TMP_DIR}
 }
 
 
