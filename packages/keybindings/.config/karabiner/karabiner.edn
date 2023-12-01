@@ -163,7 +163,7 @@
                 ;;  [:p [:open "PyCharm CE"]]
                 ;;  [:e [:open "Brave Browser"]]
                 ;;  [:a [:open "Arc"]]
-                 [:a [:open "Alacritty"]]Alacritty
+                 [:a [:open "Alacritty"]]
                  
                  [:e [:open "Evernote"]]
                 ;;  [:n [:open "Postman"]]
@@ -414,10 +414,13 @@
                  [:##k :!S2]
                  [:##m :backslash]
                  [:##comma :!Shyphen]
+                 ; フレーズチェック
+                 [:f ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-kXs6rmvRN-ying-wen-hurezutietuka; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]
+                 ; 英単語
                  [:d ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-LCZMl4La4-ying-dan-yu; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]
+                 ; IT用語
                  [:i ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-lAyeCrKJ2-ityong-yu; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]
                 ]}
-
         #_{:des "x-mode for some programming pairs like <= (not yet implemented)"
            :rules [:x-mode]}
 

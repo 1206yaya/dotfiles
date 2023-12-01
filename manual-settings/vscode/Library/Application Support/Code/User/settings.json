@@ -280,5 +280,6 @@
     }
   },
   "editor.tabSize": 2,
-  "hediet.vscode-drawio.resizeImages": null
+  "hediet.vscode-drawio.resizeImages": null,
+  "hediet.vscode-drawio.theme": "min"
 }

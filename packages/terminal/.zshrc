@@ -73,7 +73,9 @@ alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-alias g='cd $(ghq root)/$(ghq list | peco); code .; exit;'
+alias g='dir=$(ghq list | peco); [ -z "$dir" ] && return; cd "$(ghq root)/$dir" && code . && cd -'
+
+
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias fire="firebase "$@""
@@ -94,6 +96,35 @@ function cd() {
     command open  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
   else
     command cd $@
+  fi
+}
+function terminal() {
+  CURRENT_DIR=$(pwd)
+
+osascript <<END
+tell application "iTerm"
+    activate
+    try
+        tell current window
+            create tab with default profile
+        end tell
+    on error
+        tell application "System Events" to tell process "iTerm2"
+            keystroke "t" using command down
+        end tell
+    end try
+    tell current session of current window
+        write text "cd \"$CURRENT_DIR\""
+    end tell
+end tell
+END
+}
+
+function ghq() {
+  if [[ $1 == "create" ]]; then
+    command ghq create "$2" && cd "$(ghq list -p | grep "$2$")" && code .
+  else
+    command ghq "$@"
   fi
 }
 function st() {
@@ -272,7 +303,7 @@ EOF
 }
 function chatutil() {
   mkdir -p chatutils
-  tree -fFi -I '*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  tree -fFi -I 'license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   while IFS= read -r filepath
@@ -463,7 +494,7 @@ function tmpdir() {
   if [ ! -d "$TMP_DIR" ]; then
     mkdir -p "$TMP_DIR"
   fi
-  builtin cd ${TMP_DIR}
+  builtin cd ${TMP_DIR}; code .
 }
 
 
