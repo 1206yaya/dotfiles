@@ -410,7 +410,8 @@ function poetrycreate() {
   code .
 }
 
-
+alias jscreate="nodecreate"
+alias tsccreate="nodecreate"
 function nodecreate() {
   project_name=$1
   version=$2
@@ -466,8 +467,8 @@ function nodecreate() {
   
   
   git init
-  echo "mk init;"
-  echo "mk install"
+  gi nodejs > .gitignore
+  make init
 
   # mkdir $project_name
   # cd $project_name
