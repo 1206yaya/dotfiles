@@ -32,6 +32,10 @@ cs() {
         mdcat $pathDir/svn.md
     elif  [[ $@ == "npx" ]]; then
         mdcat $pathDir/npx.md
+    elif  [[ $@ == "swagger-codegen" ||  $@ == "sgen" ]]; then
+        mdcat $pathDir/swagger-codegen.md
+    elif  [[ $@ == "openapi-generator" ||  $@ == "genc" ||  $@ == "openapi" ]]; then
+        mdcat $pathDir/openapi-generator.md
     elif  [[ $@ == "dart" ]]; then
         mdcat $pathDir/dart.sh
     elif  [[ $@ == "firebase" || $@ == "flutterfire" ]]; then
@@ -68,7 +72,7 @@ cs() {
     elif  [[ $@ == "bash" || $@ == "sh" ]]; then
         mdcat $pathDir/bash.md
     elif  [[ $@ == "git" ]]; then
-        mdcat $pathDir/git.sh
+        mdcat $pathDir/git.md
     elif  [[ $@ == "ghq" ]]; then
         mdcat $pathDir/ghq.sh
     elif  [[ $@ == "fvm" ]]; then
@@ -80,7 +84,7 @@ cs() {
     elif  [[ $@ == "ts" || $@ == "typescript" ]]; then
         mdcat $pathDir/typescript.sh
     elif  [[ $@ == "open" || $@ == "edit" ]]; then
-        code $pathDir/
+        subl $pathDir/
 
     else
         mdcat <<- EOF

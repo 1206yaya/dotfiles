@@ -3353,51 +3353,6 @@
           }
         }, {
           "from" : {
-            "key_code" : "j"
-          },
-          "to" : [ {
-            "shell_command" : "open -F -na 'Google Chrome' --args http://localhost:8888/tree?"
-          } ],
-          "conditions" : [ {
-            "name" : "open-mode",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "type" : "basic",
-          "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 500
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "open-mode",
-              "value" : 1
-            }
-          }, {
-            "shell_command" : "open -F -na 'Google Chrome' --args http://localhost:8888/tree?"
-          } ],
-          "from" : {
-            "simultaneous" : [ {
-              "key_code" : "0"
-            }, {
-              "key_code" : "j"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : true,
-              "key_down_order" : "strict",
-              "key_up_order" : "strict_inverse",
-              "key_up_when" : "any",
-              "to_after_key_up" : [ {
-                "set_variable" : {
-                  "name" : "open-mode",
-                  "value" : 0
-                }
-              } ]
-            }
-          }
-        }, {
-          "from" : {
             "key_code" : "v"
           },
           "to" : [ {
@@ -3491,7 +3446,7 @@
             "key_code" : "k"
           },
           "to" : [ {
-            "shell_command" : "open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "
+            "shell_command" : "open -a 'Sublime Text' /Users/zak/ghq/github.com/1206yaya/dotfiles "
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -3510,7 +3465,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "
+            "shell_command" : "open -a 'Sublime Text' /Users/zak/ghq/github.com/1206yaya/dotfiles "
           } ],
           "from" : {
             "simultaneous" : [ {
@@ -3533,7 +3488,52 @@
           }
         }, {
           "from" : {
-            "key_code" : "1"
+            "key_code" : "k"
+          },
+          "to" : [ {
+            "shell_command" : "open -a 'Sublime Text' /Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile "
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a 'Sublime Text' /Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile "
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "0"
+            }, {
+              "key_code" : "k"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "j"
           },
           "to" : [ {
             "shell_command" : "open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "
@@ -3561,7 +3561,7 @@
             "simultaneous" : [ {
               "key_code" : "0"
             }, {
-              "key_code" : "1"
+              "key_code" : "j"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,

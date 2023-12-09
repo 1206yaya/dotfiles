@@ -194,7 +194,8 @@
     }
   ],
   "redhat.telemetry.enabled": true,
-  "dart.flutterSdkPath": "/opt/homebrew/bin/dart",
+  "dart.flutterSdkPath": "~/fvm/default/bin",
+
   "dart.checkForSdkUpdates": false,
   "bracket-pair-colorizer-2.depreciation-notice": false,
   "[python]": {

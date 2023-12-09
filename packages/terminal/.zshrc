@@ -48,7 +48,6 @@ alias pt='poetry run pytest'
 alias pr='poetry run'
 alias flrgen='flutter pub run build_runner watch'
 alias flrdel='flutter pub run build_runner build --delete-conflicting-outputs'
-
 # Override
 if [ -n "$(which z)" ]; then
     alias cd="z"
@@ -73,13 +72,15 @@ alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-alias g='dir=$(ghq list | peco); [ -z "$dir" ] && return; cd "$(ghq root)/$dir" && code . && cd -'
+alias g='dir=$(ghq list | peco); [ -z "$dir" ] && return; builtin cd "$(ghq root)/$dir" && code . '
 
 
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias fire="firebase "$@""
 alias mk="make "$@""
+alias genc="openapi-generator "$@""
+
 alias rege="fvm flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
 function open() {
   if [[ $@ == "pdf" ]]; then
@@ -123,6 +124,8 @@ END
 function ghq() {
   if [[ $1 == "create" ]]; then
     command ghq create "$2" && cd "$(ghq list -p | grep "$2$")" && code .
+  elif [[ $1 == "get" ]]; then
+    command ghq get "$2" && cd "$(ghq list -p | grep "$2$")" && code .
   else
     command ghq "$@"
   fi
@@ -184,19 +187,41 @@ tests: ## run tests with poetry
 EOF
 
 }
-
 function makefile() {
-  PROJECT_TYPES=("flutter" "firebase" "functions" "poetry")
-  target_project_type=$1
+  pathDir="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
+  ext="mk"
+    if [[ $@ == "firebase" || $@ == "fir" || $@ == "flutterfire" ]]; then
+        cat $pathDir/firebase.$ext
+    elif  [[ $@ == "py" || $@ == "python" || $@ == "poetry" ]]; then
+        cat $pathDir/poetry.$ext
+    elif  [[ $@ == "function" ]]; then
+        cat $pathDir/function.$ext
+    elif  [[ $@ == "flutter" ]]; then
+        cat $pathDir/flutter.$ext
 
-  # Step1. target_project_typeが ROJECT_TYPES に含まれていない場合  PROJECT_TYPES を表示して終了
-  if [[ ! " ${PROJECT_TYPES[@]} " =~ " ${target_project_type} " ]]; then
-    echo "第１引数には、${PROJECT_TYPES[@]} のいずれかを指定してください"
-    return 1
-  fi
-  MAKEFILE_PATH="$HOME/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
-  cat ${MAKEFILE_PATH}/Makefile_${target_project_type}.mk 
+    elif  [[ $@ == "open" || $@ == "edit" ]]; then
+        subl $pathDir/
+
+    else
+        cat <<- EOF
+Nothing $@ 
+EOF
+    fi
 }
+
+# function makefile() {
+
+#   PROJECT_TYPES=("flutter" "firebase" "functions" "poetry")
+#   target_project_type=$1
+
+#   # Step1. target_project_typeが ROJECT_TYPES に含まれていない場合  PROJECT_TYPES を表示して終了
+#   if [[ ! " ${PROJECT_TYPES[@]} " =~ " ${target_project_type} " ]]; then
+#     echo "第１引数には、${PROJECT_TYPES[@]} のいずれかを指定してください"
+#     return 1
+#   fi
+#   MAKEFILE_PATH="$HOME/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
+#   cat ${MAKEFILE_PATH}/{target_project_type}.mk 
+
 ### クリップボードの内容を特定のフォルダにタイムスタンプ付きでファイルとして保存する
 function cbf() {
   
@@ -303,7 +328,7 @@ EOF
 }
 function chatutil() {
   mkdir -p chatutils
-  tree -fFi -I 'license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  tree -fFi -I '.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   while IFS= read -r filepath

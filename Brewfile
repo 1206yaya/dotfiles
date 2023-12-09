@@ -14,10 +14,13 @@ tap "hashicorp/tap"
 tap "leoafarias/fvm"
 tap "aws/tap"
 tap "azure/functions"
+tap 'stripe/stripe-cli'
+
 # tap "wix/brew"
 cask_args appdir: "/Applications"
 
 brew "asdf"
+brew "stripe/stripe-cli/stripe"
 ## wix
 # brew "applesimutils"
 ## Network Wathing
@@ -167,6 +170,8 @@ brew "trash"
 # Android Studio SetUp
 cask "android-file-transfer"
 brew "scrcpy"
+brew "swagger-codegen"
+brew "openapi-generator"
 cask "android-studio"
 cask "android-platform-tools"
 
@@ -230,6 +235,7 @@ cask "google-japanese-ime"
 ## mac　で ubuntu / windows / raspbian
 cask "utm"
 cask "visual-studio-code"
+cask "cursor"
 # cask "zoom"
 cask "sourcetree"
 cask "karabiner-elements"

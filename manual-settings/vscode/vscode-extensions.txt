@@ -1,6 +1,8 @@
+42Crunch.vscode-openapi
 aaron-bond.better-comments
 AdrienAudouard.flutter-utils
 alexisvt.flutter-snippets
+Arjun.swagger-viewer
 Asuka.insertnumbers
 BIGModelingTools.erdiagram
 biso.du-flutter-riverpod-snippets
@@ -19,7 +21,6 @@ dsznajder.es7-react-js-snippets
 eamodio.gitlens
 esbenp.prettier-vscode
 flutterando.flutter-coverage
-frenco.vscode-notion
 genieai.chatgpt-vscode
 gera2ld.markmap-vscode
 Gerrnperl.outline-map
@@ -65,10 +66,12 @@ PKief.markdown-checkbox
 PKief.material-icon-theme
 rangav.vscode-thunder-client
 redhat.vscode-xml
+redhat.vscode-yaml
 ritwickdey.LiveServer
 robert-brunhage.flutter-riverpod-snippets
 ryanluker.vscode-coverage-gutters
 SergeLamikhov.lcov-lang
+solomonkinard.search-history
 steoates.autoimport
 tabeyti.jenkins-jack
 toba.vsfire

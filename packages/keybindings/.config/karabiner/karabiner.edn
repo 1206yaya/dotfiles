@@ -57,7 +57,9 @@
                 :Notion   ["notion.id"]
                 :Slack    ["com.tinyspeck.slackmacgap"]
                 :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
-                :vscode   ["com.microsoft.VSCode"]}
+                :vscode   ["com.microsoft.VSCode"]
+                :sublime   ["com.sublimetext.4"]
+                }
  :Evernote ["com.evernote.Evernote"]
  :templates {:launch "osascript -e 'tell application \"%s\" to activate'"
              :paste "osascript -e '
@@ -154,6 +156,7 @@
                 ;;  [{:pkey :butotn4}] :!Copen_bracket] ; Ctrl + [
                  [{:pkey :button4} :a] ; Ctrl + [
         ]} ; Ctrl + [
+
         {:des "Open mode"
          :rules [:open-mode
                 ;;  [:w [:open "WebStorm"]]
@@ -185,7 +188,7 @@
                  [:m [:opena "/Users/zak/Applications/Chrome Apps.localized/Notepad.app"]]
                  [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/GithubProject.app"]]
 
-                 [:j ["open -F -na 'Google Chrome' --args http://localhost:8888/tree?"]]
+                 ; [:j ["open -F -na 'Google Chrome' --args http://localhost:8888/tree?"]]
 
                 ;; [:p ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/Notes/osho/tasks.md'"]]
 
@@ -195,8 +198,9 @@
             ;; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
                  [:a ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/ghq/github.com/1206yaya/mytasks'"]]
-                 [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
-                 [:1 ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "]]]}
+                ;;  [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
+                 [:k ["open -a 'Sublime Text' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
+                 [:j ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "]]]}
         {:des "Notion layer"
         :rules [:n-mode
                 [:c ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]
