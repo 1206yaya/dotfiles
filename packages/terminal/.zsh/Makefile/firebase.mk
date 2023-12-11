@@ -12,11 +12,23 @@ init:
 	flutterfire configure -y --project=${PROJECT_ID}
 
 start:
-	firebase emulators:start --import=seed/all-products --project ecommerce-andrea
+	firebase emulators:start --import=seed/all-products --project=${PROJECT_ID}
 
-change_plan: # 無料
+deploy_func:
+	cd functions && npm install && npm run build && firebase deploy --only functions --project=${PROJECT_ID}
+
+
+deploy_store_rules: 
+	firebase deploy --only firestore:rules --project=${PROJECT_ID}
+
+deploy_storage_rules: # storage ルールとバケットの設定が一緒に扱われるため、単に storage と指定
+	firebase deploy --only storage --project=${PROJECT_ID} --debug
+
+
+
+open_change_plan: # 無料
 	open "https://console.firebase.google.com/u/0/project/${PROJECT_ID}/usage/details"
-
+		
 # Firestore、FireAuthを有効化してから行う
 view_ext_stripe:
 	open https://extensions.dev/extensions/stripe/firestore-stripe-payments

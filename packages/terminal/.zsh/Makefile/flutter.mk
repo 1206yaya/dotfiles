@@ -35,8 +35,9 @@ get: # pub get
 
 
 clean.ios: # rm Podfile.lock Pods
-	cd ios; rm -rf  Podfile.lock ;rm -rf Pods;pod repo update; cd ..; fvm flutter pub upgrade
-
+	flutter clean; flutter pub get; cd ios; rm -rf  Podfile.lock ; rm -rf Pods; \
+		pod repo update; pod install; cd ..
+		
 func.init: # cloud functions init
 	firebase init 
 

@@ -56,6 +56,9 @@ fi
 if [ -n "$(which exa)" ]; then
     alias ls="exa"
 fi
+function pwd() {
+  builtin pwd | tee >(pbcopy)
+}
 
 alias cat='bat --style=plain --paging=never'
 alias less='bat --style=plain'
@@ -80,7 +83,7 @@ alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias fire="firebase "$@""
 alias mk="make "$@""
 alias genc="openapi-generator "$@""
-
+alias cursor="open -a /Applications/Cursor.app "$@""
 alias rege="fvm flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
 function open() {
   if [[ $@ == "pdf" ]]; then
@@ -123,9 +126,9 @@ END
 
 function ghq() {
   if [[ $1 == "create" ]]; then
-    command ghq create "$2" && cd "$(ghq list -p | grep "$2$")" && code .
+    command ghq create "$2" && builtin cd "$(ghq list -p | grep "$2$")" && code .
   elif [[ $1 == "get" ]]; then
-    command ghq get "$2" && cd "$(ghq list -p | grep "$2$")" && code .
+    command ghq get "$2" && builtin cd "$(ghq list -p | grep "$2$")" && code .
   else
     command ghq "$@"
   fi

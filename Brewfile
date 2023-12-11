@@ -194,7 +194,7 @@ cask "gitkraken"
 cask "webtorrent"
 cask "adobe-acrobat-reader"
 # cask "adoptopenjdk/openjdk/adoptopenjdk11"
-
+cask "meld"
 cask "blackhole-16ch"
 # cask "blender"
 cask "vivaldi"

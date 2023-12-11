@@ -39,14 +39,14 @@
   "[dart]": {
     // andrea
     "editor.codeActionsOnSave": {
-      "source.fixAll": true
+      "source.fixAll": "explicit"
     },
     "editor.rulers": [80],
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": false
+    "editor.wordBasedSuggestions": "off"
     // version1
     // "editor.formatOnSave": true,
     // "editor.formatOnType": true,
@@ -77,7 +77,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   // 👆 Andrea
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "editor.selectionHighlight": false,
   // Flutter
   "dart.previewFlutterUiGuides": true,
@@ -93,7 +93,7 @@
   // ファイルをクリックで開いたら閉じずに開きっぱなしにする
   "workbench.editor.enablePreview": false,
   "editor.codeActionsOnSave": {
-    "quickfix.insertSemicolon": true
+    "quickfix.insertSemicolon": "explicit"
   },
   "editor.showFoldingControls": "always",
   "leetcode.workspaceFolder": "/Users/zak/ghq/github.com/1206yaya/leetcode",
