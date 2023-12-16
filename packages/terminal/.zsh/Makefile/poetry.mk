@@ -6,13 +6,13 @@ help:
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m %-43s\033[0m %s\n", $$1, $$2}' \
 	| sed -e 's/\[32m #-- /[33m/'
 
-_gen_requirements_vscode:
+_gen_resources:
 	mkdir -p ./scripts/Makefile && 	cp -r ${RESOURCE_DIR}/scripts/Makefile ./scripts/
 	./scripts/Makefile/setup.sh
 
 setup:
 	@asdf local python latest
-	@make _gen_requirements_vscode
+	@make _gen_resources
 	@if [ -s .env ]; then echo "exist .env"; else echo ".env is empty" && cp .env.template .env; fi
 	@if [ -s pyproject.toml ]; then poetry install; else echo "pyproject.toml is empty" && poetry init; fi
 	@if [ -s requirements-dev.txt ]; then cat requirements-dev.txt | xargs poetry add -D; else echo "requirements-dev.txt is empty"; fi
