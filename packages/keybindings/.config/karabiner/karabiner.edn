@@ -244,7 +244,8 @@
                  [:t [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleTranslate.app"]]
                  [:a [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]
                  [:x [" open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"]]
-                 [:i [:opena "/Users/zak/Applications/Chrome Apps.localized/chat.gpt.openai.app"]]]}
+                 [:i [:opena "/Users/zak/Applications/Chrome Apps.localized/chat.gpt.openai.app"]]
+                 ]}
         {:des "xmind"
          :rules [:m-mode
                  [:1 [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]]}

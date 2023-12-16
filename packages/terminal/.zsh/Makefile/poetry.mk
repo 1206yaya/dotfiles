@@ -13,6 +13,8 @@ _gen_requirements_vscode:
 setup:
 	@asdf local python latest
 	@make _gen_requirements_vscode
+	@if [ -s .env ]; then echo "exist .env"; else echo ".env is empty" && cp .env.template .env; fi
+	@if [ -s pyproject.toml ]; then poetry install; else echo "pyproject.toml is empty" && poetry init; fi
 	@if [ -s requirements-dev.txt ]; then cat requirements-dev.txt | xargs poetry add -D; else echo "requirements-dev.txt is empty"; fi
 	@if [ -s requirements.txt ]; then cat requirements.txt | xargs poetry add; else echo "requirements.txt is empty"; fi
 
@@ -43,3 +45,4 @@ in:
 run:
 	@echo "Running the crawler..."
 	poetry run python crawler.py
+	poetry run uvicorn api.main:app --reload
