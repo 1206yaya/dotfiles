@@ -20,3 +20,6 @@ setup:
 	
 # @if [ -s requirements-dev.txt ]; then cat requirements-dev.txt | xargs poetry add -D; else echo "requirements-dev.txt is empty"; fi
 # @if [ -s requirements.txt ]; then cat requirements.txt | xargs poetry add; else echo "requirements.txt is empty"; fi
+
+run:
+	poetry run streamlit run home.py
