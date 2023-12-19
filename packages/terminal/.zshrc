@@ -12,6 +12,7 @@ setopt auto_cd
 setopt hist_ignore_dups
 # setopt share_history
 setopt inc_append_history
+setopt NO_NOMATCH
 
 
 # Homebrew, asdf-vm
@@ -907,3 +908,7 @@ function fr() {
 
 
 export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+
+# grit
+export GRIT_INSTALL="$HOME/.grit"
+export PATH="$GRIT_INSTALL/bin:$PATH"

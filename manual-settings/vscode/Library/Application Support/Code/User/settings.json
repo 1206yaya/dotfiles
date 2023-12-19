@@ -77,7 +77,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   // 👆 Andrea
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "editor.selectionHighlight": false,
   // Flutter
   "dart.previewFlutterUiGuides": true,

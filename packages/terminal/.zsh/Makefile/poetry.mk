@@ -38,6 +38,8 @@ clean:
 	@rm -rf *.egg-info
 	@rm -rf poetry.lock .venv
 
+install_kernel: # .ipynbをvscodeから実行するために必要
+	@poetry run python -m pip install ipykernel
 in: 
 	poetry shell
 

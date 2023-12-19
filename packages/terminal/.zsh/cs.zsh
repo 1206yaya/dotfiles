@@ -84,7 +84,7 @@ cs() {
     elif  [[ $@ == "ts" || $@ == "typescript" ]]; then
         mdcat $pathDir/typescript.sh
     elif  [[ $@ == "open" || $@ == "edit" ]]; then
-        subl $pathDir/
+        code $pathDir/
 
     else
         mdcat <<- EOF

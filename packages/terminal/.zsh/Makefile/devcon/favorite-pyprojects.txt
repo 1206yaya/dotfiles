@@ -1,0 +1,7 @@
+streamlit
+
+openai
+pydantic
+langchain
+llama-index
+nltk
