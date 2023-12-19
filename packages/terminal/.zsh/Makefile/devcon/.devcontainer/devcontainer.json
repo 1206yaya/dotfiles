@@ -10,17 +10,16 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["ms-python.black-formatter"],
       "settings": {
-        "editor.formatOnSave": true,
         "terminal.integrated.profiles.linux": {
           "zsh": {
             "path": "/usr/bin/zsh"
           }
         },
-        "terminal.integrated.defaultProfile.linux": "zsh",
-        "python.defaultInterpreterPath": "./.venv/bin/python"
-      }
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+
+      "extensions": ["ms-python.black-formatter"]
     },
     "mounts": [
       {

@@ -17,9 +17,13 @@ setup:
 	@if [ -s poetry.toml ]; then poetry install; else echo "poetry.toml is empty" && poetry config virtualenvs.in-project true --local; fi
 	@if [ -s README.md ]; then poetry install; else echo "README.md is empty" && touch README.md; fi
 	@echo "installed python version: $$(poetry run python --version)"
+
+install:
+	@if [ -s requirements-dev.txt ]; then cat requirements-dev.txt | xargs poetry add -D; else echo "requirements-dev.txt is empty"; fi
+	@if [ -s requirements.txt ]; then cat requirements.txt | xargs poetry add; else echo "requirements.txt is empty"; fi
 	
-# @if [ -s requirements-dev.txt ]; then cat requirements-dev.txt | xargs poetry add -D; else echo "requirements-dev.txt is empty"; fi
-# @if [ -s requirements.txt ]; then cat requirements.txt | xargs poetry add; else echo "requirements.txt is empty"; fi
+in: 
+	poetry shell
 
 run:
 	poetry run streamlit run home.py
