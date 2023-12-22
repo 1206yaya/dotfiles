@@ -38,8 +38,9 @@ clean.ios: # rm Podfile.lock Pods
 	flutter clean; flutter pub get; cd ios; rm -rf  Podfile.lock ; rm -rf Pods; \
 		pod repo update; pod install; cd ..
 		
-func.init: # cloud functions init
-	firebase init 
+firebase.init: # firebase init 
+	fvm flutter pub add firebase_core
+	flutterfire configure
 
 
 add.firebase:
