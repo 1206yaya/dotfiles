@@ -58,8 +58,7 @@
                 :Slack    ["com.tinyspeck.slackmacgap"]
                 :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
                 :vscode   ["com.microsoft.VSCode"]
-                :sublime   ["com.sublimetext.4"]
-                }
+                :sublime   ["com.sublimetext.4"]}
  :Evernote ["com.evernote.Evernote"]
  :templates {:launch "osascript -e 'tell application \"%s\" to activate'"
              :paste "osascript -e '
@@ -152,10 +151,10 @@
             ;; [:left_control    :left_control    nil {:alone {:input :jp}}]
                  ]}
         {:des "VSCode Key Binding"
-         :rules [:vscode 
+         :rules [:vscode
                 ;;  [{:pkey :butotn4}] :!Copen_bracket] ; Ctrl + [
                  [{:pkey :button4} :a] ; Ctrl + [
-        ]} ; Ctrl + [
+]} ; Ctrl + [
 
         {:des "Open mode"
          :rules [:open-mode
@@ -167,7 +166,7 @@
                 ;;  [:e [:open "Brave Browser"]]
                 ;;  [:a [:open "Arc"]]
                  [:a [:open "Alacritty"]]
-                 
+
                  [:e [:open "Evernote"]]
                 ;;  [:n [:open "Postman"]]
                  [:n [:open "Notion"]]
@@ -198,19 +197,15 @@
             ; [:k ["open -F -n -b 'com.microsoft.VSCode' --args /Users/zak/projects/github/1206yaya/dotfiles"]]
             ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
                 ;;  [:a ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/ghq/github.com/1206yaya/mytasks'"]]
-                [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
+                 [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
                  ; [:k ["open -a 'Sublime Text' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
                 ;;  [:j ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "]]
-        ]}
+                 ]}
         {:des "Notion layer"
-        :rules [:n-mode
-                [:c ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]
-                [:t ["open -a 'Notion.app' 'https://www.notion.so/82559e3f040c4b4b97d941ffe7182825?pvs=4'"]]
-                [:y ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]
-                
-                
-                ]
-        }
+         :rules [:n-mode
+                 [:c ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]
+                 [:t ["open -a 'Notion.app' 'https://www.notion.so/82559e3f040c4b4b97d941ffe7182825?pvs=4'"]]
+                 [:y ["open -a 'Notion.app' 'https://www.notion.so/todo-b396f1f6d87943a0a5186d2a1f9912a7?pvs=4'"]]]}
         {:des "v-mode for number pad"
          :rules [:v-mode
                  [:f ["open -F -n -b 'com.microsoft.VSCode' --args $(pbpaste)"]]
@@ -245,8 +240,7 @@
                  [:t [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleTranslate.app"]]
                  [:a [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]
                  [:x [" open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"]]
-                 [:i [:opena "/Users/zak/Applications/Chrome Apps.localized/chat.gpt.openai.app"]]
-                 ]}
+                 [:i [:opena "/Users/zak/Applications/Chrome Apps.localized/chat.gpt.openai.app"]]]}
         {:des "xmind"
          :rules [:m-mode
                  [:1 [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]]}
@@ -425,8 +419,7 @@
                  ; 英単語
                  [:d ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-LCZMl4La4-ying-dan-yu; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]
                  ; IT用語
-                 [:i ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-lAyeCrKJ2-ityong-yu; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]
-                ]}
+                 [:i ["open -F -na 'Google Chrome' --args https://chat.openai.com/g/g-lAyeCrKJ2-ityong-yu; osascript -e 'delay 1' -e 'tell application \"System Events\" to keystroke \"v\" using command down' -e 'delay 1' -e 'tell application \"System Events\" to keystroke return'"]]]}
         #_{:des "x-mode for some programming pairs like <= (not yet implemented)"
            :rules [:x-mode]}
 

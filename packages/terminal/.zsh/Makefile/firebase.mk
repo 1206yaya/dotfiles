@@ -12,13 +12,19 @@ init:
 	flutterfire configure -y --project=${PROJECT_ID}
 
 start:
-	firebase emulators:start --import=seed/all-products --project=${PROJECT_ID}
+	firebase emulators:start  --inspect-functions --import=seed/all-products --project=${PROJECT_ID}
 
 deploy_func:
 	cd functions && npm install && npm run build && firebase deploy --only functions --project=${PROJECT_ID}
 # 仮想環境をアクティベートしてデプロイする必要がある
-	cd functions && source venv/bin/activate && python -m pip install -r requirements.txt && cd .. && firebase deploy --only functions --project=${PROJECT_ID}
-
+# gcloud auth application-default login && \
+# cd functions && \
+# 	source venv/bin/activate && \
+# 	python -m pip install -r requirements.txt && \
+# 	cd .. && \
+# 	GOOGLE_APPLICATION_CREDENTIALS=$(PATH_TO_SYNC_SPANNER_KEYS) && \
+# 	firebase deploy --only functions --project=${PROJECT_ID}
+		
 deploy_store_rules: 
 	firebase deploy --only firestore:rules --project=${PROJECT_ID}
 

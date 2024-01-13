@@ -50,7 +50,8 @@ add.firebase:
 		firebase_core \
 		cloud_firestore \
 		firebase_ui_firestore \
-		firebase_storage
+		firebase_storage \
+		cloud_functions
 
 add.util:
 	fvm flutter pub add \

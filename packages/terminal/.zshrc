@@ -14,7 +14,9 @@ setopt hist_ignore_dups
 setopt inc_append_history
 setopt NO_NOMATCH
 
-
+if [[ -f ~/.secrets ]]; then
+  export $(grep -v '^#' ~/.secrets | xargs)
+fi
 # Homebrew, asdf-vm
 if [ -f "/opt/homebrew/bin/brew"  ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -86,6 +88,7 @@ alias mk="make "$@""
 alias genc="openapi-generator "$@""
 alias cursor="open -a /Applications/Cursor.app "$@""
 alias rege="fvm flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
+alias obsidian="open -a /Applications/Obsidian.app "$@""
 function open() {
   if [[ $@ == "pdf" ]]; then
     command open /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
@@ -93,12 +96,15 @@ function open() {
     command open $@
   fi
 }
-
-function cd() {
+alias obzak="cd  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/ZAK"
+function ccd() {
   if [[ $@ == "notes" || $@ == "note" ]]; then
     command cd  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes
   elif  [[ $@ == "pdf" ]]; then
     command open  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
+  elif  [[ $@ == "aaa" ]]; then
+    echo "aaa"
+    command cd  /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/ZAK
   else
     command cd $@
   fi
@@ -192,7 +198,7 @@ EOF
 
 }
 function makefile() {
-  pathDir="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
+  pathDir="~/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
   ext="mk"
     if [[ $@ == "firebase" || $@ == "fir" || $@ == "flutterfire" ]]; then
         cat $pathDir/firebase.$ext
@@ -202,7 +208,8 @@ function makefile() {
         cat $pathDir/function.$ext
     elif  [[ $@ == "flutter" ]]; then
         cat $pathDir/flutter.$ext
-
+    elif  [[ $@ == "venv" ]]; then
+        cat $pathDir/venv.$ext
     elif  [[ $@ == "open" || $@ == "edit" ]]; then
         subl $pathDir/
 
@@ -332,7 +339,7 @@ EOF
 }
 function chatutil() {
   mkdir -p chatutils
-  tree -fFi -I '.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  tree -fFi -I '*.pyc|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   while IFS= read -r filepath

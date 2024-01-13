@@ -259,3 +259,4 @@ fi
 ###########################################################
 VSCODE_EXTENSIONS_FILE=~/ghq/github.com/1206yaya/dotfiles/manual-settings/vscode/vscode-extensions.txt
 code --list-extensions > "$VSCODE_EXTENSIONS_FILE"
+npm install --global @azu/github-label-setup

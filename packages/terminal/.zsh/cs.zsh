@@ -12,6 +12,8 @@ cs() {
         mdcat $pathDir/postgresql.md
     elif  [[ $@ == "asdf" ]]; then
         mdcat $pathDir/asdf.md
+    elif  [[ $@ == "npm" ]]; then
+        mdcat $pathDir/npm.md
     elif  [[ $@ == "jupyter" ]]; then
         mdcat $pathDir/jupyter.md
     elif  [[ $@ == "gc" || $@ == "gcloud" ]]; then
