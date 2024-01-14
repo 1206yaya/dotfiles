@@ -1,4 +1,7 @@
-{;; rule [:period ["media-mode" 1] nil {:afterup ["media-mode" 0] :alone :period}]
+{;;! マウスの設定をする時は、Karabiner-ElementsのSettings > Devices で Modify events をONにする
+;;! https://karabiner-elements.pqrs.org/docs/help/how-to/mouse-button/
+
+        ;; rule [:period ["media-mode" 1] nil {:afterup ["media-mode" 0] :alone :period}]
     ;;       |_____| |_______________| |_| |_________________________________________|
     ;;        <from>    <to>      <conditions>         <other options>
 
@@ -58,7 +61,8 @@
                 :Slack    ["com.tinyspeck.slackmacgap"]
                 :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
                 :vscode   ["com.microsoft.VSCode"]
-                :sublime   ["com.sublimetext.4"]}
+                :sublime   ["com.sublimetext.4"]
+                :Obsidian ["^md.obsidian"]}
  :Evernote ["com.evernote.Evernote"]
  :templates {:launch "osascript -e 'tell application \"%s\" to activate'"
              :paste "osascript -e '
@@ -103,7 +107,9 @@
                         keystroke \"v\" using command down
                     end tell
                   '"}
- :simlayers {:chrome-mode      {:key :d                                :condi :Chrome}
+ :simlayers {:chrome-mode
+             {:key :d
+              :condi :Chrome}
              :open-mode {:key :0}
              :2-mode {:key :2}
              :n-mode {:key :n}    ; emoji 
@@ -150,12 +156,16 @@
          :rules [[:left_command    :left_command    nil {:alone {:input :en}}]
             ;; [:left_control    :left_control    nil {:alone {:input :jp}}]
                  ]}
-        {:des "VSCode Key Binding"
-         :rules [:vscode
-                ;;  [{:pkey :butotn4}] :!Copen_bracket] ; Ctrl + [
-                 [{:pkey :button4} :a] ; Ctrl + [
-]} ; Ctrl + [
-
+        ;; {:des "VSCode Key Binding"
+        ;;  :rules [:vscode
+        ;;         ;;  [{:pkey :butotn4}] :!Copen_bracket] ; Ctrl + [
+        ;;          [{:pkey :button4} :!CO] ; Ctrl + [
+        ;;          ]}
+        {:des "Obsidian用のキーマップ"
+         :rules [;;  
+                 :Obsidian
+                 [{:pkey :button4} :!COleft_arrow] ;; Ctrl + option + ←　
+                 [{:pkey :button5} :!COright_arrow]]}
         {:des "Open mode"
          :rules [:open-mode
                 ;;  [:w [:open "WebStorm"]]
@@ -174,6 +184,8 @@
                  [:c [:open "Google Chrome"]]
                  [:a [:open "Alacritty"]]
                  [:b [:open "Obsidian"]]
+                 [:1 ["open obsidian://open?vault=obsidian_note_system&file=/Users/zak/ghq/github.com/1206yaya/obsidian_note_system"]]
+                 [:2 ["open obsidian://open?vault=ZAK&file=/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/ZAK"]]
                  [:f [:open "Finder"]]
                 ;;  [:x [:open "Vivaldi"]]
                  [:x [:open "iThoughtsX"]]
@@ -182,6 +194,8 @@
             ;; [:m [:open "Morgen"]]
                 ;;  [:d [:open "Dictionary"]]
                  [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
+                ;;  open trello 雑務https://trello.com/c/fibLYBZG
+                 [:z ["open -F -na 'Google Chrome' --args https://trello.com/c/fibLYBZG"]]
                 ;;  [:g ["open  /Users/zak/chrome_apps/TogglTime.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Planyway.app"]]
                  [:m [:opena "/Users/zak/Applications/Chrome Apps.localized/Notepad.app"]]

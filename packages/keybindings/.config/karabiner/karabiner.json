@@ -221,18 +221,26 @@
       } ]
     },
     "devices" : [ {
-      "disable_built_in_keyboard_if_exists" : false,
-      "fn_function_keys" : [ ],
+      "mouse_swap_xy" : false,
       "identifiers" : {
+        "is_game_pad" : false,
         "is_keyboard" : true,
         "is_pointing_device" : false,
         "product_id" : 49734,
         "vendor_id" : 1133
       },
+      "fn_function_keys" : [ ],
       "ignore" : true,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
       "manipulate_caps_lock_led" : true,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
       "simple_modifications" : [ ],
-      "treat_as_built_in_keyboard" : false
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
     } ],
     "fn_function_keys" : [ {
       "from" : {
@@ -2615,17 +2623,31 @@
           "type" : "basic"
         } ]
       }, {
-        "description" : "VSCode Key Binding",
+        "description" : "Obsidian用のキーマップ",
         "manipulators" : [ {
           "from" : {
             "pointing_button" : "button4"
           },
           "to" : [ {
-            "key_code" : "a"
+            "key_code" : "left_arrow",
+            "modifiers" : [ "left_command", "left_option" ]
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_if",
-            "bundle_identifiers" : [ "com.microsoft.VSCode" ]
+            "bundle_identifiers" : [ "^md.obsidian" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button5"
+          },
+          "to" : [ {
+            "key_code" : "right_arrow",
+            "modifiers" : [ "left_command", "left_option" ]
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^md.obsidian" ]
           } ],
           "type" : "basic"
         } ]
@@ -3038,6 +3060,96 @@
           }
         }, {
           "from" : {
+            "key_code" : "1"
+          },
+          "to" : [ {
+            "shell_command" : "open obsidian://open?vault=obsidian_note_system&file=/Users/zak/ghq/github.com/1206yaya/obsidian_note_system"
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open obsidian://open?vault=obsidian_note_system&file=/Users/zak/ghq/github.com/1206yaya/obsidian_note_system"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "0"
+            }, {
+              "key_code" : "1"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "2"
+          },
+          "to" : [ {
+            "shell_command" : "open obsidian://open?vault=ZAK&file=/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/ZAK"
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open obsidian://open?vault=ZAK&file=/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/ZAK"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "0"
+            }, {
+              "key_code" : "2"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
             "key_code" : "f"
           },
           "to" : [ {
@@ -3202,6 +3314,51 @@
               "key_code" : "0"
             }, {
               "key_code" : "r"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "open-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "z"
+          },
+          "to" : [ {
+            "shell_command" : "open -F -na 'Google Chrome' --args https://trello.com/c/fibLYBZG"
+          } ],
+          "conditions" : [ {
+            "name" : "open-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "open-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -F -na 'Google Chrome' --args https://trello.com/c/fibLYBZG"
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "0"
+            }, {
+              "key_code" : "z"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -9545,83 +9702,131 @@
       } ]
     },
     "devices" : [ {
-      "disable_built_in_keyboard_if_exists" : false,
-      "fn_function_keys" : [ ],
+      "mouse_swap_xy" : false,
       "identifiers" : {
+        "is_game_pad" : false,
         "is_keyboard" : true,
         "is_pointing_device" : false,
         "product_id" : 641,
         "vendor_id" : 1452
       },
-      "ignore" : false,
-      "manipulate_caps_lock_led" : true,
-      "simple_modifications" : [ ],
-      "treat_as_built_in_keyboard" : false
-    }, {
-      "disable_built_in_keyboard_if_exists" : false,
       "fn_function_keys" : [ ],
+      "ignore" : false,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
+      "manipulate_caps_lock_led" : true,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
+    }, {
+      "mouse_swap_xy" : false,
       "identifiers" : {
+        "is_game_pad" : false,
         "is_keyboard" : false,
         "is_pointing_device" : true,
         "product_id" : 641,
         "vendor_id" : 1452
       },
-      "ignore" : true,
-      "manipulate_caps_lock_led" : false,
-      "simple_modifications" : [ ],
-      "treat_as_built_in_keyboard" : false
-    }, {
-      "disable_built_in_keyboard_if_exists" : false,
       "fn_function_keys" : [ ],
+      "ignore" : true,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
+      "manipulate_caps_lock_led" : false,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
+    }, {
+      "mouse_swap_xy" : false,
       "identifiers" : {
+        "is_game_pad" : false,
         "is_keyboard" : true,
         "is_pointing_device" : false,
         "product_id" : 591,
         "vendor_id" : 1452
       },
-      "ignore" : false,
-      "manipulate_caps_lock_led" : true,
-      "simple_modifications" : [ ],
-      "treat_as_built_in_keyboard" : false
-    }, {
-      "disable_built_in_keyboard_if_exists" : false,
       "fn_function_keys" : [ ],
+      "ignore" : false,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
+      "manipulate_caps_lock_led" : true,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
+    }, {
+      "mouse_swap_xy" : false,
       "identifiers" : {
+        "is_game_pad" : false,
         "is_keyboard" : false,
         "is_pointing_device" : true,
         "product_id" : 32925,
         "vendor_id" : 1149
       },
-      "ignore" : true,
-      "manipulate_caps_lock_led" : false,
-      "simple_modifications" : [ ],
-      "treat_as_built_in_keyboard" : false
-    }, {
-      "disable_built_in_keyboard_if_exists" : false,
       "fn_function_keys" : [ ],
+      "ignore" : true,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
+      "manipulate_caps_lock_led" : false,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
+    }, {
+      "mouse_swap_xy" : false,
       "identifiers" : {
+        "is_game_pad" : false,
         "is_keyboard" : true,
         "is_pointing_device" : false,
         "product_id" : 34304,
         "vendor_id" : 1452
       },
-      "ignore" : false,
-      "manipulate_caps_lock_led" : true,
-      "simple_modifications" : [ ],
-      "treat_as_built_in_keyboard" : false
-    }, {
-      "disable_built_in_keyboard_if_exists" : false,
       "fn_function_keys" : [ ],
+      "ignore" : false,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
+      "manipulate_caps_lock_led" : true,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
+    }, {
+      "mouse_swap_xy" : false,
       "identifiers" : {
+        "is_game_pad" : false,
         "is_keyboard" : false,
         "is_pointing_device" : true,
         "product_id" : 251,
         "vendor_id" : 1390
       },
-      "ignore" : true,
+      "fn_function_keys" : [ ],
+      "ignore" : false,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
       "manipulate_caps_lock_led" : false,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
       "simple_modifications" : [ ],
-      "treat_as_built_in_keyboard" : false
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
     } ],
     "fn_function_keys" : [ {
       "from" : {
