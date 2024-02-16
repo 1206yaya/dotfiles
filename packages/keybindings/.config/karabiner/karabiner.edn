@@ -62,9 +62,11 @@
                 :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
                 :vscode   ["com.microsoft.VSCode"]
                 :sublime   ["com.sublimetext.4"]
+                :Figma    ["com.figma.Desktop"]
                 :Obsidian ["^md.obsidian"]}
  :Evernote ["com.evernote.Evernote"]
  :templates {:launch "osascript -e 'tell application \"%s\" to activate'"
+             :applescript "osascript '/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/keybindings/.config/karabiner/applescripts/%s'"
              :paste "osascript -e '
     set the clipboard to \"%s\"
     tell application \"System Events\"
@@ -139,7 +141,14 @@
                     ;; :jp {:input_source_id "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"}
                   }
 
- :main [{:des "chrome"
+ :main [
+        {:des "Key binding Template"
+                :rules [;;
+                ;;
+                ]
+                ;;
+        }
+        {:des "chrome"
          :rules [:chrome-mode
                  [:e [:open_url "https://mail.google.com/"]]
                  [:m [:open_url "https://www.google.com/maps/"]]
@@ -161,10 +170,31 @@
         ;;         ;;  [{:pkey :butotn4}] :!Copen_bracket] ; Ctrl + [
         ;;          [{:pkey :button4} :!CO] ; Ctrl + [
         ;;          ]}
-        {:des "Obsidian用のキーマップ"
+        {:des "Figma key binding"
+        :rules [;;
+        :Figma
+        [{:pkey :button4} :!Fup_arrow]
+        [{:pkey :button5} :!Fdown_arrow]
+        ]
+        ;;
+        }
+        {:des "Obsidian key binding"
          :rules [;;  
                  :Obsidian
                  [{:pkey :button4} :!COleft_arrow] ;; Ctrl + option + ←　
+                 [{:pkey :button5} :!COright_arrow]]}
+        {:des "Chrome key binding"
+         :rules [;;  
+                 :Chrome
+                 [{:pkey :button11} :a]
+                 [{:pkey :button12} :s]
+                 [{:pkey :button13} :d]
+                 [{:pkey :button16} :e]
+                 [{:pkey :button14} :1]
+                 [{:pkey :button15} :2]
+                 [{:pkey :button10} :!Cc]
+                ;;  [:1 [:!Cc] :b]
+                ;; [:3 [:!Cc [:applescript "netflix_english_tool_py.scpt"]]]
                  [{:pkey :button5} :!COright_arrow]]}
         {:des "Open mode"
          :rules [:open-mode
@@ -249,11 +279,13 @@
         {:des "open for WEB Site"
          :rules [:2-mode
                  [:c [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleCalendar.app"]]
+                 [:n [:opena "/Users/zak/Applications/Chrome Apps.localized/Netflix.app"]]
+                 [:y [:opena "/Users/zak/Applications/Chrome Apps.localized/Youtube.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Perplexity.app"]]
                  [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app"]]
                  [:t [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleTranslate.app"]]
                  [:a [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]
-                 [:x [" open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"]]
+                ;;  [:x [" open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"]]
                  [:i [:opena "/Users/zak/Applications/Chrome Apps.localized/chat.gpt.openai.app"]]]}
         {:des "xmind"
          :rules [:m-mode

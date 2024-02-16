@@ -1,5 +1,7 @@
 
 # include functions/Makefile
+export PROJECT_ID=storybook-firebase-70993
+export REGION=us-central
 
 list: # Show this help.
 	@awk -F':|#' '/^[a-zA-Z0-9_-]+:.*#/ { if ($$1 != "list") print $$1 ": " $$3 }' Makefile
@@ -40,8 +42,15 @@ clean.ios: # rm Podfile.lock Pods
 		
 firebase.init: # firebase init 
 	fvm flutter pub add firebase_core
-	flutterfire configure
+	flutterfire configure -y --project=${PROJECT_ID}
 
+
+add.firebase.store:
+	fvm flutter pub add \
+		firebase_core \
+		cloud_firestore \
+		firebase_ui_firestore \
+		
 
 add.firebase:
 	fvm flutter pub add \
@@ -49,9 +58,29 @@ add.firebase:
 		firebase_ui_auth \
 		firebase_core \
 		cloud_firestore \
+		cloud_firestore_web \
 		firebase_ui_firestore \
 		firebase_storage \
 		cloud_functions
+
+add.util.riverpod:
+	fvm flutter pub add \
+		flutter_riverpod \
+		riverpod_annotation \
+		flutter_hooks \
+		hooks_riverpod 
+
+	fvm flutter pub add \
+		flutter_lints \
+		riverpod_lint \
+		custom_lint \
+		build_runner \
+		riverpod_generator \
+		json_serializable \
+		--dev 
+
+	fvm flutter pub add \
+		freezed 
 
 add.util:
 	fvm flutter pub add \

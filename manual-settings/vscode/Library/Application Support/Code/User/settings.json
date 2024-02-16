@@ -77,7 +77,7 @@
   "explorer.fileNesting.    enabled": true,
   "explorer.fileNesting.expand": false,
   // 👆 Andrea
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "editor.selectionHighlight": false,
   // Flutter
   "dart.previewFlutterUiGuides": true,
@@ -198,8 +198,8 @@
   "dart.checkForSdkUpdates": false,
   "bracket-pair-colorizer-2.depreciation-notice": false,
   "[python]": {
-    "editor.formatOnType": true,
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.formatOnType": true
+    // "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "google-translate.firstLanguage": "zh-cn",
   "google-translate.secondLanguage": "ja",
@@ -275,5 +275,8 @@
   "notebook.formatOnSave.enabled": true,
   "remote.autoForwardPortsSource": "hybrid",
   "totalTypeScript.hiddenTips": ["passing-generics-to-types"],
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vscodetonotion.api": "secret_erBORnFvsVOEx4n2cMUlMUNJy5gNjSXg3doQnELJ8C3",
+  "vscodetonotion.databaseId": "27aeb68aeb9944c88391f5e138f51bc3",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

@@ -17,6 +17,7 @@ donjayamanne.githistory
 dracula-theme.theme-dracula
 dsznajder.es7-react-js-snippets
 esbenp.prettier-vscode
+figma.figma-vscode-extension
 flutterando.flutter-coverage
 gera2ld.markmap-vscode
 Gerrnperl.outline-map
@@ -54,6 +55,7 @@ ms-vscode.live-server
 ms-vscode.makefile-tools
 ms-vscode.remote-explorer
 mushan.vscode-paste-image
+naomina121.vscodetonotion
 Nash.awesome-flutter-snippets
 NguyenHoangLam.beautiful-dracula
 peakchen90.open-html-in-browser

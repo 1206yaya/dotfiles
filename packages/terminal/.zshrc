@@ -46,6 +46,7 @@ alias iosopen="open ./ios/Runner.xcworkspace"
 alias keycodes="cat /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h"
 # @Flutter Alias
 alias fl='flutter'
+alias localip="ifconfig en0 | grep 'inet ' | awk '{ print $2 }'"
 alias gl='gcloud'
 alias pt='poetry run pytest'
 alias pr='poetry run'
@@ -63,6 +64,7 @@ function pwd() {
   builtin pwd | tee >(pbcopy)
 }
 
+alias typora="open -a /Applications/Typora.app"
 alias cat='bat --style=plain --paging=never'
 alias less='bat --style=plain'
 alias ll="ls -lah --git --sort modified"
@@ -131,6 +133,10 @@ end tell
 END
 }
 
+function npminstall (){
+  npm install -g firebase-tools
+
+}
 function ghq() {
   if [[ $1 == "create" ]]; then
     command ghq create "$2" && builtin cd "$(ghq list -p | grep "$2$")" && code .
@@ -198,12 +204,14 @@ EOF
 
 }
 function makefile() {
-  pathDir="~/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
+  pathDir="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
   ext="mk"
     if [[ $@ == "firebase" || $@ == "fir" || $@ == "flutterfire" ]]; then
         cat $pathDir/firebase.$ext
     elif  [[ $@ == "py" || $@ == "python" || $@ == "poetry" ]]; then
         cat $pathDir/poetry.$ext
+    elif [[ $@ == "prompt" ]]; then
+        cat $pathDir/prompt.html
     elif  [[ $@ == "function" ]]; then
         cat $pathDir/function.$ext
     elif  [[ $@ == "flutter" ]]; then

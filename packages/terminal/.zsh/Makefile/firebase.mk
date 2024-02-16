@@ -8,7 +8,11 @@ list:
 export PROJECT_ID=andrea-ecommerce-202312-8ce4a
 export REGION=us-central
 
+# Download the Configurations file from Firebase Console
 init:
+	firebase init
+
+flutter_connect:
 	flutterfire configure -y --project=${PROJECT_ID}
 
 start:

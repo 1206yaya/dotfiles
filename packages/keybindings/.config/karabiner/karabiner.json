@@ -2623,7 +2623,36 @@
           "type" : "basic"
         } ]
       }, {
-        "description" : "Obsidian用のキーマップ",
+        "description" : "Figma key binding",
+        "manipulators" : [ {
+          "from" : {
+            "pointing_button" : "button4"
+          },
+          "to" : [ {
+            "key_code" : "up_arrow",
+            "modifiers" : [ "fn" ]
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.figma.Desktop" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button5"
+          },
+          "to" : [ {
+            "key_code" : "down_arrow",
+            "modifiers" : [ "fn" ]
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.figma.Desktop" ]
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Obsidian key binding",
         "manipulators" : [ {
           "from" : {
             "pointing_button" : "button4"
@@ -2648,6 +2677,107 @@
           "conditions" : [ {
             "type" : "frontmost_application_if",
             "bundle_identifiers" : [ "^md.obsidian" ]
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Chrome key binding",
+        "manipulators" : [ {
+          "from" : {
+            "pointing_button" : "button11"
+          },
+          "to" : [ {
+            "key_code" : "a"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button12"
+          },
+          "to" : [ {
+            "key_code" : "s"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button13"
+          },
+          "to" : [ {
+            "key_code" : "d"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button16"
+          },
+          "to" : [ {
+            "key_code" : "e"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button14"
+          },
+          "to" : [ {
+            "key_code" : "1"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button15"
+          },
+          "to" : [ {
+            "key_code" : "2"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button10"
+          },
+          "to" : [ {
+            "key_code" : "c",
+            "modifiers" : [ "left_command" ]
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "pointing_button" : "button5"
+          },
+          "to" : [ {
+            "key_code" : "right_arrow",
+            "modifiers" : [ "left_command", "left_option" ]
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.google.Chrome", "com.google.Chrome.beta" ]
           } ],
           "type" : "basic"
         } ]
@@ -4466,6 +4596,96 @@
           }
         }, {
           "from" : {
+            "key_code" : "n"
+          },
+          "to" : [ {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Netflix.app\" "
+          } ],
+          "conditions" : [ {
+            "name" : "2-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "2-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Netflix.app\" "
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "2"
+            }, {
+              "key_code" : "n"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "2-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
+            "key_code" : "y"
+          },
+          "to" : [ {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Youtube.app\" "
+          } ],
+          "conditions" : [ {
+            "name" : "2-mode",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "type" : "basic",
+          "parameters" : {
+            "basic.simultaneous_threshold_milliseconds" : 500
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "2-mode",
+              "value" : 1
+            }
+          }, {
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Youtube.app\" "
+          } ],
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "2"
+            }, {
+              "key_code" : "y"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : true,
+              "key_down_order" : "strict",
+              "key_up_order" : "strict_inverse",
+              "key_up_when" : "any",
+              "to_after_key_up" : [ {
+                "set_variable" : {
+                  "name" : "2-mode",
+                  "value" : 0
+                }
+              } ]
+            }
+          }
+        }, {
+          "from" : {
             "key_code" : "p"
           },
           "to" : [ {
@@ -4630,51 +4850,6 @@
               "key_code" : "2"
             }, {
               "key_code" : "a"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : true,
-              "key_down_order" : "strict",
-              "key_up_order" : "strict_inverse",
-              "key_up_when" : "any",
-              "to_after_key_up" : [ {
-                "set_variable" : {
-                  "name" : "2-mode",
-                  "value" : 0
-                }
-              } ]
-            }
-          }
-        }, {
-          "from" : {
-            "key_code" : "x"
-          },
-          "to" : [ {
-            "shell_command" : " open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"
-          } ],
-          "conditions" : [ {
-            "name" : "2-mode",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "type" : "basic",
-          "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 500
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "2-mode",
-              "value" : 1
-            }
-          }, {
-            "shell_command" : " open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"
-          } ],
-          "from" : {
-            "simultaneous" : [ {
-              "key_code" : "2"
-            }, {
-              "key_code" : "x"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -9825,6 +10000,146 @@
       "mouse_flip_y" : false,
       "mouse_swap_wheels" : false,
       "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false,
+      "mouse_flip_x" : false
+    }, {
+      "mouse_swap_xy" : false,
+      "identifiers" : {
+        "is_game_pad" : false,
+        "is_keyboard" : true,
+        "is_pointing_device" : false,
+        "product_id" : 32767,
+        "vendor_id" : 6700
+      },
+      "fn_function_keys" : [ ],
+      "ignore" : false,
+      "disable_built_in_keyboard_if_exists" : false,
+      "mouse_flip_vertical_wheel" : false,
+      "game_pad_swap_sticks" : false,
+      "mouse_flip_horizontal_wheel" : false,
+      "manipulate_caps_lock_led" : true,
+      "mouse_flip_y" : false,
+      "mouse_swap_wheels" : false,
+      "simple_modifications" : [ {
+        "from" : {
+          "key_code" : "keypad_0"
+        },
+        "to" : [ {
+          "pointing_button" : "button10"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_1"
+        },
+        "to" : [ {
+          "pointing_button" : "button11"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_2"
+        },
+        "to" : [ {
+          "pointing_button" : "button12"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_3"
+        },
+        "to" : [ {
+          "pointing_button" : "button13"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_4"
+        },
+        "to" : [ {
+          "pointing_button" : "button14"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_5"
+        },
+        "to" : [ {
+          "pointing_button" : "button15"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_6"
+        },
+        "to" : [ {
+          "pointing_button" : "button16"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_7"
+        },
+        "to" : [ {
+          "pointing_button" : "button17"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_8"
+        },
+        "to" : [ {
+          "pointing_button" : "button18"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_9"
+        },
+        "to" : [ {
+          "pointing_button" : "button19"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_num_lock"
+        },
+        "to" : [ {
+          "pointing_button" : "button20"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_slash"
+        },
+        "to" : [ {
+          "pointing_button" : "button21"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_asterisk"
+        },
+        "to" : [ {
+          "pointing_button" : "button22"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "keypad_hyphen"
+        },
+        "to" : [ {
+          "pointing_button" : "button23"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "escape"
+        },
+        "to" : [ {
+          "pointing_button" : "button24"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "tab"
+        },
+        "to" : [ {
+          "pointing_button" : "button25"
+        } ]
+      }, {
+        "from" : {
+          "key_code" : "delete_or_backspace"
+        },
+        "to" : [ {
+          "pointing_button" : "button26"
+        } ]
+      } ],
       "treat_as_built_in_keyboard" : false,
       "mouse_flip_x" : false
     } ],
