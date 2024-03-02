@@ -4734,7 +4734,7 @@
             "key_code" : "g"
           },
           "to" : [ {
-            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app\" "
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Grimoire.app\" "
           } ],
           "conditions" : [ {
             "name" : "2-mode",
@@ -4753,7 +4753,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app\" "
+            "shell_command" : "open -a \"/Users/zak/Applications/Chrome Apps.localized/Grimoire.app\" "
           } ],
           "from" : {
             "simultaneous" : [ {

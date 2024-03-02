@@ -278,5 +278,6 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vscodetonotion.api": "secret_erBORnFvsVOEx4n2cMUlMUNJy5gNjSXg3doQnELJ8C3",
   "vscodetonotion.databaseId": "27aeb68aeb9944c88391f5e138f51bc3",
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.updateImportsOnFileMove.enabled": "never"
 }

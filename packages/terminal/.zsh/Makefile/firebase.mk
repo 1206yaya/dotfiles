@@ -16,7 +16,14 @@ flutter_connect:
 	flutterfire configure -y --project=${PROJECT_ID}
 
 start:
-	firebase emulators:start  --inspect-functions --import=seed/all-products --project=${PROJECT_ID}
+	firebase emulators:start  --inspect-functions --import=seed/all-products --project=${PROJECT_ID} --only firestore
+	
+watch.tsc:
+	cd functions && npx tsc --watch
+
+start.functions:
+	make watch.tsc &
+	cd functions && firebase emulators:start --only functions  --inspect-functions
 
 deploy_func:
 	cd functions && npm install && npm run build && firebase deploy --only functions --project=${PROJECT_ID}

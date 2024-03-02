@@ -135,6 +135,8 @@ END
 
 function npminstall (){
   npm install -g firebase-tools
+  npm install -g tsc
+
 
 }
 function ghq() {
@@ -227,6 +229,43 @@ Nothing $@
 EOF
     fi
 }
+function makefile() {
+  pathDir="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
+  # 初期の拡張子を設定
+  ext="mk"
+
+  # 引数に基づいてファイル名を構築し、ショートカットを考慮
+  case "$1" in
+    firebase|fir|flutterfire)
+      filename="firebase.$ext"
+      ;;
+    py|python|poetry)
+      filename="poetry.$ext"
+      ;;
+    open|edit)
+      subl $pathDir/
+      return
+      ;;
+    *)
+      # 特に設定がない場合は引数をそのままファイル名として扱う
+      filename="${1}.$ext"
+      if [ ! -f "$pathDir/$filename" ]; then
+          # 拡張子が.htmlの場合を考慮
+          ext="html"
+          filename="${1}.$ext"
+      fi
+      ;;
+  esac
+
+  # ファイルの存在をチェックして、存在すればその内容を表示
+  if [ -f "$pathDir/$filename" ]; then
+    cat "$pathDir/$filename"
+  else
+    echo "No makefile found for $1"
+  fi
+}
+
+
 
 # function makefile() {
 
@@ -347,7 +386,7 @@ EOF
 }
 function chatutil() {
   mkdir -p chatutils
-  tree -fFi -I '*.pyc|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*.json|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  tree -fFi -I '*.pyc|dist|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   while IFS= read -r filepath

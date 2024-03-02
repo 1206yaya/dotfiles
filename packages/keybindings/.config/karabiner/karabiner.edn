@@ -282,7 +282,7 @@
                  [:n [:opena "/Users/zak/Applications/Chrome Apps.localized/Netflix.app"]]
                  [:y [:opena "/Users/zak/Applications/Chrome Apps.localized/Youtube.app"]]
                  [:p [:opena "/Users/zak/Applications/Chrome Apps.localized/Perplexity.app"]]
-                 [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/TwitterURLGenerator.app"]]
+                 [:g [:opena "/Users/zak/Applications/Chrome Apps.localized/Grimoire.app"]]
                  [:t [:opena "/Users/zak/Applications/Chrome Apps.localized/GoogleTranslate.app"]]
                  [:a [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]
                 ;;  [:x [" open -F -n -b 'com.toketaware.ithoughtsx.mas' --args '/Users/zak/Library/Mobile Documents/iCloud~com~toketaware~ios~ithoughts/Documents/MyPlan.itmz'"]]
