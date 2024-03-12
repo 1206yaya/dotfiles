@@ -83,13 +83,6 @@
   "dart.previewFlutterUiGuides": true,
   "dart.previewFlutterUiGuidesCustomTracking": true,
   "editor.accessibilitySupport": "off",
-  // soundを消す
-  "audioCues.lineHasBreakpoint": "off",
-  "audioCues.lineHasError": "off",
-  "audioCues.lineHasFoldedArea": "off",
-  "audioCues.lineHasInlineSuggestion": "off",
-  "audioCues.onDebugBreak": "off",
-  "audioCues.noInlayHints": "off",
   // ファイルをクリックで開いたら閉じずに開きっぱなしにする
   "workbench.editor.enablePreview": false,
   "editor.codeActionsOnSave": {
@@ -279,5 +272,24 @@
   "vscodetonotion.api": "secret_erBORnFvsVOEx4n2cMUlMUNJy5gNjSXg3doQnELJ8C3",
   "vscodetonotion.databaseId": "27aeb68aeb9944c88391f5e138f51bc3",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "javascript.updateImportsOnFileMove.enabled": "never"
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "accessibility.signals.lineHasError": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasFoldedArea": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasBreakpoint": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasInlineSuggestion": {
+    "sound": "off"
+  },
+  "accessibility.signals.onDebugBreak": {
+    "sound": "off"
+  },
+  "accessibility.signals.noInlayHints": {
+    "sound": "off"
+  },
+  "workbench.statusBar.visible": false
 }

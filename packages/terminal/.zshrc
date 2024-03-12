@@ -136,6 +136,7 @@ END
 function npminstall (){
   npm install -g firebase-tools
   npm install -g tsc
+  npm install -g typesync
 
 
 }
@@ -386,7 +387,7 @@ EOF
 }
 function chatutil() {
   mkdir -p chatutils
-  tree -fFi -I '*.pyc|dist|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  tree -fFi -I '*.pyc|dist|package-lock.json|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   while IFS= read -r filepath
@@ -751,7 +752,7 @@ fi
 
 alias pqstart="brew services start postgresql"
 alias pg="psql postgres"
-alias pqconn="psql -h localhost -U postgres"
+alias pqconn="psql -h localhost -U zak"
 function pqhelp() {
 mdcat <<'EOF'
 
@@ -966,3 +967,4 @@ export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 # grit
 export GRIT_INSTALL="$HOME/.grit"
 export PATH="$GRIT_INSTALL/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@16/bin:$PATH"

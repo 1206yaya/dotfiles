@@ -38,7 +38,7 @@ brew "iproute2mac"
 ## For Rust
 # brew "dust"
 # brew "ethereum" 
-
+brew "leveldb"
 ## Make if colorul for Terminal 
 brew "exa"
 cask "iterm2"
@@ -159,6 +159,7 @@ brew "gettext"
 brew "meson"
 brew "ninja"
 brew "mitmproxy"
+brew "tcl-tk"
 
 # Successfully `flutter doctor` 
 # Have to Open Android Studio App and Install Components
@@ -251,6 +252,7 @@ cask "pycharm-ce"
 cask "sublime-text"
 cask "anaconda"
 cask "timemachineeditor"
+
 # mas "Bitwarden", id: 1137397744 # this didn't work. manually installed instead.
 #mas "Final Cut Pro", id: 424389933
 # mas "Vimari", id: 1480933944
