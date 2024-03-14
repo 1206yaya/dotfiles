@@ -107,7 +107,7 @@ brew "starship"
 brew "poetry"
 brew "python-certifi"
 brew "stow"
-
+brew "create-dmg"
 ## man コミュニティー駆動
 brew "tealdeer"
 brew "tmux"
@@ -120,6 +120,10 @@ brew "zoxide"
 brew "zsh"
 brew "zsh-autosuggestions"
 brew "yqrashawn/goku/goku"
+brew "readline"
+brew "xz"
+brew "zlib"
+
 
 ## https://github.com/Automattic/node-canvas
 brew "pkg-config"
