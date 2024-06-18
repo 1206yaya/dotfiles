@@ -1,4 +1,5 @@
 #!/bin/sh 
+set -x
 GITHUB_EMAIL=1206yaya@gmail.com
 set -e 
 # set -x	
@@ -83,7 +84,7 @@ elif [ "${arch_name}" = "arm64" ]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
 
         log 'Install Rosetta 2'
-        sudo softwareupdate --install-rosetta
+        sudo softwareupdate --install-rosetta --agree-to-license
     fi
 fi
 
@@ -109,7 +110,7 @@ ensure_dir_exists ~/.config/alacritty
 ensure_dir_exists ~/.config/starship
 ensure_dir_exists ~/.config/yarn/global
 
-# shellcheck disable=SC2046
+# $STOW_PACKAGES_PATH変数で指定されたディレクトリ内の全てのパッケージ（ディレクトリ）をユーザーのホームディレクトリ（~）にシンボリックリンクとして配置
 stow -vd "$STOW_PACKAGES_PATH" -t ~ $(ls  $STOW_PACKAGES_PATH)
 # 手動で追加でしたいとき
 # swow -vd "$STOW_PACKAGES_PATH" -t ~ terminal
@@ -225,38 +226,65 @@ if ! file_exists ~/prysm/prysm.sh; then
     )
 fi
 
-###########################################################
-# Alacritty
-###########################################################
-ALACRITTY_ORG_PATH="$GIT_CLONE_PATH/alacritty"
-ensure_dir_exists "$ALACRITTY_ORG_PATH"
-if ! dir_exists "$ALACRITTY_ORG_PATH/alacritty"; then
-    (
-        cd "$ALACRITTY_ORG_PATH"
-        gh repo clone alacritty/alacritty
-    )
-fi
-
-if ! dir_exists /Applications/Alacritty.app; then
-    log "Build alacritty"
-    (
-        cd "$ALACRITTY_ORG_PATH/alacritty"
-
-        rustup target add x86_64-apple-darwin aarch64-apple-darwin
-        make app-universal
-        cp -r target/release/osx/Alacritty.app /Applications/
-    )
-fi
-
-if ! file_exists ~/crontab.log; then
-    touch ~/crontab.loga
-    chmod 777 ~/crontab.log
-fi
 
 
 ###########################################################
 # VSCode extensions export
 ###########################################################
-VSCODE_EXTENSIONS_FILE=~/ghq/github.com/1206yaya/dotfiles/manual-settings/vscode/vscode-extensions.txt
-code --list-extensions > "$VSCODE_EXTENSIONS_FILE"
+VSCODE_CONFIG_PATH=~/Library/Application\ Support/Code/User
+stow --target="$VSCODE_CONFIG_PATH" --dir="$STOW_PACKAGES_PATH" vscode
+
+VSCODE_EXTENSIONS_FILE=~/ghq/github.com/1206yaya/dotfiles/packages/vscode/vscode-extensions.txt
+
+# 現在インストールされている拡張機能の数を取得
+INSTALLED_EXTENSIONS_COUNT=$(code --list-extensions | wc -l)
+
+# 拡張機能が0の場合の処理
+if [ "$INSTALLED_EXTENSIONS_COUNT" -eq 0 ]; then
+    echo "VS Code拡張機能がインストールされていません。インストールを開始します..."
+    while IFS= read -r extension; do
+        code --install-extension "$extension" --force
+        echo "installed $extension" # ここが表示されない
+    done < "$VSCODE_EXTENSIONS_FILE"
+    echo "拡張機能のインストールが完了しました。"
+else
+    # それ以外の場合の処理（既存の拡張機能リストを更新）
+    echo "VS Codeにはすでに拡張機能がインストールされています。リストを更新します..."
+    code --list-extensions > "$VSCODE_EXTENSIONS_FILE"
+    echo "拡張機能リストの更新が完了しました。"
+fi
+
+# 現在インストールされている拡張機能のリストを取得し、一時ファイルに保存
+INSTALLED_EXTENSIONS_TEMP=$(mktemp)
+code --list-extensions > "$INSTALLED_EXTENSIONS_TEMP"
+
+# vscode-extensions.txtにない拡張機能をインストールリストに追加
+while IFS= read -r extension; do
+    if ! grep -q "^$extension$" "$VSCODE_EXTENSIONS_FILE"; then
+        echo "新たにインストールされた拡張機能を検出: $extension"
+        echo "$extension" >> "$VSCODE_EXTENSIONS_FILE"
+    fi
+done < "$INSTALLED_EXTENSIONS_TEMP"
+
+# vscode-extensions.txtから削除された拡張機能をファイルから削除
+TEMP_FILE=$(mktemp)
+while IFS= read -r extension; do
+    if grep -q "^$extension$" "$INSTALLED_EXTENSIONS_TEMP"; then
+        echo "$extension" >> "$TEMP_FILE"
+    else
+        echo "削除された拡張機能を検出: $extension"
+    fi
+done < "$VSCODE_EXTENSIONS_FILE"
+
+# 一時ファイルをvscode-extensions.txtに移動
+mv "$TEMP_FILE" "$VSCODE_EXTENSIONS_FILE"
+
+# 一時ファイルを削除
+rm "$INSTALLED_EXTENSIONS_TEMP"
+
+echo "vscode-extensions.txtを更新しました。"
+
+
 npm install --global @azu/github-label-setup
+
+poetry config virtualenvs.in-project true

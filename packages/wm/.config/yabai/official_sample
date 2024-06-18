@@ -1,0 +1,89 @@
+# タイトルバーの設定: オフ、上部の余白40px、下部の余白0px
+yabai -m config external_bar off:40:0
+
+# メニューバーの不透明度を1.0に設定（完全に不透明）
+yabai -m config menubar_opacity 1.0
+
+# マウスがフォーカスを追跡しないように設定
+yabai -m config mouse_follows_focus off
+
+# フォーカスがマウスを追跡しないように設定
+yabai -m config focus_follows_mouse off
+
+# ディスプレイの配置順序をデフォルトに設定
+yabai -m config display_arrangement_order default
+
+# ウィンドウの起点をデフォルトディスプレイに設定
+yabai -m config window_origin_display default
+
+# ウィンドウの配置方法を second_child （二番目の子ウィンドウ）に設定
+yabai -m config window_placement second_child
+
+# ウィンドウのズーム状態を維持するように設定
+yabai -m config window_zoom_persist on
+
+# ウィンドウの影を表示するように設定
+yabai -m config window_shadow on
+
+# ウィンドウアニメーションの持続時間を0.0秒に設定（アニメーションなし）
+yabai -m config window_animation_duration 0.0
+
+# ウィンドウアニメーションのイージングを ease_out_circ に設定
+yabai -m config window_animation_easing ease_out_circ
+
+# ウィンドウの不透明度変更の持続時間を0.0秒に設定（瞬時に変更）
+yabai -m config window_opacity_duration 0.0
+
+# アクティブウィンドウの不透明度を1.0に設定（完全に不透明）
+yabai -m config active_window_opacity 1.0
+
+# 通常のウィンドウの不透明度を0.90に設定
+yabai -m config normal_window_opacity 0.90
+
+# ウィンドウの不透明度の変更をオフに設定
+yabai -m config window_opacity off
+
+# ウィンドウの挿入フィードバック色を #ffd75f5f に設定
+yabai -m config insert_feedback_color 0xffd75f5f
+
+# スプリット比を0.50（50%）に設定
+yabai -m config split_ratio 0.50
+
+# スプリットタイプを自動に設定
+yabai -m config split_type auto
+
+# 自動バランスをオフに設定
+yabai -m config auto_balance off
+
+# 上の余白を12pxに設定
+yabai -m config top_padding 12
+
+# 下の余白を12pxに設定
+yabai -m config bottom_padding 12
+
+# 左の余白を12pxに設定
+yabai -m config left_padding 12
+
+# 右の余白を12pxに設定
+yabai -m config right_padding 12
+
+# ウィンドウ間の隙間を6pxに設定
+yabai -m config window_gap 6
+
+# レイアウトをバイナリスペースパーティショニング（bsp）に設定
+yabai -m config layout bsp
+
+# マウスの修飾キーをfnに設定
+yabai -m config mouse_modifier fn
+
+# マウスのアクション1をウィンドウ移動に設定
+yabai -m config mouse_action1 move
+
+# マウスのアクション2をウィンドウのリサイズに設定
+yabai -m config mouse_action2 resize
+
+# マウスでのウィンドウドロップアクションをウィンドウの入れ替えに設定
+yabai -m config mouse_drop_action swap
+
+# 設定完了メッセージを表示
+echo "yabai configuration loaded.."

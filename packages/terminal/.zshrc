@@ -5,6 +5,7 @@ export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
 export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
 export SAVEHIST=100000
+export FUNCNEST=2000
 setopt no_beep
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -27,11 +28,12 @@ export JAVA_HOME="$(asdf where java)"
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 # export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+# eval "$(anyenv init -)"
 
 # for curl
 # setopt nonomatch
 alias q="exit"
+alias qq="osascript -e 'tell application \"iTerm2\" to quit'"
 # alias code="open -a 'Visual Studio Code'"
 alias o="open ."
 alias tm="Open -a Terminal"
@@ -50,18 +52,92 @@ alias localip="ifconfig en0 | grep 'inet ' | awk '{ print $2 }'"
 alias gl='gcloud'
 alias pt='poetry run pytest'
 alias pr='poetry run'
+alias add="fvm flutter pub add "$@""
 alias flrgen='flutter pub run build_runner watch'
 alias flrdel='flutter pub run build_runner build --delete-conflicting-outputs'
+alias ls="ls -lt  "$@""
+alias pb="pbcopy"
+alias mkdir='mkdir -p'
+function touchp() { if [[ "$1" == */* ]]; then if [ ! -d "${1%/*}/" ]; then mkdir -p "${1%/*}/"; fi; fi; touch "$1" }
+alias genb="git switch -c "$@""
+alias ghclose="gh issue close "$@""
+alias ghcreate='gh issue create --title "$@" --body "Issue description"'
+
+alias lsgrep="ls -ltr | grep "$@""
 # Override
 if [ -n "$(which z)" ]; then
     alias cd="z"
 fi
+# ランダムなパスワードを生成する
+# 引数にパスワードの長さを指定できる
+# デフォルトは 10
+function genpass() {
+  local length=${1:-10}
+  pwgen -1  -B -c -n $length 1
+  # 特殊記号: -s -y
+}
 
-if [ -n "$(which exa)" ]; then
-    alias ls="exa"
-fi
+# if [ -n "$(which exa)" ]; then
+#     alias ls="exa"
+# fi
 function pwd() {
   builtin pwd | tee >(pbcopy)
+}
+
+
+function mvp() {
+    target_dir=$(dirname "$2")
+    if [ ! -d "$target_dir" ]; then
+        mkdir -p "$target_dir"
+    fi
+    mv "$1" "$2"
+}
+
+function repe() {
+  code /Users/zak/ghq/github.com/1206yaya/repecheck
+  code /Users/zak/ghq/github.com/1206yaya/repecheck/firebase/functions
+  code /Users/zak/ghq/github.com/1206yaya/repecheck/packages/flutter_app
+  open -a /Applications/Google\ Chrome.app localhost:4000/firestore/default/data;
+
+  cd /Users/zak/ghq/github.com/1206yaya/repecheck/firebase ; make start;
+}
+function closerepe() {
+
+  # 検索するウィンドウタイトルの一部を指定
+  WINDOW_TITLE_PART="repe"
+
+  # wmctrlを使用してウィンドウIDを取得
+  WINDOW_ID=$(wmctrl -l | grep "Code" | grep "$WINDOW_TITLE_PART" | awk '{print $1}')
+
+  # ウィンドウが見つかった場合は閉じる
+  if [ -n "$WINDOW_ID" ]; then
+    wmctrl -ic "$WINDOW_ID"
+    echo "ウィンドウ '$WINDOW_TITLE_PART' が閉じられました。"
+  else
+    echo "ウィンドウ '$WINDOW_TITLE_PART' が見つかりませんでした。"
+  fi
+
+}
+function gimerge() {
+  # 現在のブランチ名を取得
+  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+ # 未コミットの変更をチェック
+  if [[ -n $(git status --porcelain) ]]; then
+    echo "Error: There are uncommitted changes. Please commit or stash them before merging."
+    return 1  # エラーコードを返して終了
+  fi
+  if [[ "$current_branch" == "main" ]]; then
+    echo "You are already on 'main'. No need to merge."
+    return 1  # エラーコードを返して終了
+  fi
+
+  # main ブランチにチェックアウト
+  git checkout main
+
+  # マージを実行
+  git merge "$current_branch"
+
+  echo "Merge complete."
 }
 
 alias typora="open -a /Applications/Typora.app"
@@ -80,7 +156,7 @@ alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-alias g='dir=$(ghq list | peco); [ -z "$dir" ] && return; builtin cd "$(ghq root)/$dir" && code . '
+alias g='dir=$(ghq list | peco); [ -z "$dir" ] && return; builtin cd "$(ghq root)/$dir"  '
 
 
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
@@ -137,8 +213,8 @@ function npminstall (){
   npm install -g firebase-tools
   npm install -g tsc
   npm install -g typesync
-
-
+  dart pub global activate flutterfire_cli
+  source ~/.zshrc
 }
 function ghq() {
   if [[ $1 == "create" ]]; then
@@ -356,7 +432,11 @@ EOF
 
   sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
   sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
-
+  sed -i '' -e $'1s/^/\\android\\/key\\.properties\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\*\\*\\/android\\/app\\/google-services\\.json\\\n/' .gitignore
+  
+  sed -i '' -e $'1s/^/\\*\\*\\/ios\\/Flutter\\/Dart-Defines\\.xcconfig\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\*\\*\\/ios\\/Runner\\/GoogleService-Info\\.plist\\\n/' .gitignore
 ##! .gitignoreに次のファイルを追加するかの議論があるが、
 ##! プライベートリポジトリなので、追加しない。
 # cat <<EOF >>.gitignore
@@ -385,9 +465,98 @@ EOF
   code .
 
 }
+
+function genpodfile() {
+  local url="https://raw.githubusercontent.com/flutter/flutter/master/packages/flutter_tools/templates/cocoapods/Podfile-ios-objc"
+  local output_dir="./ios"
+  local output_file="${output_dir}/Podfile"
+
+  # Create the output directory if it does not exist
+  mkdir -p "$output_dir"
+
+  # Download the file using curl
+  curl -o "$output_file" "$url"
+
+  # Check if the download was successful
+  if [[ $? -eq 0 ]]; then
+    echo "Podfile has been successfully created at ${output_file}."
+  else
+    echo "Failed to download the Podfile. Please check the URL and try again."
+  fi
+}
+
+function fvmclosing() {
+
+  mkdir .vscode
+  touch .vscode/settings.json
+cat <<EOF >.vscode/settings.json
+{
+    // 使用するFlutter SDKのパスを指定。
+	"dart.flutterSdkPath": ".fvm/flutter_sdk",
+    // 検索対象からFVMのファイルを除外します。(任意)
+    "search.exclude": {
+        "**/.fvm": true
+    },
+    // ファイル監視対象からFVMのファイルを除外します。(任意)
+    "files.watcherExclude": {
+        "**/.fvm": true
+    },
+}
+EOF
+  # コメントアウトを削除
+  sed '/^[[:blank:]]*\/\//d;s/#.*//' ./lib/main.dart > ./lib/main.dart.tmp
+  mv ./lib/main.dart.tmp ./lib/main.dart
+
+  gi flutter > .gitignore
+  sed -i '' -e $'1s/^/\\*\\.g\\.dart\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\*\\.freezed\\.dart\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\functions\\/.env\\\n/' .gitignore
+
+
+  sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
+  sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
+
+##! .gitignoreに次のファイルを追加するかの議論があるが、
+##! プライベートリポジトリなので、追加しない。
+# cat <<EOF >>.gitignore
+# # Firebase config files
+# lib/firebase_options.dart
+# ios/Runner/GoogleService-Info.plist
+# ios/firebase_app_id_file.json
+# macos/Runner/GoogleService-Info.plist
+# macos/firebase_app_id_file.json
+# android/app/google-services.json
+# EOF
+
+cat <<EOF >>README.md
+# $project_name
+EOF
+  code .
+}
 function chatutil() {
   mkdir -p chatutils
-  tree -fFi -I '*.pyc|dist|package-lock.json|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.md|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  tree -fFi -I '*.pyc|dist|package-lock.json|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
+  sed -i.bak '$d' chatutils/files.txt
+  sed -i.bak '$d' chatutils/files.txt
+  while IFS= read -r filepath
+  do
+      # Check if the file exists before trying to display its contents
+      if [ ! -f "$filepath" ]; then
+        continue ;
+      fi
+      # Print the file path
+      echo "*$filepath*"
+      echo ""
+      echo "\`\`\`"
+      cat "$filepath"
+      echo ""
+      echo "\`\`\`"
+      echo ""
+  done < "chatutils/files.txt"
+}
+function chatutil2() {
+  mkdir -p chatutils
+  tree -fFi -I '*.pyc|dist|package-lock.json|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   sed -i.bak '$d' chatutils/files.txt
   while IFS= read -r filepath
@@ -466,7 +635,7 @@ function poetrycreate() {
     return 1;
   fi
   if [[ $project_name == *"_"* ]]; then
-    echo "プロジェクト名に _ は使えません。半角小文字とアンダースコア（-）だけが使用可能です。"
+    echo "プロジェクト名に _ は使えません。半角小文字とハイフン（-）だけが使用可能です。"
     return 1;
   fi
 
@@ -474,20 +643,25 @@ function poetrycreate() {
 
   echo "Creating poetry project: $project_name"
 
-  URL='https://github.com/1206yaya/poetry_starter'
 
-  if [[ $create_dir == true ]]; then
-    # ディレクトリを作成してそこにクローンする
-    git clone $URL $project_name
-    cd $project_name
-  else
-    # カレントディレクトリにクローンする
-    git clone $URL .
-  fi
-  rm -rf .git
+  TEMPLATE_DIR="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile/poetry"
+  cp -r $TEMPLATE_DIR $project_name
+  cd $project_name
+  # URL='https://github.com/1206yaya/poetry_starter'
+  # if [[ $create_dir == true ]]; then
+  #   # ディレクトリを作成してそこにクローンする
+  #   git clone $URL $project_name
+  #   cd $project_name
+  # else
+  #   # カレントディレクトリにクローンする
+  #   git clone $URL .
+  # fi
+  # rm -rf .git
 
-  sed -i '' "s/^name = \".*\"/name = \"$project_name\"/" pyproject.toml
-  make install
+  # sed -i '' "s/^name = \".*\"/name = \"$project_name\"/" pyproject.toml
+  makefile poetry > Makefile
+
+  make setup
 
   git init
   
@@ -586,9 +760,7 @@ function tmpdir() {
 function mkcd() {
     mkdir -p "$@" && cd "$_";
 }
-function touchp() {
-    mkdir -p "$(dirname "$@")" && touch  "$@"
-}
+
 #* ChromeのWindowタイトルに特定の文字列が含まれているもののみを終了するということはできない
 # AppleScript ではプロセス ID に関連する情報を取得する機能がないから
 # 閉じるときは全部閉じるしかない
@@ -671,8 +843,6 @@ function ghget() {
 }
 
 function dcr() {
-    # TODO
-    # if status=exited size 0 then echo "status=exitedのコンテナは存在しません"
   if [[ $# -eq 0 ]]; then
     command docker rm $(docker ps -a -f status=exited -q) ;
   else
@@ -968,3 +1138,11 @@ export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 export GRIT_INSTALL="$HOME/.grit"
 export PATH="$GRIT_INSTALL/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/zak/.dart-cli-completion/zsh-config.zsh ]] && . /Users/zak/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+
+export PATH="$PATH:/Users/zak/.kit/bin"

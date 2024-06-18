@@ -55,7 +55,12 @@ If you like to learn how to create dotfiles, check out my [tutorial ](https://gi
 
 ```
 rm ~/.config/karabiner
-stow -vd ~//Users/zak/projects/github/1206yaya/dotfiles/packages -t ~ keybindiings
+stow -vd ~//Users/zak/ghq/github.com/1206yaya/dotfiles/packages -t ~ keybindiings
+stow -v -d /Users/zak/ghq/github.com/1206yaya/dotfiles/packages -t ~ keybindings
+
+LINK: .config/skhd => ../ghq/github.com/1206yaya/dotfiles/packages/keybindings/.config/skhd
+LINK: .config/karabiner => ../ghq/github.com/1206yaya/dotfiles/packages/keybindings/.config/karabiner
+GOKU_EDN_CONFIG_FILE=~/.config/karabiner/kara
 ```
 
 ## stowが作っているファイルがどうなっているかわからなくなったとき

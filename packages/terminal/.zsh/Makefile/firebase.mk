@@ -17,6 +17,9 @@ flutter_connect:
 
 start:
 	firebase emulators:start  --inspect-functions --import=seed/all-products --project=${PROJECT_ID} --only firestore
+
+exportdata:
+	firebase emulators:export .seed
 	
 watch.tsc:
 	cd functions && npx tsc --watch
@@ -24,6 +27,7 @@ watch.tsc:
 start.functions:
 	make watch.tsc &
 	cd functions && firebase emulators:start --only functions  --inspect-functions
+
 
 deploy_func:
 	cd functions && npm install && npm run build && firebase deploy --only functions --project=${PROJECT_ID}

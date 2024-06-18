@@ -2,3 +2,5 @@
 .history
 packages/keybindings/.config/karabiner/automatic_backups/
 .secrets
+Brewfile.lock.json
+packages/git/.gitconfig.local

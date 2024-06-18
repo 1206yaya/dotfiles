@@ -34,12 +34,16 @@ genkey:
 get: # pub get
 	fvm flutter pub get
 	
-
+flutter_connect:
+	flutterfire configure --project=${PROJECT_ID}
 
 clean.ios: # rm Podfile.lock Pods
-	flutter clean; flutter pub get; cd ios; rm -rf  Podfile.lock ; rm -rf Pods; \
-		pod repo update; pod install; cd ..
-		
+	flutter clean
+	rm -rf ios/Pods
+	rm -rf ios/Podfile.lock
+	flutter pub get
+	pod install --project-directory=ios
+
 firebase.init: # firebase init 
 	fvm flutter pub add firebase_core
 	flutterfire configure -y --project=${PROJECT_ID}
@@ -81,26 +85,31 @@ add.util.riverpod:
 
 	fvm flutter pub add \
 		freezed 
+	@echo ""
+	@echo "--------------------------------------------------"
+	@echo "pubspec.yamlに以下を追加"
+	@echo "analyzer:"
+	@echo "\tplugins:"
+	@echo "\t\t- custom_lint"
 
 add.util:
 	fvm flutter pub add \
-		flutter_riverpod \
-		riverpod_annotation \
 		flutter_hooks \
-		hooks_riverpod 
+		freezed_annotation \
+		json_annotation
 
 	fvm flutter pub add \
 		flutter_lints \
-		riverpod_lint \
 		custom_lint \
 		build_runner \
-		riverpod_generator \
 		json_serializable \
-		dartz \
 		--dev 
 
 	fvm flutter pub add \
-		freezed \
+		freezed 
+
+add.util.extra:
+	fvm flutter pub add \
 		intl:^0.18.0 \
 		go_router:^9.0.3 \
 		path_provider \
@@ -120,6 +129,7 @@ add.util:
 	@echo ""
 	@echo "flutter:"
 	@echo "\tgenerate: true"
+
 
 
 run.all: #

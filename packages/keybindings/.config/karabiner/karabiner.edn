@@ -59,10 +59,12 @@
                 :Keynote  ["com.apple.iWork.Keynote"]
                 :Notion   ["notion.id"]
                 :Slack    ["com.tinyspeck.slackmacgap"]
+                :Kit    ["app.scriptkit"]
                 :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
                 :vscode   ["com.microsoft.VSCode"]
                 :sublime   ["com.sublimetext.4"]
                 :Figma    ["com.figma.Desktop"]
+                :Excel ["com.microsoft.Excel"]
                 :Obsidian ["^md.obsidian"]}
  :Evernote ["com.evernote.Evernote"]
  :templates {:launch "osascript -e 'tell application \"%s\" to activate'"
@@ -138,7 +140,7 @@
              }
   ;; dotfileTools/PrintKeylayout.swift を使ってinput sourceを調べることができます
  :input-sources  {:en {:input_source_id "^com.apple.keylayout.ABC$"}
-                    ;; :jp {:input_source_id "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"}
+                    :jp {:input_source_id "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese"}
                   }
 
  :main [
@@ -148,6 +150,11 @@
                 ]
                 ;;
         }
+        ; ⌘M ショートカットを無効化
+        ;; {:des   "Disable ⌘M shortcut"
+        ;;         :rules [[:!Cm :vk_none]]}
+        ;; {:des   "Disable ⌘M shortcut and allow plain ⌘M"
+        ;;  :rules [[:!Cm :!Cm]]}
         {:des "chrome"
          :rules [:chrome-mode
                  [:e [:open_url "https://mail.google.com/"]]
@@ -163,8 +170,12 @@
                  [:g [:open_url "https://github.com/"]]]}
         {:des "Change input source to English by left_command; Russian by right_command."
          :rules [[:left_command    :left_command    nil {:alone {:input :en}}]
-            ;; [:left_control    :left_control    nil {:alone {:input :jp}}]
                  ]}
+        ;; {:des "Change input source to Japan"
+        ;;     :rules [[:left_control    :left_control    nil {:alone {:input :jp}}]
+        ;;          ]}
+
+
         ;; {:des "VSCode Key Binding"
         ;;  :rules [:vscode
         ;;         ;;  [{:pkey :butotn4}] :!Copen_bracket] ; Ctrl + [
@@ -200,14 +211,14 @@
          :rules [:open-mode
                 ;;  [:w [:open "WebStorm"]]
                  [:l [:open "IntelliJ IDEA CE"]]
-                 [:s [:open "Slack"]]
+                 [:s [:open "Kit"]]
                 ;;  [:s [:open "Android Studio"]]
                 ;;  [:p [:open "PyCharm CE"]]
                 ;;  [:e [:open "Brave Browser"]]
                 ;;  [:a [:open "Arc"]]
-                 [:a [:open "Alacritty"]]
+                 [:a [:open "Arc"]]
 
-                 [:e [:open "Evernote"]]
+                 [:e ["open -a '/Applications/Microsoft Excel.app'"]]
                 ;;  [:n [:open "Postman"]]
                  [:n [:open "Notion"]]
                  [:i [:open "iTerm"]]
@@ -242,6 +253,7 @@
             ;; [:k [:code-project "/Users/zak/ghq/github.com/1206yaya/dotfiles"]]
                 ;;  [:a ["open -F -n -b 'com.microsoft.VSCode' --args '/Users/zak/ghq/github.com/1206yaya/mytasks'"]]
                  [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
+                 [:o ["open -a 'Visual Studio Code' '/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-shared' "]]
                  ; [:k ["open -a 'Sublime Text' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
                 ;;  [:j ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/vim-playground "]]
                  ]}
@@ -291,19 +303,22 @@
          :rules [:m-mode
                  [:1 [:opena "/Users/zak/Applications/Chrome Apps.localized/Xmind.AI.app"]]]}
 
-        {:des "Ctrl Tab to Command Tab Swap" :rules [[:!C##tab :!Ttab]]}
-        {:des "Command Tab to Ctrl Tab Swap" :rules [[:!T##tab :!Ctab]]}
+        ;; {:des "Ctrl Tab to Command Tab Swap" :rules [[:!C##tab :!Ttab]]}
+        ;; {:des "Command Tab to Ctrl Tab Swap" :rules [[:!T##tab :!Ctab]]}
 
-        {:des "Swap Win and Alt on Sculpt keyboard"
-         :rules [:sculpt-keyboard
-                 [:left_option :left_command]
-                 [:left_command :left_option]
-                 [:right_option :right_command]
-                 [:application :right_option]]}
+        ;; {:des "Swap Win and Alt on Sculpt keyboard"
+        ;;  :rules [:sculpt-keyboard　
+        ;;          [:left_option :left_command]
+        ;;          [:left_command :left_option]
+        ;;          [:right_option :right_command]
+        ;;          [:application :right_option]]}
 
+        ;; {:des "CAPSLOCK is CTRL if pressed in combination, otherwise ESC"
+        ;;  :rules  [[:##caps_lock        :left_control     nil         {:alone :escape}]]}
         {:des "CAPSLOCK is CTRL if pressed in combination, otherwise ESC"
-         :rules  [[:##caps_lock        :left_control     nil         {:alone :escape}]]}
-
+        :rules  [[:##caps_lock        :!CTOleft_shift     nil         {:alone :escape}]]
+        ;;  :rules  [[:##caps_lock        :!CTOf12     nil         {:alone :escape}]]
+         }
         {:des "f-mode for delimeters and ! ? $"
          :rules [:f-mode
                  ;; u i j k m comma -> !Sopen_bracket !Sclose_bracket !S9 !S0 open_bracket close_bracket
@@ -375,19 +390,7 @@
                   ;; [:##q :delete_or_backspace] ;; page back
                   ;; [:##w :delete_forward] ;; page back
                  ]}
-        {:des "s-mode for punctuation"   ;;    ' " `    , . &    ; : ~
-         :rules [:s-mode
-                 [:##u :quote]
-                 [:##i :!Squote]
-                 [:##o :grave_accent_and_tilde]
-                 [:##j :comma]
-                 [:##k :period]
-                 [:##l :!S7]
-                 [:##m :semicolon]
-                 [:##comma :!Ssemicolon]
-                 [:##period :!Sgrave_accent_and_tilde]
 
-                 [:##p [:yyyymmddhhss "-> 🍅"]]]}
 
         {:des "r-mode for deleting characters with ui, words with jk and lines with hl"
          :rules [:r-mode

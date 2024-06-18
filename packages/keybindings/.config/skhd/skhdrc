@@ -1,6 +1,17 @@
 
-# move window
-shift + cmd - h : yabai -m window --swap west
-shift + cmd - j : yabai -m window --swap south
-shift + cmd - k : yabai -m window --swap north
-shift + cmd - l : yabai -m window --swap east
+alt - h : yabai -m window --focus west  # 左のウィンドウにフォーカスを移動
+alt - j : yabai -m window --focus south # 下のウィンドウにフォーカスを移動
+alt - k : yabai -m window --focus north # 上のウィンドウにフォーカスを移動
+alt - l : yabai -m window --focus east  # 右のウィンドウにフォーカスを移動
+# ワープ
+ctrl + alt + cmd - 1 : yabai -m window --warp west
+ctrl + alt + cmd - 2 : yabai -m window --warp south
+ctrl + alt + cmd - 3 : yabai -m window --warp north
+ctrl + alt + cmd - 4 : yabai -m window --warp east
+ctrl + alt + cmd - 5 : yabai -m window --toggle zoom-parent
+ctrl + alt + cmd - 6 : yabai -m window --toggle float
+ctrl + alt + cmd - 7 : yabai -m window --toggle split
+ctrl + alt + cmd - 8 : yabai -m window --toggle sticky
+ctrl + alt + cmd - 9 : yabai -m window --toggle zoom-fullscreen
+; ctrl + alt + cmd - 0 : yabai -m window --toggle native-fullscreen
+yabai -m window --toggle float; yabai -m window --grid 1:1:1:0:1:1

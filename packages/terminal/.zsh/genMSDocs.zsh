@@ -1,68 +1,35 @@
 #!/bin/bash
 
 
-cs() {
-    pathDir="/Users/zak/ghq/github.com/1206yaya/cheet-sheet"
+genms() {
 
-    # 引数に基づいてファイル名を構築し、ショートカットを考慮
-    case "$1" in
-        py|python)
-            filename="python.md"
-            ;;
-        gh|ghq)
-            filename="ghq.md"
-            ;;
-        edit)
-            code $pathDir/
-            return 
-            ;;
-        psql|pg)
-            filename="postgresql.md"
-            ;;
-        gc|gcloud)
-            filename="gcloud.md" # この行のファイル名は実際のファイル名に合わせてください
-            ;;
-        func|az)
-            filename="func.md"
-            ;;
-        vscode|code)
-            filename="vscode.md"
-            ;;
-        sgen|swagger-codegen)
-            filename="swagger-codegen.md"
-            ;;
-        genc|openapi|openapi-generator)
-            filename="openapi-generator.md"
-            ;;
-        docker|dc)
-            if [[ $2 == "fix" ]]; then
-                filename="docker.fix.sh"
-            else
-                filename="docker.sh"
-            fi
-            ;;
-        flutter)
-            if [[ $2 == "pub" ]]; then
-                filename="flutter-pub.sh"
-            else
-                filename="flutter.sh"
-            fi
-            ;;
-        *)
-            # 一致するファイル名を直接構築
-            filename="${1}.md"
-            if [ ! -f "$pathDir/$filename" ]; then
-                filename="${1}.sh"
-            fi
-            ;;
-    esac
+    pathDir="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/genMSDocs"
 
-    # ファイルの存在をチェック
-    if [ -f "$pathDir/$filename" ]; then
-        mdcat "$pathDir/$filename"
+    if [ "$1" = "xlsx" ]; then
+        # xlsx の場合
+        # ファイル名を指定
+        sourceFile=$pathDir"/blank.xlsx"
+    elif [ "$1" = "csv" ]; then
+        # csv の場合
+        # ファイル名を指定
+        echo "未実装です"
     else
-        echo "No documentation found for $1"
+        # それ以外の場合はエラー
+        echo "第一引数には xlsx csv のいずれかを指定してください"
+
+        return 1
     fi
+
+    # コマンドの実行場所に filename が存在するかチェックして、存在する場合は、「すでに filename が存在します」と表示
+    # 存在しなければ コピーファイルを作成
+    if [ -f "$filename" ]; then
+        echo "すでに $filename が存在します"
+    else
+        cp $sourceFile blank.xlsx
+        echo "$filename を作成しました"
+    fi
+
+
 }
 
 

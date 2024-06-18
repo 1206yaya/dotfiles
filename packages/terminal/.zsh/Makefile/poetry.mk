@@ -9,10 +9,9 @@ help:
 _gen_resources:
 	mkdir -p ./scripts/Makefile && 	cp -r ${RESOURCE_DIR}/scripts/Makefile ./scripts/
 	./scripts/Makefile/setup.sh
-
+# TODO: _gen_resources
 setup:
 	@asdf local python ${PYTHON_VERSION}
-	@make _gen_resources
 	@if [ -s .env ]; then echo "exist .env"; else echo ".env is empty" && cp .env.template .env; fi
 	@if [ -s pyproject.toml ]; then poetry install; else echo "pyproject.toml is empty" && poetry init; fi
 	@if [ -s requirements-dev.txt ]; then cat requirements-dev.txt | xargs poetry add -D; else echo "requirements-dev.txt is empty"; fi
@@ -27,7 +26,7 @@ update:
 	@asdf install python ${PYTHON_VERSION}
 	@asdf local python ${PYTHON_VERSION}
 	@rm -rf poetry.lock .venv
-	@poetry update
+	@poetry updatet
 
 clean:
 	@echo "Cleaning up..."

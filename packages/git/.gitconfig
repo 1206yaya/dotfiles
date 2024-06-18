@@ -1,7 +1,8 @@
 [user]
 	name       = 1206yaya
 	email      = 1206yaya@gmail.com
-	signingkey = 31535A11612613F038A1712C37F085A0F0B2CD58
+[include]
+    path = ~/.gitconfig.local
 [alias]
 	s   = status -sb
 	d   = diff
