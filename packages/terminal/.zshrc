@@ -118,14 +118,17 @@ function closerepe() {
   fi
 
 }
+
 function gimerge() {
   # 現在のブランチ名を取得
   local current_branch="$(git rev-parse --abbrev-ref HEAD)"
- # 未コミットの変更をチェック
+  
+  # 未コミットの変更をチェック
   if [[ -n $(git status --porcelain) ]]; then
     echo "Error: There are uncommitted changes. Please commit or stash them before merging."
     return 1  # エラーコードを返して終了
   fi
+
   if [[ "$current_branch" == "main" ]]; then
     echo "You are already on 'main'. No need to merge."
     return 1  # エラーコードを返して終了
@@ -134,11 +137,26 @@ function gimerge() {
   # main ブランチにチェックアウト
   git checkout main
 
+  # リモートの最新状態を取得
+  git pull origin main
+
   # マージを実行
   git merge "$current_branch"
 
-  echo "Merge complete."
+  if [[ $? -ne 0 ]]; then
+    echo "Merge failed. Please resolve conflicts and try again."
+    return 1  # エラーコードを返して終了
+  fi
+
+  # マージ後の状態をリモートにプッシュ
+  git push origin main
+
+  # マージ対象ブランチをリモートにプッシュ
+  git push origin "$current_branch"
+
+  echo "Merge and push complete."
 }
+
 
 alias typora="open -a /Applications/Typora.app"
 alias cat='bat --style=plain --paging=never'
