@@ -16,7 +16,7 @@
 
 chatutil() {
   if [ "$#" -ne 1 ]; then
-      echo "使い方: cu <プロジェクトのルートディレクトリ>"
+      echo "使い方: chatutil <プロジェクトのルートディレクトリ>"
       return 1
   fi
 
@@ -28,7 +28,6 @@ chatutil() {
     PROJECT_ROOT=$PWD
   fi
 
-
   # ディレクトリが存在するかどうかをチェック
   if [ ! -d "$PROJECT_ROOT" ]; then
       echo "エラー: 指定されたディレクトリが存在しません"
@@ -37,7 +36,7 @@ chatutil() {
 
   # .chatignore ファイルの存在をチェック
   local CHATIGNORE_FILE="$PROJECT_ROOT/.chatignore"
-  local IGNORE_PATTERNS=()
+  local IGNORE_PATTERNS=(".chatignore")  # .ignorefile をデフォルトで無視するパターンに追加
   if [ -f "$CHATIGNORE_FILE" ]; then
       while IFS= read -r line; do
           # コメント行や空行を無視
@@ -79,3 +78,6 @@ chatutil() {
       echo
   done
 }
+
+# 関数を定義した後に呼び出せるようにエクスポート
+export -f chatutil
