@@ -6,6 +6,7 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
 export SAVEHIST=100000
 export FUNCNEST=2000
+export CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 setopt no_beep
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -62,6 +63,7 @@ function touchp() { if [[ "$1" == */* ]]; then if [ ! -d "${1%/*}/" ]; then mkdi
 alias genb="git switch -c "$@""
 alias ghclose="gh issue close "$@""
 alias ghcreate='gh issue create --title "$@" --body "Issue description"'
+alias hub='gh browse'
 
 alias lsgrep="ls -ltr | grep "$@""
 # Override
@@ -118,7 +120,6 @@ function closerepe() {
   fi
 
 }
-
 function gimerge() {
   # 現在のブランチ名を取得
   local current_branch="$(git rev-parse --abbrev-ref HEAD)"
@@ -154,7 +155,22 @@ function gimerge() {
   # マージ対象ブランチをリモートにプッシュ
   git push origin "$current_branch"
 
-  echo "Merge and push complete."
+  # ブランチ名から Issue 番号を抽出
+  local issue_number
+  issue_number=$(echo "$current_branch" | grep -oP '(?<=#)\d+')
+
+  # Issue 番号が見つかった場合、Issue を閉じる
+  if [[ -n "$issue_number" ]]; then
+    echo "Closing issue #$issue_number"
+    gh issue close "$issue_number"
+    
+    if [[ $? -ne 0 ]]; then
+      echo "Failed to close issue #$issue_number"
+      return 1  # エラーコードを返して終了
+    fi
+  fi
+
+  echo "Merge, push, and issue close complete."
 }
 
 
@@ -386,7 +402,84 @@ function cbf() {
   # クリップボードの内容をファイルに保存します。
   pbpaste > "$FOLDER_PATH/$TIMESTAMP.txt"
 }
+function fluttercreate() {
+  project_name=$1
+  gen_current_dir=false
+  echo "現在のリモートの最新のFlutterのバージョンは次のとおりです。"
+  fvm list remote
+  current_version=$(flutter --version | grep 'Flutter' | awk '{print $2}')
+  echo "使用しているFlutterのバージョン $current_version で作成していいですか？ [y/N]: "
+  read -r response
+  response=${response:-y}  # エンターキーを押した場合は 'y' を設定
+  if [[ $response != "y" && $response != "Y" ]]; then
+    echo "作成をキャンセルしました。"
+    return 1
+  fi
 
+  if [[ $project_name == "." || $project_name == "./" ]]; then
+    echo "カレントディレクトリに生成します"
+    CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
+    project_name=$CURERNT_DIR
+    if [[ $project_name == *"-"* ]]; then
+      echo "カレントディレクトリ名:  $project_name をプロジェクト名として使用しますが ハイフン (-) は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
+      return 1;
+    fi
+    gen_current_dir=true
+  fi
+  if [[ -z $project_name ]]; then
+    echo "プロジェクト名を第１引数に指定してください"
+    return 1;
+  fi
+  if [[ $project_name == *"-"* ]]; then
+    echo "プロジェクト名に - は使えません。半角小文字とアンダースコア（_）だけが使用可能です。"
+    return 1;
+  fi
+  echo "gen_current_dir $gen_current_dir "
+  if [[ $gen_current_dir == true ]]; then
+    flutter create --org com.u1206yaya --project-name "$project_name" .
+  else
+    flutter create --org com.u1206yaya "$project_name"
+    cd "$project_name"
+  fi
+  clean_main_comments
+  clean_pubspeck_commments
+  configure_gitignore
+}
+function clean_pubspeck_commments() {
+  grep -v '^\s*#' pubspec.yaml |grep -v '^\s*$' > pubspec.yaml_tmp; cat pubspec.yaml_tmp > pubspec.yaml ; rm -rf pubspec.yaml_tmp;
+}
+function clean_main_comments() {
+  # コメントアウトを削除
+  sed '/^[[:blank:]]*\/\//d;s/#.*//' ./lib/main.dart > ./lib/main.dart.tmp
+  mv ./lib/main.dart.tmp ./lib/main.dart
+}
+
+function configure_gitignore() {
+  gi flutter > .gitignore
+  sed -i '' -e $'1s/^/\\*\\.g\\.dart\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\*\\.freezed\\.dart\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\functions\\/.env\\\n/' .gitignore
+
+  sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
+  sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\android\\/key\\.properties\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\*\\*\\/android\\/app\\/google-services\\.json\\\n/' .gitignore
+  
+  sed -i '' -e $'1s/^/\\*\\*\\/ios\\/Flutter\\/Dart-Defines\\.xcconfig\\\n/' .gitignore
+  sed -i '' -e $'1s/^/\\*\\*\\/ios\\/Runner\\/GoogleService-Info\\.plist\\\n/' .gitignore
+
+  ##! .gitignoreに次のファイルを追加するかの議論があるが、
+  ##! プライベートリポジトリなので、追加しない。
+  cat <<EOF >>.gitignore
+# Firebase config files
+lib/firebase_options.dart
+ios/Runner/GoogleService-Info.plist
+ios/firebase_app_id_file.json
+macos/Runner/GoogleService-Info.plist
+macos/firebase_app_id_file.json
+android/app/google-services.json
+EOF
+}
 function fvmcreate() {
   project_name=$1
   version=$2
@@ -438,41 +531,17 @@ cat <<EOF >.vscode/settings.json
     },
 }
 EOF
-  # コメントアウトを削除
-  sed '/^[[:blank:]]*\/\//d;s/#.*//' ./lib/main.dart > ./lib/main.dart.tmp
-  mv ./lib/main.dart.tmp ./lib/main.dart
 
-  gi flutter > .gitignore
-  sed -i '' -e $'1s/^/\\*\\.g\\.dart\\\n/' .gitignore
-  sed -i '' -e $'1s/^/\\*\\.freezed\\.dart\\\n/' .gitignore
-  sed -i '' -e $'1s/^/\\functions\\/.env\\\n/' .gitignore
-
-
-  sed -i '' -e $'1s/^/\\.fvm\\/flutter_sdk\\\n/' .gitignore
-  sed -i '' -e $'1s/^/firebase_options\\.dart\\\n/' .gitignore
-  sed -i '' -e $'1s/^/\\android\\/key\\.properties\\\n/' .gitignore
-  sed -i '' -e $'1s/^/\\*\\*\\/android\\/app\\/google-services\\.json\\\n/' .gitignore
+  clean_main_comments
+  clean_pubspeck_commments
+  configure_gitignore
   
-  sed -i '' -e $'1s/^/\\*\\*\\/ios\\/Flutter\\/Dart-Defines\\.xcconfig\\\n/' .gitignore
-  sed -i '' -e $'1s/^/\\*\\*\\/ios\\/Runner\\/GoogleService-Info\\.plist\\\n/' .gitignore
-##! .gitignoreに次のファイルを追加するかの議論があるが、
-##! プライベートリポジトリなので、追加しない。
-# cat <<EOF >>.gitignore
-# # Firebase config files
-# lib/firebase_options.dart
-# ios/Runner/GoogleService-Info.plist
-# ios/firebase_app_id_file.json
-# macos/Runner/GoogleService-Info.plist
-# macos/firebase_app_id_file.json
-# android/app/google-services.json
-# EOF
 
 cat <<EOF >>README.md
 # $project_name
 EOF
 
 
-  grep -v '^\s*#' pubspec.yaml |grep -v '^\s*$' > pubspec.yaml_tmp; cat pubspec.yaml_tmp > pubspec.yaml ; rm -rf pubspec.yaml_tmp;
   
   echo ">>> create_dir: $create_dir"
   if [[ !create_dir ]]; then
@@ -551,50 +620,7 @@ cat <<EOF >>README.md
 EOF
   code .
 }
-function chatutil() {
-  mkdir -p chatutils
-  tree -fFi -I '*.pyc|dist|package-lock.json|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
-  sed -i.bak '$d' chatutils/files.txt
-  sed -i.bak '$d' chatutils/files.txt
-  while IFS= read -r filepath
-  do
-      # Check if the file exists before trying to display its contents
-      if [ ! -f "$filepath" ]; then
-        continue ;
-      fi
-      # Print the file path
-      echo "*$filepath*"
-      echo ""
-      echo "\`\`\`"
-      cat "$filepath"
-      echo ""
-      echo "\`\`\`"
-      echo ""
-  done < "chatutils/files.txt"
-}
-function chatutil2() {
-  mkdir -p chatutils
-  tree -fFi -I '*.pyc|dist|package-lock.json|.venv|venv|node_modules|license|*.svg|*.png|*.jpg|*.ai|*.iml|Makefile|*test*|.fvm|.dart_tool|assets|.github|.vscode|.idea|*.log|l10n.yaml|*.png|dart_test.yaml|build|android|ios|macos|web|windows|linux|.gitignore|analysis_options.yaml|flutter_starter_project.iml|*.lock|pubspec.yaml|firebase_options.dart|README.md|chatutils' | grep -v '/$' | sed 's|^\./||' | grep -v '\.g\.dart$' | grep -v '\.freezed\.dart$' > chatutils/files.txt
-  sed -i.bak '$d' chatutils/files.txt
-  sed -i.bak '$d' chatutils/files.txt
-  while IFS= read -r filepath
-  do
-      # Check if the file exists before trying to display its contents
-      if [ ! -f "$filepath" ]; then
-        continue ;
-      fi
-      # Print the file path
-      echo "*$filepath*"
-      echo ""
-      echo "\`\`\`"
-  grep -v '^import ' "$filepath"| grep -vE '^from .+ import .+'
-  #    cat "$filepath"
-      echo ""
 
-      echo "\`\`\`"
-      echo ""
-  done < "chatutils/files.txt"
-}
 function updatepy() {
   # link file
   version_file=~/ghq/github.com/1206yaya/dotfiles/packages/runtime/.tool-versions

@@ -24,6 +24,9 @@
   "files.watcherExclude": {
     "/node_modules/": true
   },
+  "files.associations": {
+    "*.drift": "sql"
+  },
   "explorer.confirmDelete": false,
   "security.workspace.trust.untrustedFiles": "open",
   "explorer.confirmDragAndDrop": false,

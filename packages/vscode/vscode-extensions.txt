@@ -28,10 +28,12 @@ github.copilot
 github.copilot-chat
 github.github-vscode-theme
 grapecity.gc-excelviewer
+gruntfuggly.todo-tree
 hancel.markdown-image
 hediet.vscode-drawio
 hzgood.dart-data-class-generator
 innwin.i18n-arb-editor
+jebbs.plantuml
 jeroen-meijer.pubspec-assist
 kisstkondoros.vscode-gutter-preview
 localizely.flutter-intl
