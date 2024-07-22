@@ -64,7 +64,7 @@ alias genb="git switch -c "$@""
 alias ghclose="gh issue close "$@""
 alias ghcreate='gh issue create --title "$@" --body "Issue description"'
 alias hub='gh browse'
-
+alias lc="pbcopy | chatutil "$@""
 alias lsgrep="ls -ltr | grep "$@""
 # Override
 if [ -n "$(which z)" ]; then
@@ -94,7 +94,26 @@ function mvp() {
     fi
     mv "$1" "$2"
 }
+function cpp() {
+    if [ ! -d "$2" ]; then
+        mkdir -p "$2"
+    fi
+    cp "$1" "$2"
+}
 
+function anki () {
+  open -a Anki
+  cd /Users/zak/ghq/github.com/1206yaya/anki; code .
+  open 'https://medium.com/@1206yaya/list/immersion-assets-08909484bc37'
+}
+function clipquery() {
+  code /Users/zak/ghq/github.com/AbdulRahmanAlHamali/flutter_typeahead/example
+
+
+  code /Users/zak/ghq/github.com/1206yaya/clip_query_ai
+  code /Users/zak/ghq/github.com/1206yaya/flutter_playground/pub_flutter_markdown
+
+}
 function repe() {
   code /Users/zak/ghq/github.com/1206yaya/repecheck
   code /Users/zak/ghq/github.com/1206yaya/repecheck/firebase/functions

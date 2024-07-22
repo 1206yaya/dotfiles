@@ -300,5 +300,8 @@
   "workbench.preferredHighContrastColorTheme": "Abyss",
   "workbench.preferredLightColorTheme": "Beautiful Dracula Darker",
   "github.copilot.editor.enableAutoCompletions": true,
-  "workbench.colorTheme": "Dracula"
+  "workbench.colorTheme": "Dracula",
+  "python.createEnvironment.trigger": "off",
+  // "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true
 }

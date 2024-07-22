@@ -59,6 +59,7 @@
                 :Keynote  ["com.apple.iWork.Keynote"]
                 :Notion   ["notion.id"]
                 :Slack    ["com.tinyspeck.slackmacgap"]
+                :Toggl ["com.toggl.daneel"]
                 :Kit    ["app.scriptkit"]
                 :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
                 :vscode   ["com.microsoft.VSCode"]
@@ -223,6 +224,8 @@
                  [:n [:open "Notion"]]
                  [:i [:open "iTerm"]]
                  [:c [:open "Google Chrome"]]
+                 [:t ["open  -a '/Applications/Toggl Track.app'"]]
+                 
                  [:a [:open "Alacritty"]]
                  [:b [:open "Obsidian"]]
                  [:1 ["open obsidian://open?vault=obsidian_note_system&file=/Users/zak/ghq/github.com/1206yaya/obsidian_note_system"]]
@@ -230,7 +233,7 @@
                  [:f [:open "Finder"]]
                 ;;  [:x [:open "Vivaldi"]]
                  [:x [:open "iThoughtsX"]]
-                 [:t [:open "Trello"]]
+                ;;  [:t [:open "Trello"]]
 
             ;; [:m [:open "Morgen"]]
                 ;;  [:d [:open "Dictionary"]]

@@ -6,6 +6,9 @@ cs() {
 
     # 引数に基づいてファイル名を構築し、ショートカットを考慮
     case "$1" in
+        ios|iphone)
+            filename="iphone.md"
+            ;;
         py|python)
             filename="python.md"
             ;;

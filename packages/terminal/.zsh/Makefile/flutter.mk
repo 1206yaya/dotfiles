@@ -26,16 +26,30 @@ genf: # build_runner build --delete-conflicting-outputs
 genintl: # gen-l10n
 	fvm flutter gen-l10n
 
+genicon:
+	fvm flutter pub run flutter_launcher_icons:main
+
 genkey:
 	fvm flutter pub add firebase_core firebase_auth google_sign_in
 	echo "password: android"
 	keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
 
+genipa:
+	flutter build ipa --export-options-plist="ios/configs/ExportOptions.plist"
+	ditto -c -k --sequesterRsrc --keepParent build/ios/archive/Runner.xcarchive/dSYMs  Runner.app.dSYM.zip
+	open https://console.firebase.google.com/u/0/project/${PROJECT_ID}/crashlytics/app/ios/${PROJECT_ID}/dsyms
+	
 get: # pub get
 	fvm flutter pub get
 	
 flutter_connect:
 	flutterfire configure --project=${PROJECT_ID}
+clean.macos: # rm Podfile.lock Pods
+	flutter clean
+	rm -rf macos/Pods
+	rm -rf macos/Podfile.lock
+	flutter pub get
+	pod install --project-directory=macos
 
 clean.ios: # rm Podfile.lock Pods
 	flutter clean
@@ -91,6 +105,18 @@ add.util.riverpod:
 	@echo "analyzer:"
 	@echo "\tplugins:"
 	@echo "\t\t- custom_lint"
+
+add.util.drift:
+	fvm flutter pub add \
+		drift \
+		sqlite3_flutter_libs \
+		path_provider \
+		path
+
+	fvm flutter pub add \
+		drift_dev \
+		build_runner \
+		--dev 
 
 add.util:
 	fvm flutter pub add \

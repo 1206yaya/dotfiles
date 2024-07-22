@@ -59,6 +59,7 @@ ms-vscode-remote.remote-ssh-edit
 ms-vscode.azure-account
 ms-vscode.live-server
 ms-vscode.remote-explorer
+ms-vscode.vscode-speech
 mushan.vscode-paste-image
 nash.awesome-flutter-snippets
 nguyenhoanglam.beautiful-dracula
