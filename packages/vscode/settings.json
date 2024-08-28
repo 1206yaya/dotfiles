@@ -39,6 +39,17 @@
   "markdown-checkbox.italicWhenChecked": false,
   "markdown-checkbox.strikeThroughWhenChecked": false,
   "debug.disassemblyView.showSourceCode": false,
+  "editor.suggest.showKeywords": false,
+  "editor.suggest.showWords": false,
+
+  "[go]": {
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
   "[dart]": {
     // andrea
     "editor.codeActionsOnSave": {
@@ -198,7 +209,7 @@
   "google-translate.secondLanguage": "ja",
   "files.autoGuessEncoding": true,
   "github.copilot.enable": {
-    "*": true,
+    "*": false,
     "plaintext": false,
     "markdown": true,
     "scminput": false
@@ -303,5 +314,10 @@
   "workbench.colorTheme": "Dracula",
   "python.createEnvironment.trigger": "off",
   // "editor.fontFamily": "JetBrains Mono",
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "leetcode.defaultLanguage": "golang",
+  "terminal.external.osxExec": "iTerm.app",
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }

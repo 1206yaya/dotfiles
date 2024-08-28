@@ -28,6 +28,8 @@ fi
 export JAVA_HOME="$(asdf where java)"
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH=$(go env GOPATH)/bin:$PATH
+
 # export PATH="$HOME/.anyenv/bin:$PATH"
 # eval "$(anyenv init -)"
 
@@ -54,8 +56,11 @@ alias gl='gcloud'
 alias pt='poetry run pytest'
 alias pr='poetry run'
 alias add="fvm flutter pub add "$@""
-alias flrgen='flutter pub run build_runner watch'
-alias flrdel='flutter pub run build_runner build --delete-conflicting-outputs'
+alias get="fvm flutter pub get"
+alias fbuild='flutter pub run build_runner build'
+alias fbuildf='flutter pub run build_runner build --delete-conflicting-outputs'
+alias dbuild='dart run build_runner build'
+alias dbuildf='dart run build_runner clean; dart run build_runner build'
 alias ls="ls -lt  "$@""
 alias pb="pbcopy"
 alias mkdir='mkdir -p'
@@ -113,6 +118,10 @@ function clipquery() {
   code /Users/zak/ghq/github.com/1206yaya/clip_query_ai
   code /Users/zak/ghq/github.com/1206yaya/flutter_playground/pub_flutter_markdown
 
+}
+function atcode() {
+  code /Users/zak/ghq/github.com/1206yaya/competitive-programing-go
+  open 
 }
 function repe() {
   code /Users/zak/ghq/github.com/1206yaya/repecheck
@@ -209,8 +218,8 @@ alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-alias g='dir=$(ghq list | peco); [ -z "$dir" ] && return; builtin cd "$(ghq root)/$dir"  '
-
+# 最終更新日時の新しい順にファイルを表示
+alias g='dir=$(ghq list | xargs -I{} stat -f "%m %N" "$(ghq root)/{}" | sort -nr | cut -d" " -f2- | peco); [ -z "$dir" ] && return; builtin cd "$dir"'
 
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
@@ -220,6 +229,12 @@ alias genc="openapi-generator "$@""
 alias cursor="open -a /Applications/Cursor.app "$@""
 alias rege="fvm flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
 alias obsidian="open -a /Applications/Obsidian.app "$@""
+alias pes="pet sync"
+#　直前のコマンドをpet に登録
+function prev() {
+  PREV=$(fc -lrn | head -n 1)
+  sh -c "pet new `printf %q "$PREV"`"
+}
 function open() {
   if [[ $@ == "pdf" ]]; then
     command open /Users/zak/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes/asettes/pdf
@@ -499,6 +514,43 @@ macos/firebase_app_id_file.json
 android/app/google-services.json
 EOF
 }
+
+function goinit() {
+  project_name=$1
+  create_dir=true
+
+  if [[ $project_name == "." || $project_name == "./" ]]; then
+    echo "カレントディレクトリに生成します"
+    CURERNT_DIR=`printf '%s\n' "${PWD##*/}"`
+    project_name=$CURERNT_DIR
+    create_dir=false
+  elif [[ -z $project_name ]]; then
+    echo "プロジェクト名を第１引数に指定してください"
+    return 1;
+  fi
+
+  if [[ $create_dir == true ]]; then
+    mkdir $project_name
+    cd $project_name
+  fi
+
+cat <<EOF >main.go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  fmt.Println("Hello, World!")
+}
+EOF
+
+go mod init $project_name
+
+  code .
+}
+
 function fvmcreate() {
   project_name=$1
   version=$2

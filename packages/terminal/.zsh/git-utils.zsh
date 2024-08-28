@@ -30,7 +30,7 @@ function ggen() {
 
     git branch -M main
     git add .
-    git commit -m 'first commit'
+    git commit -m 'initial commit'
     # git remote add origin https://github.com/1206yaya/${REPO_NAME}.git
     git remote add origin git@github.com:1206yaya/${REPO_NAME}.git
     gh repo create --private $REPO_NAME

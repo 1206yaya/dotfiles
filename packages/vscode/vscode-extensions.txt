@@ -5,6 +5,7 @@ alexisvt.flutter-snippets
 arjun.swagger-viewer
 asuka.insertnumbers
 biso.du-flutter-riverpod-snippets
+casualjim.gotemplate
 casvanluijtelaar.dart-firestore-dataclass-generator
 chflick.firecode
 christian-kohler.path-intellisense
@@ -27,6 +28,7 @@ gerrnperl.outline-map
 github.copilot
 github.copilot-chat
 github.github-vscode-theme
+golang.go
 grapecity.gc-excelviewer
 gruntfuggly.todo-tree
 hancel.markdown-image
@@ -36,6 +38,7 @@ innwin.i18n-arb-editor
 jebbs.plantuml
 jeroen-meijer.pubspec-assist
 kisstkondoros.vscode-gutter-preview
+leetcode.vscode-leetcode
 localizely.flutter-intl
 marcelovelasquez.flutter-tree
 mattpocock.ts-error-translator
@@ -77,10 +80,12 @@ sergelamikhov.lcov-lang
 solomonkinard.search-history
 steoates.autoimport
 tamasfe.even-better-toml
+teamgogogo.go-run
 tinkertrain.theme-panda
 toba.vsfire
 tomoki1207.pdf
 usernamehw.errorlens
 wayou.vscode-todo-highlight
+yzane.markdown-pdf
 yzhang.markdown-all-in-one
 zainchen.json

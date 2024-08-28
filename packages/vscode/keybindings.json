@@ -289,5 +289,13 @@
   {
     "key": "alt+cmd+b",
     "command": "-build-runner.build_filters"
+  },
+  {
+    "key": "ctrl+cmd+t",
+    "command": "workbench.action.quickOpenNavigateNextInTerminalPicker"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "-workbench.action.closeWindow"
   }
 ]
