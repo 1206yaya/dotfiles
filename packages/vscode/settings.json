@@ -41,7 +41,13 @@
   "debug.disassemblyView.showSourceCode": false,
   "editor.suggest.showKeywords": false,
   "editor.suggest.showWords": false,
-
+  "terraform.languageServer": {
+    "external": true,
+    "args": ["serve"]
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
   "[go]": {
     "editor.insertSpaces": true,
     "editor.formatOnSave": true,
@@ -50,6 +56,7 @@
       "source.organizeImports": "always"
     }
   },
+
   "[dart]": {
     // andrea
     "editor.codeActionsOnSave": {
@@ -198,7 +205,6 @@
     }
   ],
   "redhat.telemetry.enabled": true,
-  "dart.flutterSdkPath": "~/fvm/default/bin",
   "dart.checkForSdkUpdates": false,
   "bracket-pair-colorizer-2.depreciation-notice": false,
   "[python]": {
@@ -209,7 +215,7 @@
   "google-translate.secondLanguage": "ja",
   "files.autoGuessEncoding": true,
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": true,
     "scminput": false
@@ -312,12 +318,19 @@
   "workbench.preferredLightColorTheme": "Beautiful Dracula Darker",
   "github.copilot.editor.enableAutoCompletions": true,
   "workbench.colorTheme": "Dracula",
-  "python.createEnvironment.trigger": "off",
   // "editor.fontFamily": "JetBrains Mono",
   "editor.fontLigatures": true,
   "leetcode.defaultLanguage": "golang",
   "terminal.external.osxExec": "iTerm.app",
   "[snippets]": {
     "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "workbench.editorAssociations": {
+    "*.pdf": "pdf.preview"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "code-runner.runInTerminal": true,
+  "github.copilot.advanced": {
+    
   }
 }

@@ -1,0 +1,44 @@
+stracture.txt
+
+```
+
+# modules/s3/variables.tf
+variable "bucket_name" {
+  description = "The name of the S3 bucket"
+  type        = string
+}
+
+# modules/lambda/variables.tf
+variable "project_name" {
+  description = "The name of the project"
+  type        = string
+}
+
+
+```
+
+次の様に実行することで、第一引数のstracture.txt内の情報に沿ったファイル群を生成する genfiles.pyを作成せよ。
+
+```
+genfiles stracture.txt
+```
+
+genfilesは次のように定義される。
+
+```
+#!/bin/zsh
+
+genfiles() {
+    if [ "$#" -ne 1 ]; then
+        echo "使い方: genfiles <生成するファイル群の情報が記載されたファイルパス>"
+        return 1
+    fi
+
+    local TARGET_PATH=$1
+    local SCRIPT_PATH="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/genfiles.py"
+    python "$SCRIPT_PATH" "$TARGET_PATH"
+}
+```
+
+
+

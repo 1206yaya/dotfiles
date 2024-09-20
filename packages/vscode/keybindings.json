@@ -262,10 +262,6 @@
     "command": "-workbench.action.gotoSymbol"
   },
   {
-    "key": "shift+cmd+o",
-    "command": "workbench.view.extension.outline-map"
-  },
-  {
     "key": "ctrl+-",
     "command": "-workbench.action.navigateBack",
     "when": "canNavigateBack"
@@ -297,5 +293,46 @@
   {
     "key": "shift+cmd+w",
     "command": "-workbench.action.closeWindow"
+  },
+  {
+    "key": "shift+cmd+o",
+    "command": "outline.focus"
+  },
+  {
+    "key": "shift+cmd+b",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "cmd+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "cmd+w",
+    "command": "-workbench.action.closeGroup",
+    "when": "activeEditorGroupEmpty && multipleEditorGroups"
+  },
+  {
+    "key": "cmd+w",
+    "command": "-workbench.action.closeWindow",
+    "when": "!editorIsOpen && !multipleEditorGroups"
+  },
+  {
+    "key": "cmd+k f",
+    "command": "-workbench.action.closeFolder",
+    "when": "emptyWorkspaceSupport && workbenchState != 'empty'"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "workbench.action.closeWindow"
+  },
+  {
+    "key": "shift+space",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "-editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
   }
 ]

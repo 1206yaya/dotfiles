@@ -52,6 +52,8 @@ alias keycodes="cat /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/L
 # @Flutter Alias
 alias fl='flutter'
 alias localip="ifconfig en0 | grep 'inet ' | awk '{ print $2 }'"
+# Terraform
+alias tf='terraform'
 alias gl='gcloud'
 alias pt='poetry run pytest'
 alias pr='poetry run'

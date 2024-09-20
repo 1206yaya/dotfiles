@@ -224,11 +224,11 @@
                  [:n [:open "Notion"]]
                  [:i [:open "iTerm"]]
                  [:c [:open "Google Chrome"]]
-                 [:t ["open  -a '/Applications/Toggl Track.app'"]]
+                ;;  [:t ["open  -a '/Applications/Toggl Track.app'"]]
                  
                  [:a [:open "Alacritty"]]
                  [:b [:open "Obsidian"]]
-                 [:1 ["open obsidian://open?vault=obsidian_note_system&file=/Users/zak/ghq/github.com/1206yaya/obsidian_note_system"]]
+                 [:1 ["open obsidian://open?vault=obsidian-vault-zak&file=/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-vault-zak"]]
                  [:2 ["open obsidian://open?vault=ZAK&file=/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/ZAK"]]
                  [:f [:open "Finder"]]
                 ;;  [:x [:open "Vivaldi"]]

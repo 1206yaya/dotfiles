@@ -27,5 +27,16 @@ mv ~/Library/Application\ Support/Code/User/snippets/ "$PACKAGE_DIR"
 
 ln -s $PACKAGE_DIR/settings.json $CODE_DIR/settings.json
 ln -s $PACKAGE_DIR/keybindings.json $CODE_DIR/keybindings.json
-ln -s $PACKAGE_DIR/snippets/ $CODE_DIR
+ln -s $PACKAGE_DIR/snippets/ $CODE_DIR/snippets
+```
+
+## Cursor
+
+```
+PACKAGE_DIR=/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/vscode/
+CODE_DIR=/Users/zak/Library/Application\ Support/Cursor/User
+
+ln -s $PACKAGE_DIR/settings.json $CODE_DIR/settings.json
+ln -s $PACKAGE_DIR/keybindings.json $CODE_DIR/keybindings.json
+ln -s $PACKAGE_DIR/snippets/ $CODE_DIR/snippets
 ```

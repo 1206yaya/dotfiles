@@ -29,6 +29,36 @@
     //     ],
     //     "description": "Main basic"
     // },
+    "main function": {
+        "prefix": "main",
+        "body": [
+            "package main",
+            "",
+            "import \"fmt\"",
+            "",
+            "func main() {",
+            "   fmt.Println(\"Hello\")",
+            "}",
+            ""
+        ],
+        "description": ""
+    },
+    "continue ": {
+        "prefix": "con",
+        "body": "continue"
+    },
+    "return ": {
+        "prefix": "re",
+        "body": "return $1"
+    },
+    "else if statement": {
+        "prefix": "elif",
+        "body": [
+            "else if $1 {",
+            "\t\t$2",
+            "\t}"
+        ]
+    },
     "insert := ": {
         "prefix": "v",
         "description": "Variable declaration :=",
@@ -38,10 +68,6 @@
         "prefix": "vv",
         "description": "Variable declaration :=",
         "body": "${1:name} := ${0:value}"
-    },
-    ",": {
-        "prefix": ",",
-        "body": " <- "
     },
     "Test Function": {
         "prefix": "testfunc",
@@ -55,54 +81,140 @@
     "max": {
         "prefix": "max",
         "body": [
-            "func max(x, y int) int {",
-            "   if x > y {",
-            "      return x",
+            "func max[T constraints.Ordered](a T, b T) T {",
+            "\tif a > b {",
+            "\t\treturn a",
+            "\t}",
+            "\treturn b",
+            "}"
+        ]
+    },
+    "max list function": {
+        "prefix": "maxlist",
+        "body": [
+            "func maxList[T constraints.Ordered](x T, others ...T) T {",
+            "\t res := x",
+            "\t for _, y := range others {",
+            "\t\t\t if y > res {",
+            "\t\t\t\t\t res = y",
+            "\t\t\t }",
+            "\t }",
+            "\t return res",
+            "}"
+        ]
+    },
+    "min function": {
+        "prefix": "min",
+        "body": [
+            "func min[T constraints.Ordered](a T, b T) T {",
+            "\tif a < b {",
+            "\t\treturn a",
+            "\t}",
+            "\treturn b",
+            "}"
+        ]
+    },
+    "min list function": {
+        "prefix": "minlist",
+        "body": [
+            "func minList[T constraints.Ordered](x T, others ...T) T {",
+            "  res := x",
+            "  for _, y := range others {",
+            "   if y < res {",
+            "    res = y",
             "   }",
-            "   return y",
+            "  }",
+            "  return res",
+            "}"
+        ],
+        "description": ""
+    },
+    "sum function": {
+        "prefix": "sum",
+        "body": [
+            "func sum[T constraints.Ordered](values []T) (sum T) {",
+            "\tfor _, v := range values {",
+            "\t\tsum += v",
+            "\t}",
+            "\treturn sum",
+            "}",
+            ""
+        ]
+    },
+    "sum map": {
+        "prefix": "summap",
+        "body": [
+            "func sumMap[T any, R constraints.Ordered](list []T, selector func(T) R) (sum R) {",
+            "\tfor _, v := range list {",
+            "\t\tsum += selector(v)",
+            "\t}",
+            "\treturn sum",
+            "}",
+            "// ex. ",
+            "// numbers := []int{1, 2, 3, 4, 5}",
+            "// sum := SumMap(numbers, func(n int) int {",
+            "//\t\t return n",
+            "// })",
+            "//",
+            "// products := []Product{",
+            "// \t{\"Apple\", 1.99},",
+            "// \t{\"Banana\", 0.99},",
+            "// \t{\"Orange\", 2.49},",
+            "// }",
+            "// totalPrice := SumMap(products, func(p Product) float64 {",
+            "// \treturn p.Price",
+            "// })"
+        ]
+    },
+    "abs function": {
+        "prefix": "abs",
+        "body": [
+            "func abs[T constraints.Integer | constraints.Float](a T) T {",
+            "\tif a >= 0 {",
+            "\t\treturn a",
+            "\t}",
+            "\treturn -a",
+            "}"
+        ]
+    },
+    "reverse string function": {
+        "prefix": "reverseString",
+        "body": [
+            "func reverseString(s string) string {",
+            "    runes := []rune(s)",
+            "    for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {",
+            "        runes[i], runes[j] = runes[j], runes[i]",
+            "    }",
+            "    return string(runes)",
+            "}"
+        ],
+        "description": ""
+    },
+    "Yes No Answer function": {
+        "prefix": "yn",
+        "body": [
+            "func yn(c bool) {",
+            "    if c {",
+            "        println(\"YES\")",
+            "    } else {",
+            "        println(\"NO\")",
+            "    }",
             "}",
             ""
         ],
         "description": ""
     },
-    "max function": {
-        "prefix": "max",
-        "body": [
-            "func max(x int, others ...int) int {",
-            "   res := x",
-            "   for _, y := range others {",
-            "       if y > res {",
-            "           res = y",
-            "       }",
-            "   }",
-            "   return res",
-            "}"
-        ],
-        "description": "Snippet for a max function"
-    },
-    "min function": {
-        "prefix": "min",
-        "body": [
-            "func min(x int, others ...int) int {",
-            "   res := x",
-            "   for _, y := range others {",
-            "       if y < res {",
-            "           res = y",
-            "       }",
-            "   }",
-            "   return res",
-            "}"
-        ],
-        "description": "Snippet for a min function"
-    },
     "main run Fscan": {
         "prefix": "mainrunscan",
         "body": [
+            "package main",
             "func run(in io.Reader, w io.Writer) {",
             "   out := bufio.NewWriter(w)",
             "   defer out.Flush()",
             "   var a, b, c int",
             "   fmt.Fscan(in, &a, &b, &c)",
+            "   var N int",
+            "   fmt.Fscan(in, &N)",
             "",
             "}",
             "",

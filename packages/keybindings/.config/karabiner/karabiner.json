@@ -3100,51 +3100,6 @@
           }
         }, {
           "from" : {
-            "key_code" : "t"
-          },
-          "to" : [ {
-            "shell_command" : "open  -a '/Applications/Toggl Track.app'"
-          } ],
-          "conditions" : [ {
-            "name" : "open-mode",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "type" : "basic",
-          "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 500
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "open-mode",
-              "value" : 1
-            }
-          }, {
-            "shell_command" : "open  -a '/Applications/Toggl Track.app'"
-          } ],
-          "from" : {
-            "simultaneous" : [ {
-              "key_code" : "0"
-            }, {
-              "key_code" : "t"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : true,
-              "key_down_order" : "strict",
-              "key_up_order" : "strict_inverse",
-              "key_up_when" : "any",
-              "to_after_key_up" : [ {
-                "set_variable" : {
-                  "name" : "open-mode",
-                  "value" : 0
-                }
-              } ]
-            }
-          }
-        }, {
-          "from" : {
             "key_code" : "a"
           },
           "to" : [ {
@@ -3238,7 +3193,7 @@
             "key_code" : "1"
           },
           "to" : [ {
-            "shell_command" : "open obsidian://open?vault=obsidian_note_system&file=/Users/zak/ghq/github.com/1206yaya/obsidian_note_system"
+            "shell_command" : "open obsidian://open?vault=obsidian-vault-zak&file=/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-vault-zak"
           } ],
           "conditions" : [ {
             "name" : "open-mode",
@@ -3257,7 +3212,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "open obsidian://open?vault=obsidian_note_system&file=/Users/zak/ghq/github.com/1206yaya/obsidian_note_system"
+            "shell_command" : "open obsidian://open?vault=obsidian-vault-zak&file=/Users/zak/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-vault-zak"
           } ],
           "from" : {
             "simultaneous" : [ {

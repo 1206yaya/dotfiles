@@ -12,7 +12,7 @@ genms() {
     elif [ "$1" = "csv" ]; then
         # csv の場合
         # ファイル名を指定
-        echo "未実装です"
+        sourceFile=$pathDir"/blank.csv"
     else
         # それ以外の場合はエラー
         echo "第一引数には xlsx csv のいずれかを指定してください"
@@ -25,7 +25,7 @@ genms() {
     if [ -f "$filename" ]; then
         echo "すでに $filename が存在します"
     else
-        cp $sourceFile blank.xlsx
+        cp $sourceFile ./
         echo "$filename を作成しました"
     fi
 
