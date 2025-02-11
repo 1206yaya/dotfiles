@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 
 export GITHUB_EMAIL=1206yaya@gmail.com
 export GIT_CLONE_PATH=~/ghq/github.com/1206yaya
@@ -7,9 +7,9 @@ export DOTDIR="$GIT_CLONE_PATH/dotfiles"
 ###########################################################
 # Options
 ###########################################################
-unlink_packages=
 verbose=
 skip_apps=0
+use_private=0
 for i in "$@"; do
     case "$i" in
         -s|--skip-apps)
@@ -18,10 +18,13 @@ for i in "$@"; do
         -v|--verbose)
             verbose=1
             shift ;;
-        -u=*|--unlink=*)
-            unlink_packages="${i#*=}"
+        --private)
+            use_private=1
             shift ;;
-        *) ;;
+        *)
+            echo "Warning: Unknown option $i"
+            echo "Usage: $0 [--skip-apps] [--verbose] [--unlink=package] [--private]"
+            exit 1 ;;
     esac
 done
 
@@ -83,6 +86,7 @@ setup_ssh() {
   fi
 }
 
+
 install_homebrew() {
     arch_name="$(uname -m)"
     if [ "${arch_name}" = "x86_64" ]; then
@@ -105,33 +109,47 @@ install_homebrew() {
 
 install_brewfile() {
     if [ "$skip_apps" -eq 0 ]; then
+        # `Brewfile.office` の適用（必須）
+        BREWFILE_OFFICE="$GIT_CLONE_PATH/dotfiles/Brewfile.office"
+        if [ -f "$BREWFILE_OFFICE" ]; then
+            info "Applying $BREWFILE_OFFICE..."
+            brew bundle --file="$BREWFILE_OFFICE"
+        else
+            info "Error: $BREWFILE_OFFICE not found!"
+            exit 1
+        fi
+
+        # `Brewfile.private` も適用する場合
+        if [ "$use_private" -eq 1 ]; then
+            BREWFILE_PRIVATE="$GIT_CLONE_PATH/dotfiles/Brewfile.private"
+            if [ -f "$BREWFILE_PRIVATE" ]; then
+                info "Applying $BREWFILE_PRIVATE..."
+                brew bundle --file="$BREWFILE_PRIVATE"
+            else
+                info "Warning: $BREWFILE_PRIVATE not found, skipping..."
+            fi
+        fi
+
         log 'Install Apps and CLIs'
-        brew bundle --file "$DOTDIR/Brewfile" $([ -n "$verbose" ] && echo -v)
     fi
 }
 
 setup_gpg() {
-    # # ~/.gnupg ディレクトリが存在しない、または GPG 秘密鍵がない場合に実行
-    # if ! dir_exists ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
-    #     log 'Install gpg signing with git' # GPG 署名のセットアップ開始
+    # ~/.gnupg ディレクトリが存在しない、または GPG 秘密鍵がない場合に実行
+    if ! dir_exists ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
+        log 'Install gpg signing with git' # GPG 署名のセットアップ開始
 
-    #     # RSA4096 を使用して新しい GPG 鍵を作成
-    #     gpg --default-new-key-algo rsa4096 --gen-key
+        # RSA4096 を使用して新しい GPG 鍵を作成
+        gpg --default-new-key-algo rsa4096 --gen-key
 
-    #     # 作成した GPG 鍵の Key ID を取得
+        # 作成した GPG 鍵の Key ID を取得
         key_id=$(gpg --list-secret-keys --keyid-format LONG | ggrep -oP "rsa4096\/[0-9a-fA-F]{16}" | cut -d"/"  -f2)
 
-    #     # GitHub に登録するための GPG 公開鍵を表示するよう通知
-    #     log 'Copy and paste the GPG key below to GitHub'
-        
-    #     # GPG 公開鍵を表示（ユーザーが GitHub に登録するため）
-    #     gpg --armor --export "$key_id"
-
-    #     # Github URLを表示
-    #     # ユーザーにコピーする時間を与える
-    #     info 'Register your GPG key on GitHub : https://github.com/settings/gpg/new'
-        
-    #     press_to_continue
+        # GitHub に登録するための GPG 公開鍵を表示するよう通知
+        gpg --armor --export "$key_id"
+        log 'Copy and paste the GPG key below to GitHub'
+        info 'Register your GPG key on GitHub : https://github.com/settings/gpg/new'
+        press_to_continue
 
         # ~/.gitconfig.local に GPG 署名鍵の設定を追加
         git_local_config="$HOME/.gitconfig.local"
@@ -148,11 +166,14 @@ setup_gpg() {
         echo "    signingkey = $key_id" >> "$git_local_config"
 
         log "Added GPG signing key to ~/.gitconfig.local"
-    # fi
+    fi
 }
 
 create_symbolic_links() {
     log 'Create Symbolic Links'
+    ensure_dir_exists "$HOME/bin"
+    ln -sf "$DOTDIR/bin/dotfiles" "$HOME/bin/dotfiles"
+
     ln -sf "$DOTDIR/git/.gitconfig" "$HOME/.gitconfig"
     ln -sf "$DOTDIR/git/.gitignore_global" "$HOME/.gitignore_global"
 
@@ -170,7 +191,13 @@ create_symbolic_links() {
     ln -sf "$DOTDIR/.config/starship.toml" "$HOME/.config/starship.toml"
 }
 
+# configure macOS settings
+ensure_dir_exists ~/screenshots
+~/scripts/macos-defaults
 
+set_macos() {
+    . "$DOTDIR/macos/defaults.sh"
+}
 
 
 install_xcode_command_line_tools

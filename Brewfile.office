@@ -28,6 +28,7 @@ brew "wget"
 brew "xz"
 brew "zsh"
 brew "eza"
+
 cask "font-hack-nerd-font"
 cask "visual-studio-code"
 cask "google-chrome"

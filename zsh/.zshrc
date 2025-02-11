@@ -8,6 +8,7 @@ setopt hist_ignore_dups
 setopt inc_append_history
 setopt NO_NOMATCH
 
+export PATH=$PATH:$HOME/scripts # dotfiles管理下のscriptsがリンクされる
 export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
 export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
