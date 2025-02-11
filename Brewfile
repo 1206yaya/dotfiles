@@ -1,4 +1,4 @@
-tap "homebrew/cask"
+
 brew "anyenv"
 brew "autoconf"
 brew "awscli"
@@ -30,3 +30,5 @@ brew "zsh"
 brew "eza"
 cask "font-hack-nerd-font"
 cask "visual-studio-code"
+cask "google-chrome"
+cask "gpg-suite"

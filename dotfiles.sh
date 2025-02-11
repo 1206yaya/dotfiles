@@ -1,6 +1,5 @@
 #!/bin/sh 
-set -x
-set -e 
+
 export GITHUB_EMAIL=1206yaya@gmail.com
 export GIT_CLONE_PATH=~/ghq/github.com/1206yaya
 export DOTDIR="$GIT_CLONE_PATH/dotfiles"
@@ -29,11 +28,8 @@ done
 ###########################################################
 # Utils
 ###########################################################
-log() {
-    message=$1
-    echo "📌 $message"
-}
-
+log() { echo "📌 $1"; }
+info() { printf '[ \033[00;34m  \033[0m ] %s\n' "$1"; }
 file_exists() {
     path="$1"
     [ -f "$path" ]
@@ -51,7 +47,7 @@ ensure_dir_exists() {
     fi
 }
 press_to_continue() { info 'Press any key to continue'; read -r _; }
-
+success() { printf '[ \033[00;32mOK\033[0m ] %s\n' "$1"; }
 
 ###########################################################
 # Functions
@@ -114,17 +110,56 @@ install_brewfile() {
     fi
 }
 
+setup_gpg() {
+    # # ~/.gnupg ディレクトリが存在しない、または GPG 秘密鍵がない場合に実行
+    # if ! dir_exists ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
+    #     log 'Install gpg signing with git' # GPG 署名のセットアップ開始
+
+    #     # RSA4096 を使用して新しい GPG 鍵を作成
+    #     gpg --default-new-key-algo rsa4096 --gen-key
+
+    #     # 作成した GPG 鍵の Key ID を取得
+        key_id=$(gpg --list-secret-keys --keyid-format LONG | ggrep -oP "rsa4096\/[0-9a-fA-F]{16}" | cut -d"/"  -f2)
+
+    #     # GitHub に登録するための GPG 公開鍵を表示するよう通知
+    #     log 'Copy and paste the GPG key below to GitHub'
+        
+    #     # GPG 公開鍵を表示（ユーザーが GitHub に登録するため）
+    #     gpg --armor --export "$key_id"
+
+    #     # Github URLを表示
+    #     # ユーザーにコピーする時間を与える
+    #     info 'Register your GPG key on GitHub : https://github.com/settings/gpg/new'
+        
+    #     press_to_continue
+
+        # ~/.gitconfig.local に GPG 署名鍵の設定を追加
+        git_local_config="$HOME/.gitconfig.local"
+
+        if ! file_exists "$git_local_config"; then
+            touch "$git_local_config"
+        fi
+
+        # 既存の signingkey 設定を削除（重複防止）
+        sed -i '' '/signingkey/d' "$git_local_config"
+
+        # GPG 署名キーを ~/.gitconfig.local に追加
+        echo "[user]" >> "$git_local_config"
+        echo "    signingkey = $key_id" >> "$git_local_config"
+
+        log "Added GPG signing key to ~/.gitconfig.local"
+    # fi
+}
 
 create_symbolic_links() {
     log 'Create Symbolic Links'
-    ln -sf "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
-    ln -sf "$DOTDIR/.gitconfig.local" "$HOME/.gitconfig.local"
-    ln -sf "$DOTDIR/.gitignore_global" "$HOME/.gitignore_global"
+    ln -sf "$DOTDIR/git/.gitconfig" "$HOME/.gitconfig"
+    ln -sf "$DOTDIR/git/.gitignore_global" "$HOME/.gitignore_global"
 
-    ln -sf "$DOTDIR/.zshrc" "$HOME/.zshrc"
-    ln -sf "$DOTDIR/.zshenv" "$HOME/.zshenv"
+    ln -sf "$DOTDIR/zsh/.zshrc" "$HOME/.zshrc"
+    ln -sf "$DOTDIR/zsh/.zshenv" "$HOME/.zshenv"
     mkdir -p "$HOME/.config/zsh"
-    files=($DOTDIR/.config/*)
+    files=($DOTDIR/zsh/.config/*)
     if [[ ${#files[@]} -gt 0 && -e ${files[1]} ]]; then
         for file in "${files[@]}"; do
             target="$HOME/.config/zsh/$(basename "$file")"
@@ -133,9 +168,6 @@ create_symbolic_links() {
     fi
 
     ln -sf "$DOTDIR/.config/starship.toml" "$HOME/.config/starship.toml"
-    ln -sf "$DOTDIR/.config/yarn/global/package.json" "$HOME/.config/yarn/global/package.json"
-    ln -sf "$DOTDIR/.config/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
-    ln -sf "$DOTDIR/.config/starship/starship.toml" "$HOME/.config/starship/starship.toml"
 }
 
 
@@ -146,4 +178,5 @@ clone_dotfiles
 setup_ssh
 install_homebrew
 install_brewfile
+setup_gpg
 create_symbolic_links
