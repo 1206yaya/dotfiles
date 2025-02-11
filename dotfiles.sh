@@ -10,6 +10,7 @@ export DOTDIR="$GIT_CLONE_PATH/dotfiles"
 ###########################################################
 unlink_packages=
 verbose=
+skip_apps=0
 for i in "$@"; do
     case "$i" in
         -s|--skip-apps)
@@ -49,116 +50,100 @@ ensure_dir_exists() {
         mkdir -p "$path"
     fi
 }
+press_to_continue() { info 'Press any key to continue'; read -r _; }
+
 
 ###########################################################
-# Install Homebrew
+# Functions
 ###########################################################
-arch_name="$(uname -m)"
-if [ "${arch_name}" = "x86_64" ]; then
-    if ! file_exists /usr/local/bin/brew; then
-        log 'Setup Homebrew'
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+install_xcode_command_line_tools() {
+    if ! xcode-select -p; then
+        log 'Install Xcode Command Line Tools'
+        xcode-select --install
     fi
-elif [ "${arch_name}" = "arm64" ]; then
-    if ! file_exists /opt/homebrew/bin/brew; then
-        log 'Setup Homebrew'
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+}
 
-        log 'Install Rosetta 2'
-        sudo softwareupdate --install-rosetta --agree-to-license
+
+clone_dotfiles() {
+    if ! dir_exists "$DOTDIR"; then
+        log "Clone dotfiles to $DOTDIR"
+        cd "$GIT_CLONE_PATH"
+        git clone
     fi
-fi
+}
+
+setup_ssh() {
+  mkdir -p "$HOME"/.ssh
+  if [ ! -f "$HOME"/.ssh/id_ed25519.pub ]; then
+    ssh-keygen -t ed25519 -C "$(git config user.email)" -f "$HOME"/.ssh/id_ed25519
+    info 'Register your SSH public key on GitHub (Key Type: Authentication Key): https://github.com/settings/ssh/new'
+    info 'Copy the public key below and add it to the "New SSH Key" page on GitHub, selecting "Authentication Key" as the Key Type.'
+    cat "$HOME"/.ssh/id_ed25519.pub
+    echo ''
+    press_to_continue
+  else
+    success "SSH Key - Key-pair already present"
+  fi
+}
+
+install_homebrew() {
+    arch_name="$(uname -m)"
+    if [ "${arch_name}" = "x86_64" ]; then
+        if ! file_exists /usr/local/bin/brew; then
+            log 'Setup Homebrew'
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        fi
+    elif [ "${arch_name}" = "arm64" ]; then
+        if ! file_exists /opt/homebrew/bin/brew; then
+            log 'Setup Homebrew'
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+
+            log 'Install Rosetta 2'
+            sudo softwareupdate --install-rosetta --agree-to-license
+        fi
+    fi
+
+}
+
+install_brewfile() {
+    if [ "$skip_apps" -eq 0 ]; then
+        log 'Install Apps and CLIs'
+        brew bundle --file "$DOTDIR/Brewfile" $([ -n "$verbose" ] && echo -v)
+    fi
+}
 
 
-###########################################################
-# Create Symbolic Links Manually
-###########################################################
-ln -sf "$DOTDIR/git/.gitconfig" "$HOME/.gitconfig"
-ln -sf "$DOTDIR/git/.gitconfig.local" "$HOME/.gitconfig.local"
-ln -sf "$DOTDIR/git/.gitignore_global" "$HOME/.gitignore_global"
-echo DOTDIR: $DOTDIR
-# Zsh関連ファイルのリンク
-ln -sf "$DOTDIR/zsh/.zshrc" "$HOME/.zshrc"
-ln -sf "$DOTDIR/zsh/.zshenv" "$HOME/.zshenv"
+create_symbolic_links() {
+    log 'Create Symbolic Links'
+    ln -sf "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
+    ln -sf "$DOTDIR/.gitconfig.local" "$HOME/.gitconfig.local"
+    ln -sf "$DOTDIR/.gitignore_global" "$HOME/.gitignore_global"
 
-# .config/zsh ディレクトリ作成
-mkdir -p "$HOME/.config/zsh"
+    ln -sf "$DOTDIR/.zshrc" "$HOME/.zshrc"
+    ln -sf "$DOTDIR/.zshenv" "$HOME/.zshenv"
+    mkdir -p "$HOME/.config/zsh"
+    files=($DOTDIR/.config/*)
+    if [[ ${#files[@]} -gt 0 && -e ${files[1]} ]]; then
+        for file in "${files[@]}"; do
+            target="$HOME/.config/zsh/$(basename "$file")"
+            ln -sf "$file" "$target"
+        done
+    fi
 
-# $DOTDIR/zsh/.config/ 内の全ファイルを `$HOME/.config/zsh/` にリンク
-files=($DOTDIR/zsh/.config/*)
-
-# ファイルが1つでも存在するかチェック
-if [[ ${#files[@]} -gt 0 && -e ${files[1]} ]]; then
-    for file in "${files[@]}"; do
-        target="$HOME/.config/zsh/$(basename "$file")"
-        ln -sf "$file" "$target"
-    done
-fi
-
-
-ln -sf "$DOTDIR/.config/starship.toml" "$HOME/.config/starship.toml"
-
-ensure_dir_exists "$GIT_CLONE_PATH"
-
-if ! dir_exists "$DOTDIR"; then
-    log "Clone dotfiles to $DOTDIR"
-    cd "$GIT_CLONE_PATH"
-    git clone https://github.com/1206yaya/dotfiles.git
-fi
-
-if [ ! "$skip_apps" ]; then
-    log 'Install Apps and CLIs'
-    brew bundle --file "$DOTDIR/Brewfile" $([ -n "$verbose" ] && echo -v)
-fi
+    ln -sf "$DOTDIR/.config/starship.toml" "$HOME/.config/starship.toml"
+    ln -sf "$DOTDIR/.config/yarn/global/package.json" "$HOME/.config/yarn/global/package.json"
+    ln -sf "$DOTDIR/.config/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+    ln -sf "$DOTDIR/.config/starship/starship.toml" "$HOME/.config/starship/starship.toml"
+}
 
 
 
-# ensure_dir_exists ~/.config/alacritty
-# ln -sf "$DOTDIR/alacritty/alacritty.yml" ~/.config/alacritty/alacritty.yml
 
-# ensure_dir_exists ~/.config/starship
-# ln -sf "$DOTDIR/starship/starship.toml" ~/.config/starship/starship.toml
-
-# ensure_dir_exists ~/.config/yarn/global
-# ln -sf "$DOTDIR/yarn/global/package.json" ~/.config/yarn/global/package.json
-
-# ###########################################################
-# # Git Setup
-# ###########################################################
-# if ! dir_exists ~/.gnupg || [ -z "$(gpg --list-secret-keys --keyid-format LONG)" ]; then
-#     log 'Install gpg signing with git'
-#     gpg --default-new-key-algo rsa4096 --gen-key
-#     key_id=$(gpg --list-secret-keys --keyid-format LONG | grep -oP "rsa4096/[0-9a-fA-F]{16}" | cut -d"/"  -f2)
-#     log 'Copy and paste the GPG key below to GitHub'
-#     gpg --armor --export "$key_id"
-#     git config --global user.signingkey "$key_id"
-# fi
-
-# if ! file_exists ~/.ssh/id_rsa.pub; then
-#     log 'Setup SSH key for GitHub'
-#     ssh-keygen -t rsa -b 4096 -C $GITHUB_EMAIL
-#     log 'Copy and paste the SSH key below to GitHub'
-#     cat ~/.ssh/id_rsa.pub
-# fi
-
-# ###########################################################
-# # VSCode Extensions
-# ###########################################################
-# VSCODE_EXTENSIONS_FILE="$DOTDIR/vscode/vscode-extensions.txt"
-
-# INSTALLED_EXTENSIONS_COUNT=$(code --list-extensions | wc -l)
-
-# if [ "$INSTALLED_EXTENSIONS_COUNT" -eq 0 ]; then
-#     log "Installing VS Code extensions..."
-#     while IFS= read -r extension; do
-#         code --install-extension "$extension" --force
-#         echo "installed $extension"
-#     done < "$VSCODE_EXTENSIONS_FILE"
-# else
-#     log "Updating VS Code extensions list..."
-#     code --list-extensions > "$VSCODE_EXTENSIONS_FILE"
-# fi
-
-# npm install --global @azu/github-label-setup
-# poetry config virtualenvs.in-project true
+install_xcode_command_line_tools
+clone_dotfiles
+setup_ssh
+install_homebrew
+install_brewfile
+create_symbolic_links

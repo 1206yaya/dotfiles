@@ -1,4 +1,4 @@
-tap "homebrew/cask-fonts"
+tap "homebrew/cask"
 brew "anyenv"
 brew "autoconf"
 brew "awscli"
