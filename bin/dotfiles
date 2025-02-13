@@ -57,7 +57,7 @@ success() { printf '[ \033[00;32mOK\033[0m ] %s\n' "$1"; }
 ###########################################################
 
 install_xcode_command_line_tools() {
-    if ! xcode-select -p; then
+    if ! xcode-select -p >/dev/null 2>&1 ; then
         log 'Install Xcode Command Line Tools'
         xcode-select --install
     fi
@@ -73,17 +73,17 @@ clone_dotfiles() {
 }
 
 setup_ssh() {
-  mkdir -p "$HOME"/.ssh
-  if [ ! -f "$HOME"/.ssh/id_ed25519.pub ]; then
-    ssh-keygen -t ed25519 -C "$(git config user.email)" -f "$HOME"/.ssh/id_ed25519
-    info 'Register your SSH public key on GitHub (Key Type: Authentication Key): https://github.com/settings/ssh/new'
-    info 'Copy the public key below and add it to the "New SSH Key" page on GitHub, selecting "Authentication Key" as the Key Type.'
-    cat "$HOME"/.ssh/id_ed25519.pub
-    echo ''
-    press_to_continue
-  else
-    success "SSH Key - Key-pair already present"
-  fi
+    mkdir -p "$HOME"/.ssh
+    if [ ! -f "$HOME"/.ssh/id_ed25519.pub ]; then
+        ssh-keygen -t ed25519 -C "$(git config user.email)" -f "$HOME"/.ssh/id_ed25519
+        info 'Register your SSH public key on GitHub (Key Type: Authentication Key): https://github.com/settings/ssh/new'
+        info 'Copy the public key below and add it to the "New SSH Key" page on GitHub, selecting "Authentication Key" as the Key Type.'
+        cat "$HOME"/.ssh/id_ed25519.pub
+        echo ''
+        press_to_continue
+    else
+        success "SSH Key - Key-pair already present"
+    fi
 }
 
 
@@ -171,12 +171,16 @@ setup_gpg() {
 
 create_symbolic_links() {
     log 'Create Symbolic Links'
+    # bin
     ensure_dir_exists "$HOME/bin"
     ln -sf "$DOTDIR/bin/dotfiles" "$HOME/bin/dotfiles"
 
+    # git
     ln -sf "$DOTDIR/git/.gitconfig" "$HOME/.gitconfig"
     ln -sf "$DOTDIR/git/.gitignore_global" "$HOME/.gitignore_global"
+    ln -sf "$DOTDIR/git/.gitconig.local" "$HOME/.gitconig.local"
 
+    # zsh
     ln -sf "$DOTDIR/zsh/.zshrc" "$HOME/.zshrc"
     ln -sf "$DOTDIR/zsh/.zshenv" "$HOME/.zshenv"
     mkdir -p "$HOME/.config/zsh"
@@ -188,14 +192,25 @@ create_symbolic_links() {
         done
     fi
 
+    # vscode
+    ln -sf "$DOTDIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+    ln -sf "$DOTDIR/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
+    ln -sf "$DOTDIR/vscode/snippets" "$HOME/Library/Application Support/Code/User/snippets"
+    
+    # karabiner
+    ln -sf "$DOTDIR/karabiner/karabiner.edn" "$HOME/.config/karabiner/karabiner.edn"
+    # goku　でエラーが出ることがあるため、念の為ファイルを作成
+    touch "$HOME/.config/karabiner/karabiner.json"
+    # starship
     ln -sf "$DOTDIR/.config/starship.toml" "$HOME/.config/starship.toml"
 }
 
-# configure macOS settings
-ensure_dir_exists ~/screenshots
-~/scripts/macos-defaults
+
 
 set_macos() {
+    # configure macOS settings
+    ensure_dir_exists ~/screenshots
+    ~/scripts/macos-defaults
     . "$DOTDIR/macos/defaults.sh"
 }
 
@@ -207,3 +222,4 @@ install_homebrew
 install_brewfile
 setup_gpg
 create_symbolic_links
+set_macos

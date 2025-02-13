@@ -1,0 +1,217 @@
+;; !  | means mandatory
+;; #  | means optional
+;; C  | left_command
+;; T  | left_control
+;; O  | left_option
+;; S  | left_shift
+;; F  | fn
+;; Q  | right_command
+;; W  | right_control
+;; E  | right_option
+;; R  | right_shift
+;; P  | caps_lock
+;; !! | mandatory command + control + optional + shift (hyper) 
+;; 👆 !! = !CTOS ということ　
+
+;; ## | optional any
+
+;; Usage: 
+;;  :!Ca is keycode :a and prefix a with !C
+
+;; More keycodes: https://github.com/yqrashawn/GokuRakuJoudo/blob/master/src/karabiner_configurator/keys_info.clj
+
+;;    | no modifier
+;;                  input key maps to output key exactly
+;;                  adding any modifier will cancel the event
+
+;; !  | mandatory
+;;                  specified modifier is removed in output (to event)
+;;                  specified modifiers must be present for event to occur
+;;                  adding any other modifier will cancel the event
+
+;; #  | optional (single)
+;;                  specified modifier is kept in output (to event)
+;;                  one (or none) of the specified modifiers must be present
+;;                  adding any other modifier will cancel the event
+
+;; ## | optional any
+;;                  specified modifier is removed in output (to event)
+;;                  specified modifiers *must* be present for event to occur
+;;                  adding any other modifier will add to output event
+;;                  (what you typically expect, additional modifiers tacked on)
+;;
+;; need to prefix C T O S F with ! or #
+{
+:applications {
+  :Chrome   ["com.google.Chrome"]
+  :Contexts ["com.contextsformac.Contexts"]
+  :Finder   ["com.apple.finder"]
+  :IntelliJ ["com.jetbrains.intellij"]
+  :Keynote  ["com.apple.iWork.Keynote"]
+  :Notion   ["notion.id"]
+  :Slack    ["com.tinyspeck.slackmacgap"]
+  :Toggl ["com.toggl.daneel"]
+  :Kit    ["app.scriptkit"]
+  :Todoist  ["^com\\.todoist\\.mac\\.Todoist$"]
+  :vscode   ["com.microsoft.VSCode"]
+  :sublime   ["com.sublimetext.4"]
+  :Figma    ["com.figma.Desktop"]
+  :Excel ["com.microsoft.Excel"]
+  :Obsidian ["^md.obsidian"]
+}
+
+:templates {
+  :launch "osascript -e 'tell application \"%s\" to activate'"
+  :applescript "osascript '/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/keybindings/.config/karabiner/applescripts/%s'"
+  :paste "osascript -e '
+  set the clipboard to \"%s\"
+  tell application \"System Events\"
+  keystroke \"v\" using command down
+  end tell
+  '"
+  :open "open -a '%s.app'"
+  :opena "open -a \"%s\" %s"
+  :code-project "open -a 'Visual Studio Code' %s -g %s"
+  :open_url "open -u %s"
+  ;; https://github.com/osandell/cfg/blob/07e29fd3dbba187b79fff4f8c23c9e831209de97/.config/karabiner.edn
+  ;; https://gist.github.com/Glutexo/78c170e2e314f0eacc1a
+  :yyyymmddhhss "osascript -e '
+  on zero_pad(value, string_length)
+  set string_zeroes to \"\"
+  set digits_to_pad to string_length - (length of (value as string))
+  if digits_to_pad > 0 then
+  repeat digits_to_pad times
+  set string_zeroes to string_zeroes & \"0\" as string
+  end repeat
+  end if
+  set padded_value to string_zeroes & value as string
+  return padded_value
+  end zero_pad
+  set now to (current date)
+  set result to (year of now as integer) as string
+  set result to result & \"-\"
+  set result to result & zero_pad(month of now as integer, 2)	
+  set result to result & \"-\"
+  set result to result & zero_pad(day of now as integer, 2)
+  set result to result & \" \"
+  set result to result & zero_pad(hours of now as integer, 2)
+  set result to result & \":\"
+  set result to result & zero_pad(minutes of now as integer, 2)
+  set result to result & \"%s\"
+  set the clipboard to result
+  tell application \"System Events\"
+  keystroke \"v\" using command down
+  end tell
+  '"
+}
+
+:simlayers {
+  :0-mode {:key :0}
+  :1-mode {:key :1}    
+  :2-mode {:key :2}
+  :n-mode {:key :n}    
+  :chrome-mode {:key :d :condi :Chrome}
+  :z-mode {:key :z}    
+  :m-mode {:key :m}    
+  :f-mode {:key :f}    ; delimeters    ( ) [ ] { } and other symbols ~ $ &
+  :d-mode {:key :d}    ; arithmetic    + - * / = % < > #
+  :s-mode {:key :s}    ; punctuation   ? ! : ; ' " ` ~
+
+; https://gist.github.com/gsinclair/f4ab34da53034374eb6164698a0a8ace
+  :a-mode {:key :a}    ; navigation hjkl + tab + enter + page down/up
+  :w-mode {:key :w}    ; Selection left and right (letter, word, line)
+  :e-mode {:key :e}    ; Movement left and right (letter, word, line)
+  :r-mode {:key :r}    ; Deletion left and right (letter, word, line)
+}
+
+
+
+:main [
+
+  ;; {:des "a to a" :rules [[:a :a]]}
+  {
+    :des "前の入力ソースを選択" ;; Mac System Preferences > Keyboard > Shortcuts > Input Sources > Select the previous input source > right command + right shift + right option + right control + f12
+    ;; :rules [[:##right_command :!CTOSf12]]
+    :rules [[:##right_command :!!f12]]
+  }
+  {
+    :des "chrome" 
+    :rules [:chrome-mode
+      [:e [:open_url "https://mail.google.com/"]]
+      [:m [:open_url "https://www.google.com/maps/"]]
+      [:c [:open_url "https://calendar.google.com/"]]
+
+      [:r [:open_url "https://github.com/1206yaya?tab=repositories"]]
+
+      [:p [:open_url "https://chatgpt.com/"]]
+      [:g [:open_url "https://gemini.google.com/app"]]
+
+    ]
+  }
+  {
+    :des "open apps"
+    :rules [:0-mode
+      [:l [:open "IntelliJ IDEA CE"]]
+      [:n [:open "Notion"]]
+      [:i [:open "iTerm"]]
+      [:c [:open "Google Chrome"]]
+      [:f [:open "Finder"]]
+      [:v ["open -n -b 'com.microsoft.VSCode'"]]
+      [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
+    
+      [:b [:open "Obsidian"]]
+      [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
+    ]
+  }
+  {
+    :des "a-mode for hjkl movement and nm enter and ui tab and ,. PageDn/Up"
+    :rules [:a-mode
+            [:##h :left_arrow]
+            [:##j :down_arrow]
+            [:##k :up_arrow]
+            [:##l :right_arrow]
+            [:comma :page_down]
+            [:period :page_up]
+            [:##t :!Cup_arrow] ;; page top
+            ;; Escape + :end
+            [:##b [:escape :end]]]
+  }
+  
+  {
+    :des "r-mode for deleting characters with ui, words with jk and lines with hl"
+    :rules [:r-mode
+      [:##u :delete_or_backspace]   
+      [:##i :delete_forward]        
+      [:##j :!Odelete_or_backspace] 
+      [:##k :!Odelete_forward]      
+      [:##h :!Cdelete_or_backspace] 
+      [:##l :!Cdelete_forward]      
+    ]
+  }
+  {
+    :des "e-mode allows for easy back and forth one character, word or line"
+    :rules [:e-mode
+    [:##u         :left_arrow]          ; e -> u    Left
+    [:##i         :right_arrow]         ; e -> i    Right
+    [:##j         :!Oleft_arrow]        ; e -> j    Opt+Left
+    [:##k         :!Oright_arrow]       ; e -> k    Opt+Right
+    [:##h         :!Cleft_arrow]        ; e -> h    Cmd+Left
+    [:##l         :!Cright_arrow]       ; e -> l    Cmd+Right
+
+    ]
+  }
+  {
+    :des "w-mode = e-mode + SHIFT (i.e. selection, not just movement)"
+    :rules [:w-mode
+    [:##u         :!Sleft_arrow]         ; e -> u    Shift+Left
+    [:##i         :!Sright_arrow]        ; e -> i    Shift+Right
+    [:##j         :!SOleft_arrow]        ; e -> j    Shift+Opt+Left
+    [:##k         :!SOright_arrow]       ; e -> k    Shift+Opt+Right
+    [:##h         :!SCleft_arrow]        ; e -> h    Shift+Cmd+Left
+    [:##l         :!SCright_arrow]       ; e -> l    Shift+Cmd+Right
+    ]}
+]
+
+:simlayer-threshold 500
+
+}

@@ -1,0 +1,370 @@
+{
+  "window.title": "${activeEditorLong}",
+  "workbench.iconTheme": "material-icon-theme",
+  // OPEN EDITORS を非表示
+  "explorer.openEditors.visible": 1,
+  // Setting Search
+  "files.exclude": {
+    "**/.terragrunt-cache": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.history": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "/.DS_Store": true,
+    "/.git": true,
+    "/node_modules": true,
+    "/node_modules/": true
+  },
+  "search.exclude": {
+    ".history": true,
+    "**/.next": true,
+    "/node_modules": true,
+    "site-packages": true,
+    "**/.fvm": true
+  },
+  "files.watcherExclude": {
+    "/node_modules/": true
+  },
+  "files.associations": {
+    "*.drift": "sql",
+    ".chatignore": "text",
+    "*.tp.md": "clojure"
+  },
+  "explorer.confirmDelete": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSave": "afterDelay",
+  "extensions.ignoreRecommendations": true,
+  "workbench.startupEditor": "none",
+  "markdown-checkbox.checkmark": "x",
+  "markdown-checkbox.typeOfBulletPoint": "-",
+  "markdown-checkbox.dateFormat": "MM-DD HH:mm",
+  "markdown-checkbox.italicWhenChecked": false,
+  "markdown-checkbox.strikeThroughWhenChecked": false,
+  "debug.disassemblyView.showSourceCode": false,
+  "editor.suggest.showKeywords": false,
+  "editor.suggest.showWords": false,
+  "terraform.languageServer": {
+    "external": true,
+    "args": ["serve"]
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[hcl]": {
+    "editor.defaultFormatter": "fredwangwang.vscode-hcl-format",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[go]": {
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
+
+  "clang-format.language.proto.style": "google",
+  "clang-format.executable": "/opt/homebrew/bin/clang-format",
+  "[proto3]": {
+    "editor.defaultFormatter": "xaver.clang-format",
+    "editor.formatOnSave": true
+  },
+
+  "[dart]": {
+    // andrea
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+    // version1
+    // "editor.formatOnSave": true,
+    // "editor.formatOnType": true,
+    // "editor.rulers": [
+    //     80
+    // ],
+    // "editor.selectionHighlight": false,
+    // "editor.suggest.snippetsPreventQuickSuggestions": false,
+    // "editor.suggestSelection": "first",
+    // "editor.tabCompletion": "onlySnippets",
+    // "editor.wordBasedSuggestions": false,
+    // "editor.defaultFormatter": "Dart-Code.dart-code",
+    // "editor.formatOnPaste": true,
+  },
+  // 👇 Andrea Setting
+  "dart.warnWhenEditingFilesOutsideWorkspace": false,
+  "dart.renameFilesWithClasses": "prompt",
+  // "workbench.colorTheme": "Dracula Soft",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.stickyScroll.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml, pubspec_overrides.yaml, flutter_launcher_icons*.yaml",
+    "*.dart": "${capture}.g.dart, ${capture}.freezed.dart"
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "editor.selectionHighlight": false,
+  // Flutter
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "quickfix.insertSemicolon": "explicit"
+  },
+  "editor.showFoldingControls": "always",
+  "leetcode.workspaceFolder": "/Users/zak/ghq/github.com/1206yaya/leetcode",
+  "jenkins-jack.jenkins.connections": [
+    {
+      "name": "localhost:8080",
+      "uri": "http://127.0.0.1:8080",
+      "username": "1206yaya",
+      "crumbIssuer": true,
+      "active": true
+    }
+  ],
+  "jenkins-jack.pipeline.tree.items": [
+    {
+      "hostId": "localhost:8080",
+      "jobName": "1.plain-node",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/1.plain-node.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "2.plain-pipeline",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/2.plain-pipeline.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "3.conditional",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/3.conditional.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "4.groovy",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/4.groovy.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "6.write_file",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/6.write_file.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "7. parameters",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/7. parameters.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "8.try-catch-finally",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/8.try-catch-finally.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.run-other-jobs",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.run-other-jobs.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.1.job1",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.1.job1.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "JenkinsUtils",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/src/com/JenkinsUtils.groovy"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "10.shared-library",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/10.shared-library.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.2.sleep",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.2.sleep.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "9.3.job-status",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.3.job-status.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "12.retry",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/12.retry.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "13.parallel",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/13.parallel.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "DailyJob",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/osho/DailyJob.jenkins"
+    },
+    {
+      "hostId": "localhost:8080",
+      "jobName": "14.env_param",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/14.env_param.jenkins"
+    }
+  ],
+  "redhat.telemetry.enabled": true,
+  "dart.checkForSdkUpdates": false,
+  "bracket-pair-colorizer-2.depreciation-notice": false,
+  "[python]": {
+    "editor.formatOnType": true
+    // "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "google-translate.firstLanguage": "zh-cn",
+  "google-translate.secondLanguage": "ja",
+  "files.autoGuessEncoding": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false,
+    "hcl": true
+  },
+  "genieai.enableConversationHistory": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "editor.minimap.enabled": false,
+  "totalTypeScript.hideAllTips": false,
+  "totalTypeScript.hideBasicTips": false,
+  // Controls when the folding controls on the gutter are shown.
+  // 👇 vim setting
+  "vim.statusBarColorControl": false,
+  // easymotionを有効にする。高速なテキスト移動が可能になります。
+  "vim.easymotion": true,
+  // インクリメンタルサーチを有効にする。検索時に部分一致でヒットする場所をリアルタイムで表示します。
+  "vim.incsearch": true,
+  // システムのクリップボードをVimと共有する。
+  "vim.useSystemClipboard": true,
+  // Ctrlキーを使ったVimのキーバインドを有効にする。
+  "vim.useCtrlKeys": true,
+  // 検索結果をハイライト表示する。
+  "vim.hlsearch": true,
+  // 挿入モードでのキーバインド。ここでは「j」を二回押すとNormalモードに戻る設定になっています。
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  // Normalモードでの非再帰的なキーバインド。
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      // leaderキー（後述）と「d」を押すと「dd」（行削除）が実行される。
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
+    },
+    {
+      // Ctrl+nを押すと:nohl（検索ハイライトを消去）が実行される。
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      // 「K」を押すとlineBreakInsertコマンドが実行される。このコマンドはVSCode固有のもので、具体的な動作は拡張機能に依存します。
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    }
+  ],
+  // leaderキーをスペースに設定。このキーはカスタムショートカットのプレフィックスとして使われます。
+  "vim.leader": "<space>",
+  // 特定のキーのハンドリングを無効にする。ここではCtrl+aとCtrl+fが無効になっています。
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  },
+  // パフォーマンス向上のための設定。VSCodeVim拡張機能にCPUアフィニティ1を割り当てます。
+  "// To improve performance": {
+    "extensions.experimental.affinity": {
+      "vscodevim.vim": 1
+    }
+  },
+  "editor.tabSize": 2,
+  "hediet.vscode-drawio.resizeImages": null,
+  "hediet.vscode-drawio.theme": "min",
+  "notebook.formatOnSave.enabled": true,
+  "remote.autoForwardPortsSource": "hybrid",
+  "totalTypeScript.hiddenTips": ["passing-generics-to-types"],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vscodetonotion.api": "secret_erBORnFvsVOEx4n2cMUlMUNJy5gNjSXg3doQnELJ8C3",
+  "vscodetonotion.databaseId": "27aeb68aeb9944c88391f5e138f51bc3",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "accessibility.signals.lineHasError": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasFoldedArea": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasBreakpoint": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasInlineSuggestion": {
+    "sound": "off"
+  },
+  "accessibility.signals.onDebugBreak": {
+    "sound": "off"
+  },
+  "accessibility.signals.noInlayHints": {
+    "sound": "off"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "git.autofetch": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.editor.enablePreview": false,
+  "workbench.preferredHighContrastColorTheme": "Dark-Dracula",
+  "workbench.preferredLightColorTheme": "Beautiful Dracula Darker",
+  "github.copilot.editor.enableAutoCompletions": true,
+  // "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true,
+  "leetcode.defaultLanguage": "golang",
+  "terminal.external.osxExec": "iTerm.app",
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "workbench.editorAssociations": {
+    "*.pdf": "pdf.preview"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "code-runner.runInTerminal": true,
+  "github.copilot.advanced": {},
+  "python.createEnvironment.trigger": "off",
+  "workbench.colorTheme": "GitHub Dark",
+  "cSpell.languageSettings": [],
+  "editor.experimentalEditContextEnabled": true,
+  "dart.debugExternalPackageLibraries": true,
+  "dart.debugSdkLibraries": false,
+  "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
+  "gopls": {
+    "ui.completion.usePlaceholders": true
+  },
+  "editor.wordWrap": "on",
+  "editor.occurrencesHighlight": "off",
+  "chat.editing.alwaysSaveWithGeneratedChanges": true,
+  "go.goroot": "/Users/zak/.asdf/installs/golang/1.24rc1/go",
+  "github.copilot.chat.editor.temporalContext.enabled": true
+}
