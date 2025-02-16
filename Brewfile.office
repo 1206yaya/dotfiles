@@ -28,6 +28,11 @@ brew "wget"
 brew "xz"
 brew "zsh"
 brew "eza"
+brew "atuin"
+brew "mise"
+brew "rustup"
+cask "hammerspoon"
+
 
 cask "font-hack-nerd-font"
 cask "visual-studio-code"

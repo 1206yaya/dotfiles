@@ -373,5 +373,10 @@
   {
     "key": "cmd+f8",
     "command": "editor.debug.action.runToCursor"
+  },
+  {
+    "key": "shift+cmd+c",
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "when": "!terminalFocus"
   }
 ]

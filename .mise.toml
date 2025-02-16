@@ -1,0 +1,11 @@
+[tools]
+
+nodejs="22.6.0"
+golang="1.24rc1"
+rust="1.58.1"
+python="3.12.5"
+poetry="1.8.4"
+java="adoptopenjdk-17.0.7+7"
+terraform="1.9.5"
+terragrunt="0.67.16"
+

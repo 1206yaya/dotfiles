@@ -1,0 +1,27 @@
+
+[general]
+import = [ "~/.config/alacritty/themes/tokyo-night.toml" ]
+live_config_reload = true
+
+[font]
+size = 11
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[window]
+dynamic_padding = true
+padding = { x = 3, y = 3 }
+opacity = 0.9
+
+[env]
+TERM = "alacritty-direct"
+
+[terminal]
+
+[terminal.shell]
+# ターミナルエミュレータが起動するデフォルトのシェルを指定
+program = "/opt/homebrew/bin/tmux"
+# すでに 0 番のセッションがあれば、それにアタッチする
+args = ["new", "-As0"]

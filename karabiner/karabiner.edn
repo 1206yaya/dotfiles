@@ -43,6 +43,7 @@
 ;; need to prefix C T O S F with ! or #
 {
 :applications {
+  ;; BundleIDを調べる osascript -e 'id of app "Evernote"'
   :Chrome   ["com.google.Chrome"]
   :Contexts ["com.contextsformac.Contexts"]
   :Finder   ["com.apple.finder"]
@@ -58,6 +59,7 @@
   :Figma    ["com.figma.Desktop"]
   :Excel ["com.microsoft.Excel"]
   :Obsidian ["^md.obsidian"]
+  :Alacritty ["org.alacritty"]
 }
 
 :templates {
@@ -124,14 +126,16 @@
   :r-mode {:key :r}    ; Deletion left and right (letter, word, line)
 }
 
-
-
 :main [
-
   ;; {:des "a to a" :rules [[:a :a]]}
+
+;; Hyper key
+;; {
+;;   :des   "caps_lock to esc when pressed alone, to hyper as modifier"
+;;   :rules [[:caps_lock [:!TOCleft_shift :b] :Alacritty {:alone :escape}]]}
+
   {
     :des "前の入力ソースを選択" ;; Mac System Preferences > Keyboard > Shortcuts > Input Sources > Select the previous input source > right command + right shift + right option + right control + f12
-    ;; :rules [[:##right_command :!CTOSf12]]
     :rules [[:##right_command :!!f12]]
   }
   {
@@ -151,6 +155,7 @@
   {
     :des "open apps"
     :rules [:0-mode
+      [:a [:open "Alacritty"]]
       [:l [:open "IntelliJ IDEA CE"]]
       [:n [:open "Notion"]]
       [:i [:open "iTerm"]]

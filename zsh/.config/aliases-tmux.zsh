@@ -1,0 +1,3 @@
+t() {
+  command tmux "$@"
+}

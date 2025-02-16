@@ -16,6 +16,7 @@ alias ghcreate='gh issue create --title "$@" --body "Issue description"'
 alias hub='gh browse'
 alias lc="pbcopy | chatutil "$@""
 alias lsgrep="ls -ltr | grep "$@""
+alias py="pbcopy"
 
 alias cdd="builtin cd"
 # ランダムなパスワードを生成する
@@ -26,10 +27,21 @@ function genpass() {
   pwgen -1  -B -c -n $length 1
   # 特殊記号: -s -y
 }
+alias aopa='~/bin/toggle_alacritty_opacity.sh'
 
+
+# タイムスタンプ順にソート (最新ファイルを上に)
+alias lt="eza -l --sort changed"
+alias ld='eza -D'
+alias la='eza -la'
 if [ -n "$(which eza)" ]; then
-    alias ls="eza"
+    alias ls="eza -l --sort changed"
 fi
+ezt() {
+  eza --tree "$@"
+}
+
+
 function pwd() {
   builtin pwd | tee >(pbcopy)
 }
@@ -131,6 +143,7 @@ tell application "iTerm"
 end tell
 END
 }
+
 
 pulsar_open() {
     if [ $# -eq 0 ]; then
@@ -290,3 +303,5 @@ function fr() {
   ( [[ -z "$file" ]] || [[ -z "$line" ]] ) && exit
   $EDITOR $file +$line
 }
+
+

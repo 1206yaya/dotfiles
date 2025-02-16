@@ -21,6 +21,10 @@ sudo -v
 # 起動時のサウンドを無効化
 sudo nvram SystemAudioVolume=" "
 
+# ターミナルの警告音を無効化
+defaults write com.apple.terminal Bell -bool false
+
+
 ###########################################################
 # 一般設定
 ###########################################################
@@ -145,3 +149,8 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 ###########################################################
 # スクリーンショットの保存先を ~/screenshots に変更
 defaults write com.apple.screencapture location -string "${HOME}/screenshots"
+
+###########################################################
+# Hammerspoon  override the default location
+###########################################################
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"

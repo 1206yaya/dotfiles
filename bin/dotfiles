@@ -9,11 +9,15 @@ export DOTDIR="$GIT_CLONE_PATH/dotfiles"
 ###########################################################
 verbose=
 skip_apps=0
+full_install=0
 use_private=0
 for i in "$@"; do
     case "$i" in
         -s|--skip-apps)
             skip_apps=1
+            shift ;;
+        -f|--full-install)
+            full_install=1
             shift ;;
         -v|--verbose)
             verbose=1
@@ -106,32 +110,34 @@ install_homebrew() {
     fi
 
 }
-
 install_brewfile() {
-    if [ "$skip_apps" -eq 0 ]; then
-        # `Brewfile.office` の適用（必須）
-        BREWFILE_OFFICE="$GIT_CLONE_PATH/dotfiles/Brewfile.office"
-        if [ -f "$BREWFILE_OFFICE" ]; then
-            info "Applying $BREWFILE_OFFICE..."
-            brew bundle --file="$BREWFILE_OFFICE"
-        else
-            info "Error: $BREWFILE_OFFICE not found!"
-            exit 1
-        fi
-
-        # `Brewfile.private` も適用する場合
-        if [ "$use_private" -eq 1 ]; then
-            BREWFILE_PRIVATE="$GIT_CLONE_PATH/dotfiles/Brewfile.private"
-            if [ -f "$BREWFILE_PRIVATE" ]; then
-                info "Applying $BREWFILE_PRIVATE..."
-                brew bundle --file="$BREWFILE_PRIVATE"
-            else
-                info "Warning: $BREWFILE_PRIVATE not found, skipping..."
-            fi
-        fi
-
-        log 'Install Apps and CLIs'
+    # skip_apps が 1 なら即リターン
+    if [ "$skip_apps" -eq 1 ]; then
+        return
     fi
+
+    # `Brewfile.office` の適用（必須）
+    BREWFILE_OFFICE="$GIT_CLONE_PATH/dotfiles/Brewfile.office"
+    if [ -f "$BREWFILE_OFFICE" ]; then
+        info "Applying $BREWFILE_OFFICE..."
+        brew bundle --file="$BREWFILE_OFFICE"
+    else
+        info "Error: $BREWFILE_OFFICE not found!"
+        exit 1
+    fi
+
+    # `Brewfile.private` も適用する場合
+    if [ "$use_private" -eq 1 ]; then
+        BREWFILE_PRIVATE="$GIT_CLONE_PATH/dotfiles/Brewfile.private"
+        if [ -f "$BREWFILE_PRIVATE" ]; then
+            info "Applying $BREWFILE_PRIVATE..."
+            brew bundle --file="$BREWFILE_PRIVATE"
+        else
+            info "Warning: $BREWFILE_PRIVATE not found, skipping..."
+        fi
+    fi
+
+    log 'Install Apps and CLIs'
 }
 
 setup_gpg() {
@@ -169,11 +175,33 @@ setup_gpg() {
     fi
 }
 
+symlink_files() {
+    local src_dir="$1"
+    local dest_dir="$2"
+
+    ensure_dir_exists "$dest_dir"
+    # ファイル一覧を取得
+    local files=("$src_dir"/*)
+
+    # ファイルが存在するかチェック
+    if [[ ${#files[@]} -gt 0 && -e ${files[0]} ]]; then
+        for file in "${files[@]}"; do
+            local target="$dest_dir/$(basename "$file")"
+            ln -sf "$file" "$target"
+            echo "Linked: $file -> $target"
+        done
+    else
+        echo "No files found in '$src_dir'."
+    fi
+}
+
+
 create_symbolic_links() {
+
     log 'Create Symbolic Links'
     # bin
     ensure_dir_exists "$HOME/bin"
-    ln -sf "$DOTDIR/bin/dotfiles" "$HOME/bin/dotfiles"
+    symlink_files "$DOTDIR/bin" "$HOME/bin"
 
     # git
     ln -sf "$DOTDIR/git/.gitconfig" "$HOME/.gitconfig"
@@ -184,18 +212,12 @@ create_symbolic_links() {
     ln -sf "$DOTDIR/zsh/.zshrc" "$HOME/.zshrc"
     ln -sf "$DOTDIR/zsh/.zshenv" "$HOME/.zshenv"
     mkdir -p "$HOME/.config/zsh"
-    files=($DOTDIR/zsh/.config/*)
-    if [[ ${#files[@]} -gt 0 && -e ${files[1]} ]]; then
-        for file in "${files[@]}"; do
-            target="$HOME/.config/zsh/$(basename "$file")"
-            ln -sf "$file" "$target"
-        done
-    fi
+    
+    symlink_files "$DOTDIR/zsh/.config" "$HOME/.config/zsh"
+    symlink_files "$DOTDIR/zsh/zsh_functions" "$HOME/.config/zsh/zsh_functions"
 
     # vscode
-    ln -sf "$DOTDIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-    ln -sf "$DOTDIR/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
-    ln -sf "$DOTDIR/vscode/snippets" "$HOME/Library/Application Support/Code/User/snippets"
+    symlink_files "$DOTDIR/vscode" "$HOME/Library/Application Support/Code/User"
     
     # karabiner
     ln -sf "$DOTDIR/karabiner/karabiner.edn" "$HOME/.config/karabiner/karabiner.edn"
@@ -203,17 +225,50 @@ create_symbolic_links() {
     touch "$HOME/.config/karabiner/karabiner.json"
     # starship
     ln -sf "$DOTDIR/.config/starship.toml" "$HOME/.config/starship.toml"
+
+    # atuin
+    ln -sf "$DOTDIR/atuin/config.toml" "$HOME/.config/atuin/config.toml"
+
+    # hammerspoon
+    symlink_files "$DOTDIR/hammerspoon" "$HOME/.config/hammerspoon"
+
+    # alacritty
+    symlink_files "$DOTDIR/alacritty" "$HOME/.config/alacritty"
+
+    # tmux
+    symlink_files "$DOTDIR/tmux" "$HOME/.config/tmux"
+
+    # mise
+    ln -sf "$DOTDIR/.mise.toml" "$HOME/.mise.toml"
 }
 
 
 
 set_macos() {
+    # skip_apps が 1 なら即リターン
+    if [ "$skip_apps" -eq 1 ]; then
+        return
+    fi
     # configure macOS settings
     ensure_dir_exists ~/screenshots
-    ~/scripts/macos-defaults
     . "$DOTDIR/macos/defaults.sh"
 }
 
+check_list() {
+    if [ "$full_install" -eq 0 ]; then
+        return
+    fi
+    echo "Open tmux and run the following command to check the color scheme."
+    echo "curl -LO https://github.com/alacritty/alacritty/raw/master/extra/alacritty.info"
+}
+
+install_mise() {
+    if [ "$skip_apps" -eq 1 ]; then
+        return
+    fi
+    mise trust "$DOTDIR/.mise.toml"
+    mise install
+}
 
 install_xcode_command_line_tools
 clone_dotfiles
@@ -221,5 +276,9 @@ setup_ssh
 install_homebrew
 install_brewfile
 setup_gpg
+install_mise
 create_symbolic_links
 set_macos
+check_list
+
+# https://gemini.google.com/immersive/96cc28f19beec4d1/a5556460-666e-4014-b1f8-01df775ba37b
