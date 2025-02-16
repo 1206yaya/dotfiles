@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "dotfiles"
+version = "0.1.0"
+description = ""
+authors = ["1206yaya <1206yaya@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pathspec = "^0.12.1"
+chardet = "^5.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

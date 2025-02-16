@@ -63,14 +63,13 @@ ZSH_DIR="${HOME}/.config/zsh"
 # **/*.zsh のパターンが .zsh ファイルを正しく検索できるようにする
 setopt globdots
 setopt extended_glob
+setopt  nullglob  # ファイルがない場合、空リストにする
 
-# .zshがディレクトリで、読み取り、実行、が可能なとき
-if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
-    # zshディレクトリより下にある、.zshファイルの分、繰り返す
-    for file in ${ZSH_DIR}/**/*.zsh; do
-        echo $file
-        # 読み取り可能ならば実行する
-        [ -r $file ] && source $file
+if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then
+    for file in "$ZSH_DIR"/**/*.zsh; do
+        if [ -f "$file" ] && [ -r "$file" ]; then
+            source "$file"
+        fi
     done
 fi
 

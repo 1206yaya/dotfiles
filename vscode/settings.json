@@ -228,6 +228,9 @@
   "redhat.telemetry.enabled": true,
   "dart.checkForSdkUpdates": false,
   "bracket-pair-colorizer-2.depreciation-notice": false,
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
   "[python]": {
     "editor.formatOnType": true
     // "editor.defaultFormatter": "ms-python.black-formatter"
@@ -367,7 +370,5 @@
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "go.goroot": "/Users/zak/.asdf/installs/golang/1.24rc1/go",
   "github.copilot.chat.editor.temporalContext.enabled": true,
-  "settingsSync.ignoredExtensions": [
-    
-  ]
+  "settingsSync.ignoredExtensions": []
 }

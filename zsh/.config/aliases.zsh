@@ -1,4 +1,7 @@
 
+export GIT_CLONE_PATH=~/ghq/github.com/1206yaya
+export DOTDIR="$GIT_CLONE_PATH/dotfiles"
+
 alias q="exit"
 alias qq="osascript -e 'tell application \"iTerm2\" to quit'"
 alias o="open ."
@@ -145,6 +148,8 @@ END
 }
 
 
+
+
 pulsar_open() {
     if [ $# -eq 0 ]; then
         # 引数がない場合は現在のディレクトリを開く
@@ -157,6 +162,7 @@ pulsar_open() {
 
 alias pulsar=pulsar_open
 
+
 function npminstall (){
   npm install -g firebase-tools
   npm install -g tsc
@@ -164,6 +170,7 @@ function npminstall (){
   dart pub global activate flutterfire_cli
   source ~/.zshrc
 }
+
 function ghq() {
   if [[ $1 == "create" ]]; then
     command ghq create "$2" && builtin cd "$(ghq list -p | grep "$2$")" && code .
@@ -173,6 +180,7 @@ function ghq() {
     command ghq "$@"
   fi
 }
+
 function st() {
   if [[ $@ == "" ]]; then
     command open -a /Applications/SourceTree.app .
@@ -189,41 +197,6 @@ function hub() {
 }
 
 
-function makefile() {
-  pathDir="/Users/zak/ghq/github.com/1206yaya/dotfiles/packages/terminal/.zsh/Makefile"
-  # 初期の拡張子を設定
-  ext="mk"
-
-  # 引数に基づいてファイル名を構築し、ショートカットを考慮
-  case "$1" in
-    firebase|fir|flutterfire)
-      filename="firebase.$ext"
-      ;;
-    py|python|poetry)
-      filename="poetry.$ext"
-      ;;
-    open|edit)
-      subl $pathDir/
-      return
-      ;;
-    *)
-      # 特に設定がない場合は引数をそのままファイル名として扱う
-      filename="${1}.$ext"
-      if [ ! -f "$pathDir/$filename" ]; then
-          # 拡張子が.htmlの場合を考慮
-          ext="html"
-          filename="${1}.$ext"
-      fi
-      ;;
-  esac
-
-  # ファイルの存在をチェックして、存在すればその内容を表示
-  if [ -f "$pathDir/$filename" ]; then
-    cat "$pathDir/$filename"
-  else
-    echo "No makefile found for $1"
-  fi
-}
 
 ### クリップボードの内容を特定のフォルダにタイムスタンプ付きでファイルとして保存する
 function cbf() {
@@ -267,7 +240,7 @@ function killbrowser() {
 }
 
 function chat() {
-  code ~/ghq/github.com/1206yaya/prompt-engineering
+  code "$GIT_CLONE_PATH/prompt-engineering"
 }
 # killPort <port>
 function killport() {
@@ -286,22 +259,5 @@ function peco-history-pbcopy() {
 # Control + hh で実行
 zle -N peco-history-pbcopy
 bindkey '^H^H' peco-history-pbcopy
-
-
-
-
-# なんかいまいち
-# https://qiita.com/masakuni-ito/items/deb000b5ca5eb6588463
-function fr() {
-  grep_cmd="grep --recursive --line-number --invert-match --regexp '^\s*$' * 2>/dev/null"
-
-  if type "rg" >/dev/null 2>&1; then
-      grep_cmd="rg --hidden --no-ignore --line-number --no-heading --invert-match '^\s*$' 2>/dev/null"
-  fi
-
-  read -r file line <<<"$(eval $grep_cmd | fzf --select-1 --exit-0 | awk -F: '{print $1, $2}')"
-  ( [[ -z "$file" ]] || [[ -z "$line" ]] ) && exit
-  $EDITOR $file +$line
-}
 
 

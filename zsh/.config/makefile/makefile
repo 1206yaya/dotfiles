@@ -1,0 +1,1 @@
+/Users/zak/ghq/github.com/1206yaya/dotfiles/zsh/.config/makefile

@@ -31,9 +31,8 @@ brew "eza"
 brew "atuin"
 brew "mise"
 brew "rustup"
+
 cask "hammerspoon"
-
-
 cask "font-hack-nerd-font"
 cask "visual-studio-code"
 cask "google-chrome"
