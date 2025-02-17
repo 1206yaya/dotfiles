@@ -139,6 +139,10 @@
     :rules [[:##right_command :!!f12]]
   }
   {
+    :des "Swap left_command and left_control"
+    :rules [[:##left_command :left_control] [:##left_control :left_command]]
+  }
+  {
     :des "chrome" 
     :rules [:chrome-mode
       [:e [:open_url "https://mail.google.com/"]]
