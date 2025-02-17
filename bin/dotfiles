@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export GITHUB_EMAIL=1206yaya@gmail.com
 export GIT_CLONE_PATH=~/ghq/github.com/1206yaya
@@ -13,22 +13,27 @@ full_install=0
 use_private=0
 for i in "$@"; do
     case "$i" in
-        -s|--skip-apps)
-            skip_apps=1
-            shift ;;
-        -f|--full-install)
-            full_install=1
-            shift ;;
-        -v|--verbose)
-            verbose=1
-            shift ;;
-        --private)
-            use_private=1
-            shift ;;
-        *)
-            echo "Warning: Unknown option $i"
-            echo "Usage: $0 [--skip-apps] [--verbose] [--unlink=package] [--private]"
-            exit 1 ;;
+    -s | --skip-apps)
+        skip_apps=1
+        shift
+        ;;
+    -f | --full-install)
+        full_install=1
+        shift
+        ;;
+    -v | --verbose)
+        verbose=1
+        shift
+        ;;
+    --private)
+        use_private=1
+        shift
+        ;;
+    *)
+        echo "Warning: Unknown option $i"
+        echo "Usage: $0 [--skip-apps] [--verbose] [--unlink=package] [--private]"
+        exit 1
+        ;;
     esac
 done
 
@@ -53,7 +58,10 @@ ensure_dir_exists() {
         mkdir -p "$path"
     fi
 }
-press_to_continue() { info 'Press any key to continue'; read -r _; }
+press_to_continue() {
+    info 'Press any key to continue'
+    read -r _
+}
 success() { printf '[ \033[00;32mOK\033[0m ] %s\n' "$1"; }
 
 ###########################################################
@@ -61,12 +69,11 @@ success() { printf '[ \033[00;32mOK\033[0m ] %s\n' "$1"; }
 ###########################################################
 
 install_xcode_command_line_tools() {
-    if ! xcode-select -p >/dev/null 2>&1 ; then
+    if ! xcode-select -p >/dev/null 2>&1; then
         log 'Install Xcode Command Line Tools'
         xcode-select --install
     fi
 }
-
 
 clone_dotfiles() {
     if ! dir_exists "$DOTDIR"; then
@@ -89,7 +96,6 @@ setup_ssh() {
         success "SSH Key - Key-pair already present"
     fi
 }
-
 
 install_homebrew() {
     arch_name="$(uname -m)"
@@ -117,7 +123,7 @@ install_brewfile() {
     fi
 
     # `Brewfile.office` の適用（必須）
-    BREWFILE_OFFICE="$GIT_CLONE_PATH/dotfiles/Brewfile.office"
+    BREWFILE_OFFICE="$GIT_CLONE_PATH/dotfiles/office.Brewfile"
     if [ -f "$BREWFILE_OFFICE" ]; then
         info "Applying $BREWFILE_OFFICE..."
         brew bundle --file="$BREWFILE_OFFICE"
@@ -128,7 +134,7 @@ install_brewfile() {
 
     # `Brewfile.private` も適用する場合
     if [ "$use_private" -eq 1 ]; then
-        BREWFILE_PRIVATE="$GIT_CLONE_PATH/dotfiles/Brewfile.private"
+        BREWFILE_PRIVATE="$GIT_CLONE_PATH/dotfiles/private.Brewfile"
         if [ -f "$BREWFILE_PRIVATE" ]; then
             info "Applying $BREWFILE_PRIVATE..."
             brew bundle --file="$BREWFILE_PRIVATE"
@@ -149,7 +155,7 @@ setup_gpg() {
         gpg --default-new-key-algo rsa4096 --gen-key
 
         # 作成した GPG 鍵の Key ID を取得
-        key_id=$(gpg --list-secret-keys --keyid-format LONG | ggrep -oP "rsa4096\/[0-9a-fA-F]{16}" | cut -d"/"  -f2)
+        key_id=$(gpg --list-secret-keys --keyid-format LONG | ggrep -oP "rsa4096\/[0-9a-fA-F]{16}" | cut -d"/" -f2)
 
         # GitHub に登録するための GPG 公開鍵を表示するよう通知
         gpg --armor --export "$key_id"
@@ -168,8 +174,8 @@ setup_gpg() {
         sed -i '' '/signingkey/d' "$git_local_config"
 
         # GPG 署名キーを ~/.gitconfig.local に追加
-        echo "[user]" >> "$git_local_config"
-        echo "    signingkey = $key_id" >> "$git_local_config"
+        echo "[user]" >>"$git_local_config"
+        echo "    signingkey = $key_id" >>"$git_local_config"
 
         log "Added GPG signing key to ~/.gitconfig.local"
     fi
@@ -195,7 +201,6 @@ symlink_files() {
     fi
 }
 
-
 create_symbolic_links() {
 
     log 'Create Symbolic Links'
@@ -212,13 +217,12 @@ create_symbolic_links() {
     ln -sf "$DOTDIR/zsh/.zshrc" "$HOME/.zshrc"
     ln -sf "$DOTDIR/zsh/.zshenv" "$HOME/.zshenv"
     mkdir -p "$HOME/.config/zsh"
-    
+
     symlink_files "$DOTDIR/zsh/.config" "$HOME/.config/zsh"
-    symlink_files "$DOTDIR/zsh/zsh_functions" "$HOME/.config/zsh/zsh_functions"
 
     # vscode
     symlink_files "$DOTDIR/vscode" "$HOME/Library/Application Support/Code/User"
-    
+
     # karabiner
     ln -sf "$DOTDIR/karabiner/karabiner.edn" "$HOME/.config/karabiner/karabiner.edn"
     # goku　でエラーが出ることがあるため、念の為ファイルを作成
@@ -241,8 +245,6 @@ create_symbolic_links() {
     # mise
     ln -sf "$DOTDIR/.mise.toml" "$HOME/.mise.toml"
 }
-
-
 
 set_macos() {
     # skip_apps が 1 なら即リターン
