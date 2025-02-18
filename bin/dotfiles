@@ -181,24 +181,54 @@ setup_gpg() {
     fi
 }
 
+symlink_files_recursive() {
+    local src_dir="$1"
+    local dest_dir="$2"
+
+    ensure_dir_exists "$dest_dir"
+
+    # find を使ってサブディレクトリも含めてファイルを取得
+    find "$src_dir" -type f | while read -r file; do
+        # ファイルの相対パスを取得
+        local relative_path="${file#$src_dir/}"
+        local target_dir="$dest_dir/$(dirname "$relative_path")"
+        local target="$dest_dir/$relative_path"
+
+        # 必要ならディレクトリを作成
+        ensure_dir_exists "$target_dir"
+
+        # シンボリックリンクを作成
+        ln -sf "$file" "$target"
+        echo "Linked: $file -> $target"
+    done
+}
 symlink_files() {
     local src_dir="$1"
     local dest_dir="$2"
 
     ensure_dir_exists "$dest_dir"
-    # ファイル一覧を取得
-    local files=("$src_dir"/*)
 
-    # ファイルが存在するかチェック
-    if [[ ${#files[@]} -gt 0 && -e ${files[0]} ]]; then
-        for file in "${files[@]}"; do
-            local target="$dest_dir/$(basename "$file")"
-            ln -sf "$file" "$target"
+    # .venv ディレクトリを除外して find でファイル・ディレクトリを取得
+    find "$src_dir" -mindepth 1 ! -path "$src_dir/.venv*" -print | while IFS= read -r file; do
+        local relative_path="${file#$src_dir/}"
+        local target="$dest_dir/$relative_path"
+
+        # .venv の除外確認（念のため）
+        if [[ "$relative_path" == ".venv"* ]]; then
+            continue
+        fi
+
+        # ディレクトリなら作成、ファイルならシンボリックリンクを作成
+        if [[ -d "$file" ]]; then
+            ensure_dir_exists "$target"
+        else
+            if [[ -e "$target" || -L "$target" ]]; then
+                rm -f "$target"
+            fi
+            ln -s "$file" "$target"
             echo "Linked: $file -> $target"
-        done
-    else
-        echo "No files found in '$src_dir'."
-    fi
+        fi
+    done
 }
 
 create_symbolic_links() {
@@ -218,10 +248,14 @@ create_symbolic_links() {
     ln -sf "$DOTDIR/zsh/.zshenv" "$HOME/.zshenv"
     mkdir -p "$HOME/.config/zsh"
 
-    symlink_files "$DOTDIR/zsh/.config" "$HOME/.config/zsh"
+    # symlink_files "$DOTDIR/zsh/.config" "$HOME/.config/zsh"
+    symlink_files "$DOTDIR/zsh/.config/zsh/makefile" "$HOME/.config/makefile"
+    symlink_files "$DOTDIR/zsh/.config/zsh/makefile" "$HOME/.config/makefile"
 
     # vscode
-    symlink_files "$DOTDIR/vscode" "$HOME/Library/Application Support/Code/User"
+    ln -sf "$DOTDIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+    ln -sf "$DOTDIR/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
+    symlink_files "$DOTDIR/vscode/snippets" "$HOME/Library/Application Support/Code/User/snippets"
 
     # karabiner
     ln -sf "$DOTDIR/karabiner/karabiner.edn" "$HOME/.config/karabiner/karabiner.edn"
@@ -237,7 +271,7 @@ create_symbolic_links() {
     symlink_files "$DOTDIR/hammerspoon" "$HOME/.config/hammerspoon"
 
     # alacritty
-    symlink_files "$DOTDIR/alacritty" "$HOME/.config/alacritty"
+    symlink_files_recursive "$DOTDIR/alacritty" "$HOME/.config/alacritty"
 
     # tmux
     symlink_files "$DOTDIR/tmux" "$HOME/.config/tmux"
@@ -272,6 +306,10 @@ install_mise() {
     mise install
 }
 
+set_alacritty_theme() {
+    ensure_dir_exists "$HOME/.config/alacritty/themes"
+}
+
 install_xcode_command_line_tools
 clone_dotfiles
 setup_ssh
@@ -280,7 +318,7 @@ install_brewfile
 setup_gpg
 install_mise
 create_symbolic_links
-set_macos
+# set_macos
 check_list
 
 # https://gemini.google.com/immersive/96cc28f19beec4d1/a5556460-666e-4014-b1f8-01df775ba37b
