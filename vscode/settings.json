@@ -72,6 +72,15 @@
       "source.organizeImports": "always"
     }
   },
+  "go.useLanguageServer": true,
+  "go.formatTool": "goimports",
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast"],
+  "gopls": {
+    "ui.completion.usePlaceholders": true
+  },
+  // `go env GOROOT` で出力されるパスを指定
+  "go.goroot": "/Users/zak/.local/share/mise/installs/go/1.24rc1",
 
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
@@ -362,15 +371,10 @@
   "dart.debugExternalPackageLibraries": true,
   "dart.debugSdkLibraries": false,
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
-  "gopls": {
-    "ui.completion.usePlaceholders": true
-  },
+
   "editor.wordWrap": "on",
   "editor.occurrencesHighlight": "off",
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
-  "go.goroot": "/Users/zak/.asdf/installs/golang/1.24rc1/go",
   "github.copilot.chat.editor.temporalContext.enabled": true,
-  "settingsSync.ignoredExtensions": [
-    
-  ]
+  "settingsSync.ignoredExtensions": []
 }
