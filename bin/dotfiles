@@ -251,8 +251,8 @@ create_symbolic_links() {
 
     # alacritty
     enshure_dir_exists "$HOME/.config/alacritty/themes"
-    symlink_files "$DOTDIR/alacritty/themes" "$HOME/.config/alacritty/themes"
     ln -sf "$DOTDIR/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+    symlink_files "$DOTDIR/alacritty/themes" "$HOME/.config/alacritty/themes"
 
     # tmux
     symlink_files "$DOTDIR/tmux" "$HOME/.config/tmux"
