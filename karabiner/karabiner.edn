@@ -160,7 +160,6 @@
     :des "open apps"
     :rules [:0-mode
       [:a [:open "Alacritty"]]
-      [:l [:open "IntelliJ IDEA CE"]]
       [:n [:open "Notion"]]
       [:i [:open "iTerm"]]
       [:c [:open "Google Chrome"]]
