@@ -299,7 +299,5 @@ install_brewfile
 setup_gpg
 install_mise
 create_symbolic_links
-# set_macos
+set_macos
 check_list
-
-# https://gemini.google.com/immersive/96cc28f19beec4d1/a5556460-666e-4014-b1f8-01df775ba37b

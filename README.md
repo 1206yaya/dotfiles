@@ -1,7 +1,6 @@
 ## Run Shell
 
 ```sh
-curl -o - https://github.com/1206yaya/dotfiles/blob/main/bin/dotfiles | sh
-```
+curl -L  https://raw.githubusercontent.com/1206yaya/dotfiles/refs/heads/main/bin/dotfiles  | bash
 
-- [[tmux]]
+```
