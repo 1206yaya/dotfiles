@@ -24,7 +24,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
-export PATH=$(go env GOPATH)/bin:$PATH
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden -l -g '!.git/*' -g '!node_modules/*'"
 export FZF_DEFAULT_OPTS="-m --height 100% --border --preview 'cat {}'"
@@ -52,6 +51,8 @@ eval "$(/opt/homebrew/bin/mise activate zsh)"
 bindkey '^e' autosuggest-accept # 補完候補を確定する
 
 export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+
+export PATH=$(go env GOPATH)/bin:$PATH
 
 # .zshの読み込み
 ZSH_DIR="${HOME}/.config/zsh"
