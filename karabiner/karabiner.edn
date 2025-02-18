@@ -45,6 +45,7 @@
 :applications {
   ;; BundleIDを調べる osascript -e 'id of app "Evernote"'
   :Chrome   ["com.google.Chrome"]
+  :Cursor   ["com.todesktop.230313mzl4w4u92"]
   :Contexts ["com.contextsformac.Contexts"]
   :Finder   ["com.apple.finder"]
   :IntelliJ ["com.jetbrains.intellij"]
@@ -165,6 +166,7 @@
       [:c [:open "Google Chrome"]]
       [:f [:open "Finder"]]
       [:v ["open -n -b 'com.microsoft.VSCode'"]]
+      [:s ["open -a 'Cursor'"]]
       [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
     
       [:b [:open "Obsidian"]]

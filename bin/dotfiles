@@ -228,13 +228,17 @@ create_symbolic_links() {
     mkdir -p "$HOME/.config/zsh"
 
     # symlink_files "$DOTDIR/zsh/.config" "$HOME/.config/zsh"
-    symlink_files "$DOTDIR/zsh/.config/zsh/makefile" "$HOME/.config/makefile"
-    symlink_files "$DOTDIR/zsh/.config/zsh/makefile" "$HOME/.config/makefile"
+    symlink_files "$DOTDIR/zsh/.config/makefile" "$HOME/.config/makefile"
 
     # vscode
     ln -sf "$DOTDIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
     ln -sf "$DOTDIR/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
     symlink_files "$DOTDIR/vscode/snippets" "$HOME/Library/Application Support/Code/User/snippets"
+
+    # cursor
+    ln -sf "$DOTDIR/vscode/settings.json" "$HOME/Library/Application Support/Cursor/User/settings.json"
+    ln -sf "$DOTDIR/vscode/keybindings.json" "$HOME/Library/Application Support/Cursor/User/keybindings.json"
+    symlink_files "$DOTDIR/vscode/snippets" "$HOME/Library/Application Support/Cursor/User/snippets"
 
     # karabiner
     ln -sf "$DOTDIR/karabiner/karabiner.edn" "$HOME/.config/karabiner/karabiner.edn"
@@ -250,7 +254,7 @@ create_symbolic_links() {
     symlink_files "$DOTDIR/hammerspoon" "$HOME/.config/hammerspoon"
 
     # alacritty
-    enshure_dir_exists "$HOME/.config/alacritty/themes"
+    ensure_dir_exists "$HOME/.config/alacritty/themes"
     ln -sf "$DOTDIR/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
     symlink_files "$DOTDIR/alacritty/themes" "$HOME/.config/alacritty/themes"
 
