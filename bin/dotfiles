@@ -181,27 +181,6 @@ setup_gpg() {
     fi
 }
 
-symlink_files_recursive() {
-    local src_dir="$1"
-    local dest_dir="$2"
-
-    ensure_dir_exists "$dest_dir"
-
-    # find を使ってサブディレクトリも含めてファイルを取得
-    find "$src_dir" -type f | while read -r file; do
-        # ファイルの相対パスを取得
-        local relative_path="${file#$src_dir/}"
-        local target_dir="$dest_dir/$(dirname "$relative_path")"
-        local target="$dest_dir/$relative_path"
-
-        # 必要ならディレクトリを作成
-        ensure_dir_exists "$target_dir"
-
-        # シンボリックリンクを作成
-        ln -sf "$file" "$target"
-        echo "Linked: $file -> $target"
-    done
-}
 symlink_files() {
     local src_dir="$1"
     local dest_dir="$2"
@@ -271,7 +250,9 @@ create_symbolic_links() {
     symlink_files "$DOTDIR/hammerspoon" "$HOME/.config/hammerspoon"
 
     # alacritty
-    symlink_files_recursive "$DOTDIR/alacritty" "$HOME/.config/alacritty"
+    enshure_dir_exists "$HOME/.config/alacritty/themes"
+    symlink_files "$DOTDIR/alacritty/themes" "$HOME/.config/alacritty/themes"
+    ln -sf "$DOTDIR/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
 
     # tmux
     symlink_files "$DOTDIR/tmux" "$HOME/.config/tmux"
