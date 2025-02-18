@@ -366,7 +366,7 @@
     "ui.completion.usePlaceholders": true
   },
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "go.goroot": "/Users/zak/.asdf/installs/golang/1.24rc1/go",
   "github.copilot.chat.editor.temporalContext.enabled": true,
