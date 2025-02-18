@@ -78,8 +78,9 @@ install_xcode_command_line_tools() {
 clone_dotfiles() {
     if ! dir_exists "$DOTDIR"; then
         log "Clone dotfiles to $DOTDIR"
+        ensure_dir_exists "$GIT_CLONE_PATH"
         cd "$GIT_CLONE_PATH"
-        git clone $DOT_REPOURL $GIT_CLONE_PATH
+        git clone $DOT_REPOURL $DOTDIR
     fi
 }
 
