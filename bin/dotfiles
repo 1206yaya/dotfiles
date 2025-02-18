@@ -97,16 +97,15 @@ setup_ssh() {
         success "SSH Key - Key-pair already present"
     fi
 }
-
 install_homebrew() {
     arch_name="$(uname -m)"
     if [ "${arch_name}" = "x86_64" ]; then
-        if ! file_exists /usr/local/bin/brew; then
+        if ! command -v brew >/dev/null 2>&1; then
             log 'Setup Homebrew'
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         fi
     elif [ "${arch_name}" = "arm64" ]; then
-        if ! file_exists /opt/homebrew/bin/brew; then
+        if ! command -v brew >/dev/null 2>&1; then
             log 'Setup Homebrew'
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -115,8 +114,8 @@ install_homebrew() {
             sudo softwareupdate --install-rosetta --agree-to-license
         fi
     fi
-
 }
+
 install_brewfile() {
     # skip_apps が 1 なら即リターン
     if [ "$skip_apps" -eq 1 ]; then
