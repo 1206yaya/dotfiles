@@ -3,7 +3,7 @@
 export GITHUB_EMAIL=1206yaya@gmail.com
 export GIT_CLONE_PATH=~/ghq/github.com/1206yaya
 export DOTDIR="$GIT_CLONE_PATH/dotfiles"
-
+export DOT_REPOURL="https://github.com/1206yaya/dotfiles.git"
 ###########################################################
 # Options
 ###########################################################
@@ -79,7 +79,7 @@ clone_dotfiles() {
     if ! dir_exists "$DOTDIR"; then
         log "Clone dotfiles to $DOTDIR"
         cd "$GIT_CLONE_PATH"
-        git clone
+        git clone $DOT_REPOURL $GIT_CLONE_PATH
     fi
 }
 
