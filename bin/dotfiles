@@ -227,7 +227,8 @@ create_symbolic_links() {
     ln -sf "$DOTDIR/zsh/.zshenv" "$HOME/.zshenv"
     mkdir -p "$HOME/.config/zsh"
 
-    # symlink_files "$DOTDIR/zsh/.config" "$HOME/.config/zsh"
+    symlink_files "$DOTDIR/zsh/.config/aliases" "$HOME/.config/zsh/aliases"
+    symlink_files "$DOTDIR/zsh/.config/functions" "$HOME/.config/zsh/functions"
     symlink_files "$DOTDIR/zsh/.config/makefile" "$HOME/.config/makefile"
 
     # vscode
