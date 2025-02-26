@@ -23,6 +23,10 @@
     "site-packages": true,
     "**/.fvm": true
   },
+  "search.quickOpen.includeSymbols": true,
+  "search.quickAccess.preserveInput": true,
+  "search.quickOpen.includeHistory": true,
+
   "files.watcherExclude": {
     "/node_modules/": true
   },
@@ -64,6 +68,13 @@
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file"
   },
+  "[markdown]": {
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
   "[go]": {
     "editor.insertSpaces": true,
     "editor.formatOnSave": true,
@@ -77,8 +88,19 @@
   "go.lintTool": "golangci-lint",
   "go.lintFlags": ["--fast"],
   "gopls": {
-    "ui.completion.usePlaceholders": true
+    "experimentalWorkspaceModule": true,
+    "ui.navigation.importShortcut": "Definition",
+    "ui.completion.usePlaceholders": true,
+    "formatting.gofumpt": true,
+    "analyses": {
+      "fillreturns": true,
+      "nonewvars": true,
+      "undeclaredname": true,
+      "unusedparams": true
+    },
+    "staticcheck": true
   },
+
   // `go env GOROOT` で出力されるパスを指定
   "go.goroot": "/Users/zak/.local/share/mise/installs/go/1.24rc1",
 

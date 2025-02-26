@@ -314,7 +314,7 @@
     "when": "emptyWorkspaceSupport && workbenchState != 'empty'"
   },
   {
-    "key": "ctrl+cmd+w",
+    "key": "shift+cmd+w",
     "command": "workbench.action.closeWindow"
   },
   {
@@ -371,7 +371,7 @@
     "command": "workbench.action.closeActiveEditor"
   },
   {
-    "key": "cmd+f8",
+    "key": "cmd+r",
     "command": "editor.debug.action.runToCursor"
   },
   {

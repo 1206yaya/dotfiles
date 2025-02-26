@@ -44,7 +44,7 @@ chatutil() {
     fi
 
     local PROJECT_ROOT=$1
-    local SCRIPT_PATH="$HOME/.config/zsh/chatutil.py"
+    local SCRIPT_PATH="$HOME/.config/zsh/functions/chatutil.py"
     local VENV_PATH="$DOTDIR/zsh/.config/.venv"
 
     # 仮想環境が存在するか確認
