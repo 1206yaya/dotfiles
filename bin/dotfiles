@@ -242,6 +242,7 @@ create_symbolic_links() {
     symlink_files "$DOTDIR/vscode/snippets" "$HOME/Library/Application Support/Cursor/User/snippets"
 
     # karabiner
+    ensure_dir_exists "$HOME/.config/karabiner"
     ln -sf "$DOTDIR/karabiner/karabiner.edn" "$HOME/.config/karabiner/karabiner.edn"
     # goku　でエラーが出ることがあるため、念の為ファイルを作成
     touch "$HOME/.config/karabiner/karabiner.json"
