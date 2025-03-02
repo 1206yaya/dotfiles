@@ -37,7 +37,7 @@ brew "rustup"
 
 cask "deepl"
 cask "iterm2"
-cask alacritty
+cask "alacritty"
 
 cask "cursor"
 cask "microsoft-auto-update"
