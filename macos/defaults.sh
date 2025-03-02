@@ -49,19 +49,6 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 10
 # Fnキーを押さずにF1～F12を機能キーとして動作させる
 defaults write -g com.apple.keyboard.fnState -bool true
 
-# 前の入力ソースを選択する」にハイパーキーを設定
-# ⌘ (Command)	1048576
-# ⌥ (Option)	524288
-# ⌃ (Control)	262144
-# ⇧ (Shift)	131072
-defaults write ~/Library/Preferences/com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 60 "{
-    enabled = 1;
-    value = {
-        parameters = (65535, 111, 10354688);
-        type = standard;
-    };
-}"
-
 ###########################################################
 # トラックパッド・マウス
 ###########################################################
