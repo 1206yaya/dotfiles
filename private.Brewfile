@@ -4,6 +4,7 @@ cask "figma"
 
 cask "blackhole-16ch"
 cask "blackhole-2ch"
+cask "cursor"
 
 mas "Developer", id: 640199958
 mas "Kindle", id: 302584613

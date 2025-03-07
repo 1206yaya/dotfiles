@@ -166,9 +166,13 @@
       [:c [:open "Google Chrome"]]
       [:f [:open "Finder"]]
       [:v ["open -n -b 'com.microsoft.VSCode'"]]
-      [:s ["open -a 'Cursor'"]]
-      [:k ["open -a 'Visual Studio Code' /Users/zak/ghq/github.com/1206yaya/dotfiles "]]
-    
+      [:o ["open -a 'Cursor'"]]
+      [:s ["open -a 'Safari'"]]
+      [:l ["open -a 'Slack'"]]
+      [:d ["open -a 'DBeaver'"]]
+      
+      [:k ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/dotfiles "]]
+
       [:b [:open "Obsidian"]]
       [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
     ]

@@ -24,6 +24,10 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden -l -g '!.git/*' -g '!node_modules/*'"
 export FZF_DEFAULT_OPTS="-m --height 100% --border --preview 'cat {}'"
@@ -40,12 +44,12 @@ if [ -f "/opt/homebrew/bin/brew" ]; then
     # . $(brew --prefix asdf)/libexec/asdf.sh
 fi
 # export JAVA_HOME="$(asdf where java)"
-# export PATH=$PATH:$(yarn global bin)
 
 eval "$(zoxide init zsh)" # zoxideは z コマンドの強化版
 eval "$(starship init zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(/opt/homebrew/bin/mise activate zsh)"
+export PATH=$PATH:$(yarn global bin)
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^e' autosuggest-accept # 補完候補を確定する

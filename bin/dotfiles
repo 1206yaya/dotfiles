@@ -257,7 +257,7 @@ create_symbolic_links() {
 
     # alacritty
     ensure_dir_exists "$HOME/.config/alacritty/themes"
-    ln -sf "$DOTDIR/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+    ln -sf "$DOTDIR/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
     symlink_files "$DOTDIR/alacritty/themes" "$HOME/.config/alacritty/themes"
 
     # tmux
@@ -291,6 +291,12 @@ install_mise() {
     fi
     mise trust "$DOTDIR/.mise.toml"
     mise install
+
+    mise list | tail -n +2 | while read -r tool version _; do
+        mise global "$tool@$version"
+    done
+
+    poetry config virtualenvs.in-project true
 }
 
 set_alacritty_theme() {
