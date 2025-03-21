@@ -4,6 +4,19 @@ export GIT_CLONE_PATH="$HOME/ghq/github.com/1206yaya"
 export DOTDIR="$GIT_CLONE_PATH/dotfiles"
 export ZSH_CONFG_DIR="$DOTDIR/zsh/.config"
 
+backup() {
+    if [[ "$1" == "edit" ]]; then
+        code ~/backup
+    else
+        TIMESTAMP=$(date +"%Y%m%d%H%M")
+        SRC=~/ghq/github.com/hrbrain/hrbrain/apps/persia
+        DEST=~/backup/$TIMESTAMP
+        mkdir -p "$DEST"
+        cp -r "$SRC" "$DEST"
+        echo "Backup completed: $DEST"
+    fi
+}
+
 function makefile() {
     pathDir="$ZSH_CONFIG_DIR/makefile"
     # 初期の拡張子を設定

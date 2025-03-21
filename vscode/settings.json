@@ -101,8 +101,7 @@
     "staticcheck": true
   },
 
-  // `go env GOROOT` で出力されるパスを指定
-  "go.goroot": "/Users/zak/.local/share/mise/installs/go/1.24rc1",
+  "go.goroot": "/usr/local/go",
 
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
@@ -402,5 +401,6 @@
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "cursor.cmdk.useThemedDiffBackground": true
+  "cursor.cmdk.useThemedDiffBackground": true,
+  "geminicodeassist.languages": ["go", "typescript"]
 }

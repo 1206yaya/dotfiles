@@ -72,6 +72,16 @@
   keystroke \"v\" using command down
   end tell
   '"
+  :pastecode "osascript -e '
+  set theClipboard to the clipboard as text
+  set formattedClipboard to \"```\"
+  set formattedClipboard to formattedClipboard & return & theClipboard & return & \"```\" 
+  set the clipboard to formattedClipboard
+  tell application \"System Events\"
+  keystroke \"v\" using command down
+  end tell
+  '"
+
   :open "open -a '%s.app'"
   :opena "open -a \"%s\" %s"
   :code-project "open -a 'Visual Studio Code' %s -g %s"
@@ -128,6 +138,7 @@
 }
 
 :main [
+
   ;; {:des "a to a" :rules [[:a :a]]}
 
 ;; Hyper key
@@ -135,14 +146,24 @@
 ;;   :des   "caps_lock to esc when pressed alone, to hyper as modifier"
 ;;   :rules [[:caps_lock [:!TOCleft_shift :b] :Alacritty {:alone :escape}]]}
 
-  {
-    :des "前の入力ソースを選択" ;; Mac System Preferences > Keyboard > Shortcuts > Input Sources > Select the previous input source > right command + right shift + right option + right control + f12
-    :rules [[:##right_command :!!f12]]
-  }
+;; 基本設定
   {
     :des "Swap left_command and left_control"
     :rules [[:##left_command :left_control] [:##left_control :left_command]]
   }
+  {
+    :des "前の入力ソースを選択" ;; Mac System Preferences > Keyboard > Shortcuts > Input Sources > Select the previous input source > right command + right shift + right option + right control + f12
+    :rules [[:##right_command :!!f12]]
+  }
+
+;; テキスト処理
+  {
+    :des "insert ```"
+    :rules [[[:j :l] [:paste "```"]]]
+  }
+  ;; ブラウザだと改行が消える
+  ;; {:des "jl 同時押しで ``` でクリップボードを囲んだテキストを出力" :rules [[[:j :l] [:pastecode]]]}
+
   {
     :des "chrome" 
     :rules [:chrome-mode
@@ -162,7 +183,8 @@
     :rules [:0-mode
       [:a [:open "Alacritty"]]
       [:n [:open "Notion"]]
-      [:i [:open "iTerm"]]
+      [:m [:open "Notes"]]
+      [:i [:open "Firefox"]]
       [:c [:open "Google Chrome"]]
       [:f [:open "Finder"]]
       [:v ["open -n -b 'com.microsoft.VSCode'"]]

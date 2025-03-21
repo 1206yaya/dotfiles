@@ -57,6 +57,8 @@ bindkey '^e' autosuggest-accept # 補完候補を確定する
 export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 
 export PATH=$(go env GOPATH)/bin:$PATH
+export GOROOT=$(go env GOROOT)
+export PATH=$GOROOT/bin:$PATH
 
 # .zshの読み込み
 ZSH_DIR="${HOME}/.config/zsh"
