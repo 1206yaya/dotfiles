@@ -75,6 +75,14 @@
         "description": "Variable declaration :=",
         "body": "${1:name} := ${0:value}"
     },
+    "fmt.Printf 構造体": {
+        "prefix": "fp",
+        "body": [
+            "fmt.Printf(\"%#v\\n\", ${1:args})",
+            "${0}"
+        ],
+        "description": "Simple Printf Snippet"
+    },
     "Sprintf": {
         "prefix": "fs",
         "body": [

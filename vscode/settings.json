@@ -38,7 +38,7 @@
   "explorer.confirmDelete": false,
   "security.workspace.trust.untrustedFiles": "open",
   "explorer.confirmDragAndDrop": false,
-  "files.autoSave": "afterDelay",
+  "files.autoSave": "onWindowChange",
   "extensions.ignoreRecommendations": true,
   "workbench.startupEditor": "none",
   "markdown-checkbox.checkmark": "x",
@@ -101,7 +101,8 @@
     "staticcheck": true
   },
 
-  "go.goroot": "/usr/local/go",
+  // "go.goroot": "/usr/local/go/",
+  "go.goroot": "/Users/Komatsu.Aya/.local/share/mise/installs/go/1.23.6",
 
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
@@ -394,7 +395,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": "off",
+  "editor.occurrencesHighlight": false,
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -402,5 +403,6 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "cursor.cmdk.useThemedDiffBackground": true,
-  "geminicodeassist.languages": ["go", "typescript"]
+  "geminicodeassist.languages": ["go", "typescript"],
+  "githubPullRequests.pullBranch": "never"
 }

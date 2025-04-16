@@ -68,6 +68,10 @@ setopt globdots
 setopt extended_glob
 setopt nullglob # ファイルがない場合、空リストにする
 
+# sqlcコマンドのため
+export CGO_CFLAGS="-DHAVE_STRCHRNUL -mmacosx-version-min=15.4"
+export MACOSX_DEPLOYMENT_TARGET="15.4"
+
 if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then
     for file in "$ZSH_DIR"/**/*.zsh; do
         if [ -f "$file" ] && [ -r "$file" ]; then

@@ -1,4 +1,5 @@
 cs() {
+    echo "cs"
     pathDir="$HOME/ghq/github.com/1206yaya/cheet-sheet"
 
     # 引数に基づいてファイル名を構築し、ショートカットを考慮
