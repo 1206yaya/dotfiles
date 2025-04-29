@@ -31,7 +31,8 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden -l -g '!.git/*' -g '!node_modules/*'"
 export FZF_DEFAULT_OPTS="-m --height 100% --border --preview 'cat {}'"
-export PATH="$PATH:/Users/zak/.kit/bin"
+export PATH="$PATH:$HOME/.kit/bin"
+# export PATH="$PATH:$HOME/.local/bin"
 
 if [[ -f ~/.secrets ]]; then
     export $(grep -v '^#' ~/.secrets | xargs)

@@ -103,7 +103,7 @@
 
   // "go.goroot": "/usr/local/go/",
   // "go.goroot": "/Users/Komatsu.Aya/.local/share/mise/installs/go/1.23.6",
-  "go.goroot": "/usr/local/go",
+  // "go.goroot": "$HOME/.local/share/mise/installs/go/1.23.8/bin",
 
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
@@ -398,7 +398,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],

@@ -63,7 +63,7 @@ cask "gpg-suite"
 cask "postico"
 cask "dbeaver-community"
 brew "yq"
-
+brew "postgresql"
 brew "yqrashawn/goku/goku"
 cask "karabiner-elements"
 cask "hammerspoon"
