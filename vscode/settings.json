@@ -102,7 +102,8 @@
   },
 
   // "go.goroot": "/usr/local/go/",
-  "go.goroot": "/Users/Komatsu.Aya/.local/share/mise/installs/go/1.23.6",
+  // "go.goroot": "/Users/Komatsu.Aya/.local/share/mise/installs/go/1.23.6",
+  "go.goroot": "/usr/local/go",
 
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
@@ -274,7 +275,9 @@
     "plaintext": false,
     "markdown": true,
     "scminput": false,
-    "hcl": true
+    "hcl": true,
+    "sql": false,
+    "go": true
   },
   "genieai.enableConversationHistory": true,
   "git.enableSmartCommit": true,

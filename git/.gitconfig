@@ -5,12 +5,13 @@
     path = ~/.gitconfig.local
 [alias]
 	s   = status -sb
+	sw	= switch
 	d   = diff
 	a   = add
 	aa  = add -A
 	b   = branch
-	co  = checkout
-	cob = checkout -b
+	ch  = checkout
+	chb = checkout -b
 	c   = commit
 	cm  = commit -m
 	pso = push origin
