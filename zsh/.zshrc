@@ -50,6 +50,7 @@ eval "$(zoxide init zsh)" # zoxideは z コマンドの強化版
 eval "$(starship init zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(/opt/homebrew/bin/mise activate zsh)"
+export PATH="$(aqua root-dir)/bin:$PATH"
 export PATH=$PATH:$(yarn global bin)
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
