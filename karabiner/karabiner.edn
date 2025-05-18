@@ -44,6 +44,7 @@
 {
 :applications {
   ;; BundleIDを調べる osascript -e 'id of app "Evernote"'
+  :Postman ["com.postmanlabs.mac"]
   :Insomnia ["com.insomnia.app"]
   :Chrome   ["com.google.Chrome"]
   :Cursor   ["com.todesktop.230313mzl4w4u92"]
@@ -183,7 +184,7 @@
     :des "open apps"
     :rules [:0-mode
       [:a [:open "Alacritty"]]
-      [:n [:open "Insomnia"]]
+      [:n [:open "Postman"]]
       [:m [:open "Notes"]]
       [:i [:open "Firefox"]]
       [:c [:open "Google Chrome"]]

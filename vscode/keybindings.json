@@ -382,5 +382,9 @@
   {
     "key": "shift+cmd+d",
     "command": "-cgroovy.organizeDependences"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
   }
 ]

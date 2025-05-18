@@ -88,7 +88,6 @@
   "go.lintTool": "golangci-lint",
   "go.lintFlags": ["--fast"],
   "gopls": {
-    "experimentalWorkspaceModule": true,
     "ui.navigation.importShortcut": "Definition",
     "ui.completion.usePlaceholders": true,
     "formatting.gofumpt": true,
@@ -101,16 +100,14 @@
     "staticcheck": true
   },
 
-  // "go.goroot": "/usr/local/go/",
-  // "go.goroot": "/Users/Komatsu.Aya/.local/share/mise/installs/go/1.23.6",
-  // "go.goroot": "$HOME/.local/share/mise/installs/go/1.23.8/bin",
-
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
   "[proto3]": {
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true
   },
+  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.3",
+  "go.gopath": "${env:HOME}/go",
 
   "[dart]": {
     // andrea
@@ -271,13 +268,13 @@
   "google-translate.secondLanguage": "ja",
   "files.autoGuessEncoding": true,
   "github.copilot.enable": {
-    "*": true,
+    "*": false,
     "plaintext": false,
     "markdown": true,
     "scminput": false,
     "hcl": true,
     "sql": false,
-    "go": true
+    "go": false
   },
   "genieai.enableConversationHistory": true,
   "git.enableSmartCommit": true,
@@ -407,5 +404,6 @@
   },
   "cursor.cmdk.useThemedDiffBackground": true,
   "geminicodeassist.languages": ["go", "typescript"],
-  "githubPullRequests.pullBranch": "never"
+  "githubPullRequests.pullBranch": "never",
+  "gitlens.views.worktrees.pullRequests.showForBranches": false
 }
