@@ -61,6 +61,7 @@ export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 export PATH=$(go env GOPATH)/bin:$PATH
 export GOROOT=$(go env GOROOT)
 export PATH=$GOROOT/bin:$PATH
+export HRBRAIN_REPO_PATH="$HOME/ghq/github.com/hrbrain/hrbrain"
 
 # .zshの読み込み
 ZSH_DIR="${HOME}/.config/zsh"

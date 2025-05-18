@@ -213,9 +213,6 @@ symlink_files() {
 create_symbolic_links() {
 
     log 'Create Symbolic Links'
-    # vscode > settings.json でgo.goroot を参照できるように
-    # settings.json > "go.goroot": "/usr/local/go",　を追加
-    sudo ln -s $(go env GOROOT) /usr/local/go
 
     # bin
     ensure_dir_exists "$HOME/bin"
