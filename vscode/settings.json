@@ -32,6 +32,7 @@
   },
   "files.associations": {
     "*.drift": "sql",
+    "*.tpl": "html",
     ".chatignore": "text",
     "*.tp.md": "clojure"
   },
@@ -340,7 +341,7 @@
   "hediet.vscode-drawio.theme": "min",
   "notebook.formatOnSave.enabled": true,
   "remote.autoForwardPortsSource": "hybrid",
-  "totalTypeScript.hiddenTips": ["passing-generics-to-types"],
+  "totalTypeScript.hiddenTips": ["passing-generics-to-types", "ts-object-type"],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vscodetonotion.api": "secret_erBORnFvsVOEx4n2cMUlMUNJy5gNjSXg3doQnELJ8C3",
   "vscodetonotion.databaseId": "27aeb68aeb9944c88391f5e138f51bc3",
@@ -405,5 +406,19 @@
   "cursor.cmdk.useThemedDiffBackground": true,
   "geminicodeassist.languages": ["go", "typescript"],
   "githubPullRequests.pullBranch": "never",
-  "gitlens.views.worktrees.pullRequests.showForBranches": false
+  "gitlens.views.worktrees.pullRequests.showForBranches": false,
+  "gitlens.graph.minimap.enabled": false,
+  "gitlens.graph.minimap.additionalTypes": ["pullRequests"],
+  "gitlens.graph.scrollMarkers.additionalTypes": [
+    "localBranches",
+    "stashes",
+    "pullRequests"
+  ],
+  "gitlens.graph.dimMergeCommits": true,
+  "gitlens.graph.searchItemLimit": 1000,
+  "gitlens.graph.onlyFollowFirstParent": true,
+  "gitlens.views.commitDetails.files.layout": "tree",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4",
+  "github.copilot.nextEditSuggestions.enabled": false
 }

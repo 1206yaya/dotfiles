@@ -87,7 +87,7 @@ function cpp() {
 
 alias cat='bat --style=plain --paging=never'
 alias less='bat --style=plain'
-alias ll="ls -lah --git --sort modified"
+alias ll="ls -lah --git --sort=name"
 alias lt="ll -TL 3 --ignore-glob=.git"
 alias ps="procs"
 alias top="ytop"

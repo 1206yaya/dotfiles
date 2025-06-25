@@ -44,6 +44,11 @@
         ],
         "description": ""
     },
+    "log function": {
+        "prefix": "logf",
+        "body": "fmt.Println(\"$1\")",
+        "description": ""
+    },
     "continue ": {
         "prefix": "con",
         "body": "continue"
