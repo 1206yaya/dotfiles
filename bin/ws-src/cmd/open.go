@@ -10,10 +10,30 @@ import (
 )
 
 var openCmd = &cobra.Command{
-	Use:   "open <worktree-name>",
-	Short: "Open the existing code-workspace in VSCode",
-	Args:  cobra.ExactArgs(1),
+	Use:   "open [worktree-name]", // Make the argument optional
+	Short: "Open the existing code-workspace in VSCode or list worktrees",
+	Args:  cobra.MaximumNArgs(1), // Allow 0 or 1 argument
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			// No argument provided, execute the desired commands
+			targetDir := "/Users/Komatsu.Aya/ghq/github.com/hrbrain/hrbrain"
+
+			fmt.Printf("📂 Changing directory to: %s\n", targetDir)
+			if err := os.Chdir(targetDir); err != nil {
+				return fmt.Errorf("❌ Failed to change directory to %s: %w", targetDir, err)
+			}
+
+			fmt.Println("🌳 Listing git worktrees:")
+			gitWorktreeListCmd := exec.Command("git", "worktree", "list")
+			gitWorktreeListCmd.Stdout = os.Stdout
+			gitWorktreeListCmd.Stderr = os.Stderr
+			if err := gitWorktreeListCmd.Run(); err != nil {
+				return fmt.Errorf("❌ Failed to execute 'git worktree list': %w", err)
+			}
+			return nil
+		}
+
+		// Argument provided, proceed with opening VSCode
 		worktreeName := args[0]
 
 		homeDir, err := os.UserHomeDir()
