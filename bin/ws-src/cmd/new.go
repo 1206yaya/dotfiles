@@ -19,22 +19,25 @@ import (
 - worktree に対応する　VSCode のワークスペース用設定ファイルの配置場所
   - /Users/Komatsu.Aya/ghq/github.com/hrbrain/hrbrain/code-workspaces
 
-newには2つの引数が与えられる
-new ブランチ名 統合ブランチ名
-e.g. new PER-7332 main
+第１引数は、対象となるブランチ名を指定する
+第２引数は、統合ブランチ名を指定する
+第3引数は、オプションで検索機能のような説明を追加する
 
-すると次のコマンドが実行され  code-workspaces が追加される
-
-cd /Users/Komatsu.Aya/ghq/github.com/hrbrain/hrbrain/
-git worktree add -b PER-7332 ../hrbrain.worktrees/main-PER-7332 origin/PER-7332
+e.g.
+ws new PER-7332 main 検索機能
+git worktree add -b PER-7332 ../hrbrain.worktrees/main-PER-7332-検索機能 origin/PER-7332
 */
 var newCmd = &cobra.Command{
-	Use:   "new <branch-name> <base-branch-name>",
+	Use:   "new <branch-name> <base-branch-name> [comment]",
 	Short: "Create a git worktree and open a workspace for it",
-	Args:  cobra.ExactArgs(2), // 2つの引数 (ブランチ名と統合ブランチ名) を期待するように変更
+	Args:  cobra.RangeArgs(2, 10), // 2つ以上の引数を受け取る（コメント部分は複数の単語になる可能性があるため）
 	RunE: func(cmd *cobra.Command, args []string) error {
 		branchName := args[0]
 		baseBranchName := args[1] // 統合ブランチ名を追加
+		comment := ""
+		if len(args) > 2 {
+			comment = strings.Join(args[2:], " ") // 検索機能のような説明を追加
+		}
 
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
@@ -45,12 +48,12 @@ var newCmd = &cobra.Command{
 
 		// git worktree add コマンド実行前に、worktree のパスを決定
 		// 例: ../hrbrain.worktrees/main-PER-7332
-		worktreeRelativePath := filepath.Join("..", "hrbrain.worktrees", fmt.Sprintf("%s-%s", baseBranchName, branchName))
+		worktreeRelativePath := filepath.Join("..", "hrbrain.worktrees", fmt.Sprintf("%s-%s-%s", baseBranchName, branchName, comment))
 		gitWorktreeFullPath := filepath.Join(repoRoot, worktreeRelativePath) // git worktree add に渡す絶対パス
 
 		fmt.Printf("ℹ️  Checking if worktree path already exists: %s\n", gitWorktreeFullPath)
 		if _, err := os.Stat(gitWorktreeFullPath); !os.IsNotExist(err) {
-			return fmt.Errorf("❌ Worktree path already exists: %s. Please remove it first or choose a different name.", gitWorktreeFullPath)
+			return fmt.Errorf("❌ Worktree path already exists: %s. Please remove it first or choose a different name", gitWorktreeFullPath)
 		}
 
 		// 対象ブランチがメインリポジトリにローカルに存在するかどうかを判断
@@ -82,9 +85,14 @@ var newCmd = &cobra.Command{
 		}
 		fmt.Printf("✅ Git worktree '%s' added successfully at %s\n", branchName, gitWorktreeFullPath)
 
-		// NewCodeWorkSpace に渡す worktreeName は結合された名前
-		workspaceWorktreeName := fmt.Sprintf("%s-%s", baseBranchName, branchName)
-		workspaceFile, _, err := NewCodeWorkSpace(workspaceWorktreeName, basePath) // worktreePath は NewCodeWorkSpace 内部で構築されるため、ここでは不要
+		// NewCodeWorkSpace に渡す worktreeName は結合された名前（コメント部分も含む）
+		var workspaceWorktreeName string
+		if comment == "" {
+			workspaceWorktreeName = fmt.Sprintf("%s-%s", baseBranchName, branchName)
+		} else {
+			workspaceWorktreeName = fmt.Sprintf("%s-%s-%s", baseBranchName, branchName, comment)
+		}
+		workspaceFile, _, err := NewCodeWorkSpace(workspaceWorktreeName, basePath)
 		if err != nil {
 			return err
 		}
@@ -109,6 +117,7 @@ var newCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		fmt.Println("✅ 'mise trust' executed successfully.")
+		fmt.Printf("🚀 Run: %s\n", workspaceWorktreeName)
 
 		return nil
 	},
