@@ -18,4 +18,5 @@ func init() {
 	rootCmd.AddCommand(newCmd)
 	rootCmd.AddCommand(openCmd)
 	rootCmd.AddCommand(rmCmd)
+	rootCmd.AddCommand(copydbCmd)
 }

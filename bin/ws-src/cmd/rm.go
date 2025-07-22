@@ -17,7 +17,7 @@ var rmCmd = &cobra.Command{
 		allFlag, _ := cmd.Flags().GetBool("all")
 
 		if !allFlag {
-			return fmt.Errorf("❌ Please specify -a or --all flag to remove all worktrees")
+			return fmt.Errorf("❌ Please specify -a or --all flag-s to remove all worktrees")
 		}
 
 		homeDir, err := os.UserHomeDir()
