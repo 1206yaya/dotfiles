@@ -60,6 +60,7 @@ export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 
 export PATH=$(go env GOPATH)/bin:$PATH
 export GOROOT=$(go env GOROOT)
+# export GOTOOLCHAIN=local # ツールチェイン自動切り替えを無効化
 export PATH=$GOROOT/bin:$PATH
 export HRBRAIN_REPO_PATH="$HOME/ghq/github.com/hrbrain/hrbrain"
 
@@ -82,3 +83,4 @@ if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then
         fi
     done
 fi
+

@@ -142,7 +142,6 @@
 :main [
 
   ;; {:des "a to a" :rules [[:a :a]]}
-
 ;; Hyper key
 ;; {
 ;;   :des   "caps_lock to esc when pressed alone, to hyper as modifier"
@@ -150,7 +149,7 @@
 
 ;; 基本設定
   {
-    :des "Swap left_command and left_control"
+    :des "Swap left_command and left_control コントロールとコマンドを逆にスイッチ"
     :rules [[:##left_command :left_control] [:##left_control :left_command]]
   }
   {
@@ -172,9 +171,8 @@
       [:e [:open_url "https://mail.google.com/"]]
       [:m [:open_url "https://www.google.com/maps/"]]
       [:c [:open_url "https://calendar.google.com/"]]
-
+      [:a [:open_url "https://www.notion.so/DailyNote-201d34a85b8c80a48ddefd74b7cc7434"]]
       [:r [:open_url "https://github.com/1206yaya?tab=repositories"]]
-
       [:p [:open_url "https://chatgpt.com/"]]
       [:g [:open_url "https://gemini.google.com/app"]]
 
@@ -184,6 +182,7 @@
     :des "open apps"
     :rules [:0-mode
       [:a [:open "Alacritty"]]
+      [:e [:open "EdrawMind"]]
       [:n [:open "Postman"]]
       [:m [:open "Notes"]]
       [:i [:open "Firefox"]]
@@ -196,9 +195,11 @@
       [:d ["open -a 'DBeaver'"]]
       
       [:k ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/dotfiles "]]
+      [:1 ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/00hbproj-note "]]
 
       [:b [:open "Obsidian"]]
-      [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
+      [:r [:open "Arc"]]
+      ;; [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
     ]
   }
   {
@@ -210,7 +211,7 @@
             [:##l :right_arrow]
             [:comma :page_down]
             [:period :page_up]
-            [:##t :!Cup_arrow] ;; page top
+            [:##t :!Cup_arrow] ;; page f
             ;; Escape + :end
             [:##b [:escape :end]]]
   }

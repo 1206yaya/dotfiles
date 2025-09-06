@@ -2,168 +2,302 @@ package cmd
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"strings"
 
 	"github.com/spf13/cobra"
 )
 
-var copyDB bool
+var (
+	copyDB    bool
+	remoteURL string
+)
 
-/*
-次のディレクトリが存在する
-- worktree 用
-  - /Users/Komatsu.Aya/ghq/github.com/hrbrain/hrbrain/hrbrain.worktrees
+//
+// ===== パス/リポ基礎ユーティリティ =====
+//
 
-- worktree に対応する　VSCode のワークスペース用設定ファイルの配置場所
-  - /Users/Komatsu.Aya/ghq/github.com/hrbrain/hrbrain/code-workspaces
+// 親リポの場所
+func repoRootPath(homeDir string) string {
+	return filepath.Join(homeDir, "wt/github.com/hrbrain/hrbrain")
+}
 
-第１引数は、統合ブランチ名を指定する
-第２引数は、対象となるブランチ名を指定する
-第3引数は、オプションで検索機能のような説明を追加する
+// ワークツリー基底
+func worktreesRoot(homeDir string) string {
+	return filepath.Join(repoRootPath(homeDir), "worktrees")
+}
 
-e.g.
-ws new main PER-7332 検索機能
-ws new main PER-7332 検索機能 --copy-db  # データベースもコピー
-git worktree add -b PER-7332 ../hrbrain.worktrees/main-PER-7332-検索機能 origin/PER-7332
-*/
+// Git リポかどうか
+func isGitRepo(path string) bool {
+	if fi, err := os.Stat(filepath.Join(path, ".git")); err == nil && fi.IsDir() {
+		return true
+	}
+	cmd := exec.Command("git", "-C", path, "rev-parse", "--git-dir")
+	if err := cmd.Run(); err == nil {
+		return true
+	}
+	return false
+}
+
+// 先頭スラッシュが欠けている場合に補う（mac/Linux 用）
+func ensureAbsolute(p string) string {
+	if p == "" {
+		return p
+	}
+	if filepath.IsAbs(p) {
+		return p
+	}
+	if runtime.GOOS == "windows" {
+		return p
+	}
+	return string(os.PathSeparator) + p
+}
+
+// ghq から正確なフルパスを取得（無ければ $HOME/ghq/... をフォールバック）
+func detectGhqRepoPath() (string, error) {
+	// 1) ghq が使えるなら最優先
+	if _, err := exec.LookPath("ghq"); err == nil {
+		out, err := exec.Command("ghq", "list", "-p", "github.com/hrbrain/hrbrain").Output()
+		if err == nil {
+			p := strings.TrimSpace(string(out))
+			if p != "" {
+				return filepath.Clean(p), nil
+			}
+		}
+	}
+	// 2) フォールバック
+	home, _ := os.UserHomeDir()
+	return filepath.Clean(filepath.Join(home, "ghq/github.com/hrbrain/hrbrain")), nil
+}
+
+// パスが github.com/hrbrain で止まっていれば hrbrain を付与して .git を検証
+func fixHrbrainRepoPath(p string) (string, error) {
+	p = filepath.Clean(p)
+	// すでに repo 直下なら OK
+	if isGitRepo(p) {
+		return p, nil
+	}
+	// 末尾が github.com/hrbrain で止まっている？ → /hrbrain を試す
+	if strings.HasSuffix(p, filepath.Join("github.com", "hrbrain")) {
+		cand := filepath.Join(p, "hrbrain")
+		if isGitRepo(cand) {
+			return cand, nil
+		}
+	}
+	// それでもダメならそのまま返す（以降のコピーはスキップ運用）
+	return p, fmt.Errorf("repo root does not contain .git: %s", p)
+}
+
+//
+// ===== 親リポを保証（clone/fetch） =====
+//
+
+func safeClone(remote, dst string) error {
+	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
+		return fmt.Errorf("failed to create repo root parent: %w", err)
+	}
+	fmt.Printf("ℹ️  Cloning %s into %s\n", remote, dst)
+	clone := exec.Command("git", "clone", "--origin", "origin", remote, dst)
+	clone.Stdout, clone.Stderr = os.Stdout, os.Stderr
+	return clone.Run()
+}
+
+func ensureRepoRoot(repoRoot, fallbackRemote string) error {
+	_, statErr := os.Stat(repoRoot)
+	switch {
+	case errors.Is(statErr, os.ErrNotExist):
+		if fallbackRemote == "" {
+			fallbackRemote = "git@github.com:hrbrain/hrbrain.git"
+		}
+		return safeClone(fallbackRemote, repoRoot)
+
+	case statErr == nil:
+		if !isGitRepo(repoRoot) {
+			fmt.Printf("⚠️  %s exists but is not a git repo. Reinitializing...\n", repoRoot)
+			if err := os.RemoveAll(repoRoot); err != nil {
+				return fmt.Errorf("failed to remove non-git dir: %w", err)
+			}
+			if fallbackRemote == "" {
+				fallbackRemote = "git@github.com:hrbrain/hrbrain.git"
+			}
+			return safeClone(fallbackRemote, repoRoot)
+		}
+		fmt.Println("ℹ️  Fetching latest refs...")
+		fetch := exec.Command("git", "-C", repoRoot, "fetch", "--all", "--prune")
+		fetch.Stdout, fetch.Stderr = os.Stdout, os.Stderr
+		_ = fetch.Run()
+		return nil
+
+	default:
+		return fmt.Errorf("failed to stat repo root: %w", statErr)
+	}
+}
+
+//
+// ===== ws new コマンド本体 =====
+//
+
 var newCmd = &cobra.Command{
 	Use:   "new <base-branch-name> <branch-name> [comment]",
 	Short: "Create a git worktree and open a workspace for it",
-	Args:  cobra.RangeArgs(2, 10), // 2つ以上の引数を受け取る（コメント部分は複数の単語になる可能性があるため）
+	Args:  cobra.RangeArgs(2, 10),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		baseBranchName := args[0] // 統合ブランチ名を追加
+		baseBranchName := args[0]
 		branchName := args[1]
 		comment := ""
 		if len(args) > 2 {
-			comment = strings.Join(args[2:], " ") // 検索機能のような説明を追加
+			comment = strings.Join(args[2:], " ")
 		}
 
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
 			return fmt.Errorf("failed to get home directory: %w", err)
 		}
-		basePath := filepath.Join(homeDir, "ghq/github.com/hrbrain")
-		repoRoot := filepath.Join(basePath, "hrbrain") // リポジトリのルートパス
 
-		// git worktree add コマンド実行前に、worktree のパスを決定
-		// 例: ../hrbrain.worktrees/main-PER-7332
-		worktreeRelativePath := filepath.Join("..", "hrbrain.worktrees", fmt.Sprintf("%s-%s-%s", baseBranchName, branchName, comment))
-		gitWorktreeFullPath := filepath.Join(repoRoot, worktreeRelativePath) // git worktree add に渡す絶対パス
+		repoRoot := repoRootPath(homeDir)
+		wtRoot := worktreesRoot(homeDir)
 
-		fmt.Printf("ℹ️  Checking if worktree path already exists: %s\n", gitWorktreeFullPath)
-		if _, err := os.Stat(gitWorktreeFullPath); !os.IsNotExist(err) {
-			return fmt.Errorf("❌ Worktree path already exists: %s. Please remove it first or choose a different name", gitWorktreeFullPath)
+		// 親リポ保障
+		if err := ensureRepoRoot(repoRoot, remoteURL); err != nil {
+			return fmt.Errorf("failed to ensure repo root: %w", err)
 		}
 
-		// 対象ブランチがメインリポジトリにローカルに存在するかどうかを判断
+		// WT基底作成
+		if err := os.MkdirAll(wtRoot, 0o755); err != nil {
+			return fmt.Errorf("failed to create worktrees root dir: %w", err)
+		}
+
+		// worktree ディレクトリ名
+		var worktreeName string
+		if comment == "" {
+			worktreeName = fmt.Sprintf("%s-%s", baseBranchName, branchName)
+		} else {
+			worktreeName = fmt.Sprintf("%s-%s-%s", baseBranchName, branchName, comment)
+		}
+		gitWorktreeFullPath := filepath.Join(wtRoot, worktreeName)
+
+		// 既存チェック
+		fmt.Printf("ℹ️  Checking if worktree path already exists: %s\n", gitWorktreeFullPath)
+		if _, err := os.Stat(gitWorktreeFullPath); !os.IsNotExist(err) {
+			return fmt.Errorf("❌ Worktree path already exists: %s", gitWorktreeFullPath)
+		}
+
+		// --- ブランチ存在確認 ---
 		branchExistsLocallyCmd := exec.Command("git", "show-ref", "--verify", "--quiet", fmt.Sprintf("refs/heads/%s", branchName))
 		branchExistsLocallyCmd.Dir = repoRoot
-		err = branchExistsLocallyCmd.Run() // 出力は不要、終了コードのみ
-		branchExistsLocally := err == nil  // errがnilの場合、コマンドは成功し、ブランチが存在する
+		err = branchExistsLocallyCmd.Run()
+		branchExistsLocally := err == nil
 
-		// リモートブランチが存在するかどうかを判断
 		remoteExistsCmd := exec.Command("git", "show-ref", "--verify", "--quiet", fmt.Sprintf("refs/remotes/origin/%s", branchName))
 		remoteExistsCmd.Dir = repoRoot
 		err = remoteExistsCmd.Run()
 		remoteExists := err == nil
 
+		baseLocalCmd := exec.Command("git", "show-ref", "--verify", "--quiet", fmt.Sprintf("refs/heads/%s", baseBranchName))
+		baseLocalCmd.Dir = repoRoot
+		err = baseLocalCmd.Run()
+		baseExistsLocally := err == nil
+
+		baseRemoteCmd := exec.Command("git", "show-ref", "--verify", "--quiet", fmt.Sprintf("refs/remotes/origin/%s", baseBranchName))
+		baseRemoteCmd.Dir = repoRoot
+		err = baseRemoteCmd.Run()
+		baseExistsRemotely := err == nil
+
+		// worktree add 引数
 		var worktreeAddArgs []string
-		if branchExistsLocally {
-			fmt.Printf("ℹ️  Local branch '%s' already exists. Adding worktree to checkout existing branch.\n", branchName)
-			// ブランチがローカルに存在する場合、-b を使用せずに直接チェックアウト
+		switch {
+		case branchExistsLocally:
+			fmt.Printf("ℹ️  Using existing local branch '%s'\n", branchName)
 			worktreeAddArgs = []string{"worktree", "add", gitWorktreeFullPath, branchName}
-		} else if remoteExists {
-			fmt.Printf("ℹ️  Local branch '%s' does not exist but remote branch exists. Creating new branch and adding worktree from origin/%s.\n", branchName, branchName)
-			// ローカルブランチは存在しないが、リモートブランチが存在する場合
+		case remoteExists:
+			fmt.Printf("ℹ️  Creating local '%s' from origin/%s\n", branchName, branchName)
 			worktreeAddArgs = []string{"worktree", "add", "-b", branchName, gitWorktreeFullPath, fmt.Sprintf("origin/%s", branchName)}
-		} else {
-			// ローカルブランチもリモートブランチも存在しない場合、baseBranchNameから新しいブランチを作成
-			fmt.Printf("ℹ️  Neither local nor remote branch '%s' exists. Creating new branch from '%s'.\n", branchName, baseBranchName)
-			worktreeAddArgs = []string{"worktree", "add", "-b", branchName, gitWorktreeFullPath, baseBranchName}
+		default:
+			var baseRef string
+			switch {
+			case baseExistsLocally:
+				baseRef = baseBranchName
+			case baseExistsRemotely:
+				baseRef = fmt.Sprintf("origin/%s", baseBranchName)
+			default:
+				return fmt.Errorf("❌ base branch '%s' not found locally nor on origin", baseBranchName)
+			}
+			fmt.Printf("ℹ️  Creating '%s' from '%s'\n", branchName, baseRef)
+			worktreeAddArgs = []string{"worktree", "add", "-b", branchName, gitWorktreeFullPath, baseRef}
 		}
 
-		// git worktree add コマンドの構築と実行
-		fmt.Printf("ℹ️  Executing git %s...\n", strings.Join(worktreeAddArgs, " ")) // デバッグ用
+		// 実行
+		fmt.Printf("ℹ️  Executing git %s (in %s)...\n", strings.Join(worktreeAddArgs, " "), repoRoot)
 		worktreeAddCmd := exec.Command("git", worktreeAddArgs...)
-		worktreeAddCmd.Dir = repoRoot // コマンドを実行するディレクトリ
+		worktreeAddCmd.Dir = repoRoot
 		worktreeAddCmd.Stdout = os.Stdout
 		worktreeAddCmd.Stderr = os.Stderr
-
 		if err := worktreeAddCmd.Run(); err != nil {
 			return fmt.Errorf("❌ Failed to execute 'git %s': %w", strings.Join(worktreeAddArgs, " "), err)
 		}
-		fmt.Printf("✅ Git worktree '%s' added successfully at %s\n", branchName, gitWorktreeFullPath)
+		fmt.Printf("✅ Git worktree '%s' added at %s\n", branchName, gitWorktreeFullPath)
 
-		// データベースとファイルのコピー処理
+		// ====== DB/設定コピー ======
 		if copyDB {
-			fmt.Println("ℹ️  Copying database and configuration files...")
-			if err := copyDatabaseAndConfig(gitWorktreeFullPath, basePath); err != nil {
+			ghqRoot, _ := detectGhqRepoPath() // ghq で実パス取得
+			ghqRoot = ensureAbsolute(ghqRoot) // 先頭スラッシュ矯正
+			// github.com/hrbrain で止まってたら hrbrain を付与
+			if fixed, err := fixHrbrainRepoPath(ghqRoot); err == nil {
+				ghqRoot = fixed
+			}
+			fmt.Printf("ℹ️  Copying database and configuration files from: %s\n", ghqRoot)
+
+			if err := copyDatabaseAndConfig(gitWorktreeFullPath, ghqRoot, wtRoot); err != nil {
 				return fmt.Errorf("❌ Failed to copy database and config files: %w", err)
 			}
 			fmt.Println("✅ Database and configuration files copied successfully")
 		}
 
-		// NewCodeWorkSpace に渡す worktreeName は結合された名前（コメント部分も含む）
-		var workspaceWorktreeName string
-		if comment == "" {
-			workspaceWorktreeName = fmt.Sprintf("%s-%s", baseBranchName, branchName)
-		} else {
-			workspaceWorktreeName = fmt.Sprintf("%s-%s-%s", baseBranchName, branchName, comment)
-		}
-		workspaceFile, _, err := NewCodeWorkSpace(workspaceWorktreeName, basePath)
+		// VSCode ワークスペース作成
+		workspaceFile, _, err := NewCodeWorkSpace(worktreeName, wtRoot)
 		if err != nil {
 			return err
 		}
-
 		fmt.Printf("✅ Workspace created: %s\n", workspaceFile)
 
 		// VSCode 起動
-		fmt.Printf("ℹ️  Opening VSCode with workspace: %s\n", workspaceFile)
+		fmt.Printf("ℹ️  Opening VSCode: %s\n", workspaceFile)
 		if err := exec.Command("code", workspaceFile).Start(); err != nil {
 			fmt.Printf("❌ Failed to open VSCode: %v\n", err)
 			os.Exit(1)
 		}
 
-		// worktreePath で mise trust 実行
-		fmt.Printf("ℹ️  Running 'mise trust' in worktree path: %s\n", gitWorktreeFullPath)
+		// mise trust
+		fmt.Printf("ℹ️  Running 'mise trust' in %s\n", gitWorktreeFullPath)
 		miseCmd := exec.Command("mise", "trust", gitWorktreeFullPath)
-		miseCmd.Stdout = os.Stdout
-		miseCmd.Stderr = os.Stderr
-
+		miseCmd.Stdout, miseCmd.Stderr = os.Stdout, os.Stderr
 		if err := miseCmd.Run(); err != nil {
 			fmt.Printf("❌ Failed to execute 'mise trust': %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Println("✅ 'mise trust' executed successfully.")
-		fmt.Printf("🚀 Run: %s\n", workspaceWorktreeName)
-
-		// データベースと設定ファイルのコピー処理
-		if copyDB {
-			fmt.Printf("ℹ️  Copying database and configuration files to worktree path: %s\n", gitWorktreeFullPath)
-			if err := copyDatabaseAndConfig(gitWorktreeFullPath, basePath); err != nil {
-				return fmt.Errorf("❌ Failed to copy database and configuration files: %w", err)
-			}
-		}
-
+		fmt.Println("✅ 'mise trust' executed.")
+		fmt.Printf("🚀 Run: %s\n", worktreeName)
 		return nil
 	},
 }
 
-// NewCodeWorkSpace は VS Code ワークスペースファイルを作成します。
-func NewCodeWorkSpace(worktreeName string, basePath string) (string, string, error) {
-	// worktreeName は 'baseBranchName-branchName' の形式を期待
-	worktreePath := filepath.Join(basePath, "hrbrain.worktrees", worktreeName)
+//
+// ===== VSCode Workspace =====
+//
+
+func NewCodeWorkSpace(worktreeName string, wtRoot string) (string, string, error) {
+	worktreePath := filepath.Join(wtRoot, worktreeName)
 	if _, err := os.Stat(worktreePath); os.IsNotExist(err) {
 		return "", "", fmt.Errorf("❌ Worktree path does not exist: %s", worktreePath)
 	}
 
-	workspaceDir := filepath.Join(basePath, "code-workspaces")
+	workspaceDir := filepath.Join(wtRoot, "code-workspaces")
 	workspaceFile := filepath.Join(workspaceDir, worktreeName+".code-workspace")
-
 	if err := os.MkdirAll(workspaceDir, 0o755); err != nil {
 		return "", "", fmt.Errorf("failed to create workspace directory: %w", err)
 	}
@@ -193,69 +327,76 @@ func NewCodeWorkSpace(worktreeName string, basePath string) (string, string, err
 
 func init() {
 	newCmd.Flags().BoolVar(&copyDB, "copy-db", false, "Copy database and configuration files when creating worktree")
+	newCmd.Flags().StringVar(&remoteURL, "remote", "", "Git remote URL to clone when repo root is missing (default: git@github.com:hrbrain/hrbrain.git)")
 }
 
-// copyDatabaseAndConfig は worktree にデータベースと設定ファイルをコピーします
-func copyDatabaseAndConfig(gitWorktreeFullPath, basePath string) error {
+//
+// ===== コピー関連 =====
+//
+
+func copyDatabaseAndConfig(gitWorktreeFullPath, sourceRoot, wtRoot string) error {
 	workspaceWorktreeName := filepath.Base(gitWorktreeFullPath)
+	worktreesRoot := filepath.Join(wtRoot)
 
-	// パス定義
-	hrbrainPath := basePath
-	worktreePath := filepath.Join(basePath, "hrbrain.worktrees")
+	// 宛先パス
+	bengalAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/bengal/app")
+	persiaAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/persia/app")
+	hachiAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/hachi/app")
+	persiaFrontPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/persia/front")
+	tiltPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "tilt")
 
-	bengalAppPath := filepath.Join(worktreePath, workspaceWorktreeName, "apps/bengal/app/")
-	persiaAppPath := filepath.Join(worktreePath, workspaceWorktreeName, "apps/persia/app/")
-	hachiAppPath := filepath.Join(worktreePath, workspaceWorktreeName, "apps/hachi/app/")
-	persiaFrontPath := filepath.Join(worktreePath, workspaceWorktreeName, "apps/persia/front/")
-	tiltPath := filepath.Join(worktreePath, workspaceWorktreeName, "tilt/")
+	// .data ディレクトリ
+	fmt.Printf("ℹ️  Copying .data directories to worktree: %s\n", workspaceWorktreeName)
+	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/bengal/app/.data"), filepath.Join(bengalAppPath, ".data"))
+	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/hachi/app/.data"), filepath.Join(hachiAppPath, ".data"))
+	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/persia/app/.data"), filepath.Join(persiaAppPath, ".data"))
 
-	// .data ディレクトリのコピー
-	if err := copyDir(filepath.Join(hrbrainPath, "hrbrain/apps/bengal/app/.data"), filepath.Join(bengalAppPath, ".data")); err != nil {
-		return fmt.Errorf("failed to copy bengal .data: %w", err)
-	}
-	fmt.Println("✅ Copied bengal .data directory")
+	// 設定ファイル
+	fmt.Printf("ℹ️  Copying configuration files to worktree: %s\n", workspaceWorktreeName)
+	_ = copyFileIfExists(filepath.Join(sourceRoot, "tilt/tilt_config.json"), filepath.Join(tiltPath, "tilt_config.json"))
+	_ = copyFileIfExists(filepath.Join(sourceRoot, "apps/persia/app/.env"), filepath.Join(persiaAppPath, ".env"))
+	_ = copyFileIfExists(filepath.Join(sourceRoot, "apps/persia/front/.env.local"), filepath.Join(persiaFrontPath, ".env.local"))
 
-	if err := copyDir(filepath.Join(hrbrainPath, "hrbrain/apps/hachi/app/.data"), filepath.Join(hachiAppPath, ".data")); err != nil {
-		return fmt.Errorf("failed to copy hachi .data: %w", err)
-	}
-	fmt.Println("✅ Copied hachi .data directory")
-
-	if err := copyDir(filepath.Join(hrbrainPath, "hrbrain/apps/persia/app/.data"), filepath.Join(persiaAppPath, ".data")); err != nil {
-		return fmt.Errorf("failed to copy persia .data: %w", err)
-	}
-	fmt.Println("✅ Copied persia .data directory")
-
-	// 設定ファイルのコピー
-	if err := copyFile(filepath.Join(hrbrainPath, "hrbrain/tilt/tilt_config.json"), filepath.Join(tiltPath, "tilt_config.json")); err != nil {
-		return fmt.Errorf("failed to copy tilt_config.json: %w", err)
-	}
-	fmt.Println("✅ Copied tilt_config.json")
-
-	if err := copyFile(filepath.Join(hrbrainPath, "hrbrain/apps/persia/app/.env"), filepath.Join(persiaAppPath, ".env")); err != nil {
-		return fmt.Errorf("failed to copy persia app .env: %w", err)
-	}
-	fmt.Println("✅ Copied persia app .env")
-
-	if err := copyFile(filepath.Join(hrbrainPath, "hrbrain/apps/persia/front/.env.local"), filepath.Join(persiaFrontPath, ".env.local")); err != nil {
-		return fmt.Errorf("failed to copy persia front .env.local: %w", err)
-	}
-	fmt.Println("✅ Copied persia front .env.local")
-
+	fmt.Println("✅ Copied DB and config (missing sources were skipped with warnings)")
 	return nil
 }
 
-// copyFile はファイルをコピーします
-func copyFile(src, dst string) error {
+func copyFileIfExists(src, dst string) error {
+	src = filepath.Clean(src)
+	dst = filepath.Clean(dst)
+	if _, err := os.Stat(src); os.IsNotExist(err) {
+		fmt.Printf("⚠️  skip: file not found: %s\n", src)
+		return nil
+	}
+	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
+		return err
+	}
+	fmt.Printf("ℹ️  copying file: %s -> %s\n", src, dst)
 	cmd := exec.Command("cp", src, dst)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
+	cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("⚠️  copy failed but continuing: %v\n", err)
+		return nil
+	}
+	return nil
 }
 
-// copyDir はディレクトリを再帰的にコピーします
-func copyDir(src, dst string) error {
+func copyDirIfExists(src, dst string) error {
+	src = filepath.Clean(src)
+	dst = filepath.Clean(dst)
+	if _, err := os.Stat(src); os.IsNotExist(err) {
+		fmt.Printf("⚠️  skip: dir not found: %s\n", src)
+		return nil
+	}
+	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
+		return err
+	}
+	fmt.Printf("ℹ️  copying directory: %s -> %s\n", src, dst)
 	cmd := exec.Command("cp", "-r", src, dst)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
+	cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("⚠️  copy failed but continuing: %v\n", err)
+		return nil
+	}
+	return nil
 }

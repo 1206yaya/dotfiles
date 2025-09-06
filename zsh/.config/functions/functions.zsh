@@ -156,6 +156,7 @@ gen() {
         sourceFile=$GENDIR"/blank.csv"
     elif [ "$1" = "xlsx" ]; then
         sourceFile=$GENDIR"/blank.xlsx"
+
     else
         # それ以外の場合はエラー
         echo "第一引数には chatignore のいずれかを指定してください"
@@ -170,4 +171,8 @@ gen() {
         echo "$filename を作成しました"
     fi
 
+}
+
+noz() {
+    caffeinate -d -i -m -s
 }

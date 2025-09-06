@@ -19,4 +19,5 @@ func init() {
 	rootCmd.AddCommand(openCmd)
 	rootCmd.AddCommand(rmCmd)
 	rootCmd.AddCommand(copydbCmd)
+	// rootCmd.AddCommand(checkoutCmd)
 }

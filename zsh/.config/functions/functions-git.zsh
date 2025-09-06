@@ -10,7 +10,7 @@ alias gtags="git tag -l"
 # gam 'first commit'
 # ggen
 function restoreapi() {
-  cd /Users/Komatsu.Aya/ghq/github.com/hrbrain/hrbrain
+  cd ${HOME}/ghq/github.com/hrbrain/hrbrain
   git restore apps/persia/app/handlers/http/oapi/api.gen.go \
     apps/persia/app/handlers/http/oapi/spec.gen.go \
     apps/persia/front/src/adapters/gen/api.ts

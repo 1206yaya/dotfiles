@@ -5,7 +5,7 @@ set -e
 DATE=$(date +%Y%m%d)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 DEST_DIR=~/Documents/stashList/${DATE}/${BRANCH}
-cd /Users/Komatsu.Aya/ghq/github.com/hrbrain/hrbrain/
+cd ${HOME}/ghq/github.com/hrbrain/hrbrain/
 
 if ! git stash list | grep -q .; then
   echo "❌ スタッシュが空です"

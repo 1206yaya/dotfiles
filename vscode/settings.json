@@ -5,16 +5,17 @@
   "explorer.openEditors.visible": 1,
   // Setting Search
   "files.exclude": {
-    "**/.terragrunt-cache": true,
     "**/.classpath": true,
     "**/.factorypath": true,
     "**/.history": true,
     "**/.project": true,
     "**/.settings": true,
+    "**/.terragrunt-cache": true,
     "/.DS_Store": true,
     "/.git": true,
     "/node_modules": true,
-    "/node_modules/": true
+    "/node_modules/": true,
+    "/var/folders/**": true
   },
   "search.exclude": {
     ".history": true,
@@ -107,7 +108,7 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true
   },
-  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.3",
+  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.5",
   "go.gopath": "${env:HOME}/go",
 
   "[dart]": {
@@ -141,7 +142,6 @@
   // "workbench.colorTheme": "Dracula Soft",
   "editor.bracketPairColorization.enabled": true,
   "editor.inlineSuggest.enabled": true,
-  "editor.formatOnSave": true,
   "editor.stickyScroll.enabled": true,
   "explorer.fileNesting.patterns": {
     "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml, pubspec_overrides.yaml, flutter_launcher_icons*.yaml",
@@ -269,13 +269,14 @@
   "google-translate.secondLanguage": "ja",
   "files.autoGuessEncoding": true,
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": true,
     "scminput": false,
     "hcl": true,
     "sql": false,
-    "go": false
+    "go": true,
+    "dockerfile": true
   },
   "genieai.enableConversationHistory": true,
   "git.enableSmartCommit": true,
@@ -370,10 +371,8 @@
   },
   "git.autofetch": true,
   "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.editor.enablePreview": false,
   "workbench.preferredHighContrastColorTheme": "Dark-Dracula",
   "workbench.preferredLightColorTheme": "Beautiful Dracula Darker",
-  "github.copilot.editor.enableAutoCompletions": true,
   // "editor.fontFamily": "JetBrains Mono",
   "editor.fontLigatures": true,
   "leetcode.defaultLanguage": "golang",
@@ -396,7 +395,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": "off",
+  "editor.occurrencesHighlight": false,
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -420,5 +419,41 @@
   "gitlens.views.commitDetails.files.layout": "tree",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4",
-  "github.copilot.nextEditSuggestions.enabled": false
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "docker.extension.enableComposeLanguageServer": false,
+  "inlineChat.lineEmptyHint": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "language": "ja",
+      "text": "日本語で簡潔に書いてください. 適切な英語のprefixをつけてください."
+    }
+  ],
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "file": "./apps/persia/app/.github/copilot-instructions.md"
+    }
+  ],
+  "geminicodeassist.enable": false,
+  "markdown-preview-enhanced.printBackground": true,
+  "go.coverOnSave": false,
+  "testing.coverageBarThresholds": {
+
+    "red": 0,
+    "yellow": 60,
+    "green": 90
+  },
+  "git.repositoryScanIgnoredFolders": [
+    "node_modules",
+  ],
+  "githubPullRequests.createOnPublishBranch": "never",
+  "chat.agent.maxRequests": 75,
+  "githubPullRequests.fileListLayout": "tree",
+  "vs-kubernetes": {
+    "vscode-kubernetes.helm-path-mac": "${env:HOME}/.vs-kubernetes/tools/helm/darwin-arm64/helm",
+    "vscode-kubernetes.kubectl-path-mac": "${env:HOME}/.vs-kubernetes/tools/kubectl/kubectl",
+    "vscode-kubernetes.minikube-path-mac": "${env:HOME}/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
+  },
+  "git.replaceTagsWhenPull": true,
+
 }

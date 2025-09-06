@@ -29,7 +29,6 @@ alias hub='gh browse'
 alias lc="pbcopy | chatutil "$@""
 alias lsgrep="ls -ltr | grep "$@""
 alias py="pbcopy"
-
 alias cdd="builtin cd"
 # ランダムなパスワードを生成する
 # 引数にパスワードの長さを指定できる
