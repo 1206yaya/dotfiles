@@ -3,3 +3,5 @@ __ignore
 .gitconfig.local
 .trash
 .obsidian
+.env
+.chatignore

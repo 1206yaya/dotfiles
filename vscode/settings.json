@@ -108,6 +108,8 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true
   },
+  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.5",
+  "go.gopath": "${env:HOME}/go",
 
   "[dart]": {
     // andrea
@@ -273,7 +275,7 @@
     "scminput": false,
     "hcl": true,
     "sql": false,
-    "go": false,
+    "go": true,
     "dockerfile": true
   },
   "genieai.enableConversationHistory": true,
@@ -393,7 +395,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": "off",
+  "editor.occurrencesHighlight": false,
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -453,6 +455,5 @@
     "vscode-kubernetes.minikube-path-mac": "${env:HOME}/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
   },
   "git.replaceTagsWhenPull": true,
-  "runMyBashScript.scriptPath": "/Users/Komatsu.Aya/ghq/github.com/1206yaya/00hbproj-note/tip-golang/tools/new_problem.sh",
 
 }

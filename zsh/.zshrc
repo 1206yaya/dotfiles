@@ -50,6 +50,7 @@ eval "$(zoxide init zsh)" # zoxideは z コマンドの強化版
 eval "$(starship init zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(/opt/homebrew/bin/mise activate zsh)"
+export PATH="$(aqua root-dir)/bin:$PATH"
 export PATH=$PATH:$(yarn global bin)
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -59,7 +60,9 @@ export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 
 export PATH=$(go env GOPATH)/bin:$PATH
 export GOROOT=$(go env GOROOT)
+# export GOTOOLCHAIN=local # ツールチェイン自動切り替えを無効化
 export PATH=$GOROOT/bin:$PATH
+export HRBRAIN_REPO_PATH="$HOME/ghq/github.com/hrbrain/hrbrain"
 
 # .zshの読み込み
 ZSH_DIR="${HOME}/.config/zsh"
@@ -80,3 +83,4 @@ if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then
         fi
     done
 fi
+

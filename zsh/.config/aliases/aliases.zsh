@@ -29,7 +29,6 @@ alias hub='gh browse'
 alias lc="pbcopy | chatutil "$@""
 alias lsgrep="ls -ltr | grep "$@""
 alias py="pbcopy"
-
 alias cdd="builtin cd"
 # ランダムなパスワードを生成する
 # 引数にパスワードの長さを指定できる
@@ -87,7 +86,7 @@ function cpp() {
 
 alias cat='bat --style=plain --paging=never'
 alias less='bat --style=plain'
-alias ll="ls -lah --git --sort modified"
+alias ll="ls -lah --git --sort=name"
 alias lt="ll -TL 3 --ignore-glob=.git"
 alias ps="procs"
 alias top="ytop"
