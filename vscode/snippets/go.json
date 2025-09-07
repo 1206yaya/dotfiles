@@ -8,7 +8,7 @@
     // same ids are connected.
     // Example:
     // "Print to console": {
-    // 	"prefix": "log",
+    // 	"prefix": "logs",
     // 	"body": [
     // 		"console.log('$1');",
     // 		"$2"
@@ -44,6 +44,11 @@
         ],
         "description": ""
     },
+    "log function": {
+        "prefix": "logf",
+        "body": "fmt.Println(\"$1\")",
+        "description": ""
+    },
     "continue ": {
         "prefix": "con",
         "body": "continue"
@@ -75,10 +80,25 @@
         "description": "Variable declaration :=",
         "body": "${1:name} := ${0:value}"
     },
-    "fmt.Printf 構造体": {
-        "prefix": "fp",
+    "log spew": {
+        "prefix": "logs",
         "body": [
-            "fmt.Printf(\"%#v\\n\", ${1:args})",
+            "spew.Config = spew.ConfigState{",
+            "  Indent:                  \"  \",",
+            "  DisablePointerAddresses: true,",
+            "  DisableCapacities:       true,",
+            "  SortKeys:                true,",
+            "}",
+            "fmt.Println(\"${1:args} ---\")",
+            "spew.Dump(${1:args})",
+            "${0}"
+        ],
+        "description": "Setup spew config and dump a variable"
+    },
+    "fmt.Printf 構造体": {
+        "prefix": "fmts",
+        "body": [
+            "fmt.Printf(\"${1:args} --- %#v\\n\", ${1:args})",
             "${0}"
         ],
         "description": "Simple Printf Snippet"

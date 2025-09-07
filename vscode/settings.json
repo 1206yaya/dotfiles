@@ -5,16 +5,17 @@
   "explorer.openEditors.visible": 1,
   // Setting Search
   "files.exclude": {
-    "**/.terragrunt-cache": true,
     "**/.classpath": true,
     "**/.factorypath": true,
     "**/.history": true,
     "**/.project": true,
     "**/.settings": true,
+    "**/.terragrunt-cache": true,
     "/.DS_Store": true,
     "/.git": true,
     "/node_modules": true,
-    "/node_modules/": true
+    "/node_modules/": true,
+    "/var/folders/**": true
   },
   "search.exclude": {
     ".history": true,
@@ -32,6 +33,7 @@
   },
   "files.associations": {
     "*.drift": "sql",
+    "*.tpl": "html",
     ".chatignore": "text",
     "*.tp.md": "clojure"
   },
@@ -88,7 +90,6 @@
   "go.lintTool": "golangci-lint",
   "go.lintFlags": ["--fast"],
   "gopls": {
-    "experimentalWorkspaceModule": true,
     "ui.navigation.importShortcut": "Definition",
     "ui.completion.usePlaceholders": true,
     "formatting.gofumpt": true,
@@ -100,10 +101,6 @@
     },
     "staticcheck": true
   },
-
-  // "go.goroot": "/usr/local/go/",
-  // "go.goroot": "/Users/Komatsu.Aya/.local/share/mise/installs/go/1.23.6",
-  // "go.goroot": "$HOME/.local/share/mise/installs/go/1.23.8/bin",
 
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
@@ -143,7 +140,6 @@
   // "workbench.colorTheme": "Dracula Soft",
   "editor.bracketPairColorization.enabled": true,
   "editor.inlineSuggest.enabled": true,
-  "editor.formatOnSave": true,
   "editor.stickyScroll.enabled": true,
   "explorer.fileNesting.patterns": {
     "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml, pubspec_overrides.yaml, flutter_launcher_icons*.yaml",
@@ -273,11 +269,12 @@
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
-    "markdown": true,
+    "markdown": false,
     "scminput": false,
     "hcl": true,
     "sql": false,
-    "go": true
+    "go": false,
+    "dockerfile": true
   },
   "genieai.enableConversationHistory": true,
   "git.enableSmartCommit": true,
@@ -343,7 +340,7 @@
   "hediet.vscode-drawio.theme": "min",
   "notebook.formatOnSave.enabled": true,
   "remote.autoForwardPortsSource": "hybrid",
-  "totalTypeScript.hiddenTips": ["passing-generics-to-types"],
+  "totalTypeScript.hiddenTips": ["passing-generics-to-types", "ts-object-type"],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vscodetonotion.api": "secret_erBORnFvsVOEx4n2cMUlMUNJy5gNjSXg3doQnELJ8C3",
   "vscodetonotion.databaseId": "27aeb68aeb9944c88391f5e138f51bc3",
@@ -372,10 +369,8 @@
   },
   "git.autofetch": true,
   "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.editor.enablePreview": false,
   "workbench.preferredHighContrastColorTheme": "Dark-Dracula",
   "workbench.preferredLightColorTheme": "Beautiful Dracula Darker",
-  "github.copilot.editor.enableAutoCompletions": true,
   // "editor.fontFamily": "JetBrains Mono",
   "editor.fontLigatures": true,
   "leetcode.defaultLanguage": "golang",
@@ -390,7 +385,7 @@
   "code-runner.runInTerminal": true,
   "github.copilot.advanced": {},
   "python.createEnvironment.trigger": "off",
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "Tokyo Night Storm",
   "cSpell.languageSettings": [],
   "editor.experimentalEditContextEnabled": true,
   "dart.debugExternalPackageLibraries": true,
@@ -407,5 +402,57 @@
   },
   "cursor.cmdk.useThemedDiffBackground": true,
   "geminicodeassist.languages": ["go", "typescript"],
-  "githubPullRequests.pullBranch": "never"
+  "githubPullRequests.pullBranch": "never",
+  "gitlens.views.worktrees.pullRequests.showForBranches": false,
+  "gitlens.graph.minimap.enabled": false,
+  "gitlens.graph.minimap.additionalTypes": ["pullRequests"],
+  "gitlens.graph.scrollMarkers.additionalTypes": [
+    "localBranches",
+    "stashes",
+    "pullRequests"
+  ],
+  "gitlens.graph.dimMergeCommits": true,
+  "gitlens.graph.searchItemLimit": 1000,
+  "gitlens.graph.onlyFollowFirstParent": true,
+  "gitlens.views.commitDetails.files.layout": "tree",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4",
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "docker.extension.enableComposeLanguageServer": false,
+  "inlineChat.lineEmptyHint": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "language": "ja",
+      "text": "日本語で簡潔に書いてください. 適切な英語のprefixをつけてください."
+    }
+  ],
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "file": "./apps/persia/app/.github/copilot-instructions.md"
+    }
+  ],
+  "geminicodeassist.enable": false,
+  "markdown-preview-enhanced.printBackground": true,
+  "go.coverOnSave": false,
+  "testing.coverageBarThresholds": {
+
+    "red": 0,
+    "yellow": 60,
+    "green": 90
+  },
+  "git.repositoryScanIgnoredFolders": [
+    "node_modules",
+  ],
+  "githubPullRequests.createOnPublishBranch": "never",
+  "chat.agent.maxRequests": 75,
+  "githubPullRequests.fileListLayout": "tree",
+  "vs-kubernetes": {
+    "vscode-kubernetes.helm-path-mac": "${env:HOME}/.vs-kubernetes/tools/helm/darwin-arm64/helm",
+    "vscode-kubernetes.kubectl-path-mac": "${env:HOME}/.vs-kubernetes/tools/kubectl/kubectl",
+    "vscode-kubernetes.minikube-path-mac": "${env:HOME}/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
+  },
+  "git.replaceTagsWhenPull": true,
+  "runMyBashScript.scriptPath": "/Users/Komatsu.Aya/ghq/github.com/1206yaya/00hbproj-note/tip-golang/tools/new_problem.sh",
+
 }
