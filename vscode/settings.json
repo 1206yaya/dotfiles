@@ -40,7 +40,7 @@
   "explorer.confirmDelete": false,
   "security.workspace.trust.untrustedFiles": "open",
   "explorer.confirmDragAndDrop": false,
-  "files.autoSave": "onWindowChange",
+  "files.autoSave": "afterDelay",
   "extensions.ignoreRecommendations": true,
   "workbench.startupEditor": "none",
   "markdown-checkbox.checkmark": "x",
@@ -108,7 +108,7 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true
   },
-  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.5",
+  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.25.1",
   "go.gopath": "${env:HOME}/go",
 
   "[dart]": {
@@ -271,11 +271,11 @@
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
-    "markdown": true,
+    "markdown": false,
     "scminput": false,
     "hcl": true,
     "sql": false,
-    "go": true,
+    "go": false,
     "dockerfile": true
   },
   "genieai.enableConversationHistory": true,
@@ -385,9 +385,8 @@
   },
   "go.toolsManagement.autoUpdate": true,
   "code-runner.runInTerminal": true,
-  "github.copilot.advanced": {},
   "python.createEnvironment.trigger": "off",
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "Tokyo Night Storm",
   "cSpell.languageSettings": [],
   "editor.experimentalEditContextEnabled": true,
   "dart.debugExternalPackageLibraries": true,
@@ -395,7 +394,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -419,7 +418,7 @@
   "gitlens.views.commitDetails.files.layout": "tree",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4",
-  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
   "inlineChat.lineEmptyHint": true,
   "github.copilot.chat.codesearch.enabled": true,
@@ -438,14 +437,11 @@
   "markdown-preview-enhanced.printBackground": true,
   "go.coverOnSave": false,
   "testing.coverageBarThresholds": {
-
     "red": 0,
     "yellow": 60,
     "green": 90
   },
-  "git.repositoryScanIgnoredFolders": [
-    "node_modules",
-  ],
+  "git.repositoryScanIgnoredFolders": ["node_modules"],
   "githubPullRequests.createOnPublishBranch": "never",
   "chat.agent.maxRequests": 75,
   "githubPullRequests.fileListLayout": "tree",
@@ -455,5 +451,38 @@
     "vscode-kubernetes.minikube-path-mac": "${env:HOME}/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
   },
   "git.replaceTagsWhenPull": true,
-
+  "chat.tools.autoApprove": true,
+  "chat.tools.terminal.autoApprove": {
+    "/.*/": true,
+    "sed -n '50,178p' procedure_versions.sql | grep -E '^\\([0-9]+, [0-9]+, NOW\\(\\)\\)' | sort | uniq -d": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "PGPASSWORD=persiapw psql -h localhost -p 4810 -U persiau -d persiadb -c \"SELECT document_id, procedure_template_id, version, COUNT(*) FROM admin_documents GROUP BY document_id, procedure_template_id, version HAVING COUNT(*) > 1;\"": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "PGPASSWORD=persiapw psql -h localhost -p 4810 -U persiau -d persiadb -c \"SELECT document_id, procedure_template_id, version, COUNT(*) as duplicates FROM (SELECT '00000000-0000-0000-0000-000000000001' as document_id, '00000000-0000-0000-0000-000000000001' as procedure_template_id, 1 as version UNION ALL SELECT '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 2) as new_data WHERE EXISTS(SELECT 1 FROM admin_documents WHERE admin_documents.document_id = new_data.document_id AND admin_documents.procedure_template_id = new_data.procedure_template_id AND admin_documents.version = new_data.version) GROUP BY document_id, procedure_template_id, version;\"": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "editor.suggestSelection": "recentlyUsedByPrefix"
 }

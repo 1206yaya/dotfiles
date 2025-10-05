@@ -21,7 +21,7 @@ function touchp() {
   fi
   touch "$1"
 }
-
+alias mkgen="make gen;npx prettier --write ../front/src/adapters/gen/api.ts ../front/src/adapters/gen/base.ts"
 alias genb="git switch -c "$@""
 alias ghclose="gh issue close "$@""
 alias ghcreate='gh issue create --title "$@" --body "Issue description"'

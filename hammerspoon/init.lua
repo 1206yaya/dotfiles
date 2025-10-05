@@ -83,4 +83,3 @@ local function maximizeWindow()
 end
 
 hs.hotkey.bind(hyper, "0", maximizeWindow) -- `⌘⌥⌃ + 0` でウィンドウ最大化
-
