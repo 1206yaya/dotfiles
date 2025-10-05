@@ -12,7 +12,8 @@ import (
 
 	"github.com/spf13/cobra"
 )
-
+// 仕様
+// baseブランチは、リモートになければローカルを参照する
 var (
 	copyDB    bool
 	remoteURL string
@@ -281,6 +282,7 @@ var newCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		fmt.Println("✅ 'mise trust' executed.")
+
 		fmt.Printf("🚀 Run: %s\n", worktreeName)
 		return nil
 	},
@@ -341,14 +343,12 @@ func copyDatabaseAndConfig(gitWorktreeFullPath, sourceRoot, wtRoot string) error
 	// 宛先パス
 	bengalAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/bengal/app")
 	persiaAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/persia/app")
-	hachiAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/hachi/app")
 	persiaFrontPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/persia/front")
 	tiltPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "tilt")
 
 	// .data ディレクトリ
 	fmt.Printf("ℹ️  Copying .data directories to worktree: %s\n", workspaceWorktreeName)
 	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/bengal/app/.data"), filepath.Join(bengalAppPath, ".data"))
-	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/hachi/app/.data"), filepath.Join(hachiAppPath, ".data"))
 	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/persia/app/.data"), filepath.Join(persiaAppPath, ".data"))
 
 	// 設定ファイル
