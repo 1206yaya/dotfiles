@@ -114,7 +114,7 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true
   },
-  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.5",
+  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.8",
   "go.gopath": "${env:HOME}/go",
 
   "[dart]": {

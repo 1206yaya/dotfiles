@@ -16,7 +16,7 @@ import (
 const (
 	owner  = "hrbrain"
 	repo   = "hrbrain"
-	number = "36551"
+	number = "37169"
 )
 
 type fileAdditions struct {

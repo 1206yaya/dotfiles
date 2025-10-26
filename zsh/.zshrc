@@ -7,6 +7,14 @@ setopt hist_ignore_dups
 setopt inc_append_history
 setopt NO_NOMATCH
 
+
+# mise を先に有効化（これで go が使えるようになる）
+if [ -f "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # . $(brew --prefix asdf)/libexec/asdf.sh
+fi
+eval "$(/opt/homebrew/bin/mise activate zsh)"
+
 export PATH=$PATH:$HOME/bin # dotfiles管理下のbinがリンクされる
 export fpath=(~/.config/zsh/.zsh_functions $fpath)
 export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
@@ -39,17 +47,20 @@ if [[ -f ~/.secrets ]]; then
 fi
 # export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # # Homebrew, asdf-vm
-if [ -f "/opt/homebrew/bin/brew" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    # . $(brew --prefix asdf)/libexec/asdf.sh
-fi
 # export JAVA_HOME="$(asdf where java)"
+
+export PATH=$(go env GOPATH)/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+# export GOROOT=$(go env GOROOT)
+# export GOTOOLCHAIN=local # ツールチェイン自動切り替えを無効化
+
+export HRBRAIN_REPO_PATH="$HOME/ghq/github.com/hrbrain/hrbrain"
 
 eval "$(zoxide init zsh)" # zoxideは z コマンドの強化版
 eval "$(starship init zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+
 export PATH="$(aqua root-dir)/bin:$PATH"
 export PATH=$PATH:$(yarn global bin)
 
@@ -58,11 +69,6 @@ bindkey '^e' autosuggest-accept # 補完候補を確定する
 
 export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 
-export PATH=$(go env GOPATH)/bin:$PATH
-export GOROOT=$(go env GOROOT)
-# export GOTOOLCHAIN=local # ツールチェイン自動切り替えを無効化
-export PATH=$GOROOT/bin:$PATH
-export HRBRAIN_REPO_PATH="$HOME/ghq/github.com/hrbrain/hrbrain"
 
 # .zshの読み込み
 ZSH_DIR="${HOME}/.config/zsh"

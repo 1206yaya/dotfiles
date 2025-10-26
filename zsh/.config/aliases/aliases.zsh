@@ -21,7 +21,7 @@ function touchp() {
   fi
   touch "$1"
 }
-
+alias mkgen="make gen;npx prettier --write ../front/src/adapters/gen/api.ts ../front/src/adapters/gen/base.ts"
 alias genb="git switch -c "$@""
 alias ghclose="gh issue close "$@""
 alias ghcreate='gh issue create --title "$@" --body "Issue description"'
@@ -92,12 +92,11 @@ alias ps="procs"
 alias top="ytop"
 alias vi="nvim"
 alias vim="nvim"
-alias du="dust"
 alias de="defaults"
 alias groot="cd ~/ghq/github.com/1206yaya"
 alias icloud="cd /Users/zak/Library/Mobile Documents/com~apple~CloudDocs"
 alias kraken="open -na 'GitKraken' --args -p $(pwd)"
-
+alias repo="gh repo view --web"
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
 # 最終更新日時の新しい順にファイルを表示

@@ -13,6 +13,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// 仕様
+// baseブランチは、リモートになければローカルを参照する
 var (
 	copyDB    bool
 	remoteURL string
@@ -242,6 +244,13 @@ var newCmd = &cobra.Command{
 		}
 		fmt.Printf("✅ Git worktree '%s' added at %s\n", branchName, gitWorktreeFullPath)
 
+		// ====== launch.json 作成 (常に実行) ======
+		persiaAppPath := filepath.Join(gitWorktreeFullPath, "apps/persia/app")
+		fmt.Printf("ℹ️  Creating launch.json for worktree: %s\n", worktreeName)
+		if err := createLaunchJSON(persiaAppPath, wtRoot, worktreeName); err != nil {
+			fmt.Printf("⚠️  Failed to create launch.json: %v\n", err)
+		}
+
 		// ====== DB/設定コピー ======
 		if copyDB {
 			ghqRoot, _ := detectGhqRepoPath() // ghq で実パス取得
@@ -281,6 +290,7 @@ var newCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		fmt.Println("✅ 'mise trust' executed.")
+
 		fmt.Printf("🚀 Run: %s\n", worktreeName)
 		return nil
 	},
@@ -341,14 +351,12 @@ func copyDatabaseAndConfig(gitWorktreeFullPath, sourceRoot, wtRoot string) error
 	// 宛先パス
 	bengalAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/bengal/app")
 	persiaAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/persia/app")
-	hachiAppPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/hachi/app")
 	persiaFrontPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "apps/persia/front")
 	tiltPath := filepath.Join(worktreesRoot, workspaceWorktreeName, "tilt")
 
 	// .data ディレクトリ
 	fmt.Printf("ℹ️  Copying .data directories to worktree: %s\n", workspaceWorktreeName)
 	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/bengal/app/.data"), filepath.Join(bengalAppPath, ".data"))
-	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/hachi/app/.data"), filepath.Join(hachiAppPath, ".data"))
 	_ = copyDirIfExists(filepath.Join(sourceRoot, "apps/persia/app/.data"), filepath.Join(persiaAppPath, ".data"))
 
 	// 設定ファイル
@@ -398,5 +406,82 @@ func copyDirIfExists(src, dst string) error {
 		fmt.Printf("⚠️  copy failed but continuing: %v\n", err)
 		return nil
 	}
+	return nil
+}
+
+func createLaunchJSON(persiaAppPath, worktreesRoot, workspaceWorktreeName string) error {
+	vscodeDir := filepath.Join(persiaAppPath, ".vscode")
+	if err := os.MkdirAll(vscodeDir, 0o755); err != nil {
+		return fmt.Errorf("failed to create .vscode directory: %w", err)
+	}
+
+	launchJSONPath := filepath.Join(vscodeDir, "launch.json")
+
+	// 既存ファイルがあれば削除
+	if _, err := os.Stat(launchJSONPath); err == nil {
+		fmt.Printf("ℹ️  Existing launch.json found, overwriting: %s\n", launchJSONPath)
+		if err := os.Remove(launchJSONPath); err != nil {
+			return fmt.Errorf("failed to remove existing launch.json: %w", err)
+		}
+	}
+
+	worktreeFullPath := filepath.Join(worktreesRoot, workspaceWorktreeName)
+
+	launchConfig := map[string]interface{}{
+		"version": "0.2.0",
+		"configurations": []map[string]interface{}{
+			{
+				"name":         "Remote (if the path where the hrbrain repository is located is different from the above)",
+				"type":         "go",
+				"request":      "attach",
+				"mode":         "remote",
+				"port":         14800,
+				"host":         "localhost",
+				"cwd":          "${workspaceRoot}",
+				"showLog":      true,
+				"debugAdapter": "dlv-dap",
+				"substitutePath": []map[string]string{
+					{
+						"from": "${workspaceFolder}",
+						"to":   filepath.Join(worktreeFullPath, "apps/persia/app"),
+					},
+					{
+						"from": "${workspaceFolder}/../../../libs/hrbx",
+						"to":   filepath.Join(worktreeFullPath, "libs/hrbx"),
+					},
+					{
+						"from": "${workspaceFolder}/../../../libs/hrbx/log/v3",
+						"to":   filepath.Join(worktreeFullPath, "libs/hrbx/log/v3"),
+					},
+					{
+						"from": "${workspaceFolder}/../../../libs/hrbx/log/v3/adapters/grpc",
+						"to":   filepath.Join(worktreeFullPath, "libs/hrbx/log/v3/adapters/grpc"),
+					},
+					{
+						"from": "${workspaceFolder}/../../../libs/hrbx/otel",
+						"to":   filepath.Join(worktreeFullPath, "libs/hrbx/otel"),
+					},
+					{
+						"from": "${env:GOPATH}",
+						"to":   "${env:HOME}/go",
+					},
+				},
+			},
+		},
+	}
+
+	file, err := os.Create(launchJSONPath)
+	if err != nil {
+		return fmt.Errorf("failed to create launch.json: %w", err)
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ")
+	if err := encoder.Encode(launchConfig); err != nil {
+		return fmt.Errorf("failed to write launch.json: %w", err)
+	}
+
+	fmt.Printf("✅ Created launch.json at %s\n", launchJSONPath)
 	return nil
 }

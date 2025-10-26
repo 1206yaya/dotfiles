@@ -182,6 +182,7 @@
     :des "open apps"
     :rules [:0-mode
       [:a [:open "Alacritty"]]
+      [:t [:open "Todoist"]]
       [:e [:open "EdrawMind"]]
       [:n [:open "Postman"]]
       [:m [:open "Notes"]]
