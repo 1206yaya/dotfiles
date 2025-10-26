@@ -1,4 +1,10 @@
 {
+"workbench.list.horizontalScrolling": true,
+"workbench.editor.labelFormat": "medium", 
+"breadcrumbs.enabled": true,
+"breadcrumbs.filePath": "on",
+"editor.largeFileOptimizations": false,
+
   "window.title": "${activeEditorLong}",
   "workbench.iconTheme": "material-icon-theme",
   // OPEN EDITORS を非表示
@@ -108,7 +114,7 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true
   },
-  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.25.1",
+  "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.8",
   "go.gopath": "${env:HOME}/go",
 
   "[dart]": {
@@ -269,7 +275,7 @@
   "google-translate.secondLanguage": "ja",
   "files.autoGuessEncoding": true,
   "github.copilot.enable": {
-    "*": true,
+    "*": false,
     "plaintext": false,
     "markdown": false,
     "scminput": false,
@@ -394,7 +400,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": "off",
+  "editor.occurrencesHighlight": false,
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -484,5 +490,8 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "editor.suggestSelection": "recentlyUsedByPrefix"
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "workbench.editor.enablePreview": false,
+  "editor.snippetSuggestions": "top",
+  "git.autoRepositoryDetection": false
 }

@@ -1,85 +1,69 @@
 {
     // builtin snippet : https://github.com/microsoft/vscode-go/blob/master/snippets/go.json
-    // いい感じの snippet: https://github.com/doggy8088/go-extension-pack/blob/8a6c2a6382d12a49ca5e007011d3184f233ddf0f/snippets/go.json#L261
-    // https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
-    // Place your snippets for go here. Each snippet is defined under a snippet name and has a prefix, body and 
-    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-    // same ids are connected.
-    // Example:
-    // "Print to console": {
-    // 	"prefix": "logs",
-    // 	"body": [
-    // 		"console.log('$1');",
-    // 		"$2"
-    // 	],
-    // 	"description": "Log output to console"
-    // }
-    // "main basic": {
-    //     "prefix": "main",
-    //     "body": [
-    //         "package main",
-    //         "",
-    //         "import (",
-    //         "\t\"fmt\"",
-    //         ")",
-    //         "",
-    //         "func main() {",
-    //         "\tfmt.Println(\"$1\")",
-    //         "}"
-    //     ],
-    //     "description": "Main basic"
-    // },
+    // 良いスニペット例:
+    //   https://github.com/doggy8088/go-extension-pack/blob/8a6c2a6382d12a49ca5e007011d3184f233ddf0f/snippets/go.json#L261
+    // スニペット作成補助: https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
+    //
+    // Snippet 定義方法:
+    // - prefix: スニペットを呼び出すトリガー
+    // - body: 展開内容（配列または文字列）
+    // - description: 説明（任意）
+    //
+    // 変数: $1, $2, ... でタブ移動位置を指定。$0 は最終カーソル位置。
+    // 同じ ID を持つプレースホルダは連動します。
+
     "main function": {
-        "prefix": "main",
+        "prefix": "mainf",
         "body": [
             "package main",
             "",
             "import \"fmt\"",
             "",
             "func main() {",
-            "   fmt.Println(\"Hello\")",
+            "\t$0",
             "}",
             ""
         ],
-        "description": ""
+        "description": "Basic main function template"
     },
-    "log function": {
-        "prefix": "logf",
-        "body": "fmt.Println(\"$1\")",
-        "description": ""
-    },
-    "continue ": {
-        "prefix": "con",
+
+    "continue": {
+        "prefix": "cont",
         "body": "continue"
     },
-    "return ": {
-        "prefix": "re",
+
+    "return": {
+        "prefix": "return",
         "body": "return $1"
     },
+
     "else if statement": {
         "prefix": "elif",
         "body": [
             "else if $1 {",
-            "\t\t$2",
-            "\t}"
+            "\t$2",
+            "}"
         ]
     },
+
     "type int": {
-        "prefix": "ti",
+        "prefix": "tint",
         "description": "Type int",
         "body": "type $1 int"
     },
-    "insert := ": {
+
+    "insert :=": {
         "prefix": "v",
         "description": "Variable declaration :=",
         "body": " := "
     },
-    "insert name := value ": {
+
+    "insert name := value": {
         "prefix": "vv",
-        "description": "Variable declaration :=",
+        "description": "Variable declaration name := value",
         "body": "${1:name} := ${0:value}"
     },
+
     "log spew": {
         "prefix": "logs",
         "body": [
@@ -95,22 +79,33 @@
         ],
         "description": "Setup spew config and dump a variable"
     },
-    "fmt.Printf 構造体": {
-        "prefix": "fmts",
-        "body": [
-            "fmt.Printf(\"${1:args} --- %#v\\n\", ${1:args})",
-            "${0}"
-        ],
-        "description": "Simple Printf Snippet"
+    
+    "fmt.Println()": {
+        "prefix": "print",
+        "body": "fmt.Println($1)",
+        "description": "Snippet for fmt.Println()"
     },
-    "Sprintf": {
-        "prefix": "fs",
+
+    "fmt.Printf with selectable format": {
+        "prefix": "printv",
         "body": [
-            "fmt.Sprintf(\"${1:verbs}\", ${2:args})",
-            "${0}"
+            "fmt.Printf(\"${1:var}: ${2|%+v,%#+v|}\\n\", ${1:var})"
         ],
-        "description": "Simple Sprintf Snippet"
+        "description": "fmt.Printf() with selectable %+v or %#v format"
     },
+
+    "fmt.Sprintf basic format": {
+        "prefix": "sprintf",
+        "body": "fmt.Sprintf(\"${2|%d,%f,%s,%t|}\", ${1:value})",
+        "description": "fmt.Sprintf() for int %d, float %f, string %s, bool %t"
+    },
+
+    "fmt.Sprintf variable format": {
+        "prefix": "sprintv",
+        "body": "fmt.Sprintf(\"${2|%+v,%#v|}\", ${1:var})",
+        "description": "fmt.Sprintf with %+v or %#v format"
+    },
+
     "iferr": {
         "prefix": "iferr",
         "body": [
@@ -118,8 +113,9 @@
             "    ${1|return,return err,return nil\\, err,log.Fatalf(\"Error %s\"\\, err.Error())|}",
             "}"
         ],
-        "description": "Snippet for if err != nil with common usage scenario"
+        "description": "Snippet for if err != nil with common patterns"
     },
+
     "Test Function": {
         "prefix": "testfunc",
         "body": [
@@ -127,153 +123,54 @@
             "\t$0",
             "}"
         ],
-        "description": "Generate a Test function"
+        "description": "Generate a basic test function"
     },
-    "max": {
-        "prefix": "max",
+
+    "Table driven test": {
+        "prefix": "tdtest",
         "body": [
-            "func max[T constraints.Ordered](a T, b T) T {",
-            "\tif a > b {",
-            "\t\treturn a",
+            "func Test${1:Name}(t *testing.T) {",
+            "\ttests := []struct {",
+            "\t\tname string",
+            "\t\tinput ${2:type}",
+            "\t\twant ${3:type}",
+            "\t}{",
+            "\t\t// {\"case1\", input, want},",
             "\t}",
-            "\treturn b",
-            "}"
-        ]
-    },
-    "max list function": {
-        "prefix": "maxlist",
-        "body": [
-            "func maxList[T constraints.Ordered](x T, others ...T) T {",
-            "\t res := x",
-            "\t for _, y := range others {",
-            "\t\t\t if y > res {",
-            "\t\t\t\t\t res = y",
-            "\t\t\t }",
-            "\t }",
-            "\t return res",
-            "}"
-        ]
-    },
-    "min function": {
-        "prefix": "min",
-        "body": [
-            "func min[T constraints.Ordered](a T, b T) T {",
-            "\tif a < b {",
-            "\t\treturn a",
+            "\tfor _, tt := range tests {",
+            "\t\tt.Run(tt.name, func(t *testing.T) {",
+            "\t\t\tgot := ${4:funcUnderTest}(tt.input)",
+            "\t\t\tif got != tt.want {",
+            "\t\t\t\tt.Errorf(\"got %v, want %v\", got, tt.want)",
+            "\t\t\t}",
+            "\t\t})",
             "\t}",
-            "\treturn b",
-            "}"
-        ]
-    },
-    "min list function": {
-        "prefix": "minlist",
-        "body": [
-            "func minList[T constraints.Ordered](x T, others ...T) T {",
-            "  res := x",
-            "  for _, y := range others {",
-            "   if y < res {",
-            "    res = y",
-            "   }",
-            "  }",
-            "  return res",
             "}"
         ],
-        "description": ""
+        "description": "テーブル駆動テストの雛形"
     },
-    "sum function": {
-        "prefix": "sum",
+
+    "make slice with len": {
+        "prefix": "makeT",
         "body": [
-            "func sum[T constraints.Ordered](values []T) (sum T) {",
-            "\tfor _, v := range values {",
-            "\t\tsum += v",
-            "\t}",
-            "\treturn sum",
-            "}",
-            ""
-        ]
-    },
-    "sum map": {
-        "prefix": "summap",
-        "body": [
-            "func sumMap[T any, R constraints.Ordered](list []T, selector func(T) R) (sum R) {",
-            "\tfor _, v := range list {",
-            "\t\tsum += selector(v)",
-            "\t}",
-            "\treturn sum",
-            "}",
-            "// ex. ",
-            "// numbers := []int{1, 2, 3, 4, 5}",
-            "// sum := SumMap(numbers, func(n int) int {",
-            "//\t\t return n",
-            "// })",
-            "//",
-            "// products := []Product{",
-            "// \t{\"Apple\", 1.99},",
-            "// \t{\"Banana\", 0.99},",
-            "// \t{\"Orange\", 2.49},",
-            "// }",
-            "// totalPrice := SumMap(products, func(p Product) float64 {",
-            "// \treturn p.Price",
-            "// })"
-        ]
-    },
-    "abs function": {
-        "prefix": "abs",
-        "body": [
-            "func abs[T constraints.Integer | constraints.Float](a T) T {",
-            "\tif a >= 0 {",
-            "\t\treturn a",
-            "\t}",
-            "\treturn -a",
-            "}"
-        ]
-    },
-    "reverse string function": {
-        "prefix": "reverseString",
-        "body": [
-            "func reverseString(s string) string {",
-            "    runes := []rune(s)",
-            "    for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {",
-            "        runes[i], runes[j] = runes[j], runes[i]",
-            "    }",
-            "    return string(runes)",
-            "}"
+        "${1:varName} := make([]${2:string}, 0, len(${3:es}))"
         ],
-        "description": ""
+        "description": "Make a slice with preallocated len"
     },
-    "Yes No Answer function": {
-        "prefix": "yn",
+    
+    "Slice of int": {
+        "prefix": "si",
         "body": [
-            "func yn(c bool) {",
-            "    if c {",
-            "        println(\"YES\")",
-            "    } else {",
-            "        println(\"NO\")",
-            "    }",
-            "}",
-            ""
+        "[]int"
         ],
-        "description": ""
+        "description": "Expand to []int"
     },
-    "main run Fscan": {
-        "prefix": "mainrunscan",
+    "Slice of string": {
+        "prefix": "ss",
         "body": [
-            "package main",
-            "func run(in io.Reader, w io.Writer) {",
-            "   out := bufio.NewWriter(w)",
-            "   defer out.Flush()",
-            "   var a, b, c int",
-            "   fmt.Fscan(in, &a, &b, &c)",
-            "   var N int",
-            "   fmt.Fscan(in, &N)",
-            "",
-            "}",
-            "",
-            "func main() {",
-            "   run(bufio.NewReader(os.Stdin), os.Stdout)",
-            "}",
-            ""
+        "[]string"
         ],
-        "description": ""
+        "description": "Expand to []string"
     }
+
 }
