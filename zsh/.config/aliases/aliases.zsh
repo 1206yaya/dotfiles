@@ -113,6 +113,8 @@ alias genc="openapi-generator "$@""
 alias cursor="open -a /Applications/Cursor.app "$@""
 alias rege="fvm flutter pub run build_runner build --delete-conflicting-outputs; flutter pub run build_runner watch "
 alias obsidian="open -a /Applications/Obsidian.app "$@""
+# リモートリポジトリを検索してクローン＆移動（プライベート含む）
+alias gr='repo=$(gh repo list 1206yaya --limit 1000 --json nameWithOwner -q ".[].nameWithOwner" | fzf); [ -n "$repo" ] && ghq get "$repo" && cd "$(ghq list -p | grep "$repo$")"'
 alias pes="pet sync"
 #　直前のコマンドをpet に登録
 function prev() {

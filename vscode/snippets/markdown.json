@@ -14,7 +14,12 @@
   // }
   "Code Bloc Insert": {
     "prefix": "c",
-    "body": ["```", "$0", "```"],
+    "body": ["```$0","```"],
+    "description": ""
+  },
+  "Go Code Bloc Insert": {
+    "prefix": "cg",
+    "body": ["```go","$0","```"],
     "description": ""
   },
   "Folding Bloc Insert": {

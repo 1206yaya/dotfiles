@@ -5,3 +5,11 @@ __ignore
 .obsidian
 .env
 .chatignore
+
+# bin配下のバイナリファイル（ソースコードとシェルスクリプトは除く）
+bin/copydb
+bin/dotfiles
+bin/stash
+bin/tomp4
+bin/ws
+bin/pr-added-diff-src/pr-added-diff

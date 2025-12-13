@@ -189,6 +189,23 @@ var newCmd = &cobra.Command{
 			return fmt.Errorf("❌ Worktree path already exists: %s", gitWorktreeFullPath)
 		}
 
+		// --- ブランチが他のワークツリーで使用されているかチェック ---
+		wtListCmd := exec.Command("git", "worktree", "list", "--porcelain")
+		wtListCmd.Dir = repoRoot
+		wtListOut, err := wtListCmd.Output()
+		if err == nil {
+			lines := strings.Split(string(wtListOut), "\n")
+			var currentWorktreePath string
+			for _, line := range lines {
+				if strings.HasPrefix(line, "worktree ") {
+					currentWorktreePath = strings.TrimPrefix(line, "worktree ")
+				}
+				if strings.HasPrefix(line, "branch refs/heads/"+branchName) {
+					return fmt.Errorf("❌ Branch '%s' is already used by worktree at '%s'\n💡 Hint: Use a different branch name or remove the existing worktree first with:\n   git worktree remove %s", branchName, currentWorktreePath, currentWorktreePath)
+				}
+			}
+		}
+
 		// --- ブランチ存在確認 ---
 		branchExistsLocallyCmd := exec.Command("git", "show-ref", "--verify", "--quiet", fmt.Sprintf("refs/heads/%s", branchName))
 		branchExistsLocallyCmd.Dir = repoRoot
