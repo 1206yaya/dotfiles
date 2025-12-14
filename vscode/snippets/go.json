@@ -151,13 +151,19 @@
     },
 
     "make slice with len": {
-        "prefix": "makeT",
+        "prefix": ["makeS", "mks"],
         "body": [
         "${1:varName} := make([]${2:string}, 0, len(${3:es}))"
         ],
         "description": "Make a slice with preallocated len"
     },
-    
+    "make map": {
+        "prefix":["makeM", "mkm"],
+        "body": [
+            "${1:varName} := make(map[${2:string}]${3:int}, len(${4:es}))"
+        ],
+        "description": "Make a map with preallocated capacity"
+    },
     "Slice of int": {
         "prefix": "si",
         "body": [

@@ -17,17 +17,16 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.terragrunt-cache": true,
-    "/.DS_Store": true,
-    "/.git": true,
-    "/node_modules": true,
-    "/node_modules/": true,
-    "/var/folders/**": true
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/var/folders": true
   },
   "search.exclude": {
-    ".history": true,
+    "**/.history": true,
     "**/.next": true,
-    "/node_modules": true,
-    "site-packages": true,
+    "**/node_modules": true,
+    "**/site-packages": true,
     "**/.fvm": true
   },
   "search.quickOpen.includeSymbols": true,
@@ -89,8 +88,11 @@
     "editor.defaultFormatter": "golang.go",
     "editor.codeActionsOnSave": {
       "source.organizeImports": "always"
-    }
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.tabCompletion": "onlySnippets"
   },
+  "editor.suggest.showSnippets": true,
   "go.useLanguageServer": true,
   "go.formatTool": "goimports",
   "go.lintTool": "golangci-lint",
@@ -98,6 +100,7 @@
   "gopls": {
     "ui.navigation.importShortcut": "Definition",
     "ui.completion.usePlaceholders": true,
+    "completeUnimported": true,
     "formatting.gofumpt": true,
     "analyses": {
       "fillreturns": true,
@@ -281,7 +284,7 @@
     "scminput": false,
     "hcl": true,
     "sql": false,
-    "go": false,
+    "go": true,
     "dockerfile": true
   },
   "genieai.enableConversationHistory": true,
@@ -392,7 +395,6 @@
   "go.toolsManagement.autoUpdate": true,
   "code-runner.runInTerminal": true,
   "python.createEnvironment.trigger": "off",
-  "workbench.colorTheme": "Tokyo Night Storm",
   "cSpell.languageSettings": [],
   "editor.experimentalEditContextEnabled": true,
   "dart.debugExternalPackageLibraries": true,
@@ -400,7 +402,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -471,6 +473,40 @@
     "PGPASSWORD=persiapw psql -h localhost -p 4810 -U persiau -d persiadb -c \"SELECT document_id, procedure_template_id, version, COUNT(*) as duplicates FROM (SELECT '00000000-0000-0000-0000-000000000001' as document_id, '00000000-0000-0000-0000-000000000001' as procedure_template_id, 1 as version UNION ALL SELECT '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 2) as new_data WHERE EXISTS(SELECT 1 FROM admin_documents WHERE admin_documents.document_id = new_data.document_id AND admin_documents.procedure_template_id = new_data.procedure_template_id AND admin_documents.version = new_data.version) GROUP BY document_id, procedure_template_id, version;\"": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "find": true,
+    "find goblog -name \"*.md\" -not -path \"*/.history/*\" -exec wc -l {} \\; | grep -v \" 10 \" | grep -v \" 9 \" | sort -n": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "rm -f *.md && go run split-chapters.go": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "rm": true,
+    "cd goblog && find . -name \"goblog-*.md\" -type f -exec sh -c 'lines=$(wc -l < \"$1\"); if [ \"$lines\" -gt 10 ]; then echo \"$1 ($lines lines)\"; fi' _ {} \\; | head -20": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "cd articles && find goblog -name \"goblog-*.md\" -type f -not -path \"*/.history/*\" -exec sh -c 'lines=$(wc -l < \"$1\"); if [ \"$lines\" -gt 10 ]; then basename \"$1\"; fi' _ {} \\; | head -30": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "find goblog -name \"goblog-*.md\" -type f -not -path \"*/.history/*\" -exec sh -c 'lines=$(wc -l < \"$1\"); if [ \"$lines\" -gt 10 ]; then echo \"$1\"; fi' _ {} \\; | wc -l": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "cd /Users/Komatsu.Aya/wt/github.com/hrbrain/hrbrain/worktrees/PER-6885-PER-8734-離職票の電子申請のための修正/apps/persia/app/domain/egov/egovprocedures/proc4950008680037000 && \\\nsed -i '' \\\n  -e 's|<住所>青森県 住民票住所リンゴ市 住民票住所1番 住民票住所アップルハイツ荘</住所>|<住所>{{ .離職者_住所 }}</住所>|g' \\\n  -e 's|<住所>123-1234 富山県 市区町村 丁目・番地 建物名・部屋番号</住所>|<住所>{{ .事業主_住所 }}</住所>|g' \\\n  -e 's|<氏名_上段>労働保険事業主氏名</氏名_上段>|<氏名_上段>{{ .事業主_氏名_上段 }}</氏名_上段>|g' \\\n  -e 's|<配達局番号>123</配達局番号>|<配達局番号>{{ .配達局番号 }}</配達局番号>|g' \\\n  -e 's|<町域番号>1234</町域番号>|<町域番号>{{ .町域番号 }}</町域番号>|g' \\\n  -e 's|<付記欄_安定所提出用>提出用メモ</付記欄_安定所提出用>|<付記欄_安定所提出用>{{ .付記欄_安定所提出用 }}</付記欄_安定所提出用>|g' \\\n  -e 's|<付記欄_離職票2>離職票2メモ</付記欄_離職票2>|<付記欄_離職票2>{{ .付記欄_離職票2 }}</付記欄_離職票2>|g' \\\n  -e 's|<付記欄>備考テキスト</付記欄>|<付記欄>{{ .付記欄 }}</付記欄>|g' \\\n  495008680037800371_01.goxml": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "cd /Users/Komatsu.Aya/wt/github.com/hrbrain/hrbrain/worktrees/PER-6885-PER-8734-離職票の電子申請のための修正/apps/persia/app/domain/egov/egovprocedures/proc4950008680037000 && \\\nsed -i '' \\\n  -e '/<事業所>/,/<\\/事業所>/{ s|<市外局番>080</市外局番>|<市外局番>{{ .事業所_市外局番 }}</市外局番>|; s|<市内局番>7777</市内局番>|<市内局番>{{ .事業所_市内局番 }}</市内局番>|; s|<加入者番号>7777</加入者番号>|<加入者番号>{{ .事業所_加入者番号 }}</加入者番号>|; }' \\\n  495008680037800371_01.goxml": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "cd /Users/Komatsu.Aya/wt/github.com/hrbrain/hrbrain/worktrees/PER-6885-PER-8739-XMLタグ実装の分割処理/apps/persia/app/domain/procedure/proceduretemplates/resignationletter/resignationletter2025/resignationletter2025egov && realpath --relative-to=. ../../../../../../../egov/egovprocedures/proc4950008680037000/495008680037800371_01.goxml 2>/dev/null || python3 -c \"import os; print(os.path.relpath('../../../../../../../egov/egovprocedures/proc4950008680037000/495008680037800371_01.goxml', '.'))\"": {
+      "approve": true,
+      "matchCommandLine": true
     }
   },
   "[dockercompose]": {
@@ -493,5 +529,26 @@
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "workbench.editor.enablePreview": false,
   "editor.snippetSuggestions": "top",
-  "git.autoRepositoryDetection": false
+  "git.autoRepositoryDetection": false,
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "gitlens.views.scm.grouped.views": {
+    "commits": true,
+    "branches": true,
+    "remotes": true,
+    "stashes": true,
+    "tags": true,
+    "worktrees": true,
+    "contributors": true,
+    "fileHistory": true,
+    "repositories": true,
+    "searchAndCompare": false,
+    "launchpad": false
+  },
+  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+  "security.promptForLocalFileProtocolHandling": false,
+  "codetour.customTourDirectory": "",
+  "codetour.showMarkers": true,
+  "claudeCode.preferredLocation": "panel"
 }

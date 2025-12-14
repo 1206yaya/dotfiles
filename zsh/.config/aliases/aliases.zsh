@@ -51,9 +51,9 @@ ezt() {
   eza --tree "$@"
 }
 
-function pwd() {
-  builtin pwd | tee >(pbcopy)
-}
+# function pwd() {
+#   builtin pwd | tee >(pbcopy)
+# }
 function man() {
   env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -92,6 +92,11 @@ alias ps="procs"
 alias top="ytop"
 alias vi="nvim"
 alias vim="nvim"
+alias cc="claude "$@""
+alias ccmcp="claude --mcp-config .mcp.json"
+alias ccdsp="claude --dangerously-skip-permissions "$@""
+alias ccc="claude --continue"
+
 alias de="defaults"
 alias groot="cd ~/ghq/github.com/1206yaya"
 alias icloud="cd /Users/zak/Library/Mobile Documents/com~apple~CloudDocs"

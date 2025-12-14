@@ -241,16 +241,16 @@
         "key": "alt+cmd+n",
         "command": "workbench.action.files.newUntitledFile"
     },
-    {
-        "key": "shift+alt+cmd+a",
-        "command": "copyRelativeFilePath",
-        "when": "editorFocus"
-    },
-    {
-        "key": "cmd+k shift+alt+cmd+c",
-        "command": "-copyRelativeFilePath",
-        "when": "editorFocus"
-    },
+    // {
+    //     "key": "shift+alt+cmd+a",
+    //     "command": "copyRelativeFilePath",
+    //     "when": "editorFocus"
+    // },
+    // {
+    //     "key": "cmd+k shift+alt+cmd+c",
+    //     "command": "-copyRelativeFilePath",
+    //     "when": "editorFocus"
+    // },
     {
         "key": "cmd+o",
         "command": "-workbench.action.files.openFile",
@@ -474,5 +474,38 @@
         "key": "cmd+l cmd+c",
         "command": "-extension.liveServer.goOffline",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+cmd+k",
+        "command": "-bookmarks.toggle",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+k t",
+        "command": "bookmarks.toggle"
+    },
+    {
+        "key": "cmd+k cmd+]",
+        "command": "editor.foldRecursively",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "cmd+k cmd+[",
+        "command": "-editor.foldRecursively",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "cmd+k cmd+[",
+        "command": "editor.unfoldRecursively",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "cmd+k cmd+]",
+        "command": "-editor.unfoldRecursively",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "cmd+q",
+        "command": "-workbench.action.quit"
     }
 ]

@@ -184,7 +184,9 @@
       [:a [:open "Alacritty"]]
       [:t [:open "Todoist"]]
       [:e [:open "EdrawMind"]]
-      [:n [:open "Postman"]]
+      ;; [:n [:open "Postman"]]
+      [:n [:open "Notion"]]
+
       [:m [:open "Notes"]]
       [:i [:open "Firefox"]]
       [:c [:open "Google Chrome"]]
