@@ -156,7 +156,8 @@ gen() {
         sourceFile=$GENDIR"/blank.csv"
     elif [ "$1" = "xlsx" ]; then
         sourceFile=$GENDIR"/blank.xlsx"
-
+    elif [ "$1" = "mcp" ]; then
+        sourceFile=$GENDIR"/.mcp.json"
     else
         # それ以外の場合はエラー
         echo "第一引数には chatignore のいずれかを指定してください"
