@@ -20,6 +20,10 @@
     "**/.DS_Store": true,
     "**/.git": true,
     "**/node_modules": true,
+    "**/var/folders": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/node_modules": true,
     "**/var/folders": true
   },
   "search.exclude": {
