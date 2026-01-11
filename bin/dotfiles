@@ -253,6 +253,9 @@ create_symbolic_links() {
     # atuin
     ln -sf "$DOTDIR/atuin/config.toml" "$HOME/.config/atuin/config.toml"
 
+    # ideavim
+    ln -sf "$DOTDIR/ideavim/.ideavimrc" "$HOME/.ideavimrc"
+
     # hammerspoon
     symlink_files "$DOTDIR/hammerspoon" "$HOME/.config/hammerspoon"
 
@@ -266,6 +269,10 @@ create_symbolic_links() {
 
     # mise
     ln -sf "$DOTDIR/.mise.toml" "$HOME/.mise.toml"
+
+    # vim
+    ensure_dir_exists "$HOME/.vim"
+    symlink_files "$DOTDIR/vim" "$HOME/.vim"
 }
 
 set_macos() {

@@ -1,12 +1,14 @@
 brew "hugo"
+brew "exercism"
 cask "notion"
 cask "figma"
-
+cask "raycast"
 cask "blackhole-16ch"
 cask "blackhole-2ch"
 cask "cursor"
+cask "cursor-cli"
 cask "claude"
-
+brew "rclone"
 mas "Developer", id: 640199958
 mas "Kindle", id: 302584613
 mas "Skitch", id: 425955336

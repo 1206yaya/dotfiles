@@ -1,0 +1,91 @@
+
+" vim共通設定を読み込む
+source ~/.vim/vimrc
+
+" Leader を明示的に設定（vimrc から読み込まれない可能性があるため）
+let mapleader=' '
+
+nnoremap <Leader>sr :source ~/.ideavimrc<CR>
+" IdeaVim固有の設定
+" デフォルトで使えるショートカット: Ctrl + c <Esc>
+
+" IdeaVimExtension プラグインをインストールする。
+set keep-english-in-normal      " IME (日本語入力) の切り替えを自動化
+set ideavimsupport=dialog
+
+" IdeaVim固有のアクションマッピング
+" Go to code
+nmap ge <Action>(GotoNextError)
+nmap gp <Action>(GotoPreviousError)
+
+" Previous file
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+" LSP Actions 
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>gi <Action>(GotoImplementation)
+map <leader>gt <Action>(GotoTest)
+map <leader>gf <Action>(ReformatCode)
+map <leader>gu <Action>(FindUsages)
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>cg <Action>(Generate)
+map <leader>rn <Action>(RenameElement)
+
+map <leader><leader>r <Action>(Replace)
+map <leader>rf <Action>(ReplaceInPath)
+
+" Split windows
+map <leader>sh <Action>(SplitHorizontally)
+map <leader>sv <Action>(SplitVertically)
+map <leader>su <Action>(Unsplit)
+
+nmap <C-h> <Action>(PrevSplitter)
+nmap <C-l> <Action>(NextSplitter)
+
+" IDEの「全選択」アクションを呼び出す
+nnoremap <D-A> :action $SelectAll<CR>
+
+" 次の同じ単語を選択 (Select Next Occurrence)
+nmap gb <Action>(SelectNextOccurrence)
+vmap gb <Action>(SelectNextOccurrence)
+
+" 選択をスキップして次へ (Unselect Occurrence)
+nmap gB <Action>(UnselectPreviousOccurrence)
+vmap gB <Action>(UnselectPreviousOccurrence)
+
+" 全ての同じ単語を選択 (Select All Occurrences)
+nmap gA <Action>(SelectAllOccurrences)
+vmap gA <Action>(SelectAllOccurrences)
+
+" Terminal
+map <leader>to <Action>(ActivateTerminalToolWindow)
+map <leader>th <Action>(HideActiveWindow)
+
+" Project
+nmap <leader>1 <action>(ActivateProjectToolWindow)
+
+nmap <C-c> <Action>(EditorEscape)
+nmap <C-C> <Action>(FocusEditor)
+
+" Test
+" プロジェクト全体のテストを実行
+nnoremap <leader>ta :action RunAllTestsInProject<CR>
+
+" 現在のファイルのテストをすべて実行
+nnoremap <leader>tf :action RunClass<CR>
+
+" カーソル位置のテストメソッドを実行
+nnoremap <leader>tt :action RunContextConfiguration<CR>
+
+" 最後に実行したテストを再実行
+nnoremap <leader>tr :action Rerun<CR>
+
+" 最後に実行したテストをデバッグ実行
+nnoremap <leader>tdr :action Debug<CR>
+
+" デバッグモードでテストを実行
+nnoremap <leader>td :action DebugClass<CR>
+
+
+" https://github.com/VictorKPetersen/dotfiles/blob/ce24f87a1d0675c6e346563a62dc76bb35a7d4c6/ideavim/.ideavimrc#L72

@@ -1,0 +1,638 @@
+" ================================================================================
+" Author: chloneda <chloneda@163.com>
+" Repository: https://github.com/chloneda/vim-cheatsheet
+" Blog: https://www.cnblogs.com/chloneda
+" Create Date: 2022-02-01
+" Desc:  IntelliJ IDEA IdeaVim プラグイン用カスタム設定ファイル🍎
+" License: MIT
+" ================================================================================
+" 
+" IdeaVim Github: https://github.com/JetBrains/ideavim
+" IdeaVim-EasyMotion: https://github.com/AlexPl292/IdeaVim-EasyMotion
+"
+" 注意:
+"   1. Vim スクリプトのコメントは " で始まる行コメントのみで、ブロックコメントはありません
+"   2. 本ドキュメントでの <Leader> は "\\" キーを指し、Leader をスペースに変更しています
+"   3. 本書は機能別→キー別にマッピングを整理しており、分類を分かりやすく記載しています
+"   4. IdeaVim プラグインでノーマルモードで :actionlist を入力すると IDEA の全アクションを確認できます
+"   5. 本文を ~/.ideavimrc にコピーしてカスタム設定を適用してください
+" ================================================================================
+
+" ================================================================================
+" 共通基本設定
+" ================================================================================
+set number                      " 行番号を表示（省略形: set nu）
+set relativenumber              " 相対行番号を設定（省略形: set rnu）
+set highlightedyank             " yiw 時に短時間コピー箇所をハイライト
+set textobj-indent              " インデントオブジェクトの選択 vii / vai
+set exchange                    " cx{範囲} と cx{後} で入れ替え、または v 選択後 X で交換
+set ReplaceWithRegister         " レジスター関連の操作（例: griw 等でレジスター内と置換）
+set argtextobj                  " 関数の引数を素早く選択 🔥
+set showmode                    " ステータスラインに現在のモードを表示
+set showcmd                     " コマンドをステータスに表示
+set wrap                        " 行を自動で折り返す
+set hlsearch                    " 検索結果をハイライト（省略形: set hls）
+set foldopen-=hor               " 折り畳みを水平移動時に開かない
+set ignorecase                  " 検索で大文字小文字を無視
+set incsearch                   " インクリメンタルサーチで即座に結果をハイライト
+set shiftwidth=4                " インデント幅を4スペースに設定
+set softtabstop=4               " Tabキーで4スペース入力
+set smartcase                   " 大文字を含むときは大文字小文字を区別
+set clipboard+=unnamed          " Vim の既定レジスターをシステムクリップボードと共有
+set clipboard+=ideaput
+set history=200                 " コマンド履歴を200件保持（デフォルト20）
+set showtabline=2               " 常にタブラインを表示
+set laststatus=2                " 常にステータスラインを表示
+set paste                       " ペーストモードを有効
+set ruler                       " カーソル位置を表示
+set scrolloff=10                " カーソルと上下端の余白を10行に設定
+
+set encoding=utf-8              " 文字エンコーディング（省略形: set enc）
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr
+set fileformats=unix,dos,mac
+set termencoding=utf-8
+set formatoptions+=m
+set formatoptions+=B
+
+set easymotion                  " EasyMotion プラグイン
+let g:EasyMotion_do_mapping=0   " EasyMotion のデフォルトマッピングを無効化
+set commentary                  " コメント操作プラグイン
+set surround                    " Surround プラグイン
+set keep-english-in-normal      " インサート時の入力メソッド自動切替
+set ideavimsupport+=dialog      " ダイアログエディタで IdeaVim を無効化
+set ideaenabledbufs+=singleline
+let g:argtextobj_pairs="(:),{:},<:>"    " (a,b) や {a,b}、<a,b> 内を対象に設定
+
+" ================================================================================
+" IntelliJ IDEA 固有の基本設定
+" ================================================================================
+set ideajoin                    " 文字列や制御構造のスマート結合
+set ideamarks                   " IDEA のグローバルマークを有効化
+
+" ================================================================================
+" 共通キー映射
+" ================================================================================
+" Leader をスペースに変更（デフォルトは "\\"）。このコメントを後ろに置かないでください。
+let mapleader=' '
+
+" ideavimrc をリロード
+nnoremap <Leader>sv :source ~/.ideavimrc<CR>
+nnoremap <Leader>rv <Action>(IdeaVim.ReloadVimRc.reload)
+
+nnoremap <C-S> :w<CR>           " 素早く保存
+nnoremap <C-A> ggVG             " 全選択
+
+" インサートモードで行頭・行末へ素早く移動
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+
+" 検索で見つかった箇所を中央に表示
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" 上下移動時に画面を中央に保つ
+nnoremap <C-u> <C-u>zz
+nnoremap <C-o> <C-d>zz
+vnoremap <C-u> <C-u>zz
+vnoremap <C-o> <C-d>zz
+nnoremap <C-d> 3<C-e>zz
+nnoremap <C-u> 3<C-y>zz
+
+vnoremap d dzz
+nnoremap dd ddzz
+nnoremap ;; <Esc>A;             " 行尾に ; を追加（改行しない）
+
+" 内部のiw
+nnoremap vn v^
+nnoremap vq v$
+
+onoremap n ^
+onoremap q $
+
+" 内部
+onoremap w iw
+onoremap , i(
+onoremap ( i(
+onoremap r i[
+onoremap m i{
+onoremap . i<
+onoremap z i'
+onoremap c i"
+
+" 外部
+onoremap aw aw
+onoremap a, a(
+onoremap ae a(
+onoremap ar a[
+onoremap am a{
+onoremap a. a<
+onoremap az a'
+onoremap ac a"
+
+" 内部
+nnoremap vw viw
+nnoremap v( vi(
+nnoremap vr vi[
+nnoremap vm vi{
+nnoremap v. vi<
+nnoremap v, vi(
+nnoremap vz vi'
+nnoremap vc vi"
+
+" 外部
+nnoremap vaw vaw
+nnoremap va, va(
+nnoremap vae va(
+nnoremap var va[
+nnoremap vam va{
+nnoremap va. va<
+nnoremap va, va(
+nnoremap vaz va'
+nnoremap vac va"
+
+nnoremap m <C-W>w               " ウィンドウを順に切り替え
+noremap gp gP                   " ブロックの後に貼り付け
+nnoremap gop :pu<CR>            " 現行の次の行に貼り付け
+nnoremap gip k:pu<CR>           " 現行の前の行に貼り付け
+
+" 折りたたみ操作
+nnoremap zm zM
+nnoremap zr zR
+nnoremap zc zC
+
+" <Leader>+数字キーでタブ切替
+nmap <silent> \1 1gt<CR>
+nmap <silent> \2 2gt<CR>
+nmap <silent> \3 3gt<CR>
+nmap <silent> \4 4gt<CR>
+nmap <silent> \5 5gt<CR>
+nmap <silent> \6 6gt<CR>
+nmap <silent> \7 7gt<CR>
+nmap <silent> \8 8gt<CR>
+nmap <silent> \9 9gt<CR>
+nmap <silent> \0 10gt<CR>
+
+" ブックマーク管理
+nmap mm <Action>(ToggleBookmark)
+" 全ブックマークを表示
+nmap ma <Action>(ShowBookmarks)
+" ブックマーク編集
+nmap m; <Action>(Bookmarks)
+
+nmap 'a <Action>(GotoBookmarkA)
+nmap 'b <Action>(GotoBookmarkB)
+nmap 'c <Action>(GotoBookmarkC)
+nmap 'd <Action>(GotoBookmarkD)
+nmap 'e <Action>(GotoBookmarkE)
+nmap 'f <Action>(GotoBookmarkF)
+nmap 'g <Action>(GotoBookmarkG)
+nmap 'h <Action>(GotoBookmarkH)
+nmap 'i <Action>(GotoBookmarkI)
+nmap 'j <Action>(GotoBookmarkJ)
+nmap 'k <Action>(GotoBookmarkK)
+nmap 'l <Action>(GotoBookmarkL)
+nmap 'm <Action>(GotoBookmarkM)
+nmap 'n <Action>(GotoBookmarkN)
+nmap 'o <Action>(GotoBookmarkO)
+nmap 'p <Action>(GotoBookmarkP)
+nmap 'q <Action>(GotoBookmarkQ)
+nmap 'r <Action>(GotoBookmarkR)
+nmap 's <Action>(GotoBookmarkS)
+nmap 't <Action>(GotoBookmarkT)
+nmap 'u <Action>(GotoBookmarkU)
+nmap 'v <Action>(GotoBookmarkV)
+nmap 'w <Action>(GotoBookmarkW)
+nmap 'x <Action>(GotoBookmarkX)
+nmap 'y <Action>(GotoBookmarkY)
+nmap 'z <Action>(GotoBookmarkZ)
+
+" 予備のブックマークマッピング
+nmap mb  <Action>(ToggleBookmarkB)
+nmap mc  <Action>(ToggleBookmarkC)
+nmap md  <Action>(ToggleBookmarkD)
+nmap me  <Action>(ToggleBookmarkE)
+nmap mf  <Action>(ToggleBookmarkF)
+nmap mg  <Action>(ToggleBookmarkG)
+nmap mh  <Action>(ToggleBookmarkH)
+nmap mi  <Action>(ToggleBookmarkI)
+nmap mj  <Action>(ToggleBookmarkJ)
+nmap mk  <Action>(ToggleBookmarkK)
+nmap ml  <Action>(ToggleBookmarkL)
+nmap mn  <Action>(ToggleBookmarkN)
+nmap mo  <Action>(ToggleBookmarkO)
+nmap mp  <Action>(ToggleBookmarkP)
+nmap mq  <Action>(ToggleBookmarkQ)
+nmap mr  <Action>(ToggleBookmarkR)
+nmap ms  <Action>(ToggleBookmarkS)
+nmap mt  <Action>(ToggleBookmarkT)
+nmap mu  <Action>(ToggleBookmarkU)
+nmap mv  <Action>(ToggleBookmarkV)
+nmap mw  <Action>(ToggleBookmarkW)
+nmap mx  <Action>(ToggleBookmarkX)
+nmap my  <Action>(ToggleBookmarkY)
+nmap mz  <Action>(ToggleBookmarkZ)
+
+vnoremap <C-C> "+y
+vnoremap <C-Insert> "+y
+vnoremap <C-V> "+P
+inoremap <C-V> <C-R>+
+nnoremap <S-Insert> "+P
+cnoremap <C-V> <C-R>+
+cnoremap <S-Insert> <C-R>+
+
+nnoremap <F1> :nohls<CR>                    " 検索ハイライトを解除
+nnoremap <F3> :set relativenumber!<CR>      " 相対行番号の表示切替
+
+" ================================================================================
+" IntelliJ IDEA 固有のキー割当
+" ================================================================================
+nnoremap <C-.> :action ShowIntentionActions<CR>            " IDEA のインテンションアクションを表示
+nnoremap <C-/> :action CommentByLineComment<CR>            " 行コメント
+vnoremap <C-/> :action CommentByLineComment<CR>            " 行コメント
+inoremap <C-/> <Esc>:action CommentByLineComment<CR>       " 行コメント
+
+nnoremap <A-/> :action CommentByBlockComment<CR>           " ブロックコメント
+vnoremap <A-/> :action CommentByBlockComment<CR>           " ブロックコメント
+inoremap <A-/> <Esc>:action CommentByBlockComment<CR>      " ブロックコメント
+
+vnoremap = :action ReformatCode<CR>                        " 選択時に IDEA のコード整形を呼び出す
+
+nnoremap <S-F> :action Find<CR>                            " 現ファイル内検索
+nnoremap <C-R> :action Replace<CR>                         " 現ファイル内置換
+nnoremap / <ESC>:action Find<CR>                           " 現ファイル内検索
+nnoremap ' <ESC>:action Replace<CR>                        " 現ファイル内置換
+
+nnoremap <C-F> :action FindInPath<CR>                      " プロジェクト全体を検索
+vnoremap <C-F> :action FindInPath<CR>                      " プロジェクト全体を検索
+noremap g/ <ESC>:action FindInPath<CR>                     " プロジェクト全体を検索
+noremap g' <ESC>:action ReplaceInPath<CR>                  " プロジェクト全体で置換
+nnoremap <A-f> :action SearchEverywhere<CR>                " Search Everywhere を開く
+vnoremap <A-f> :action SearchEverywhere<CR>                " Search Everywhere を開く
+nnoremap <Leader>fe :action SearchEverywhere<CR>           " Search Everywhere を開く
+
+nnoremap <C-E> :action RecentFiles<CR>                     " 最近開いたファイル
+nnoremap <C-Q> :action QuickJavaDoc<CR>                    " カーソル下のドキュメントを表示（存在する場合）
+nnoremap <C-O> :action Back<CR>                            " IDEA の戻る
+nnoremap <C-I> :action Forward<CR>                         " IDEA の進む
+noremap gee :action ShowErrorDescription<CR>               " カーソル下のエラー説明を表示
+noremap <C-N> :action GotoNextError<CR>                    " 次のエラーへ
+noremap <C-P> :action GotoPreviousError<CR>                " 前のエラーへ
+nnoremap <Leader>fp :action ShowFilePath<CR>               " 現在ファイルのパスを表示
+
+nnoremap wt :action ActiveToolwindowGroup<CR>
+nnoremap wj :action ActivateStructureToolWindow<CR
+
+nnoremap <leader>' :action ShowBookmarks<CR>
+nnoremap ]b :action GotoNextBookmark<CR>
+nnoremap [b :action GotoPreviousBookmark<CR>
+
+" ================================================================================
+" よく使う操作 " ================================================================================ nnoremap fip :action FindInPath<CR>                         " プロジェクト全体検索
+nnoremap <Leader>nc :action NewClass<CR>                    " クラス新規作成（nE より速い）
+nnoremap <Leader>nm :action NewModule<CR>                   " モジュール新規作成
+nnoremap <Leader>nf :action NewFile<CR>                     " ファイル新規作成
+nnoremap <Leader>sw :action SurroundWith<CR>                " Surround（if, try/catch などで囲む）
+nnoremap <Leader>= :action ReformatCode<CR>                 " コード整形
+nnoremap <Leader>an :action Annotate<CR>                    " Git の著者情報表示
+nnoremap <Leader>va :action VimActions<CR>                  " Vim 関連アクション
+
+nnoremap fsp :action FileStructurePopup<CR>                 " ファイル構造ポップアップ
+nnoremap <Leader>cip :action CheckinProject<CR>             " プロジェクトをコミット
+nnoremap <Leader>fu :action FindUsages<CR>                  " 参照を検索
+nnoremap <Leader>su :action ShowUsages<CR>                  " 使用箇所を表示
+nnoremap <Leader>oi :action OptimizeImports<CR>             " インポートの最適化
+
+nnoremap ghc <ESC>:action CallHierarchy<CR>
+nnoremap ght <ESC>:action TypeHierarchy<CR>
+nnoremap ghm <ESC>:action MethodHierarchy<CR>
+
+" ================================================================================
+" リファクタリング
+" ================================================================================
+noremap <Leader>re :action RenameElement<CR>                " 要素名のリネーム
+noremap <Leader>mv :action Move<CR>                         " 移動リファクタ
+noremap <Leader>ms :action MakeStatic<CR>                   " メンバーを static に変更（移動と組み合わせて有効）
+noremap <Leader>ci :action ConvertToInstanceMethod<CR>      " static をインスタンス化
+noremap <Leader>il :action Inline<CR>                       " インラインリファクタ
+noremap <Leader>em :action ExtractMethod<CR>                " メソッド抽出
+noremap <Leader>ei :action ExtractInterface<CR>             " インターフェース抽出
+noremap <Leader>ef :action EncapsulateFields<CR>            " フィールドのカプセル化
+noremap <Leader>iv :action IntroduceVariable<CR>            " 一時変数導入
+noremap <Leader>ic :action IntroduceConstant<CR>            " 定数導入
+noremap <Leader>ip :action IntroduceParameter<CR>           " パラメータ導入
+noremap <Leader>if :action IntroduceField<CR>               " フィールド導入
+noremap <Leader>po :action IntroduceParameterObject<CR>     " パラメータオブジェクト導入
+noremap <Leader>pd :action MemberPushDown<CR>               " メソッドをサブクラスへ移動
+noremap <Leader>pu :action MembersPullUp<CR>                " メンバーをスーパークラスへ移動
+noremap <Leader>RF :action RenameFile<CR>                   " ファイル名リファクタ
+noremap <Leader>cs :action ChangeSignature<CR>              " メソッドシグネチャ変更
+noremap <Leader>ec :action ExtractClass<CR>                 " クラス抽出
+noremap <Leader>ai :action AnonymousToInner<CR>             " 匿名クラスを内部クラスへ
+noremap <Leader>rmo :action ReplaceMethodWithMethodObject<CR> " メソッドをオブジェクトに置換
+
+" ================================================================================
+" ジャンプ（移動）
+" ================================================================================
+nnoremap <Leader>ts mm`m:action GotoSymbol<CR>              " シンボル宣言へジャンプ
+noremap <Leader>tu mm`m: action Tool.GotoRequestService<CR> " URL へジャンプ
+nnoremap <Leader>gd :action GotoDeclaration<CR>             " 定義へジャンプ
+nnoremap <Leader>ga mm`m:action GotoAction<CR>              " アクションへジャンプ
+nnoremap <Leader>gf mm`m:action GotoFile<CR>                " ファイル検索へジャンプ
+nnoremap <Leader>gt mm`m:action GotoTest<CR>                " テストクラスへジャンプ
+nnoremap <Leader>gc mm`m:action GotoClass<CR>               " クラスへジャンプ
+nnoremap <Leader>fp mm`m:action FindInPath<CR>              " テキスト検索へジャンプ
+nnoremap <Leader>ne mm`m:action GotoNextError<CR>           " 次のエラーへジャンプ
+nnoremap <Leader>pe mm`m:action GotoPreviousError<CR>       " 前のエラーへジャンプ
+nnoremap <Leader>gs mm`m:action GotoSuperMethod<CR>         " スーパーメソッドへ
+nnoremap <Leader>gi mm`m:action GotoImplementation<CR>      " 実装へジャンプ
+nnoremap <Leader>g, mm`m:action JumpToLastChange<CR>        " 最後の変更へジャンプ
+nnoremap <Leader>g; mm`m:action JumpToNextChange<CR>        " 次の変更へジャンプ
+nnoremap <Leader>rf mm`m:action RecentFiles<CR>             " 最近のファイルへジャンプ
+nnoremap <Leader>rF mm`m:action RecentChangedFiles<CR>      " 最近変更したファイルへジャンプ
+nnoremap <Leader>nw :action NextProjectWindow<CR>           " プロジェクト間（次）
+nnoremap <Leader>pw :action PreviousProjectWindow<CR>       " プロジェクト間（前）
+
+" AceJump プラグインが必要なジャンプ
+noremap <Leader>tj mm`m:action AceWordAction<CR>
+noremap <Leader>jp mm`m:action AceDeclarationAction<CR>
+noremap <Leader><Leader> mm`m:action AceAction<CR>           " ジャンプを簡略化
+
+" ================================================================================
+" 生成（Generate）
+" ================================================================================
+nnoremap <Leader>G :action Generate<CR>
+nnoremap <Leader>gtm :action GenerateTestMethod<CR>
+nnoremap <Leader>gsm :action GenerateSetUpMethod<CR>
+nnoremap <Leader>gge :action GenerateGetter<CR>
+nnoremap <Leader>gse :action GenerateSetter<CR>
+nnoremap <Leader>ggs :action GenerateGetterAndSetter<CR>
+nnoremap <Leader>geq :action GenerateEquals<CR>
+nnoremap <Leader>gco :action GenerateConstructor<CR>
+nnoremap <Leader>gts :action Actions.ActionsPlugin.GenerateToString<CR>
+
+" ================================================================================
+" SQL 関連
+" ================================================================================
+noremap <Leader>sc :action Console.Transaction.Commit<CR>   " SQL コミット
+noremap <Leader>sr :action Console.Transaction.Rollback<CR> " SQL ロールバック
+noremap <Leader>se :action Console.Jdbc.Execute<CR>         " SQL 実行
+noremap <Leader>ep :action Console.Jdbc.ExplainPlan<CR>     " 実行プラン
+noremap <Leader>EP :action Console.Jdbc.ExplainPlan.Raw<CR> " 実行プラン（raw）
+
+" MyBatis Log Plugin を導入している場合に DB ログウィンドウを開く
+noremap <Leader>sl :action TailMyBatisLog0<CR>
+noremap <Leader>SL :action ActivateMyBatisLogToolWindow<CR>
+noremap <Leader>AL :action TailMyBatisLog0<CR>:action ActivateMyBatisLogToolWindow<CR>
+
+" ================================================================================
+" 実行関連
+" ================================================================================
+nnoremap <Leader>rc :action RunConfiguration<CR>            " 実行構成を設定
+noremap <Leader>rer <Esc>:action Rerun<CR>                  " 最後の実行を再実行
+nnoremap <Leader>rr :action Run<CR>                          " 最後に実行したものを実行
+nnoremap <Leader>rn :action RunClass<CR>                     " 現在のクラスを実行
+noremap <Leader>dd :action Debug<CR>                        " 最後の実行をデバッグ
+nnoremap <Leader>dn :action DebugClass<CR>                   " 現在のクラスをデバッグ
+nnoremap <Leader>cc :action Coverage<CR>                     " テストカバレッジ（最後の実行）
+nnoremap <Leader>cn :action RunCoverage<CR>                  " テストカバレッジ（現在のクラス）
+nnoremap <Leader>sp :action Stop<CR>                         " プロジェクト停止
+
+" ================================================================================
+" デバッグ関連
+" ================================================================================
+noremap <Leader>bp :action ToggleLineBreakpoint<CR>         " 行ブレークポイントの切替
+noremap <Leader>mb :action XDebugger.MuteBreakpoints<CR>    " ブレークポイントをミュート
+noremap <Leader>rab :action Debugger.RemoveAllBreakpointsInFile<CR> " 現ファイルの全ブレークポイント削除
+noremap <Leader>raB :action Debugger.RemoveAllBreakpoints<CR> " 全ブレークポイント削除
+noremap <Leader>qe :action QuickEvaluateExpression<CR>      " デバッグ時に式を即評価
+noremap <Leader>ee :action EvaluateExpression<CR>           " 式評価
+noremap <Leader>fr :action Debugger.ForceEarlyReturn<CR>    " 強制早期リターン
+noremap <Leader>so <ESC>:action StepOver<CR>                " ステップオーバー
+noremap <Leader>si <ESC>:action SmartStepInto<CR>           " スマートステップイン
+noremap <Leader>daw :action Debugger.AddToWatch<CR>         " ウォッチへ追加
+noremap <Leader>fc :action ForceRunToCursor<CR>             " カーソルまで強制実行
+noremap <Leader>hs :action Hotswap<CR>                      " JRebel 専用のホットスワップ
+noremap <Leader>DD :action JRebel Debug<CR>                 " JRebel デバッグ実行
+noremap <Leader>df :action Debugger.PopFrame<CR>            " フレームをポップ
+noremap <Leader>pp :action ShowExecutionPoint<CR>           " 実行ポイントを表示
+noremap <Leader>ds :action StreamTracerAction<CR>           " ストリームトレーサ
+noremap <Leader>eb :action EditBreakpoint<CR>               " 条件付きブレークポイント編集
+
+" ================================================================================
+" Maven 関連
+" ================================================================================
+" Maven 依存を再インポート
+nnoremap <Leader>mr :action Maven.Reimport<CR>
+" Maven ゴールを実行
+nnoremap <Leader>me :action Maven.ExecuteGoal<CR>
+" Maven ツールウィンドウをアクティベート
+nnoremap <Leader>mw :action ActivateMavenToolWindow<CR>
+
+" ================================================================================
+" バージョン管理
+" ================================================================================
+nnoremap <Leader>vu :action Vcs.UpdateProject<CR>
+nnoremap <Leader>vp :action Vcs.Push<CR>
+nnoremap <Leader>vc :action Vcs.QuickListPopupAction<CR>
+
+nnoremap <Leader>vm :action Git.Menu<CR>
+nnoremap <Leader>vb :action Git.Branches<CR>
+nnoremap <Leader>vgp :action Git.Pull<CR>
+nnoremap <Leader>vgf :action Git.Fetch<CR>
+nnoremap <Leader>vgm :action Git.Merge<CR>
+nnoremap <Leader>vgr :action Git.Rebase<CR>
+nnoremap <Leader>vgl :action Git.Log<CR>
+nnoremap <Leader>vgt :action Git.CreateNewTag<CR>
+nnoremap <Leader>vgc :action Git.CompareWithBranch<CR>
+
+nnoremap <Leader>vv :action ActivateVersionControlToolWindow<CR>
+nnoremap <Leader>va :set norelativenumber<CR>:action Annotate<CR>
+
+nnoremap <Leader>vpr <Action>(Github.View.Pull.Request)
+nnoremap <Leader>vlc <Action>(Vcs.Show.Local.Changes)
+nnoremap <Leader>vre <Action>(Compare.Selected)
+nnoremap <Leader>vhs <Action>(Vcs.ShowHistoryForBlock)
+nnoremap <Leader>vhf <Action>(Vcs.ShowTabbedFileHistory)
+
+" ================================================================================
+" タブ関連
+" ================================================================================
+nnoremap <Leader>co :action CloseAllEditorsButActive<CR>    " 他のすべてのエディタを閉じる
+nnoremap <Leader>cr :action CloseAllToTheRight<CR>          " 右側のタブを閉じる
+nnoremap <Leader>cl :action CloseAllToTheLeft<CR>           " 左側のタブを閉じる
+nnoremap <Leader>ca :action CloseActiveTab<CR>
+nnoremap <S-j> :action PreviousTab<CR>
+nnoremap <S-k> :action NextTab<CR>
+
+" ================================================================================
+" ウィンドウ関連
+" ================================================================================
+noremap <Leader>AM :action ActivateMavenToolWindow<CR>      " Maven ウィンドウを有効化
+noremap <Leader>AD :action ActivateDatabaseToolWindow<CR>   " Database ウィンドウを有効化
+noremap <Leader>AT :action ActivateTODOToolWindow<CR>       " TODO ウィンドウを有効化
+noremap <Leader>AW :action ActivateTerminalToolWindow<CR>   " ターミナルウィンドウを有効化
+noremap <Leader>AF :action ActivateFavoritesToolWindow<CR>  " Favorites を有効化
+noremap <Leader>AP :action ActivateProjectToolWindow<CR>    " Project ウィンドウを有効化
+noremap <Leader>AG :action ActivateVersionControlToolWindow<CR> " VCS ウィンドウを有効化
+noremap <Leader>AS :action ActivateServicesToolWindow<CR>   " Services を有効化
+noremap <Leader>AB :action ViewBreakpoints<CR>              " Breakpoints を表示
+noremap <Leader>AR :action ActivateRestServicesToolWindow<CR> " REST サービス（プラグイン）
+nnoremap <Leader>wd :action ActivateDebugToolWindow<CR>     " Debug ウィンドウを有効化
+nnoremap <Leader>wr :action ActivateRunToolWindow<CR>       " Run ウィンドウを有効化
+nnoremap <Leader>wh :action HideActiveWindow<CR>            " ウィンドウを隠す
+nnoremap <Leader>mm :action MaximizeToolWindow<CR>          " ツールウィンドウを最大化
+noremap <Leader>ha :action HideAllWindows<CR>               " すべてのウィンドウを隠す
+noremap <Leader>siv :action SelectInProjectView<CR>         " Project View で選択
+
+" ================================================================================
+" 情報表示
+" ================================================================================
+noremap <Leader>ed :action ShowErrorDescription<CR>         " エラー説明を表示
+noremap <Leader>ti :action ExpressionTypeInfo<CR>           " 型情報を表示
+noremap <Leader>pi :action ParameterInfo<CR>                " パラメータ情報を表示
+noremap <Leader>jd :action QuickJavaDoc<CR>                 " クイック JavaDoc を表示
+noremap <Leader>fs mm`m:action FileStructurePopup<CR>       " ファイル構造を表示
+noremap <Leader>sd :action ShowUmlDiagram<CR>               " UML（依存関係）を表示
+noremap <Leader>ch :action CallHierarchy<CR>                " 呼び出し階層を表示
+noremap <Leader>mh :action MethodHierarchy<CR>              " メソッド階層を表示
+noremap <Leader>th :action TypeHierarchy<CR>                " 型階層を表示
+noremap <Leader>ss :action ShowSettings<CR>                 " 設定を表示
+noremap <Leader>ps :action ShowProjectStructureSettings<CR> " プロジェクト構造を表示
+
+" ================================================================================
+" プロジェクト
+" ================================================================================
+noremap <Leader>cp :action CloseProject<CR>                 " プロジェクトを閉じる
+noremap <Leader>CP :action CloseProject<CR>                 " プロジェクトを閉じる
+
+noremap <Leader>op :action OpenFile<CR>                     " プロジェクトを開く
+noremap <Leader>OP :action OpenFile<CR>                     " プロジェクトを開く
+noremap <Leader>of :action OpenFile<CR>                     " ファイルを開く
+noremap <Leader>OF :action OpenFile<CR>                     " ファイルを開く
+
+noremap <Leader>np :action NewProject<CR>                   " 新規プロジェクト
+noremap <Leader>NP :action NewProject<CR>                   " 新規プロジェクト
+
+" ================================================================================
+" 実用ツール
+" ================================================================================
+noremap <Leader>sm :action ShowPopupMenu<CR>                " ポップアップメニューを表示
+noremap <Leader>st :action SaveAsTemplate<CR>               " テンプレートとして保存
+noremap <Leader>cap :action CopyAbsolutePath<CR>            " 現在ファイルの絶対パスをコピー
+noremap <Leader>ccp :action CopyContentRootPath<CR>         " コンテントルートパスをコピー
+nnoremap <Leader>cv :action ChangeView<CR>                  " ビュー切替
+noremap <Leader>ag :action antlr.Generate<CR>:action antlr.Generate<CR> " g4 ファイルからコード生成 (antlr4 プラグインが必要)
+noremap <Leader>TR :action antlr.TestRule<CR>
+noremap <Leader>bc :action ByteCodeViewer<CR>               " バイトコードを表示
+noremap <Leader>qq :action $TranslateTextComponent<CR>      " 翻訳（プラグインが必要）
+noremap <Leader>tr :action $TranslateAndReplaceAction<CR>   " 翻訳して置換（プラグインが必要）
+noremap <Leader>gfu :action GenerateFullRestUrl<CR>
+noremap <Leader>atf :action AddToFavorites<CR>              " お気に入りに追加
+noremap <Leader>cE :action CopyElement<CR>                  " 要素をコピー
+noremap <Leader>nE :action NewElement<CR>                   " 要素を新規作成
+noremap <Leader>de :action SafeDelete<CR>                   " 要素を安全に削除
+nnoremap <CR><CR> :action ShowIntentionActions<CR>          " IDEA のインテンションを表示
+nnoremap <Leader><CR> :action GotoNextError<CR>             " 次のエラーへ（インテンションと併用）
+noremap <Leader>ps :action ShowProjectStructureSettings<CR> " プロジェクト設定を開く
+noremap <Leader>ri :action RevealIn<CR>                     " ファイルをエクスプローラで表示
+noremap <Leader>cu :action CloseAllUnmodifiedEditors<CR>    " 未変更のエディタを閉じる
+noremap <Leader>oc :action OpenCodotaSearch<CR>             " Codota で類似コード検索（プラグイン必要）
+noremap <Leader>AC :action ActivateCodotaToolWindow<CR>     " Codota を有効化（プラグイン必要）
+noremap <Leader>cs :action CodotaLeanSearchCrossRefAction<CR> " Codota 機能（プラグイン必要）
+noremap <Leader>csdn :action SearchByCSDN<CR>               " CSDN 検索（プラグイン必要）
+noremap <Leader>rp :action ReplaceInPath<CR>                " パス内置換
+noremap <Leader>dl :action DatabaseView.OpenDdlInConsole<CR> " DDL をコンソールで開く
+noremap <Leader>ot :action Terminal.OpenInTerminal<CR>      " ターミナルで開く
+noremap <Leader>sf :action SonarLint.AnalyzeFiles<CR>       " SonarLint による解析（プラグイン必要）
+noremap <Leader>lv :action Compare.LastVersion<CR>          " 最新バージョンとの差分を比較
+noremap <Leader>bd :action CompileProject<CR>               " プロジェクトをビルド
+noremap <Leader>sa :action SonarLint.AnalyzeAllFiles<CR>    " プロジェクト全体を解析（SonarLint）
+noremap <Leader>uu :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR> " ケース変換（camel/snake/kebab など）
+
+" 変更されたファイルを解析
+noremap <Leader>SC :action SonarLint.AnalyzeChangedFiles<CR>
+noremap <Leader>lcw :action leetcode.OpenInWebAction<CR>
+noremap <Leader>lcs :action leetcode.OpenSolutionAction<CR>
+noremap <Leader>lcn :action leetcode.editor.note<CR>
+noremap <Leader>lcr :action leetcode.editor.RunCodeAction<CR>
+
+noremap <Leader>rs :action RestfulTool.action.OptionForEditor-NavigationServiceTreeAction<CR>
+noremap <CR><Leader> :action copilot.openCopilot<CR>
+noremap <Leader>ir :action IdeaVim.ReloadVimRc.group<CR>
+imap <C-i> <CR>:action copilot.applyInlays<CR>
+
+" ================================================================================
+" その他
+" ================================================================================
+" 別の場所の単語をコピーして現在の単語を置換
+noremap giw :action emacsIDEAs.AceJumpObtainThenReplace.Word<CR>
+noremap gic :action emacsIDEAs.AceJumpObtainThenReplace.Quote<CR>
+noremap giz :action emacsIDEAs.AceJumpObtainThenReplace.Quote<CR>
+noremap gim :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gie :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gir :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gi, :action emacsIDEAs.AceJumpObtainThenReplace.Block<CR>
+noremap gii :action emacsIDEAs.AceJumpObtainThenReplace.Line<CR>
+noremap gil :action emacsIDEAs.AceJumpObtainThenReplace.Line<CR>
+
+" 別の場所の単語を現在のカーソル位置にコピー
+noremap gyw a<Esc>:action emacsIDEAs.AceJumpCopy.Word<CR>
+imap <A-I> <C-O>:action emacsIDEAs.AceJumpCopy.Word<CR>
+noremap gyc a<Esc>:action emacsIDEAs.AceJumpCopy.Quote<CR>
+noremap gyz a<Esc>:action emacsIDEAs.AceJumpCopy.Quote<CR>
+noremap gym a<Esc>:action emacsIDEAs.AceJumpCopy.Block<CR>
+noremap gye a<Esc>:action emacsIDEAs.AceJumpCopy.Block<CR>
+noremap gy, a<Esc>:action emacsIDEAs.AceJumpCopy.Block<CR>
+noremap gyy a<Esc>:action emacsIDEAs.AceJumpCopy.Line<CR>
+noremap gyl a<Esc>:action emacsIDEAs.AceJumpCopy.Line<CR>
+
+" 別の場所の単語を現在のカーソル位置へ移動
+noremap gmw a<Esc>:action emacsIDEAs.AceJumpMove.Word<CR>
+noremap gmc a<Esc>:action emacsIDEAs.AceJumpMove.Quote<CR>
+noremap gmz a<Esc>:action emacsIDEAs.AceJumpMove.Quote<CR>
+noremap gmm a<Esc>:action emacsIDEAs.AceJumpMove.Block<CR>
+noremap gme a<Esc>:action emacsIDEAs.AceJumpMove.Block<CR>
+noremap gm, a<Esc>:action emacsIDEAs.AceJumpMove.Block<CR>
+noremap gmy a<Esc>:action emacsIDEAs.AceJumpMove.Line<CR>
+noremap gml a<Esc>:action emacsIDEAs.AceJumpMove.Line<CR>
+
+" 現在の単語をコピーして別の場所の単語を置換
+noremap gow :action emacsIDEAs.AceJumpAndReplace.Word<CR>
+noremap goc :action emacsIDEAs.AceJumpAndReplace.Quote<CR>
+noremap goz :action emacsIDEAs.AceJumpAndReplace.Quote<CR>
+noremap gom :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap goe :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap gor :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap go, :action emacsIDEAs.AceJumpAndReplace.Block<CR>
+noremap goo :action emacsIDEAs.AceJumpAndReplace.Line<CR>
+noremap gol :action emacsIDEAs.AceJumpAndReplace.Line<CR>
+
+" Visual モードで * を押すと選択内容を検索
+vmap * "ry/<C-R>r<CR>N
+vmap # "ry/<C-R>r<CR>n
+
+" Vue の Props 等へジャンプ（検索用）
+unmap s
+nnoremap sp /props:<CR>:noh<CR>zt5j
+nnoremap sd /data:<CR>:noh<CR>zt5j
+nnoremap sc /computed:<CR>:noh<CR>zt5j
+nnoremap sw /watch:<CR>:noh<CR>zt5j
+nnoremap sm /methods:<CR>:noh<CR>zt5j
+nnoremap sr /return \(<CR>:noh<CR>zt5j
+nnoremap sf /a-form<CR>:noh<CR>zt5j
+nnoremap st /a-table<CR>:noh<CR>zt5j
+nnoremap ss /render() {<CR>/\<Sm<CR>:noh<CR>zt
+nnoremap se /useEffect<CR>n:noh<CR>zz
+nnoremap sa /render() {<CR>/\<a\-
+nnoremap s, /\<
+
+" ================================================================================
+" END
+" ================================================================================

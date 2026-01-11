@@ -1,0 +1,18 @@
+" vim共通設定
+" 公式vimが推奨するデフォルト設定 https://github.com/vim/vim/blob/master/runtime/defaults.vim
+set history=1000
+set showcmd " 入力中のコマンドを画面の右下に表示する
+set showmode " 現在のモード（通常、挿入、ビジュアルなど）を画面の左下に表示する
+
+" Leader をスペースに変更（デフォルトは "\\"）
+let mapleader=' '
+
+" jj で Esc
+inoremap jj <Esc>
+
+" ideavimrc や vimrc をリロード
+
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k

@@ -109,6 +109,7 @@ alias g='dir=$(ghq list | xargs -I{} stat -f "%m %N" "$(ghq root)/{}" | sort -nr
 
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
+alias goland="open -na 'GoLand.app' --args "$@""
 # alias pulsar="open -na 'Pulsar.app' --args "$@""
 alias pulsar="open -na 'Pulsar.app' --args"
 

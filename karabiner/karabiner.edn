@@ -51,6 +51,7 @@
   :Contexts ["com.contextsformac.Contexts"]
   :Finder   ["com.apple.finder"]
   :IntelliJ ["com.jetbrains.intellij"]
+  :Goland ["com.jetbrains.goland"]
   :Keynote  ["com.apple.iWork.Keynote"]
   :Notion   ["notion.id"]
   :Slack    ["com.tinyspeck.slackmacgap"]
@@ -63,6 +64,7 @@
   :Excel ["com.microsoft.Excel"]
   :Obsidian ["^md.obsidian"]
   :Alacritty ["org.alacritty"]
+  :Claude ["com.anthropic.claudefordesktop"]
 }
 
 :templates {
@@ -143,15 +145,17 @@
 
   ;; {:des "a to a" :rules [[:a :a]]}
 ;; Hyper key
-;; {
-;;   :des   "caps_lock to esc when pressed alone, to hyper as modifier"
-;;   :rules [[:caps_lock [:!TOCleft_shift :b] :Alacritty {:alone :escape}]]}
+  {
+    :des "caps_lock to Control+Option+Command+Shift (Hyper key)"
+    :rules [[:##caps_lock [:!CTOSleft_control :!CTOSleft_option :!CTOSleft_command]]]
+  }
+
 
 ;; 基本設定
-  {
-    :des "Swap left_command and left_control コントロールとコマンドを逆にスイッチ"
-    :rules [[:##left_command :left_control] [:##left_control :left_command]]
-  }
+  ;; {
+  ;;   :des "Swap left_command and left_control コントロールとコマンドを逆にスイッチ"
+  ;;   :rules [[:##left_command :left_control] [:##left_control :left_command]]
+  ;; }
   {
     :des "前の入力ソースを選択" ;; Mac System Preferences > Keyboard > Shortcuts > Input Sources > Select the previous input source > right command + right shift + right option + right control + f12
     :rules [[:##right_command :!!f12]]
@@ -191,18 +195,22 @@
       [:i [:open "Firefox"]]
       [:c [:open "Google Chrome"]]
       [:f [:open "Finder"]]
+      [:u [:open "Claude"]]
       [:v ["open -n -b 'com.microsoft.VSCode'"]]
       [:o ["open -a 'Cursor'"]]
       [:s ["open -a 'Safari'"]]
-      [:l ["open -a 'Slack'"]]
+      [:l ["open -a 'Intellij IDEA CE'"]]
+      [:g ["open -a 'Goland'"]]
       [:d ["open -a 'DBeaver'"]]
-      
       [:k ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/dotfiles "]]
+      [:w ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/workspace "]]
+
       [:1 ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/00hbproj-note "]]
 
       [:b [:open "Obsidian"]]
       [:r [:open "Arc"]]
       ;; [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
+      [:f1 ["open \"obsidian://open?vault=workspace&file=Dashboard\""]]
     ]
   }
   {

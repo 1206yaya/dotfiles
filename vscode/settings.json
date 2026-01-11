@@ -1,9 +1,9 @@
 {
-"workbench.list.horizontalScrolling": true,
-"workbench.editor.labelFormat": "medium", 
-"breadcrumbs.enabled": true,
-"breadcrumbs.filePath": "on",
-"editor.largeFileOptimizations": false,
+  "workbench.list.horizontalScrolling": true,
+  "workbench.editor.labelFormat": "medium",
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "on",
+  "editor.largeFileOptimizations": false,
 
   "window.title": "${activeEditorLong}",
   "workbench.iconTheme": "material-icon-theme",
@@ -17,10 +17,6 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.terragrunt-cache": true,
-    "**/.DS_Store": true,
-    "**/.git": true,
-    "**/node_modules": true,
-    "**/var/folders": true,
     "**/.DS_Store": true,
     "**/.git": true,
     "**/node_modules": true,
@@ -60,6 +56,13 @@
   "debug.disassemblyView.showSourceCode": false,
   "editor.suggest.showKeywords": false,
   "editor.suggest.showWords": false,
+
+  // インサートモードからノーマルモードに戻った際に、自動的に入力ソース（IME）を「英数（英語）」に切り替える
+  "vim.autoSwitchInputMethod.enable": true,
+  "vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.ABC",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "/opt/homebrew/bin/im-select",
+  "vim.autoSwitchInputMethod.switchIMCmd": "/opt/homebrew/bin/im-select {im}",
+
   "terraform.languageServer": {
     "external": true,
     "args": ["serve"]
@@ -98,7 +101,7 @@
   },
   "editor.suggest.showSnippets": true,
   "go.useLanguageServer": true,
-  "go.formatTool": "goimports",
+  "go.formatTool": "default",
   "go.lintTool": "golangci-lint",
   "go.lintFlags": ["--fast"],
   "gopls": {
@@ -288,7 +291,7 @@
     "scminput": false,
     "hcl": true,
     "sql": false,
-    "go": true,
+    "go": false,
     "dockerfile": true
   },
   "genieai.enableConversationHistory": true,
@@ -428,8 +431,8 @@
   "gitlens.graph.searchItemLimit": 1000,
   "gitlens.graph.onlyFollowFirstParent": true,
   "gitlens.views.commitDetails.files.layout": "tree",
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-4",
+  "gitlens.ai.model": "gitkraken",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "github.copilot.nextEditSuggestions.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
   "inlineChat.lineEmptyHint": true,
@@ -458,9 +461,9 @@
   "chat.agent.maxRequests": 75,
   "githubPullRequests.fileListLayout": "tree",
   "vs-kubernetes": {
-    "vscode-kubernetes.helm-path-mac": "${env:HOME}/.vs-kubernetes/tools/helm/darwin-arm64/helm",
-    "vscode-kubernetes.kubectl-path-mac": "${env:HOME}/.vs-kubernetes/tools/kubectl/kubectl",
-    "vscode-kubernetes.minikube-path-mac": "${env:HOME}/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
+    "vscode-kubernetes.helm-path-mac": "/Users/zak/.vs-kubernetes/tools/helm/darwin-arm64/helm",
+    "vscode-kubernetes.kubectl-path-mac": "/Users/zak/.vs-kubernetes/tools/kubectl/kubectl",
+    "vscode-kubernetes.minikube-path-mac": "/Users/zak/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
   },
   "git.replaceTagsWhenPull": true,
   "chat.tools.autoApprove": true,
@@ -554,5 +557,8 @@
   "security.promptForLocalFileProtocolHandling": false,
   "codetour.customTourDirectory": "",
   "codetour.showMarkers": true,
-  "claudeCode.preferredLocation": "panel"
+  "claudeCode.preferredLocation": "panel",
+  "chat.viewSessions.orientation": "stacked",
+  "cursor.composer.queueMessageDefaultBehavior": "stop-and-send",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash"
 }

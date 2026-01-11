@@ -454,10 +454,6 @@
         "when": "editorHasDefinitionProvider && editorTextFocus"
     },
     {
-        "key": "cmd+e",
-        "command": "composerMode.background"
-    },
-    {
         "key": "cmd+k cmd+c",
         "command": "github.copilot.completions.toggle"
     },
