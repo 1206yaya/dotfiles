@@ -51,9 +51,9 @@ ezt() {
   eza --tree "$@"
 }
 
-# function pwd() {
-#   builtin pwd | tee >(pbcopy)
-# }
+function pwd() {
+  builtin pwd | tee >(pbcopy)
+}
 function man() {
   env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -92,9 +92,9 @@ alias ps="procs"
 alias top="ytop"
 alias vi="nvim"
 alias vim="nvim"
-alias cc="claude "$@""
+# alias cc="claude "$@""
 alias ccmcp="claude --mcp-config .mcp.json"
-alias ccdsp="claude --dangerously-skip-permissions "$@""
+alias cc="claude --dangerously-skip-permissions"
 alias ccc="claude --continue"
 
 alias de="defaults"
@@ -237,8 +237,10 @@ function mkcd() {
 # AppleScript ではプロセス ID に関連する情報を取得する機能がないから
 # 閉じるときは手動で閉じるしかない
 function killbrowser() {
-  kill $(ps aux | grep 'selenium' | awk '{print $2}')
-  kill $(ps aux | grep 'Google Chrome.app' | awk '{print $2}')
+  pkill -9 -f selenium 2>/dev/null
+  pkill -9 -i "Google Chrome" 2>/dev/null
+  pkill -9 -i Chromium 2>/dev/null
+  echo "Browser processes killed"
 }
 
 function chat() {

@@ -82,4 +82,19 @@ local function maximizeWindow()
     end
 end
 
+local function centerWindow()
+    local win = hs.window.focusedWindow()
+    if win then
+        local f = win:frame()
+        local screen = win:screen()
+        local max = screen:frame()
+        
+        f.x = max.x + (max.w - f.w) / 2
+        f.y = max.y + (max.h - f.h) / 2
+        
+        win:setFrame(f)
+    end
+end
+
 hs.hotkey.bind(hyper, "0", maximizeWindow) -- `⌘⌥⌃ + 0` でウィンドウ最大化
+hs.hotkey.bind(hyper, "C", centerWindow) -- 中央に配置（サイズ保持）

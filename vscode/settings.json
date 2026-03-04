@@ -287,7 +287,7 @@
   "github.copilot.enable": {
     "*": false,
     "plaintext": false,
-    "markdown": false,
+    "markdown": true,
     "scminput": false,
     "hcl": true,
     "sql": false,
@@ -409,7 +409,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": "off",
+  "editor.occurrencesHighlight": false,
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -560,5 +560,6 @@
   "claudeCode.preferredLocation": "panel",
   "chat.viewSessions.orientation": "stacked",
   "cursor.composer.queueMessageDefaultBehavior": "stop-and-send",
-  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash"
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
 }

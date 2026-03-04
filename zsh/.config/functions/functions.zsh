@@ -147,7 +147,6 @@ cs() {
 }
 
 gen() {
-
     GENDIR="$ZSH_CONFG_DIR/gen"
 
     if [ "$1" = "chatignore" ]; then
@@ -159,9 +158,7 @@ gen() {
     elif [ "$1" = "mcp" ]; then
         sourceFile=$GENDIR"/.mcp.json"
     else
-        # それ以外の場合はエラー
-        echo "第一引数には chatignore のいずれかを指定してください"
-
+        echo "Usage: gen {chatignore|csv|xlsx|mcp}"
         return 1
     fi
 
@@ -171,9 +168,45 @@ gen() {
         cp $sourceFile ./
         echo "$filename を作成しました"
     fi
-
 }
 
 noz() {
     caffeinate -d -i -m -s
+}
+
+pdflib() {
+    local venv="$DOTDIR/bin/pdflib/.venv/bin/python"
+    if [ ! -f "$venv" ]; then
+        echo "pdflib: venv not found. Run: cd $DOTDIR/bin/pdflib && uv sync"
+        return 1
+    fi
+    PYTHONPATH="$DOTDIR/bin" "$venv" -m pdflib "$@"
+}
+
+book() {
+    local catalog="$HOME/Documents/PDF/catalog.json"
+    if [ ! -f "$catalog" ]; then
+        echo "book: catalog.json not found. Run: pdflib scan"
+        return 1
+    fi
+
+    local selected
+    selected=$(cat "$catalog" | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+for b in data['books']:
+    author = b.get('author') or 'Unknown'
+    year = b.get('year') or '?'
+    fmts = ', '.join(f['format'] for f in b['formats'])
+    paths = '|'.join(f['path'] for f in b['formats'])
+    print(f\"[{b['category']}] {b['title']} — {author} ({year}) [{fmts}]\t{paths}\")
+" | fzf --delimiter='\t' --with-nth=1 --preview-window=hidden)
+
+    [ -z "$selected" ] && return 0
+
+    local paths
+    paths=$(echo "$selected" | cut -f2)
+    local first_path
+    first_path=$(echo "$paths" | tr '|' '\n' | head -1)
+    open "$HOME/Documents/PDF/$first_path"
 }

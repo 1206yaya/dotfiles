@@ -1,7 +1,7 @@
 .PHONY: build build-all clean clean-all help
 
 # コマンド一覧
-COMMANDS := copydb stash tomp4 ws
+COMMANDS := copydb obsidian-bridge stash tomp4 ws
 
 # デフォルトターゲット
 help:

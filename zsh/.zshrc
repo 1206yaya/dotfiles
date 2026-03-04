@@ -53,7 +53,7 @@ fi
 export PATH=$(go env GOPATH)/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
 # export GOROOT=$(go env GOROOT)
-# export GOTOOLCHAIN=local # ツールチェイン自動切り替えを無効化
+export GOTOOLCHAIN=local # ツールチェイン自動切り替えを無効化
 
 export HRBRAIN_REPO_PATH="$HOME/ghq/github.com/hrbrain/hrbrain"
 

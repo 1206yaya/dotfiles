@@ -13,3 +13,4 @@ bin/stash
 bin/tomp4
 bin/ws
 bin/pr-added-diff-src/pr-added-diff
+.idea/

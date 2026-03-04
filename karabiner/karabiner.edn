@@ -124,6 +124,7 @@
 
 :simlayers {
   :0-mode {:key :0}
+  :9-mode {:key :9}
   :1-mode {:key :1}    
   :2-mode {:key :2}
   :n-mode {:key :n}    
@@ -179,6 +180,7 @@
       [:r [:open_url "https://github.com/1206yaya?tab=repositories"]]
       [:p [:open_url "https://chatgpt.com/"]]
       [:g [:open_url "https://gemini.google.com/app"]]
+      [:u [:open_url "https://claude.ai/"]]
 
     ]
   }
@@ -202,15 +204,20 @@
       [:l ["open -a 'Intellij IDEA CE'"]]
       [:g ["open -a 'Goland'"]]
       [:d ["open -a 'DBeaver'"]]
-      [:k ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/dotfiles "]]
-      [:w ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/workspace "]]
-
-      [:1 ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/00hbproj-note "]]
 
       [:b [:open "Obsidian"]]
       [:r [:open "Arc"]]
       ;; [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]
       [:f1 ["open \"obsidian://open?vault=workspace&file=Dashboard\""]]
+    ]
+  }
+  {
+    :des "open apps"
+    :rules [:9-mode
+      [:k ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/dotfiles "]]
+      [:w ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/workspace "]]
+      [:u ["open -a 'Visual Studio Code' $HOME/.claude "]]
+      [:1 ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/00hbproj-note "]]
     ]
   }
   {
