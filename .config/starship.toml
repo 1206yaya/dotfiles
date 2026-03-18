@@ -1,8 +1,13 @@
 add_newline = false
 command_timeout = 3000
 format = """
-$time$directory$golang$nodejs$python$dart$rust$deno$ruby$cmd_duration$git_status$git_branch
+$username$time$directory$golang$nodejs$python$dart$rust$deno$ruby$cmd_duration$git_status$git_branch
 $character"""
+
+[username]
+show_always = true
+style_user = "bold white"
+format = "[$user]($style) "
 
 
 [character]
