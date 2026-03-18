@@ -538,5 +538,10 @@
     {
         "key": "cmd+1",
         "command": "workbench.view.explorer"
+    },
+    {
+        "key": "cmd+w",
+        "command": "workbench.action.closeWindow",
+        "when": "!editorIsOpen && !multipleEditorGroups"
     }
 ]
