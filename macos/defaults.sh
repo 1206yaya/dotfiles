@@ -149,3 +149,13 @@ defaults write com.apple.screencapture location -string "${HOME}/screenshots"
 # Hammerspoon  override the default location
 ###########################################################
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+
+###########################################################
+# キーボードショートカット（plist からインポート）
+###########################################################
+MACOS_DIR="${DOTDIR:+$DOTDIR/macos}"
+MACOS_DIR="${MACOS_DIR:-$(cd "$(dirname "$0")" && pwd)}"
+if [ -f "$MACOS_DIR/symbolichotkeys.plist" ]; then
+    defaults import com.apple.symbolichotkeys "$MACOS_DIR/symbolichotkeys.plist"
+    echo "[ OK ] Imported keyboard shortcuts from symbolichotkeys.plist"
+fi

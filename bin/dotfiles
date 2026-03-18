@@ -4,6 +4,16 @@ export GITHUB_EMAIL=1206yaya@gmail.com
 export GIT_CLONE_PATH=~/ghq/github.com/1206yaya
 export DOTDIR="$GIT_CLONE_PATH/dotfiles"
 export DOT_REPOURL="https://github.com/1206yaya/dotfiles.git"
+
+###########################################################
+# Subcommands
+###########################################################
+if [ "${1:-}" = "export" ]; then
+    DOTDIR="${DOTDIR:-$(cd "$(dirname "$0")/.." && pwd)}"
+    . "$DOTDIR/macos/export.sh"
+    exit 0
+fi
+
 ###########################################################
 # Options
 ###########################################################
