@@ -46,9 +46,6 @@ nmap <C-l> <Action>(NextSplitter)
 " IDEの「全選択」アクションを呼び出す
 nnoremap <D-A> :action $SelectAll<CR>
 
-" 次の同じ単語を選択 (Select Next Occurrence)
-nmap gb <Action>(SelectNextOccurrence)
-vmap gb <Action>(SelectNextOccurrence)
 
 " 選択をスキップして次へ (Unselect Occurrence)
 nmap gB <Action>(UnselectPreviousOccurrence)
@@ -86,6 +83,10 @@ nnoremap <leader>tdr :action Debug<CR>
 
 " デバッグモードでテストを実行
 nnoremap <leader>td :action DebugClass<CR>
+
+" Debug
+nnoremap <leader>dr :action Rerun<CR>
+nnoremap <leader>dc :action RunToCursor<CR>
 
 
 " https://github.com/VictorKPetersen/dotfiles/blob/ce24f87a1d0675c6e346563a62dc76bb35a7d4c6/ideavim/.ideavimrc#L72

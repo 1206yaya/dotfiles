@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Open in Obsidian",
+            "type": "shell",
+            "command": "${env:HOME}/ghq/github.com/1206yaya/dotfiles/bin/open-in-obsidian",
+            "args": ["${file}"],
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared",
+                "close": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -301,7 +301,7 @@
         "command": "-workbench.action.closeWindow"
     },
     {
-        "key": "ctrl+shift+cmd+o",
+        "key": "cmd+7",
         "command": "outline.focus"
     },
     {
@@ -401,12 +401,8 @@
         "command": "workbench.view.extension.bookmarks"
     },
     {
-        "key": "shift+cmd+c l",
-        "command": "github.copilot.chat.attachSelection"
-    },
-    {
-        "key": "shift+cmd+c f",
-        "command": "github.copilot.chat.attachFile"
+        "key": "shift+cmd+c",
+        "command": "copyFilePath"
     },
     {
         "key": "cmd+i",
@@ -459,7 +455,20 @@
     },
     {
         "key": "shift+cmd+f12",
-        "command": "pr.checkoutByNumber"
+        "command": "workbench.action.toggleZenMode",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "shift+cmd+f12",
+        "command": "runCommands",
+        "when": "terminalFocus",
+        "args": {
+            "commands": [
+                "workbench.action.closeSidebar",
+                "workbench.action.closeAuxiliaryBar",
+                "workbench.action.toggleMaximizedPanel"
+            ]
+        }
     },
     {
         "key": "cmd+l cmd+o",
@@ -503,5 +512,31 @@
     {
         "key": "cmd+q",
         "command": "-workbench.action.quit"
+    },
+    {
+        "key": "alt+cmd+s",
+        "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
+        "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
+    },
+    {
+        "key": "cmd+7",
+        "command": "-workbench.action.focusSeventhEditorGroup"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Open in Obsidian"
+    },
+    {
+        "key": "cmd+1",
+        "command": "-workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": "shift+cmd+e",
+        "command": "-workbench.view.explorer"
+    },
+    {
+        "key": "cmd+1",
+        "command": "workbench.view.explorer"
     }
 ]

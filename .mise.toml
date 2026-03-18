@@ -1,6 +1,6 @@
 [tools]
 go= "1.26.0"
-nodejs="22.6.0"
+nodejs="22.22.1"
 "npm:yarn"="1.22.22"
 rust="1.58.1"
 python= "3.12.5"

@@ -1,6 +1,7 @@
 [user]
 	name = 1206yaya
 	email = 1206yaya@gmail.com
+	signingkey = 1A14AD1AB6A6D93A
 [include]
     path = ~/.gitconfig.local
 [alias]

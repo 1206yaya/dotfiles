@@ -1,0 +1,17 @@
+#!/bin/zsh
+# open-in-obsidian: VS Code で開いているファイルを Obsidian で開く
+# Usage: open-in-obsidian <absolute-file-path>
+
+FILE="${1}"
+
+if [[ -z "$FILE" ]]; then
+    echo "Usage: open-in-obsidian <file-path>" >&2
+    exit 1
+fi
+
+python3 -c "
+import urllib.parse, subprocess, sys
+path = sys.argv[1]
+uri = 'obsidian://open?path=' + urllib.parse.quote(path)
+subprocess.run(['open', uri])
+" "${FILE}"

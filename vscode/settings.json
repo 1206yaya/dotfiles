@@ -29,7 +29,7 @@
     "**/site-packages": true,
     "**/.fvm": true
   },
-  "search.quickOpen.includeSymbols": true,
+  "search.quickOpen.includeSymbols": false,
   "search.quickAccess.preserveInput": true,
   "search.quickOpen.includeHistory": true,
 
@@ -409,7 +409,7 @@
   "markdown-preview-enhanced.plantumlJarPath": "/opt/homebrew/Cellar/plantuml/1.2024.8/libexec/plantuml.jar",
 
   "editor.wordWrap": "on",
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
@@ -557,9 +557,54 @@
   "security.promptForLocalFileProtocolHandling": false,
   "codetour.customTourDirectory": "",
   "codetour.showMarkers": true,
+  "zenMode.fullScreen": false,
+  "zenMode.hideStatusBar": false,
+  "zenMode.hideActivityBar": false,
+  "zenMode.centerLayout": false,
+  "zenMode.hideLineNumbers": false,
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.toggleZenMode"
+  ],
   "claudeCode.preferredLocation": "panel",
   "chat.viewSessions.orientation": "stacked",
   "cursor.composer.queueMessageDefaultBehavior": "stop-and-send",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
+  "workbench.colorTheme": "Tokyo Night",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "markup.bold.markdown",
+        "settings": {
+          "foreground": "#ff9e64"
+        }
+      }
+    ]
+  },
+  "markdown-header-coloring.userDefinedHeaderColor": {
+    "enabled": true,
+    "Header_1": {
+      "color": "#f7768e",
+      "backgroundColor": "rgba(247, 118, 142, 0.15)"
+    },
+    "Header_2": {
+      "color": "#e0af68",
+      "backgroundColor": "rgba(224, 175, 104, 0.15)"
+    },
+    "Header_3": {
+      "color": "#7dcfff",
+      "backgroundColor": "rgba(125, 207, 255, 0.15)"
+    },
+    "Header_4": {
+      "color": "#9ece6a",
+      "backgroundColor": "rgba(158, 206, 106, 0.15)"
+    },
+    "Header_5": {
+      "color": "#bb9af7",
+      "backgroundColor": "rgba(187, 154, 247, 0.15)"
+    },
+    "Header_6": {
+      "color": "#a0a0a0",
+      "backgroundColor": "rgba(160, 160, 160, 0.15)"
+    }
+  }
 }
