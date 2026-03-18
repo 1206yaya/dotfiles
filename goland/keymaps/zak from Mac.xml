@@ -1,0 +1,26 @@
+<keymap version="1" name="zak from Mac" parent="Mac OS X 10.5+">
+  <action id="CloseAllEditors">
+    <keyboard-shortcut first-keystroke="shift meta w" />
+  </action>
+  <action id="CollapsiblePanel-toggle" />
+  <action id="Console.TableResult.ColumnVisibility" />
+  <action id="GotoLine">
+    <keyboard-shortcut first-keystroke="meta l" />
+  </action>
+  <action id="HideAllWindows">
+    <keyboard-shortcut first-keystroke="meta j" />
+  </action>
+  <action id="OpenInRightSplit">
+    <mouse-shortcut keystroke="alt button1 doubleClick" />
+  </action>
+  <action id="QuickPreview" />
+  <action id="SelectNextOccurrence">
+    <keyboard-shortcut first-keystroke="ctrl g" />
+  </action>
+  <action id="SplitChooser.SplitCenter" />
+  <action id="Terminal.OpenInReworkedTerminal">
+    <keyboard-shortcut first-keystroke="shift ctrl t" />
+  </action>
+  <action id="Terminal.SearchInCommandHistory" />
+  <action id="UsageFiltering.ReadAccess" />
+</keymap>

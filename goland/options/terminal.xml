@@ -1,0 +1,9 @@
+<application>
+  <component name="ReworkedTerminalUsage"><![CDATA[{
+  "enterKeyPressedTimes": 434,
+  "completionPopupShownTimes": 3
+}]]></component>
+  <component name="TerminalOptionsProvider">
+    <option name="useOptionAsMetaKey" value="true" />
+  </component>
+</application>

@@ -1,0 +1,29 @@
+<application>
+  <component name="github-copilot">
+    <option name="signinNotificationShown" value="true" />
+    <languageAllowList>
+      <map>
+        <entry key="*" value="true" />
+        <entry key="go" value="false" />
+      </map>
+    </languageAllowList>
+    <option name="enableCompletionsToolWindow" value="false" />
+    <option name="selectedCompletionModel" value="gpt-41-copilot" />
+    <option name="toolConfirmAutoApprove" value="true" />
+    <option name="terminalRulesVersion" value="1" />
+    <editAutoApprove>
+      <FileSafetyRule>
+        <option name="description" value="Github instructions files" />
+        <option name="pattern" value="**/.github/instructions/*" />
+      </FileSafetyRule>
+      <FileSafetyRule>
+        <option name="description" value="JetBrains settings files" />
+        <option name="pattern" value="**/.idea/**/*" />
+      </FileSafetyRule>
+      <FileSafetyRule>
+        <option name="description" value="Github Copilot settings and token files" />
+        <option name="pattern" value="**/github-copilot/**/*" />
+      </FileSafetyRule>
+    </editAutoApprove>
+  </component>
+</application>

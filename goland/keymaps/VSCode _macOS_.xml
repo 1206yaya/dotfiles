@@ -1,0 +1,22 @@
+<keymap version="1" name="VSCode (macOS) コピー" parent="VSCode OSX">
+  <action id="Back">
+    <keyboard-shortcut first-keystroke="ctrl minus" />
+    <mouse-shortcut keystroke="button4" />
+    <keyboard-shortcut first-keystroke="meta open_bracket" />
+  </action>
+  <action id="EditorUnindentSelection">
+    <keyboard-shortcut first-keystroke="shift tab" />
+  </action>
+  <action id="GitLab.Merge.Request.List.Refresh" />
+  <action id="NextTab">
+    <keyboard-shortcut first-keystroke="meta close_bracket" />
+  </action>
+  <action id="PreviousTab" />
+  <action id="Refresh" />
+  <action id="RunToCursor">
+    <mouse-shortcut keystroke="Force touch" />
+    <keyboard-shortcut first-keystroke="meta r" />
+  </action>
+  <action id="Vcs.Log.Refresh" />
+  <action id="Vcs.RefreshFileHistory" />
+</keymap>

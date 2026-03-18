@@ -1,0 +1,12 @@
+<application>
+  <component name="ActionMacroManager">
+    <macro name="Capture to Obsidian">
+      <action id="EditorCopy" />
+      <action id="SearchEverywhere" />
+      <typing text-keycode="83:1;69:0;78:0;84:0">Sent</typing>
+      <action id="EditorBackSpace" />
+      <typing text-keycode="68:0;32:0;84:0;79:0">d&amp;#x20;to</typing>
+      <action id="Tool_External Tools_Send to Obsidian" />
+    </macro>
+  </component>
+</application>
