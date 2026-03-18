@@ -255,8 +255,26 @@ create_symbolic_links() {
     # karabiner
     ensure_dir_exists "$HOME/.config/karabiner"
     ln -sf "$DOTDIR/karabiner/karabiner.edn" "$HOME/.config/karabiner/karabiner.edn"
-    # goku　でエラーが出ることがあるため、念の為ファイルを作成
-    touch "$HOME/.config/karabiner/karabiner.json"
+    # goku が "Default" プロファイルを要求するため、最小限の有効なJSONを作成
+    if [ ! -s "$HOME/.config/karabiner/karabiner.json" ]; then
+      cat > "$HOME/.config/karabiner/karabiner.json" << 'KARABINER_JSON'
+{
+    "global": { "show_in_menu_bar": false },
+    "profiles": [
+        {
+            "name": "Default",
+            "selected": true,
+            "simple_modifications": [],
+            "complex_modifications": { "rules": [] }
+        }
+    ]
+}
+KARABINER_JSON
+    fi
+    # edn → json 変換
+    if command -v goku &>/dev/null; then
+      goku
+    fi
     # starship
     ln -sf "$DOTDIR/.config/starship.toml" "$HOME/.config/starship.toml"
 
