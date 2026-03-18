@@ -1,0 +1,27 @@
+<application>
+  <component name="ProjectManager">
+    <defaultProject>
+      <component name="GoImports">
+        <option name="excludedPackages">
+          <array>
+            <option value="github.com/pkg/errors" />
+            <option value="golang.org/x/net/context" />
+          </array>
+        </option>
+      </component>
+      <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  }
+}</component>
+      <component name="WindowStateProjectService">
+        <state x="409" y="243" key="SettingsEditor" timestamp="1772754854697">
+          <screen x="0" y="39" width="1800" height="1130" />
+        </state>
+        <state x="409" y="243" key="SettingsEditor/0.39.1800.1130" timestamp="1768913641306" />
+        <state x="409" y="243" key="SettingsEditor/0.39.1800.1130/-785.-1410.3440.1410" timestamp="1772754854697" />
+      </component>
+    </defaultProject>
+  </component>
+</application>

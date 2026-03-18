@@ -1,0 +1,16 @@
+<templateSet group="Go">
+  <template name="new" value="func $FUNC$() $TYPE$ {&#10;    return $TYPE${$END$}&#10;}" description="constructor function" toReformat="false" toShortenFQNames="true">
+    <variable name="FUNC" expression="" defaultValue="&quot;Constructor&quot;" alwaysStopAt="true" />
+    <variable name="TYPE" expression="complete()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO" value="true" />
+    </context>
+  </template>
+  <template name="ifok" value="if $VAR$, ok := $EXPR$; ok {&#10;    $END$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="VAR" expression="" defaultValue="val" alwaysStopAt="true" />
+    <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO" value="true" />
+    </context>
+  </template>
+</templateSet>

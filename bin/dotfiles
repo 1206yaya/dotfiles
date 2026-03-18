@@ -284,6 +284,18 @@ KARABINER_JSON
     # ideavim
     ln -sf "$DOTDIR/ideavim/.ideavimrc" "$HOME/.ideavimrc"
 
+    # goland
+    GOLAND_DIR="$HOME/Library/Application Support/JetBrains/GoLand2025.3"
+    ensure_dir_exists "$GOLAND_DIR"
+    symlink_files "$DOTDIR/goland/keymaps"    "$GOLAND_DIR/keymaps"
+    symlink_files "$DOTDIR/goland/templates"  "$GOLAND_DIR/templates"
+    symlink_files "$DOTDIR/goland/colors"     "$GOLAND_DIR/colors"
+    symlink_files "$DOTDIR/goland/codestyles" "$GOLAND_DIR/codestyles"
+    symlink_files "$DOTDIR/goland/options"    "$GOLAND_DIR/options"
+    ln -sf "$DOTDIR/goland/goland.vmoptions"  "$GOLAND_DIR/goland.vmoptions"
+    ln -sf "$DOTDIR/goland/idea.properties"   "$GOLAND_DIR/idea.properties"
+    ln -sf "$DOTDIR/goland/disabled_plugins.txt" "$GOLAND_DIR/disabled_plugins.txt"
+
     # hammerspoon
     symlink_files "$DOTDIR/hammerspoon" "$HOME/.config/hammerspoon"
 

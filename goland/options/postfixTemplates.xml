@@ -1,0 +1,16 @@
+<application>
+  <component name="PostfixTemplates">
+    <template id="vok@userDefined" key=".vok" provider="com.goide.postfix.GoPostfixTemplateProvider" topmost="false">
+      <conditions>
+        <condition id="non void" />
+      </conditions>
+      <template name="fakeKey" value="$END$, exists := $EXPR$" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+    <template id="ifok@userDefined2" key=".ifok" provider="com.goide.postfix.GoPostfixTemplateProvider" topmost="false">
+      <conditions>
+        <condition id="non void" />
+      </conditions>
+      <template name="fakeKey" value="if $END$, ok := $EXPR$; ok {&#10;&#9;&#10;}" description="" toReformat="true" toShortenFQNames="true" />
+    </template>
+  </component>
+</application>
