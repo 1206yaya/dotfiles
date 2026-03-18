@@ -10,13 +10,8 @@ echo 📌 Configuring macOS default settings
 ###########################################################
 
 # システム環境設定が開いている場合は閉じる（設定の変更を妨げないようにする）
-osascript -e 'tell application "System Preferences" to quit'
-
-# 管理者パスワードの入力を事前に要求する
-sudo -v
-
-# sudo の有効期間を維持する（スクリプトが終了するまで）
-# while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+# macOS 13+ では "System Settings" に名称変更
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
 
 # ターミナルの警告音を無効化
 defaults write com.apple.terminal Bell -bool false
@@ -157,5 +152,6 @@ MACOS_DIR="${DOTDIR:+$DOTDIR/macos}"
 MACOS_DIR="${MACOS_DIR:-$(cd "$(dirname "$0")" && pwd)}"
 if [ -f "$MACOS_DIR/symbolichotkeys.plist" ]; then
     defaults import com.apple.symbolichotkeys "$MACOS_DIR/symbolichotkeys.plist"
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     echo "[ OK ] Imported keyboard shortcuts from symbolichotkeys.plist"
 fi
