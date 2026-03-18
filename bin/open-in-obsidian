@@ -1,5 +1,6 @@
 #!/bin/zsh
 # open-in-obsidian: VS Code で開いているファイルを Obsidian で開く
+# .obsidian ディレクトリを探して Vault 名を特定し、vault + file 形式の URI を使う
 # Usage: open-in-obsidian <absolute-file-path>
 
 FILE="${1}"
@@ -9,9 +10,30 @@ if [[ -z "$FILE" ]]; then
     exit 1
 fi
 
+# .obsidian ディレクトリを親方向に探して Vault ルートを特定
+dir="$(dirname "$FILE")"
+while [[ "$dir" != "/" ]]; do
+    if [[ -d "$dir/.obsidian" ]]; then
+        vault_root="$dir"
+        break
+    fi
+    dir="$(dirname "$dir")"
+done
+
+if [[ -z "$vault_root" ]]; then
+    echo "Error: No Obsidian vault found for $FILE" >&2
+    exit 1
+fi
+
+vault_name="$(basename "$vault_root")"
+# Vault ルートからの相対パスを取得（拡張子なし）
+rel_path="${FILE#$vault_root/}"
+rel_path="${rel_path%.md}"
+
 python3 -c "
 import urllib.parse, subprocess, sys
-path = sys.argv[1]
-uri = 'obsidian://open?path=' + urllib.parse.quote(path)
+vault = sys.argv[1]
+file = sys.argv[2]
+uri = 'obsidian://open?vault=' + urllib.parse.quote(vault) + '&file=' + urllib.parse.quote(file)
 subprocess.run(['open', uri])
-" "${FILE}"
+" "$vault_name" "$rel_path"
