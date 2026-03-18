@@ -1,5 +1,4 @@
 tap "daipeihust/tap"
-brew "im-select"
 tap "yqrashawn/goku"
 brew "anyenv"
 brew "pandoc"
