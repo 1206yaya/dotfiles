@@ -683,7 +683,7 @@
 		<key>54</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>value</key>
 			<dict>
 				<key>parameters</key>
@@ -699,7 +699,7 @@
 		<key>56</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>value</key>
 			<dict>
 				<key>parameters</key>
