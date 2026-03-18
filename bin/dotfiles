@@ -331,8 +331,6 @@ install_mise() {
     mise list | tail -n +2 | while read -r tool version _; do
         mise global "$tool@$version"
     done
-
-    poetry config virtualenvs.in-project true
 }
 
 set_alacritty_theme() {

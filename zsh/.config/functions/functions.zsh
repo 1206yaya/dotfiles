@@ -24,8 +24,8 @@ function makefile() {
 
     # 引数に基づいてファイル名を構築し、ショートカットを考慮
     case "$1" in
-    py | python | poetry)
-        filename="poetry.$ext"
+    py | python)
+        filename="python.$ext"
         ;;
     open | edit)
         subl $pathDir/

@@ -1,5 +1,5 @@
 
 # Python
-alias pt='poetry run pytest'
-alias pr='poetry run'
+alias pt='uv run pytest'
+alias pr='uv run'
 
