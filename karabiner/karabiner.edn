@@ -205,6 +205,7 @@
       [:g ["open -a 'Goland'"]]
       [:d ["open -a 'DBeaver'"]]
 
+      [:p [:open "memo"]]
       [:b [:open "Obsidian"]]
       [:r [:open "Arc"]]
       ;; [:r ["open -F -na 'Google Chrome' --args https://translate.google.co.jp/?hl=ja&sl=ja&tl=en&op=translate"]]

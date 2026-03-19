@@ -523,7 +523,7 @@
         "command": "-workbench.action.focusSeventhEditorGroup"
     },
     {
-        "key": "ctrl+o",
+        "key": "ctrl+shift+o",
         "command": "workbench.action.tasks.runTask",
         "args": "Open in Obsidian"
     },
