@@ -16,6 +16,7 @@ fi
 eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 export PATH=$PATH:$HOME/bin # dotfiles管理下のbinがリンクされる
+export PATH="$HOME/.local/bin:$PATH" 
 export fpath=(~/.config/zsh/.zsh_functions $fpath)
 export GOKU_EDN_CONFIG_FILE="$HOME"/.config/karabiner/karabiner.edn
 export HISTFILE=~/.zsh_history
