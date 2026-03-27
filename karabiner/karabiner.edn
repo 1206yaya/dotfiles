@@ -122,6 +122,10 @@
   '"
 }
 
+:devices {
+  :keychron-k2 [{:vendor_id 1452 :product_id 591}]
+}
+
 :simlayers {
   :0-mode {:key :0}
   :9-mode {:key :9}
@@ -144,7 +148,12 @@
 
 :main [
 
-  ;; {:des "a to a" :rules [[:a :a]]}
+;; Keychron K2: right_control → right_option
+  {
+    :des "Keychron K2: right_control to right_option"
+    :rules [[:##right_control :right_option [:keychron-k2]]]
+  }
+
 ;; Hyper key
   {
     :des "caps_lock to Control+Option+Command+Shift (Hyper key)"
