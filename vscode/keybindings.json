@@ -203,7 +203,13 @@
     },
     {
         "key": "shift+cmd+[",
-        "command": "workbench.action.previousEditor"
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "shift+cmd+[",
+        "command": "workbench.action.previousEditor",
+        "when": "!terminalFocus"
     },
     {
         "key": "alt+cmd+left",

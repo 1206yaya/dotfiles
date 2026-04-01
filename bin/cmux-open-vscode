@@ -1,0 +1,33 @@
+#!/bin/bash
+# cmux-open-vscode: Open VS Code in the cwd of the currently focused cmux terminal
+#
+# Usage: cmux-open-vscode
+# Designed to be called from Karabiner (shell_command) without needing a terminal.
+# Uses AppleScript (no socket access required).
+
+set -euo pipefail
+
+LOG=/tmp/cmux-open-vscode.log
+exec > "$LOG" 2>&1
+echo "=== $(date) ==="
+
+CODE=/opt/homebrew/bin/code
+
+# Get the cwd of the focused terminal via AppleScript
+CWD=$(osascript -e '
+tell application "cmux"
+  set w to front window
+  set t to selected tab of w
+  set term to focused terminal of t
+  return working directory of term
+end tell
+' 2>&1)
+echo "CWD=$CWD"
+
+if [ -z "$CWD" ]; then
+  osascript -e 'display notification "Could not get cwd" with title "cmux-open-vscode"'
+  exit 1
+fi
+
+"$CODE" "$CWD"
+echo "Done"

@@ -12,3 +12,4 @@ cat ~/.ssh/id_ed25519.pub
 ```
 
 Register your SSH public key on GitHub (Key Type: Authentication Key): https://github.com/settings/ssh/new
+

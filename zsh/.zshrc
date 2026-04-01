@@ -66,6 +66,7 @@ export PATH=$PATH:$(yarn global bin)
 
 . $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^e' autosuggest-accept # 補完候補を確定する
+bindkey -s '^o' 'code .\n'       # VS Code をカレントディレクトリで開く
 
 export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 
@@ -94,3 +95,5 @@ fi
 if [[ "$TERM_PROGRAM" == "kiro" ]]; then
     . "$(kiro --locate-shell-integration-path zsh)"
 fi
+
+alias claude-mem='bun "/Users/zak/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'

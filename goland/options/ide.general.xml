@@ -12,5 +12,7 @@
     <entry key="ide.experimental.ui" value="true" source="SYSTEM" />
     <entry key="enable.connection.configuration.widget" value="false" source="SYSTEM" />
     <entry key="switched.from.classic.to.islands" value="false" source="SYSTEM" />
+    <entry key="llm.chat.agent.codex.install.codex.version" value="0.114.0" source="MANAGER" />
+    <entry key="llm.chat.agent.codex.install.acp.server.version" value="0.0.31" source="MANAGER" />
   </component>
 </application>

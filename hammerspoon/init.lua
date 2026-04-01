@@ -98,3 +98,92 @@ end
 
 hs.hotkey.bind(hyper, "0", maximizeWindow) -- `⌘⌥⌃ + 0` でウィンドウ最大化
 hs.hotkey.bind(hyper, "C", centerWindow) -- 中央に配置（サイズ保持）
+
+-- =============================================================
+-- Activity Monitor - HTTP API + Dashboard
+-- =============================================================
+print(">>> Activity Monitor loading...")
+
+local monitorState = {
+    activeApp = "",
+    activeAppBundle = "",
+    activeWindowTitle = "",
+    idleTime = 0,
+    windows = {},
+    browserUrl = "",
+    lastUpdate = "",
+}
+
+local function getMonitorBrowserUrl(appName)
+    local scripts = {
+        ["Google Chrome"] = 'tell application "Google Chrome" to return URL of active tab of front window',
+        ["Brave Browser"] = 'tell application "Brave Browser" to return URL of active tab of front window',
+        ["Safari"] = 'tell application "Safari" to return URL of current tab of front window',
+        ["Arc"] = 'tell application "Arc" to return URL of active tab of front window',
+    }
+    local script = scripts[appName]
+    if not script then return "" end
+    local ok, result = hs.osascript.applescript(script)
+    if ok then return result else return "" end
+end
+
+local monitorAppWatcher = hs.application.watcher.new(function(appName, eventType, app)
+    if eventType == hs.application.watcher.activated then
+        monitorState.activeApp = appName or ""
+        monitorState.activeAppBundle = app and app:bundleID() or ""
+        local win = app and app:focusedWindow()
+        monitorState.activeWindowTitle = win and win:title() or ""
+        monitorState.browserUrl = getMonitorBrowserUrl(appName or "")
+    end
+end)
+monitorAppWatcher:start()
+print(">>> appWatcher started")
+
+local monitorTimer = hs.timer.doEvery(2, function()
+    monitorState.idleTime = math.floor(hs.host.idleTime())
+    monitorState.lastUpdate = os.date("!%Y-%m-%dT%H:%M:%SZ")
+
+    pcall(function()
+        local wins = hs.window.visibleWindows()
+        local windowList = {}
+        for _, w in ipairs(wins) do
+            local app = w:application()
+            table.insert(windowList, {
+                title = w:title() or "",
+                app = app and app:name() or "",
+                bundle = app and app:bundleID() or "",
+                id = w:id(),
+            })
+        end
+        monitorState.windows = windowList
+    end)
+
+    local focused = hs.window.focusedWindow()
+    if focused then
+        monitorState.activeWindowTitle = focused:title() or ""
+        local app = focused:application()
+        if app then
+            monitorState.activeApp = app:name() or ""
+            monitorState.activeAppBundle = app:bundleID() or ""
+        end
+    end
+
+    -- Write monitor.json for the Python HTTP server
+    pcall(function()
+        local monitorPath = os.getenv("HOME") .. "/.config/hammerspoon/monitor.json"
+        local ok, json = pcall(hs.json.encode, monitorState)
+        if ok then
+            local f = io.open(monitorPath, "w")
+            if f then
+                f:write(json)
+                f:close()
+            end
+        end
+    end)
+end)
+print(">>> updateTimer started — writing monitor.json")
+
+-- -----------------------------------------------
+-- Window Restore (sleep/wake)
+-- -----------------------------------------------
+require("window_restore")

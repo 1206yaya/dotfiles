@@ -393,6 +393,14 @@
   "editor.fontLigatures": true,
   "leetcode.defaultLanguage": "golang",
   "terminal.external.osxExec": "iTerm.app",
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[snippets]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
@@ -562,6 +570,7 @@
   "zenMode.hideActivityBar": false,
   "zenMode.centerLayout": false,
   "zenMode.hideLineNumbers": false,
+  "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.toggleZenMode"
   ],

@@ -1,3 +1,4 @@
+com.github.beansoft.iscratch
 com.github.linwancen.drawgraph
 com.intellij.swagger
 com.jetbrains.writerside

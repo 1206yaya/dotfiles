@@ -213,6 +213,7 @@
       [:l ["open -a 'Intellij IDEA CE'"]]
       [:g ["open -a 'Goland'"]]
       [:d ["open -a 'DBeaver'"]]
+      [:x ["open -a 'cmux'"]]
 
       [:p [:open "memo"]]
       [:b [:open "Obsidian"]]
@@ -225,9 +226,11 @@
     :des "open apps"
     :rules [:9-mode
       [:k ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/dotfiles "]]
-      [:w ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/workspace "]]
       [:u ["open -a 'Visual Studio Code' $HOME/.claude "]]
-      [:1 ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/00hbproj-note "]]
+      [:l ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/ai-agent-lemon "]]
+      [:p ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/ai-agent-playground "]]
+      [:x ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/praxis "]]
+      [:v ["$HOME/ghq/github.com/1206yaya/dotfiles/bin/cmux-open-vscode"]] ;; cmux focused terminal → VS Code
     ]
   }
   {
