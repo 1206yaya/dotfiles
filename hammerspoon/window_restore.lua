@@ -1,138 +1,110 @@
 -- =============================================================
--- Window Restore on Sleep/Wake
+-- Window Layout — 宣言的レイアウト適用
 -- =============================================================
--- systemWillSleep  → 全ウィンドウの配置を JSON に保存
--- systemDidWake    → 遅延後にリストア
--- ⌘⌥⌃ + S         → 手動保存
--- ⌘⌥⌃ + R         → 手動リストア
-
-local SAVE_PATH = os.getenv("HOME") .. "/.hammerspoon/window_layout.json"
-local RESTORE_DELAY = 3  -- ディスプレイ再認識を待つ秒数
+-- systemDidWake       → 段階的リトライでレイアウト適用
+-- screenWatcher       → ディスプレイ接続/切断時に自動適用
+-- super(⌘⌥⌃⇧) + 1   → 手動適用
 
 -- -----------------------------------------------
--- Save layout
+-- レイアウト定義
 -- -----------------------------------------------
-local function saveLayout()
-    local layout = {}
-    local allWindows = hs.window.allWindows()
-    for _, win in ipairs(allWindows) do
-        if win:isStandard() then
-            local app = win:application()
-            local frame = win:frame()
-            local screen = win:screen()
-            if app and screen then
-                table.insert(layout, {
-                    appName = app:name(),
-                    bundleID = app:bundleID(),
-                    windowTitle = win:title(),
-                    windowID = win:id(),
-                    frame = {
-                        x = frame.x,
-                        y = frame.y,
-                        w = frame.w,
-                        h = frame.h,
-                    },
-                    screenName = screen:name(),
-                    screenID = screen:getUUID(),
-                })
-            end
-        end
-    end
-
-    local ok, json = pcall(hs.json.encode, layout, true)
-    if not ok then
-        print(">>> window_restore: JSON encode failed: " .. tostring(json))
-        return
-    end
-
-    local f = io.open(SAVE_PATH, "w")
-    if f then
-        f:write(json)
-        f:close()
-        print(">>> window_restore: saved " .. #layout .. " windows")
-    else
-        print(">>> window_restore: failed to write " .. SAVE_PATH)
-    end
-end
+-- { アプリ名, スクリーン名（部分一致）, 配置 }
+-- 配置: hs.layout.maximized = 最大化
+local appLayout = {
+    { "Google Chrome",       "Display"       },
+    { "cmux",                "Built-in"      },
+    { "Obsidian",            "LG"            },
+    { "Code",                "LG"            },
+    { "WebStorm",            "LG"            },
+}
 
 -- -----------------------------------------------
--- Restore layout
+-- スクリーン名でスクリーンを探す（部分一致）
 -- -----------------------------------------------
-local function restoreLayout()
-    local f = io.open(SAVE_PATH, "r")
-    if not f then
-        print(">>> window_restore: no saved layout found")
-        return
-    end
-    local raw = f:read("*a")
-    f:close()
-
-    local ok, layout = pcall(hs.json.decode, raw)
-    if not ok or type(layout) ~= "table" then
-        print(">>> window_restore: failed to parse layout JSON")
-        return
-    end
-
-    -- スクリーン UUID → screen オブジェクトのマップ
-    local screenMap = {}
+local function findScreen(partialName)
+    -- 完全一致を優先
     for _, screen in ipairs(hs.screen.allScreens()) do
-        screenMap[screen:getUUID()] = screen
+        if screen:name() == partialName then
+            return screen
+        end
     end
+    -- 部分一致にフォールバック
+    for _, screen in ipairs(hs.screen.allScreens()) do
+        if string.find(screen:name(), partialName, 1, true) then
+            return screen
+        end
+    end
+    return nil
+end
 
-    local restored = 0
-    for _, entry in ipairs(layout) do
-        local app = hs.application.get(entry.bundleID)
+-- -----------------------------------------------
+-- レイアウト適用
+-- -----------------------------------------------
+function applyLayout()
+    local applied = 0
+    local total = #appLayout
+
+    for _, entry in ipairs(appLayout) do
+        local appName = entry[1]
+        local screenHint = entry[2]
+
+        local app = hs.application.get(appName)
         if app then
-            for _, win in ipairs(app:allWindows()) do
-                if win:isStandard() and win:title() == entry.windowTitle then
-                    local targetScreen = screenMap[entry.screenID]
-                    if targetScreen then
-                        -- 対象スクリーンに移動してからフレーム設定
+            local targetScreen = findScreen(screenHint)
+            if targetScreen then
+                for _, win in ipairs(app:allWindows()) do
+                    if win:isStandard() then
                         win:moveToScreen(targetScreen, false, false, 0)
+                        win:maximize(0)
+                        applied = applied + 1
                     end
-                    local frame = hs.geometry.rect(
-                        entry.frame.x, entry.frame.y,
-                        entry.frame.w, entry.frame.h
-                    )
-                    win:setFrame(frame, 0)
-                    restored = restored + 1
-                    break
                 end
+            else
+                print(">>> layout: screen not found for hint '" .. screenHint .. "'")
             end
         end
     end
 
-    print(">>> window_restore: restored " .. restored .. "/" .. #layout .. " windows")
-    hs.alert.show("Windows restored: " .. restored .. "/" .. #layout)
+    print(">>> layout: applied " .. applied .. " windows (from " .. total .. " rules)")
+    hs.alert.show("Layout applied: " .. applied .. " windows")
 end
 
 -- -----------------------------------------------
--- Sleep/Wake watcher
+-- Sleep/Wake watcher — 段階的リトライ
 -- -----------------------------------------------
+local RETRY_DELAYS = { 3, 6, 10 }  -- 秒
+
 local sleepWatcher = hs.caffeinate.watcher.new(function(event)
-    if event == hs.caffeinate.watcher.systemWillSleep then
-        print(">>> window_restore: systemWillSleep — saving layout")
-        saveLayout()
-    elseif event == hs.caffeinate.watcher.systemDidWake then
-        print(">>> window_restore: systemDidWake — restoring in " .. RESTORE_DELAY .. "s")
-        hs.timer.doAfter(RESTORE_DELAY, function()
-            restoreLayout()
-        end)
+    if event == hs.caffeinate.watcher.systemDidWake then
+        print(">>> layout: systemDidWake — applying layout with retries")
+        for _, delay in ipairs(RETRY_DELAYS) do
+            hs.timer.doAfter(delay, function()
+                print(">>> layout: retry at " .. delay .. "s")
+                applyLayout()
+            end)
+        end
     end
 end)
 sleepWatcher:start()
-print(">>> window_restore: sleep/wake watcher started")
+print(">>> layout: sleep/wake watcher started")
+
+-- -----------------------------------------------
+-- スクリーン接続/切断の監視
+-- -----------------------------------------------
+local screenWatcher = hs.screen.watcher.new(function()
+    print(">>> layout: screen configuration changed — applying layout in 2s")
+    hs.timer.doAfter(2, applyLayout)
+end)
+screenWatcher:start()
+print(">>> layout: screen watcher started")
 
 -- -----------------------------------------------
 -- Manual hotkeys
 -- -----------------------------------------------
-local hyper = {"cmd", "alt", "ctrl"}
-hs.hotkey.bind(hyper, "S", function()
-    saveLayout()
-    hs.alert.show("Window layout saved")
-end)
-hs.hotkey.bind(hyper, "R", function()
-    restoreLayout()
+local superKey = {"cmd", "alt", "ctrl", "shift"}
+
+hs.hotkey.bind(superKey, "1", function()
+    applyLayout()
 end)
 
-print(">>> window_restore: loaded (⌘⌥⌃+S save, ⌘⌥⌃+R restore)")
+print(">>> layout: loaded (super+1 apply)")

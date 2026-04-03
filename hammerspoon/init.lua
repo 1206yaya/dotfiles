@@ -1,3 +1,6 @@
+-- IPC (CLI からの制御用)
+require("hs.ipc")
+
 -- y   k   u
 -- h       l
 -- b   j   n
