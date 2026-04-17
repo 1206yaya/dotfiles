@@ -11,7 +11,8 @@
 -- { アプリ名, スクリーン名（部分一致）, 配置 }
 -- 配置: hs.layout.maximized = 最大化
 local appLayout = {
-    { "Google Chrome",       "Display"       },
+    { "Google Chrome",       "GY-16Q"        },
+    { "EdrawMind",           "Display"       },
     { "cmux",                "Built-in"      },
     { "Obsidian",            "LG"            },
     { "Code",                "LG"            },
@@ -99,6 +100,108 @@ screenWatcher:start()
 print(">>> layout: screen watcher started")
 
 -- -----------------------------------------------
+-- スナップショット保存・復元
+-- -----------------------------------------------
+local SNAPSHOT_PATH = os.getenv("HOME") .. "/.hammerspoon/window_snapshot.json"
+
+-- 全ウィンドウの位置を保存（タイトルで個別ウィンドウを区別）
+local function saveSnapshot()
+    local snapshot = {}
+    for _, win in ipairs(hs.window.allWindows()) do
+        if win:isStandard() then
+            local app = win:application()
+            local screen = win:screen()
+            local frame = win:frame()
+            if app and screen then
+                table.insert(snapshot, {
+                    appName = app:name(),
+                    windowTitle = win:title(),
+                    screenName = screen:name(),
+                    x = frame.x,
+                    y = frame.y,
+                    w = frame.w,
+                    h = frame.h,
+                })
+            end
+        end
+    end
+    local json = hs.json.encode(snapshot, true)
+    local f = io.open(SNAPSHOT_PATH, "w")
+    if f then
+        f:write(json)
+        f:close()
+        print(">>> snapshot: saved " .. #snapshot .. " windows")
+        hs.alert.show("Snapshot saved: " .. #snapshot .. " windows")
+    else
+        print(">>> snapshot: failed to write file")
+        hs.alert.show("Snapshot save failed!")
+    end
+end
+
+-- 保存したスナップショットを復元（タイトルで個別ウィンドウをマッチ）
+local function restoreSnapshot()
+    local f = io.open(SNAPSHOT_PATH, "r")
+    if not f then
+        print(">>> snapshot: no snapshot file found")
+        hs.alert.show("No snapshot found")
+        return
+    end
+    local content = f:read("*a")
+    f:close()
+
+    local snapshot = hs.json.decode(content)
+    if not snapshot then
+        print(">>> snapshot: failed to parse snapshot")
+        hs.alert.show("Snapshot parse error!")
+        return
+    end
+
+    -- ウィンドウタイトルでマッチング（タイトルが変わっていても部分一致で対応）
+    local restored = 0
+    local usedWindows = {}  -- 同じウィンドウを二重に復元しないためのトラッカー
+
+    for _, entry in ipairs(snapshot) do
+        local app = hs.application.get(entry.appName)
+        if app then
+            local targetScreen = findScreen(entry.screenName)
+            if targetScreen then
+                local matched = false
+                -- まずタイトル完全一致で探す
+                for _, win in ipairs(app:allWindows()) do
+                    local winId = win:id()
+                    if win:isStandard() and not usedWindows[winId] and win:title() == entry.windowTitle then
+                        win:moveToScreen(targetScreen, false, false, 0)
+                        win:setFrame(hs.geometry.rect(entry.x, entry.y, entry.w, entry.h), 0)
+                        usedWindows[winId] = true
+                        restored = restored + 1
+                        matched = true
+                        break
+                    end
+                end
+                -- 完全一致がなければタイトル部分一致で探す
+                if not matched and entry.windowTitle and entry.windowTitle ~= "" then
+                    for _, win in ipairs(app:allWindows()) do
+                        local winId = win:id()
+                        if win:isStandard() and not usedWindows[winId]
+                           and string.find(win:title(), entry.windowTitle, 1, true) then
+                            win:moveToScreen(targetScreen, false, false, 0)
+                            win:setFrame(hs.geometry.rect(entry.x, entry.y, entry.w, entry.h), 0)
+                            usedWindows[winId] = true
+                            restored = restored + 1
+                            matched = true
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    print(">>> snapshot: restored " .. restored .. " windows")
+    hs.alert.show("Snapshot restored: " .. restored .. " windows")
+end
+
+-- -----------------------------------------------
 -- Manual hotkeys
 -- -----------------------------------------------
 local superKey = {"cmd", "alt", "ctrl", "shift"}
@@ -107,4 +210,12 @@ hs.hotkey.bind(superKey, "1", function()
     applyLayout()
 end)
 
-print(">>> layout: loaded (super+1 apply)")
+hs.hotkey.bind(superKey, "2", function()
+    saveSnapshot()
+end)
+
+hs.hotkey.bind(superKey, "3", function()
+    restoreSnapshot()
+end)
+
+print(">>> layout: loaded (super+1 apply, super+2 save, super+3 restore)")

@@ -1,12 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(rclone listremotes)",
-      "Bash(mise list)",
-      "Read(//Users/zak/.local/bin/**)",
-      "Bash(python3 -c \"from pdflib.models import FileFormat; f = FileFormat\\(format=''pdf'', path=''Go/test.pdf'', original_filename=''test.pdf'', gdrive_url=''https://drive.google.com/test''\\); print\\(f\\); d = {''format'': ''pdf'', ''path'': ''Go/test.pdf'', ''original_filename'': ''test.pdf'', ''gdrive_url'': ''https://example.com''}; f2 = FileFormat\\(format=d[''format''], path=d[''path''], original_filename=d[''original_filename''], gdrive_url=d.get\\(''gdrive_url''\\)\\); print\\(f2.gdrive_url\\)\")",
-      "Bash(python3 -m pdflib --help)",
-      "Bash(python3 -c \"import sys; sys.path.insert\\(0, ''.''\\); from pdflib.models import FileFormat; f = FileFormat\\(format=''pdf'', path=''Go/test.pdf'', original_filename=''test.pdf'', gdrive_url=''https://drive.google.com/test''\\); print\\(''gdrive_url:'', f.gdrive_url\\)\")"
-    ]
+    "allow": ["Bash(*)"]
   }
 }

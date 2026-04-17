@@ -520,11 +520,6 @@
         "command": "-workbench.action.quit"
     },
     {
-        "key": "alt+cmd+s",
-        "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
-        "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
-    },
-    {
         "key": "cmd+7",
         "command": "-workbench.action.focusSeventhEditorGroup"
     },
@@ -549,5 +544,15 @@
         "key": "cmd+w",
         "command": "workbench.action.closeWindow",
         "when": "!editorIsOpen && !multipleEditorGroups"
+    },
+    {
+        "key": "cmd+k y",
+        "command": "-mark-sharp.switch-editor-mode",
+        "when": "activeWebviewPanelId == 'msharp.customEditor' || editorLangId == markdown"
+    },
+    {
+        "key": "ctrl+shift+s",
+        "command": "mark-sharp.switch-editor-mode",
+        "when": "activeWebviewPanelId == 'msharp.customEditor' || editorLangId == markdown"
     }
 ]

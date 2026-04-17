@@ -24,6 +24,7 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 export FUNCNEST=2000
 export CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH="$CHROME_PATH"  # macOS Tahoe: Playwright bundled Chromium crashes (SIGBUS)
 export GPG_TTY=$(tty)
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
