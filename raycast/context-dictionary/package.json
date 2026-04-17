@@ -1,0 +1,54 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "context-dictionary",
+  "title": "Context Dictionary",
+  "description": "選択テキストやクリップボードの単語を画面コンテキスト付きでAIに質問",
+  "icon": "extension-icon.png",
+  "author": "1206yaya",
+  "categories": ["Productivity"],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "context-capture",
+      "title": "Context Lookup",
+      "subtitle": "Context Dictionary",
+      "description": "選択中またはクリップボードの単語を画面の文脈とともにAIで調べる",
+      "mode": "no-view"
+    },
+    {
+      "name": "context-result",
+      "title": "Context Result",
+      "subtitle": "Context Dictionary",
+      "description": "Context Lookupの結果を表示（内部用）",
+      "mode": "view",
+      "disabledByDefault": true
+    }
+  ],
+  "preferences": [
+    {
+      "name": "apiKey",
+      "title": "Anthropic API Key",
+      "description": "Claude API key from console.anthropic.com",
+      "type": "password",
+      "required": true
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.83.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.11",
+    "@types/node": "~22.13.0",
+    "@types/react": "^19.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.4.0",
+    "typescript": "^5.7.0"
+  },
+  "scripts": {
+    "postinstall": "swiftc -O -o assets/capture-screen scripts/capture-screen.swift -framework ScreenCaptureKit -framework Cocoa",
+    "build": "ray build",
+    "dev": "ray dev",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  }
+}
