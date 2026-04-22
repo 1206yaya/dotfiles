@@ -5,6 +5,9 @@
   "breadcrumbs.filePath": "on",
   "editor.largeFileOptimizations": false,
 
+  // Outline Map: 深さ切り替え(ctrl+[/])を有効にするため初期深さを設定
+  "outline-map.defaultMaxDepth": 6,
+
   "window.title": "${activeEditorLong}",
   "workbench.iconTheme": "material-icon-theme",
   // OPEN EDITORS を非表示

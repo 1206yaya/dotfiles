@@ -3,6 +3,7 @@ export DOTDIR="$GIT_CLONE_PATH/dotfiles"
 
 alias q="exit"
 alias qq="osascript -e 'tell application \"iTerm2\" to quit'"
+alias cl="clear"
 alias o="open ."
 alias pr="gh pr view --web"
 # Network
@@ -96,6 +97,7 @@ alias vim="nvim"
 alias ccmcp="claude --mcp-config .mcp.json"
 alias cc="claude --dangerously-skip-permissions"
 alias ccc="claude --continue"
+alias claude-up='npm install -g @anthropic-ai/claude-code@latest && claude --version'
 
 alias de="defaults"
 alias groot="cd ~/ghq/github.com/1206yaya"
@@ -104,12 +106,14 @@ alias kraken="open -na 'GitKraken' --args -p $(pwd)"
 alias repo="gh repo view --web"
 alias refresh="source ~/.zshrc"
 alias edit="code ~/.zshrc"
-# 最終更新日時の新しい順にファイルを表示
-alias g='dir=$(ghq list | xargs -I{} stat -f "%m %N" "$(ghq root)/{}" | sort -nr | cut -d" " -f2- | peco); [ -z "$dir" ] && return; builtin cd "$dir"'
+# g / g-refresh は functions/functions-ghq.zsh に移動
+# (GitHub topic 表示・検索対応のため関数化)
 
 alias pycharm="open -na 'PyCharm CE.app' --args "$@""
 alias intellij="open -na 'IntelliJ IDEA CE.app' --args "$@""
 alias goland="open -na 'GoLand.app' --args "$@""
+alias claude-new="open -n -a 'Claude'"
+alias webstorm="open -na 'WebStorm.app' --args "$@""
 # alias pulsar="open -na 'Pulsar.app' --args "$@""
 alias pulsar="open -na 'Pulsar.app' --args"
 

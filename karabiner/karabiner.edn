@@ -233,6 +233,7 @@
       [:p ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/ai-agent-playground "]]
       [:x ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/praxis "]]
       [:v ["$HOME/ghq/github.com/1206yaya/dotfiles/bin/cmux-open-vscode"]] ;; cmux focused terminal → VS Code
+      [:1 ["open -a 'Visual Studio Code' $HOME/ghq/github.com/1206yaya/llm-wiki "]]
     ]
   }
   {

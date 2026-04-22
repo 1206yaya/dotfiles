@@ -98,3 +98,6 @@ if [[ "$TERM_PROGRAM" == "kiro" ]]; then
 fi
 
 alias claude-mem='bun "/Users/zak/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+
+# Raise file descriptor limit for Claude Code and other modern tools
+ulimit -n 2147483646

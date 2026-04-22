@@ -308,7 +308,7 @@
     },
     {
         "key": "cmd+7",
-        "command": "outline.focus"
+        "command": "outline-map-view.focus"
     },
     {
         "key": "shift+cmd+b",
@@ -554,5 +554,13 @@
         "key": "ctrl+shift+s",
         "command": "mark-sharp.switch-editor-mode",
         "when": "activeWebviewPanelId == 'msharp.customEditor' || editorLangId == markdown"
+    },
+    {
+        "key": "alt+[",
+        "command": "outline-map.reduceDepth"
+    },
+    {
+        "key": "alt+]",
+        "command": "outline-map.addDepth"
     }
 ]
