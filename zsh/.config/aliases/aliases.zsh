@@ -96,6 +96,7 @@ alias vim="nvim"
 # alias cc="claude "$@""
 alias ccmcp="claude --mcp-config .mcp.json"
 alias cc="claude --dangerously-skip-permissions"
+alias ccs="claude --dangerously-skip-permissions --model sonnet"
 alias ccc="claude --continue"
 alias claude-up='npm install -g @anthropic-ai/claude-code@latest && claude --version'
 
