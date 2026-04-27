@@ -347,6 +347,14 @@ install_mise() {
     done
 }
 
+install_claude_code() {
+    if [ "$skip_apps" -eq 1 ]; then
+        return
+    fi
+    log 'Install/Update Claude Code via npm'
+    mise exec -- npm install -g @anthropic-ai/claude-code@latest
+}
+
 set_alacritty_theme() {
     ensure_dir_exists "$HOME/.config/alacritty/themes"
 }
@@ -358,6 +366,7 @@ install_homebrew
 install_brewfile
 setup_gpg
 install_mise
+install_claude_code
 create_symbolic_links
 set_macos
 check_list
