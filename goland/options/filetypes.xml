@@ -1,6 +1,6 @@
 <application>
   <component name="FileTypeManager" version="19">
-    <ignoreFiles list="*.pyc;*.pyo;*.rbc;*.yarb;*~;.DS_Store;.git;.hg;.history;.mypy_cache;.pytest_cache;.ruff_cache;.svn;CVS;__pycache__;_svn;vssver.scc;vssver2.scc" />
+    <ignoreFiles list="*$py.class;*.pyc;*.pyo;*.rbc;*.yarb;*~;.DS_Store;.git;.hg;.history;.mypy_cache;.pytest_cache;.ruff_cache;.svn;CVS;__pycache__;_svn;vssver.scc;vssver2.scc" />
     <extensionMap>
       <mapping pattern="tmp" type="AUTO_DETECTED" />
       <mapping pattern="mcp.json" type="JSON5" />

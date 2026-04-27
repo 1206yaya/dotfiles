@@ -3,6 +3,7 @@
   <metaInfo>
     <property name="ide">GoLand</property>
     <property name="ideVersion">2025.1.1.0.0</property>
+    <property name="modified">2026-04-23T12:15:17</property>
     <property name="originalScheme">Dark</property>
     <property name="partialSave">true</property>
     <property name="pluginId">com.intellij</property>

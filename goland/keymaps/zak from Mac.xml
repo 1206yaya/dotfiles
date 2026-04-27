@@ -23,4 +23,5 @@
   </action>
   <action id="Terminal.SearchInCommandHistory" />
   <action id="UsageFiltering.ReadAccess" />
+  <action id="copilot.disposeInlays" />
 </keymap>
