@@ -213,6 +213,7 @@
       [:l ["open -a 'Intellij IDEA CE'"]]
       [:g ["open -a 'Goland'"]]
       [:w ["open -a 'WebStorm'"]]
+      [:y ["open -a 'PyCharm CE'"]]
       [:d ["open -a 'DBeaver'"]]
       [:x ["open -a 'cmux'"]]
 
