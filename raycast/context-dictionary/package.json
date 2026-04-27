@@ -50,5 +50,8 @@
     "dev": "ray dev",
     "fix-lint": "ray lint --fix",
     "lint": "ray lint"
+  },
+  "overrides": {
+    "minimatch": "^9.0.7"
   }
 }
