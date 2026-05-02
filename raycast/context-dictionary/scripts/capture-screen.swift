@@ -34,7 +34,15 @@ Task {
             exit(1)
         }
 
-        let filter = SCContentFilter(display: display, excludingWindows: [])
+        // Raycast 自身のウィンドウを除外して撮影（view モードで Raycast UI が前面にいてもOK）
+        let raycastApps = content.applications.filter {
+            $0.bundleIdentifier.hasPrefix("com.raycast")
+        }
+        let filter = SCContentFilter(
+            display: display,
+            excludingApplications: raycastApps,
+            exceptingWindows: []
+        )
         let config = SCStreamConfiguration()
         config.width = display.width
         config.height = display.height

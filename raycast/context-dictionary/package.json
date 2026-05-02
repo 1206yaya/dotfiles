@@ -16,12 +16,18 @@
       "mode": "no-view"
     },
     {
-      "name": "context-result",
-      "title": "Context Result",
+      "name": "context-show",
+      "title": "Context Show",
       "subtitle": "Context Dictionary",
       "description": "Context Lookupの結果を表示（内部用）",
-      "mode": "view",
-      "disabledByDefault": true
+      "mode": "view"
+    },
+    {
+      "name": "stop-audio",
+      "title": "Stop Reading",
+      "subtitle": "Context Dictionary",
+      "description": "再生中の読み上げを停止する（ホットキー bind 推奨）",
+      "mode": "no-view"
     }
   ],
   "preferences": [
@@ -31,6 +37,22 @@
       "description": "Claude API key from console.anthropic.com",
       "type": "password",
       "required": true
+    },
+    {
+      "name": "audioRate",
+      "title": "Audio Speed",
+      "description": "英語TTSの再生速度（倍速）",
+      "type": "dropdown",
+      "default": "1.75",
+      "required": false,
+      "data": [
+        { "title": "0.75x", "value": "0.75" },
+        { "title": "1.0x", "value": "1.0" },
+        { "title": "1.25x", "value": "1.25" },
+        { "title": "1.5x", "value": "1.5" },
+        { "title": "1.75x", "value": "1.75" },
+        { "title": "2.0x", "value": "2.0" }
+      ]
     }
   ],
   "dependencies": {
