@@ -97,8 +97,20 @@ alias vim="nvim"
 alias ccmcp="claude --mcp-config .mcp.json"
 alias cc="claude --dangerously-skip-permissions"
 alias ccs="claude --dangerously-skip-permissions --model sonnet"
+alias cch="claude --dangerously-skip-permissions --model haiku"
 alias ccc="claude --continue"
-alias claude-up='npm install -g @anthropic-ai/claude-code@latest && claude --version'
+unalias claude-up 2>/dev/null
+claude-up() {
+  local before after
+  before="$(claude --version 2>/dev/null)"
+  npm install -g @anthropic-ai/claude-code@latest || return $?
+  after="$(claude --version 2>/dev/null)"
+  if [[ "$before" != "$after" ]]; then
+    echo "Claude Code がアップデートされました: ${before:-(未インストール)} -> ${after}"
+  else
+    echo "Claude Code は既に最新です: ${after}"
+  fi
+}
 
 alias de="defaults"
 alias groot="cd ~/ghq/github.com/1206yaya"
