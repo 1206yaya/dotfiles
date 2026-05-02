@@ -171,6 +171,16 @@
     :rules [[:##right_command :!!f12]]
   }
 
+  {
+    :des "スペシャルキー (Hyper) + F2 でスリープモード (Hammerspoon 経由)"
+    :rules [[:!!f2 ["{ date; /opt/homebrew/bin/hs -c 'hs.caffeinate.systemSleep(); return \"called\"'; echo \"hs_exit=$?\"; } >> /tmp/hyper-f2.log 2>&1"]]]
+  }
+
+  {
+    :des "スペシャルキー (Hyper) + F1 で context-dictionary (Raycast 拡張) の ray dev を再起動"
+    :rules [[:!!f1 ["{ date; launchctl kickstart -k gui/$(id -u)/com.1206yaya.raycast-context-dictionary; echo \"kick_exit=$?\"; } >> /tmp/hyper-f1-ctxdict.log 2>&1"]]]
+  }
+
 ;; テキスト処理
   {
     :des "insert ```"
