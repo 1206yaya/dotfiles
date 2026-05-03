@@ -1,8 +1,8 @@
 -- =============================================================
 -- Window Layout — スナップショットベースのレイアウト管理
 -- =============================================================
--- super(⌘⌥⌃⇧) + 1   → 現在の配置を snapshot に保存
--- super(⌘⌥⌃⇧) + 2   → snapshot から配置を復元
+-- super(⌘⌥⌃⇧) + 2   → 現在の配置を snapshot に保存
+-- super(⌘⌥⌃⇧) + 1   → snapshot から配置を復元
 -- screenWatcher       → ディスプレイ接続/切断時に自動復元
 -- systemDidWake       → スリープ復帰時に段階的リトライで自動復元
 
@@ -199,12 +199,12 @@ print(">>> snapshot: screen watcher started")
 -- -----------------------------------------------
 local superKey = {"cmd", "alt", "ctrl", "shift"}
 
-hs.hotkey.bind(superKey, "1", function()
+hs.hotkey.bind(superKey, "2", function()
     saveSnapshot()
 end)
 
-hs.hotkey.bind(superKey, "2", function()
+hs.hotkey.bind(superKey, "1", function()
     restoreSnapshot()
 end)
 
-print(">>> snapshot: loaded (super+1 save, super+2 restore)")
+print(">>> snapshot: loaded (super+2 save, super+1 restore)")
