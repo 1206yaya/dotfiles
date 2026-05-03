@@ -23,27 +23,27 @@
     "**/.DS_Store": true,
     "**/.git": true,
     "**/node_modules": true,
-    "**/var/folders": true,
+    "**/var/folders": true
   },
   "search.exclude": {
     "**/.history": true,
     "**/.next": true,
     "**/node_modules": true,
     "**/site-packages": true,
-    "**/.fvm": true,
+    "**/.fvm": true
   },
   "search.quickOpen.includeSymbols": false,
   "search.quickAccess.preserveInput": true,
   "search.quickOpen.includeHistory": true,
 
   "files.watcherExclude": {
-    "/node_modules/": true,
+    "/node_modules/": true
   },
   "files.associations": {
     "*.drift": "sql",
     "*.tpl": "html",
     ".chatignore": "text",
-    "*.tp.md": "clojure",
+    "*.tp.md": "clojure"
   },
   "explorer.confirmDelete": false,
   "security.workspace.trust.untrustedFiles": "open",
@@ -68,39 +68,39 @@
 
   "terraform.languageServer": {
     "external": true,
-    "args": ["serve"],
+    "args": ["serve"]
   },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
+    "editor.formatOnSaveMode": "file"
   },
   "[terraform-vars]": {
     "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
+    "editor.formatOnSaveMode": "file"
   },
   "[hcl]": {
     "editor.defaultFormatter": "fredwangwang.vscode-hcl-format",
     "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
+    "editor.formatOnSaveMode": "file"
   },
   "[markdown]": {
     "editor.quickSuggestions": {
       "comments": "on",
       "strings": "on",
-      "other": "on",
-    },
+      "other": "on"
+    }
   },
   "[go]": {
     "editor.insertSpaces": true,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "golang.go",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "always",
+      "source.organizeImports": "always"
     },
     "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "editor.tabCompletion": "onlySnippets",
+    "editor.tabCompletion": "onlySnippets"
   },
   "editor.suggest.showSnippets": true,
   "go.useLanguageServer": true,
@@ -116,16 +116,16 @@
       "fillreturns": true,
       "nonewvars": true,
       "undeclaredname": true,
-      "unusedparams": true,
+      "unusedparams": true
     },
-    "staticcheck": true,
+    "staticcheck": true
   },
 
   "clang-format.language.proto.style": "google",
   "clang-format.executable": "/opt/homebrew/bin/clang-format",
   "[proto3]": {
     "editor.defaultFormatter": "xaver.clang-format",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
   "go.goroot": "${env:HOME}/.local/share/mise/installs/go/1.24.8",
   "go.gopath": "${env:HOME}/go",
@@ -133,14 +133,14 @@
   "[dart]": {
     // andrea
     "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
+      "source.fixAll": "explicit"
     },
     "editor.rulers": [80],
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": "off",
+    "editor.wordBasedSuggestions": "off"
     // version1
     // "editor.formatOnSave": true,
     // "editor.formatOnType": true,
@@ -164,7 +164,7 @@
   "editor.stickyScroll.enabled": true,
   "explorer.fileNesting.patterns": {
     "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml, pubspec_overrides.yaml, flutter_launcher_icons*.yaml",
-    "*.dart": "${capture}.g.dart, ${capture}.freezed.dart",
+    "*.dart": "${capture}.g.dart, ${capture}.freezed.dart"
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
@@ -174,7 +174,7 @@
   "dart.previewFlutterUiGuidesCustomTracking": true,
   "editor.accessibilitySupport": "off",
   "editor.codeActionsOnSave": {
-    "quickfix.insertSemicolon": "explicit",
+    "quickfix.insertSemicolon": "explicit"
   },
   "editor.showFoldingControls": "always",
   "leetcode.workspaceFolder": "/Users/zak/ghq/github.com/1206yaya/leetcode",
@@ -184,104 +184,104 @@
       "uri": "http://127.0.0.1:8080",
       "username": "1206yaya",
       "crumbIssuer": true,
-      "active": true,
-    },
+      "active": true
+    }
   ],
   "jenkins-jack.pipeline.tree.items": [
     {
       "hostId": "localhost:8080",
       "jobName": "1.plain-node",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/1.plain-node.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/1.plain-node.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "2.plain-pipeline",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/2.plain-pipeline.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/2.plain-pipeline.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "3.conditional",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/3.conditional.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/3.conditional.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "4.groovy",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/4.groovy.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/4.groovy.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "6.write_file",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/6.write_file.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/6.write_file.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "7. parameters",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/7. parameters.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/7. parameters.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "8.try-catch-finally",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/8.try-catch-finally.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/8.try-catch-finally.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "9.run-other-jobs",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.run-other-jobs.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.run-other-jobs.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "9.1.job1",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.1.job1.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.1.job1.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "JenkinsUtils",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/src/com/JenkinsUtils.groovy",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/src/com/JenkinsUtils.groovy"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "10.shared-library",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/10.shared-library.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/10.shared-library.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "9.2.sleep",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.2.sleep.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.2.sleep.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "9.3.job-status",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.3.job-status.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/9.3.job-status.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "12.retry",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/12.retry.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/12.retry.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "13.parallel",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/13.parallel.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/13.parallel.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "DailyJob",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/osho/DailyJob.jenkins",
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/osho/DailyJob.jenkins"
     },
     {
       "hostId": "localhost:8080",
       "jobName": "14.env_param",
-      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/14.env_param.jenkins",
-    },
+      "filepath": "/Users/zak/ghq/github.com/1206yaya/jenkins-playground/14.env_param.jenkins"
+    }
   ],
   "redhat.telemetry.enabled": true,
   "dart.checkForSdkUpdates": false,
   "bracket-pair-colorizer-2.depreciation-notice": false,
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[python]": {
-    "editor.formatOnType": true,
+    "editor.formatOnType": true
     // "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "google-translate.firstLanguage": "zh-cn",
@@ -295,7 +295,7 @@
     "hcl": true,
     "sql": false,
     "go": false,
-    "dockerfile": true,
+    "dockerfile": true
   },
   "genieai.enableConversationHistory": true,
   "git.enableSmartCommit": true,
@@ -321,40 +321,40 @@
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "j"],
-      "after": ["<Esc>"],
-    },
+      "after": ["<Esc>"]
+    }
   ],
   // Normalモードでの非再帰的なキーバインド。
   "vim.normalModeKeyBindingsNonRecursive": [
     {
       // leaderキー（後述）と「d」を押すと「dd」（行削除）が実行される。
       "before": ["<leader>", "d"],
-      "after": ["d", "d"],
+      "after": ["d", "d"]
     },
     {
       // Ctrl+nを押すと:nohl（検索ハイライトを消去）が実行される。
       "before": ["<C-n>"],
-      "commands": [":nohl"],
+      "commands": [":nohl"]
     },
     {
       // 「K」を押すとlineBreakInsertコマンドが実行される。このコマンドはVSCode固有のもので、具体的な動作は拡張機能に依存します。
       "before": ["K"],
       "commands": ["lineBreakInsert"],
-      "silent": true,
-    },
+      "silent": true
+    }
   ],
   // leaderキーをスペースに設定。このキーはカスタムショートカットのプレフィックスとして使われます。
   "vim.leader": "<space>",
   // 特定のキーのハンドリングを無効にする。ここではCtrl+aとCtrl+fが無効になっています。
   "vim.handleKeys": {
     "<C-a>": false,
-    "<C-f>": false,
+    "<C-f>": false
   },
   // パフォーマンス向上のための設定。VSCodeVim拡張機能にCPUアフィニティ1を割り当てます。
   "// To improve performance": {
     "extensions.experimental.affinity": {
-      "vscodevim.vim": 1,
-    },
+      "vscodevim.vim": 1
+    }
   },
   "editor.tabSize": 2,
   "hediet.vscode-drawio.resizeImages": null,
@@ -368,25 +368,25 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "javascript.updateImportsOnFileMove.enabled": "never",
   "accessibility.signals.lineHasError": {
-    "sound": "off",
+    "sound": "off"
   },
   "accessibility.signals.lineHasFoldedArea": {
-    "sound": "off",
+    "sound": "off"
   },
   "accessibility.signals.lineHasBreakpoint": {
-    "sound": "off",
+    "sound": "off"
   },
   "accessibility.signals.lineHasInlineSuggestion": {
-    "sound": "off",
+    "sound": "off"
   },
   "accessibility.signals.onDebugBreak": {
-    "sound": "off",
+    "sound": "off"
   },
   "accessibility.signals.noInlayHints": {
-    "sound": "off",
+    "sound": "off"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "git.autofetch": true,
   "diffEditor.ignoreTrimWhitespace": false,
@@ -398,17 +398,17 @@
   "terminal.external.osxExec": "iTerm.app",
   "[json]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[snippets]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "workbench.editorAssociations": {
-    "*.pdf": "pdf.preview",
+    "*.pdf": "pdf.preview"
   },
   "go.toolsManagement.autoUpdate": true,
   "code-runner.runInTerminal": true,
@@ -425,7 +425,7 @@
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "settingsSync.ignoredExtensions": [],
   "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "cursor.cmdk.useThemedDiffBackground": true,
   "geminicodeassist.languages": ["go", "typescript"],
@@ -436,7 +436,7 @@
   "gitlens.graph.scrollMarkers.additionalTypes": [
     "localBranches",
     "stashes",
-    "pullRequests",
+    "pullRequests"
   ],
   "gitlens.graph.dimMergeCommits": true,
   "gitlens.graph.searchItemLimit": 1000,
@@ -451,13 +451,13 @@
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "language": "ja",
-      "text": "日本語で簡潔に書いてください. 適切な英語のprefixをつけてください.",
-    },
+      "text": "日本語で簡潔に書いてください. 適切な英語のprefixをつけてください."
+    }
   ],
   "github.copilot.chat.reviewSelection.instructions": [
     {
-      "file": "./apps/persia/app/.github/copilot-instructions.md",
-    },
+      "file": "./apps/persia/app/.github/copilot-instructions.md"
+    }
   ],
   "geminicodeassist.enable": false,
   "markdown-preview-enhanced.printBackground": true,
@@ -465,7 +465,7 @@
   "testing.coverageBarThresholds": {
     "red": 0,
     "yellow": 60,
-    "green": 90,
+    "green": 90
   },
   "git.repositoryScanIgnoredFolders": ["node_modules"],
   "githubPullRequests.createOnPublishBranch": "never",
@@ -474,7 +474,7 @@
   "vs-kubernetes": {
     "vscode-kubernetes.helm-path-mac": "/Users/zak/.vs-kubernetes/tools/helm/darwin-arm64/helm",
     "vscode-kubernetes.kubectl-path-mac": "/Users/zak/.vs-kubernetes/tools/kubectl/kubectl",
-    "vscode-kubernetes.minikube-path-mac": "/Users/zak/.vs-kubernetes/tools/minikube/darwin-arm64/minikube",
+    "vscode-kubernetes.minikube-path-mac": "/Users/zak/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
   },
   "git.replaceTagsWhenPull": true,
   "chat.tools.autoApprove": true,
@@ -482,50 +482,50 @@
     "/.*/": true,
     "sed -n '50,178p' procedure_versions.sql | grep -E '^\\([0-9]+, [0-9]+, NOW\\(\\)\\)' | sort | uniq -d": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "PGPASSWORD=persiapw psql -h localhost -p 4810 -U persiau -d persiadb -c \"SELECT document_id, procedure_template_id, version, COUNT(*) FROM admin_documents GROUP BY document_id, procedure_template_id, version HAVING COUNT(*) > 1;\"": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "PGPASSWORD=persiapw psql -h localhost -p 4810 -U persiau -d persiadb -c \"SELECT document_id, procedure_template_id, version, COUNT(*) as duplicates FROM (SELECT '00000000-0000-0000-0000-000000000001' as document_id, '00000000-0000-0000-0000-000000000001' as procedure_template_id, 1 as version UNION ALL SELECT '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 2) as new_data WHERE EXISTS(SELECT 1 FROM admin_documents WHERE admin_documents.document_id = new_data.document_id AND admin_documents.procedure_template_id = new_data.procedure_template_id AND admin_documents.version = new_data.version) GROUP BY document_id, procedure_template_id, version;\"": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "find": true,
     "find goblog -name \"*.md\" -not -path \"*/.history/*\" -exec wc -l {} \\; | grep -v \" 10 \" | grep -v \" 9 \" | sort -n": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "rm -f *.md && go run split-chapters.go": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "rm": true,
     "cd goblog && find . -name \"goblog-*.md\" -type f -exec sh -c 'lines=$(wc -l < \"$1\"); if [ \"$lines\" -gt 10 ]; then echo \"$1 ($lines lines)\"; fi' _ {} \\; | head -20": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "cd articles && find goblog -name \"goblog-*.md\" -type f -not -path \"*/.history/*\" -exec sh -c 'lines=$(wc -l < \"$1\"); if [ \"$lines\" -gt 10 ]; then basename \"$1\"; fi' _ {} \\; | head -30": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "find goblog -name \"goblog-*.md\" -type f -not -path \"*/.history/*\" -exec sh -c 'lines=$(wc -l < \"$1\"); if [ \"$lines\" -gt 10 ]; then echo \"$1\"; fi' _ {} \\; | wc -l": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "cd /Users/Komatsu.Aya/wt/github.com/hrbrain/hrbrain/worktrees/PER-6885-PER-8734-離職票の電子申請のための修正/apps/persia/app/domain/egov/egovprocedures/proc4950008680037000 && \\\nsed -i '' \\\n  -e 's|<住所>青森県 住民票住所リンゴ市 住民票住所1番 住民票住所アップルハイツ荘</住所>|<住所>{{ .離職者_住所 }}</住所>|g' \\\n  -e 's|<住所>123-1234 富山県 市区町村 丁目・番地 建物名・部屋番号</住所>|<住所>{{ .事業主_住所 }}</住所>|g' \\\n  -e 's|<氏名_上段>労働保険事業主氏名</氏名_上段>|<氏名_上段>{{ .事業主_氏名_上段 }}</氏名_上段>|g' \\\n  -e 's|<配達局番号>123</配達局番号>|<配達局番号>{{ .配達局番号 }}</配達局番号>|g' \\\n  -e 's|<町域番号>1234</町域番号>|<町域番号>{{ .町域番号 }}</町域番号>|g' \\\n  -e 's|<付記欄_安定所提出用>提出用メモ</付記欄_安定所提出用>|<付記欄_安定所提出用>{{ .付記欄_安定所提出用 }}</付記欄_安定所提出用>|g' \\\n  -e 's|<付記欄_離職票2>離職票2メモ</付記欄_離職票2>|<付記欄_離職票2>{{ .付記欄_離職票2 }}</付記欄_離職票2>|g' \\\n  -e 's|<付記欄>備考テキスト</付記欄>|<付記欄>{{ .付記欄 }}</付記欄>|g' \\\n  495008680037800371_01.goxml": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "cd /Users/Komatsu.Aya/wt/github.com/hrbrain/hrbrain/worktrees/PER-6885-PER-8734-離職票の電子申請のための修正/apps/persia/app/domain/egov/egovprocedures/proc4950008680037000 && \\\nsed -i '' \\\n  -e '/<事業所>/,/<\\/事業所>/{ s|<市外局番>080</市外局番>|<市外局番>{{ .事業所_市外局番 }}</市外局番>|; s|<市内局番>7777</市内局番>|<市内局番>{{ .事業所_市内局番 }}</市内局番>|; s|<加入者番号>7777</加入者番号>|<加入者番号>{{ .事業所_加入者番号 }}</加入者番号>|; }' \\\n  495008680037800371_01.goxml": {
       "approve": true,
-      "matchCommandLine": true,
+      "matchCommandLine": true
     },
     "cd /Users/Komatsu.Aya/wt/github.com/hrbrain/hrbrain/worktrees/PER-6885-PER-8739-XMLタグ実装の分割処理/apps/persia/app/domain/procedure/proceduretemplates/resignationletter/resignationletter2025/resignationletter2025egov && realpath --relative-to=. ../../../../../../../egov/egovprocedures/proc4950008680037000/495008680037800371_01.goxml 2>/dev/null || python3 -c \"import os; print(os.path.relpath('../../../../../../../egov/egovprocedures/proc4950008680037000/495008680037800371_01.goxml', '.'))\"": {
       "approve": true,
-      "matchCommandLine": true,
-    },
+      "matchCommandLine": true
+    }
   },
   "[dockercompose]": {
     "editor.insertSpaces": true,
@@ -534,22 +534,22 @@
     "editor.quickSuggestions": {
       "other": true,
       "comments": false,
-      "strings": true,
+      "strings": true
     },
-    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "editor.quickSuggestions": {
-    "strings": "on",
+    "strings": "on"
   },
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "workbench.editor.enablePreview": false,
   "editor.snippetSuggestions": "top",
   "git.autoRepositoryDetection": false,
   "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml",
+    "editor.defaultFormatter": "redhat.vscode-xml"
   },
   "gitlens.views.scm.grouped.views": {
     "commits": true,
@@ -562,7 +562,7 @@
     "fileHistory": true,
     "repositories": true,
     "searchAndCompare": false,
-    "launchpad": false,
+    "launchpad": false
   },
   "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
   "security.promptForLocalFileProtocolHandling": false,
@@ -584,37 +584,39 @@
       {
         "scope": "markup.bold.markdown",
         "settings": {
-          "foreground": "#ff9e64",
-        },
-      },
-    ],
+          "foreground": "#ff9e64"
+        }
+      }
+    ]
   },
   "markdown-header-coloring.userDefinedHeaderColor": {
     "enabled": true,
     "Header_1": {
       "color": "#f7768e",
-      "backgroundColor": "rgba(247, 118, 142, 0.15)",
+      "backgroundColor": "rgba(247, 118, 142, 0.15)"
     },
     "Header_2": {
       "color": "#e0af68",
-      "backgroundColor": "rgba(224, 175, 104, 0.15)",
+      "backgroundColor": "rgba(224, 175, 104, 0.15)"
     },
     "Header_3": {
       "color": "#7dcfff",
-      "backgroundColor": "rgba(125, 207, 255, 0.15)",
+      "backgroundColor": "rgba(125, 207, 255, 0.15)"
     },
     "Header_4": {
       "color": "#9ece6a",
-      "backgroundColor": "rgba(158, 206, 106, 0.15)",
+      "backgroundColor": "rgba(158, 206, 106, 0.15)"
     },
     "Header_5": {
       "color": "#bb9af7",
-      "backgroundColor": "rgba(187, 154, 247, 0.15)",
+      "backgroundColor": "rgba(187, 154, 247, 0.15)"
     },
     "Header_6": {
       "color": "#a0a0a0",
-      "backgroundColor": "rgba(160, 160, 160, 0.15)",
-    },
+      "backgroundColor": "rgba(160, 160, 160, 0.15)"
+    }
   },
   "chat.viewSessions.orientation": "stacked",
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.initialPermissionMode": "bypassPermissions"
 }
