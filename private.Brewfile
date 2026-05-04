@@ -8,6 +8,7 @@ cask "blackhole-2ch"
 cask "cursor"
 cask "cursor-cli"
 cask "claude"
+cask "google-drive"
 brew "rclone"
 mas "Developer", id: 640199958
 mas "Kindle", id: 302584613
