@@ -355,6 +355,17 @@ install_claude_code() {
     mise exec -- npm install -g @anthropic-ai/claude-code@latest
 }
 
+build_bin_binaries() {
+    if [ "$skip_apps" -eq 1 ]; then
+        return
+    fi
+    if [ ! -f "$DOTDIR/bin/Makefile" ]; then
+        return
+    fi
+    log 'Build Go binaries in dotfiles/bin'
+    (cd "$DOTDIR/bin" && mise exec -- make build-all)
+}
+
 set_alacritty_theme() {
     ensure_dir_exists "$HOME/.config/alacritty/themes"
 }
@@ -367,6 +378,7 @@ install_brewfile
 setup_gpg
 install_mise
 install_claude_code
+build_bin_binaries
 create_symbolic_links
 set_macos
 check_list
