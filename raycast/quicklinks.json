@@ -1,0 +1,43 @@
+[
+  {
+    "name": "AmazonJapan",
+    "keyword": "ama",
+    "url": "https://www.amazon.co.jp/s?k={Query}",
+    "icon": "amazon"
+  },
+  {
+    "name": "Amazon 購入履歴",
+    "keyword": "amar",
+    "url": "https://www.amazon.co.jp/gp/css/order-history?ref_=nav_orders_first"
+  },
+  {
+    "name": "Amazon リスト 合わせ買い",
+    "keyword": "amal",
+    "url": "https://www.amazon.co.jp/hz/wishlist/ls/2U7FC5YL3NIRQ?ref_=list_d_wl_lfu_nav_14"
+  },
+  {
+    "name": "Send to Kindle",
+    "keyword": "kindle",
+    "url": "https://www.amazon.co.jp/sendtokindle"
+  },
+  {
+    "name": "YouTube",
+    "keyword": "y",
+    "url": "https://www.youtube.com/results?search_query={Query}"
+  },
+  {
+    "name": "YouTube Studio",
+    "keyword": "you e",
+    "url": "https://studio.youtube.com/channel/UCKcNEOyYo0XTQr8z0dhdiKg/videos"
+  },
+  {
+    "name": "YouTube 後で見る",
+    "keyword": "youl",
+    "url": "https://www.youtube.com/playlist?list=WL"
+  },
+  {
+    "name": "YouTube History",
+    "keyword": "youh",
+    "url": "https://www.youtube.com/feed/history"
+  }
+]
