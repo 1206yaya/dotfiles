@@ -10,6 +10,7 @@ __ignore
 # bin配下のバイナリファイル（ソースコードとシェルスクリプトは除く）
 bin/copydb
 bin/dotfiles
+bin/obsidian-bridge
 bin/stash
 bin/tomp4
 bin/ws
