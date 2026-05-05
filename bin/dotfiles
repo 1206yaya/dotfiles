@@ -371,6 +371,33 @@ set_alacritty_theme() {
     ensure_dir_exists "$HOME/.config/alacritty/themes"
 }
 
+# brew cask でインストールされても、初回 GUI 起動 (onboarding / 権限付与) を
+# 必要とするアプリは bootstrap だけでは「使える状態」にならない。
+# アプリ本体は存在するが Application Support ディレクトリが未作成 = 未起動 を
+# 検出して、`open -a` で初回起動を促す。
+launch_first_run_apps() {
+    if [ "$skip_apps" -eq 1 ]; then
+        return
+    fi
+
+    _maybe_first_run() {
+        local app_path="$1"
+        local support_dir="$2"
+        local hint="$3"
+        if [ -d "$app_path" ] && [ ! -d "$support_dir" ]; then
+            info "[first-run] $(basename "$app_path") は未起動 → 開きます"
+            info "  → $hint"
+            open -a "$app_path" 2>&1 || info "  (open に失敗 — GUI セッション無し? 物理画面で起動してください)"
+        fi
+    }
+
+    log 'Detect & open apps that need first-run GUI onboarding'
+    _maybe_first_run \
+        "/Applications/Raycast.app" \
+        "$HOME/Library/Application Support/com.raycast.macos" \
+        "Activation Hotkey を Ctrl+Space / Accessibility 許可 / Cloud Sync を有効化"
+}
+
 install_xcode_command_line_tools
 clone_dotfiles
 setup_ssh
@@ -382,4 +409,5 @@ install_claude_code
 build_bin_binaries
 create_symbolic_links
 set_macos
+launch_first_run_apps
 check_list
