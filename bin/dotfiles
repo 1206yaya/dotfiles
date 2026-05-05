@@ -231,7 +231,8 @@ create_symbolic_links() {
     # git
     ln -sf "$DOTDIR/git/.gitconfig" "$HOME/.gitconfig"
     ln -sf "$DOTDIR/git/.gitignore_global" "$HOME/.gitignore_global"
-    ln -sf "$DOTDIR/git/.gitconig.local" "$HOME/.gitconig.local"
+    # ~/.gitconfig.local はマシン固有 (signingkey 等) のため symlink せず、
+    # setup_gpg() / 手動セットアップで $HOME 直下に実体ファイルとして生成する。
 
     # zsh
     ln -sf "$DOTDIR/zsh/.zshrc" "$HOME/.zshrc"
