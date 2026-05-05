@@ -395,7 +395,19 @@ launch_first_run_apps() {
     _maybe_first_run \
         "/Applications/Raycast.app" \
         "$HOME/Library/Application Support/com.raycast.macos" \
-        "Activation Hotkey を Ctrl+Space / Accessibility 許可 / Cloud Sync を有効化"
+        "onboarding を済ませた後 → 設定 import が自動で起動します"
+
+    # Raycast の設定 export (.rayconfig) が dotfiles に commit されていて、
+    # かつローカルにまだ未起動 = 未 import の状態なら、Import ダイアログを開く。
+    # Raycast が .rayconfig を Owner として登録しているので open 一発で Import 画面が出る。
+    # (パスワードは export 時のもの。覚えておく必要あり)
+    local rayconfig="$DOTDIR/raycast/raycast-export.rayconfig"
+    if [ -f "$rayconfig" ] && [ ! -d "$HOME/Library/Application Support/com.raycast.macos" ]; then
+        info "[first-run] Raycast 設定 import を準備"
+        info "  Raycast の onboarding 完了後、Import ダイアログにパスワードを入力してください"
+        # onboarding 中だと open がキューされるため、5秒バッファをはさむ
+        ( sleep 5 && open "$rayconfig" ) &
+    fi
 }
 
 install_xcode_command_line_tools
